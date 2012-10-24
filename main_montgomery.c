@@ -43,9 +43,9 @@ void fips(unsigned char *a, unsigned char *b, unsigned char *n, unsigned char n_
 	
 	for (i = 0; i < SIZE; i++) {
 		for (j = 0; j < i; j++) {
- 			; tmp = t[0] + a[j]*b[i-j];
+ 			tmp = t[0] + a[j]*b[i-j];
  			__asm
-				
+				mov _a_j	
  			__endasm
 			s = tmp;
 			c = tmp >> 8;
@@ -130,11 +130,7 @@ void fips(unsigned char *a, unsigned char *b, unsigned char *n, unsigned char n_
 		result[i] = v;
 	}
 
-	tmp = m[SIZE] - u;
-	u = tmp;
-	result[SIZE] = tmp >> 8;
-
-	if (u = 0) {
+	if (u == 0) {
 		for (i = 0; i < SIZE; i++) {
 			m[i] = result[i];
 		}

@@ -1,2 +1,5 @@
 # Do not version MCU8051IDE project files
-*.mcu8051ide*
+*.mcu8051ide
+
+# We do not want temporary editor files
+*~
