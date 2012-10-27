@@ -266,35 +266,17 @@ Symbol Table
     _TR1                                                        =  008E G
     _TXD                                                        =  00B1 G
     _WR                                                         =  00B6 G
-    __gptrget                                                      **** GX
-    __gptrput                                                      **** GX
  11 __interrupt_vect                                               0000 R
     __mcs51_genRAMCLEAR                                            **** GX
     __mcs51_genXINIT                                               **** GX
     __mcs51_genXRAMCLEAR                                           **** GX
-    __modsint                                                      **** GX
-    __modsint_PARM_2                                               **** GX
     __sdcc_gsinit_startup                                          **** GX
  11 __sdcc_program_startup                                         0003 GR
   5 __start__stack                                                 0000 GR
   D _a                                                             0080 GR
   E _b                                                             0100 GR
     _endBrk                                                     =  FFFF G
- 1A _fips                                                          003A GR
-  3 _fips_PARM_2                                                   0008 GR
-  3 _fips_PARM_3                                                   000B GR
-  3 _fips_PARM_4                                                   000E GR
-  3 _fips_PARM_5                                                   000F GR
-  3 _fips_a_1_1                                                    0012 R
-  3 _fips_c_1_1                                                    0015 R
-    _fips_result_1_1                                            =  0500 
-  3 _fips_s_1_1                                                    0016 R
-  3 _fips_sloc0_1_0                                                0017 R
-  3 _fips_sloc1_1_0                                                001A R
-  3 _fips_sloc2_1_0                                                001C R
-  3 _fips_sloc3_1_0                                                001F R
-  3 _fips_sloc4_1_0                                                0022 R
-  3 _fips_sloc5_1_0                                                0024 R
+ 1A _fips                                                          0013 GR
   3 _i                                                             0000 GR
   3 _j                                                             0002 GR
     _m                                                          =  0400 G
@@ -488,7 +470,7 @@ Area Table
    0 _CODE                                                                              size    0   flags 0
    1 RSEG                                                                               size    0   flags 0
    2 REG_BANK_0                                                                         size    8   flags 4
-   3 DSEG                                                                               size   25   flags 0
+   3 DSEG                                                                               size    8   flags 0
    4 OSEG                                                                               size    0   flags 4
    5 SSEG                                                                               size    1   flags 0
    6 ISEG                                                                               size    0   flags 0
@@ -511,7 +493,7 @@ Area Table
   17 GSINIT5                                                                            size    0   flags 20
   18 GSINIT                                                                             size  91A   flags 20
   19 GSFINAL                                                                            size    3   flags 20
-  1A CSEG                                                                               size  2CC   flags 20
+  1A CSEG                                                                               size  18E   flags 20
   1B CONST                                                                              size    0   flags 20
   1C XINIT                                                                              size    0   flags 20
   1D CABS                                                                               size    0   flags 28

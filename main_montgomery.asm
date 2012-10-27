@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 2.9.0 #5416 (Aug  6 2010) (UNIX)
-; This file was generated Sat Oct 27 13:34:01 2012
+; This file was generated Sat Oct 27 18:32:31 2012
 ;--------------------------------------------------------
 	.module main_montgomery
 	.optsdcc -mmcs51 --model-small
@@ -113,10 +113,6 @@
 	.globl _m
 	.globl _endBrk
 	.globl _startBrk
-	.globl _fips_PARM_5
-	.globl _fips_PARM_4
-	.globl _fips_PARM_3
-	.globl _fips_PARM_2
 	.globl _t
 	.globl _s
 	.globl _j
@@ -243,32 +239,6 @@ _s::
 	.ds 1
 _t::
 	.ds 3
-_fips_PARM_2:
-	.ds 3
-_fips_PARM_3:
-	.ds 3
-_fips_PARM_4:
-	.ds 1
-_fips_PARM_5:
-	.ds 3
-_fips_a_1_1:
-	.ds 3
-_fips_c_1_1:
-	.ds 1
-_fips_s_1_1:
-	.ds 1
-_fips_sloc0_1_0:
-	.ds 3
-_fips_sloc1_1_0:
-	.ds 2
-_fips_sloc2_1_0:
-	.ds 3
-_fips_sloc3_1_0:
-	.ds 3
-_fips_sloc4_1_0:
-	.ds 2
-_fips_sloc5_1_0:
-	.ds 1
 ;--------------------------------------------------------
 ; overlayable items in internal ram 
 ;--------------------------------------------------------
@@ -304,7 +274,6 @@ __start__stack:
 _startBrk	=	0xfffe
 _endBrk	=	0xffff
 _m	=	0x0400
-_fips_result_1_1	=	0x0500
 ;--------------------------------------------------------
 ; absolute external ram data
 ;--------------------------------------------------------
@@ -1563,21 +1532,7 @@ _main:
 	mov	dptr,#_startBrk
 	mov	a,#0x01
 	movx	@dptr,a
-;	main_montgomery.c:27: fips(a, b, n, n_prime, m);
-	mov	_fips_PARM_2,#_b
-	mov	(_fips_PARM_2 + 1),#(_b >> 8)
-	mov	(_fips_PARM_2 + 2),#0x00
-	mov	_fips_PARM_3,#_n
-	mov	(_fips_PARM_3 + 1),#(_n >> 8)
-	mov	(_fips_PARM_3 + 2),#0x00
-	mov	dptr,#_n_prime
-	movx	a,@dptr
-	mov	_fips_PARM_4,a
-	mov	_fips_PARM_5,#_m
-	mov	(_fips_PARM_5 + 1),#(_m >> 8)
-	mov	(_fips_PARM_5 + 2),#0x00
-	mov	dptr,#_a
-	mov	b,#0x00
+;	main_montgomery.c:27: fips();
 	lcall	_fips
 ;	main_montgomery.c:29: endBrk=1;
 	mov	dptr,#_endBrk
@@ -1589,52 +1544,26 @@ _main:
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'fips'
 ;------------------------------------------------------------
-;b                         Allocated with name '_fips_PARM_2'
-;n                         Allocated with name '_fips_PARM_3'
-;n_prime                   Allocated with name '_fips_PARM_4'
-;m                         Allocated with name '_fips_PARM_5'
-;a                         Allocated with name '_fips_a_1_1'
-;tmp                       Allocated to registers r2 r3 
-;c                         Allocated with name '_fips_c_1_1'
-;s                         Allocated with name '_fips_s_1_1'
-;u                         Allocated to registers 
-;v                         Allocated to registers 
-;sloc0                     Allocated with name '_fips_sloc0_1_0'
-;sloc1                     Allocated with name '_fips_sloc1_1_0'
-;sloc2                     Allocated with name '_fips_sloc2_1_0'
-;sloc3                     Allocated with name '_fips_sloc3_1_0'
-;sloc4                     Allocated with name '_fips_sloc4_1_0'
-;sloc5                     Allocated with name '_fips_sloc5_1_0'
-;result                    Allocated with name '_fips_result_1_1'
 ;------------------------------------------------------------
-;	main_montgomery.c:33: void fips(unsigned char *a, unsigned char *b, unsigned char *n, unsigned char n_prime, unsigned char *m) {
+;	main_montgomery.c:33: void fips() {
 ;	-----------------------------------------
 ;	 function fips
 ;	-----------------------------------------
 _fips:
-	mov	_fips_a_1_1,dpl
-	mov	(_fips_a_1_1 + 1),dph
-	mov	(_fips_a_1_1 + 2),b
-;	main_montgomery.c:44: for (i = 0; i < SIZE; i++) {
+;	main_montgomery.c:34: for (i = 0; i < SIZE; i++) {
 	clr	a
 	mov	_i,a
 	mov	(_i + 1),a
-	mov	_fips_sloc3_1_0,_fips_PARM_2
-	mov	(_fips_sloc3_1_0 + 1),(_fips_PARM_2 + 1)
-	mov	(_fips_sloc3_1_0 + 2),(_fips_PARM_2 + 2)
-	mov	_fips_sloc0_1_0,_fips_PARM_3
-	mov	(_fips_sloc0_1_0 + 1),(_fips_PARM_3 + 1)
-	mov	(_fips_sloc0_1_0 + 2),(_fips_PARM_3 + 2)
 00105$:
 	clr	c
 	mov	a,_i
 	subb	a,#0x80
 	mov	a,(_i + 1)
 	subb	a,#0x00
-	jc	00127$
+	jc	00126$
 	ljmp	00108$
-00127$:
-;	main_montgomery.c:45: for (j = 0; j < i; j++) {
+00126$:
+;	main_montgomery.c:35: for (j = 0; j < i; j++) {
 	clr	a
 	mov	_j,a
 	mov	(_j + 1),a
@@ -1644,10 +1573,10 @@ _fips:
 	subb	a,_i
 	mov	a,(_j + 1)
 	subb	a,(_i + 1)
-	jc	00128$
+	jc	00127$
 	ljmp	00104$
-00128$:
-;	main_montgomery.c:145: __endasm;
+00127$:
+;	main_montgomery.c:135: __endasm;
 	
     ; load j in lower
 	    mov dpl, _j
@@ -1718,7 +1647,7 @@ _fips:
     ; t[0] = s
 	    mov _t, a
 	
-    ; load c
+    ; load carry to a
 	    mov a, #0x00
 	    addc a, b
 	
@@ -1729,323 +1658,227 @@ _fips:
 	    addc a, 0x00
 	    mov (_t + 0x0002), a
 	    
-;	main_montgomery.c:45: for (j = 0; j < i; j++) {
+;	main_montgomery.c:35: for (j = 0; j < i; j++) {
 	inc	_j
 	clr	a
 	cjne	a,_j,00101$
 	inc	(_j + 1)
 	ljmp	00101$
 00104$:
-;	main_montgomery.c:148: tmp = t[0] + a[i]*b[0];
-	mov	_fips_sloc1_1_0,_t
-	mov	(_fips_sloc1_1_0 + 1),#0x00
-	mov	a,_i
-	add	a,_fips_a_1_1
-	mov	r4,a
-	mov	a,(_i + 1)
-	addc	a,(_fips_a_1_1 + 1)
-	mov	r2,a
-	mov	r3,(_fips_a_1_1 + 2)
-	mov	dpl,r4
-	mov	dph,r2
-	mov	b,r3
-	lcall	__gptrget
-	mov	r4,a
-	mov	dpl,_fips_sloc3_1_0
-	mov	dph,(_fips_sloc3_1_0 + 1)
-	mov	b,(_fips_sloc3_1_0 + 2)
-	lcall	__gptrget
-	mov	b,r4
-	mul	ab
-	add	a,_fips_sloc1_1_0
-	mov	r2,a
-	mov	a,(_fips_sloc1_1_0 + 1)
-	addc	a,b
-	mov	r3,a
-;	main_montgomery.c:149: s = tmp;
-	mov	_fips_s_1_1,r2
-;	main_montgomery.c:150: c = tmp >> 8;
-	mov	_fips_c_1_1,r3
-;	main_montgomery.c:153: tmp = t[1] + c;
-	mov	r4,(_t + 0x0001)
-	mov	r5,#0x00
-	mov	r6,_fips_c_1_1
-	mov	r7,#0x00
-	mov	a,r6
-	add	a,r4
-	mov	r2,a
-	mov	a,r7
-	addc	a,r5
-	mov	r3,a
-;	main_montgomery.c:154: t[1] = tmp;
-	mov	ar4,r2
-	mov	(_t + 0x0001),r4
-;	main_montgomery.c:155: t[2] = t[2] + (tmp >> 8);
-	mov	a,r3
-	add	a,(_t + 0x0002)
-	mov	_fips_sloc1_1_0,a
-	mov	(_t + 0x0002),_fips_sloc1_1_0
-;	main_montgomery.c:157: m[i] = (s*n_prime)%256;
-	mov	a,_i
-	add	a,_fips_PARM_5
-	mov	_fips_sloc2_1_0,a
-	mov	a,(_i + 1)
-	addc	a,(_fips_PARM_5 + 1)
-	mov	(_fips_sloc2_1_0 + 1),a
-	mov	(_fips_sloc2_1_0 + 2),(_fips_PARM_5 + 2)
-	mov	b,_fips_s_1_1
-	mov	a,_fips_PARM_4
-	mul	ab
-	mov	dpl,a
-	mov	dph,b
-	mov	__modsint_PARM_2,#0x00
-	mov	(__modsint_PARM_2 + 1),#0x01
-	push	ar4
-	lcall	__modsint
-	mov	r5,dpl
-	pop	ar4
-	mov	dpl,_fips_sloc2_1_0
-	mov	dph,(_fips_sloc2_1_0 + 1)
-	mov	b,(_fips_sloc2_1_0 + 2)
-	mov	a,r5
-	lcall	__gptrput
-;	main_montgomery.c:159: tmp = s + m[i]*n[0];
-	mov	_fips_sloc2_1_0,_fips_s_1_1
-	mov	(_fips_sloc2_1_0 + 1),#0x00
-	mov	dpl,_fips_sloc0_1_0
-	mov	dph,(_fips_sloc0_1_0 + 1)
-	mov	b,(_fips_sloc0_1_0 + 2)
-	lcall	__gptrget
-	mov	b,r5
-	mul	ab
-	add	a,_fips_sloc2_1_0
-	mov	a,(_fips_sloc2_1_0 + 1)
-	addc	a,b
-	mov	r3,a
-;	main_montgomery.c:161: c = tmp >> 8;
-	mov	_fips_c_1_1,r3
-;	main_montgomery.c:164: tmp = t[1] + c;
-	mov	r5,#0x00
-	mov	r6,_fips_c_1_1
-	mov	r7,#0x00
-	mov	a,r6
-	add	a,r4
-	mov	r2,a
-	mov	a,r7
-	addc	a,r5
-	mov	r3,a
-;	main_montgomery.c:165: t[1] = tmp;
-	mov	ar4,r2
-	mov	(_t + 0x0001),r4
-;	main_montgomery.c:166: t[2] = t[2] + (tmp >> 8);
-	mov	a,r3
-	add	a,_fips_sloc1_1_0
-	mov	r5,a
-	mov	(_t + 0x0002),r5
-;	main_montgomery.c:168: t[0] = t[1];
-	mov	_t,r4
-;	main_montgomery.c:169: t[1] = t[2];
-	mov	(_t + 0x0001),r5
-;	main_montgomery.c:170: t[2] = 0;
-	mov	(_t + 0x0002),#0x00
-;	main_montgomery.c:44: for (i = 0; i < SIZE; i++) {
+;	main_montgomery.c:220: __endasm;
+	
+   ; load i in higher
+	   mov dpl, _i
+	
+   ; load a[i]
+	   mov dph, #(_a >> 8)
+	   movx a, @dptr
+	   mov b, a
+	
+   ; load b[0]
+	   clr a
+	   mov dph, #(_b >> 8)
+	   movx a, @dptr
+	
+   ; a[i] * b[0]
+	   mul ab
+	
+   ; t[0] + a[i] * b[0]
+	   add a, _t
+	
+   ; save result in variable s
+	   mov _s, a
+   ; reset a
+	   mov a, #0x00
+   ; save b in a
+	   addc a, b
+	
+   ; t[1] = t[1] + c
+	   add a, (_t + 0x0001)
+	   mov (_t + 0x0001), a
+   ; t[2] = t[2] + carry
+	   mov a, (_t + 0x0002)
+	   addc a, #0x00
+	   mov (_t + 0x0002), a
+	
+   ; m[i] = (s*n_prime)%256
+	   mov dptr, #_n_prime
+	   movx a, @dptr
+	   mov b, _s
+	   mul ab
+	   mov dpl, _i
+	   mov dph, #(_m >> 8)
+	   movx @dptr, a
+	   mov b, a
+	
+   ; s + m[i] * n[0]
+	   mov dpl, #0x00
+	   mov dph, #_n
+	   movx a, @dptr
+	   mul ab
+	   add a, _s
+	
+	   add a, (_t + 0x0001)
+	   mov _t, a
+	   mov a, (_t + 0x0002)
+	   addc a, #0x00
+	   mov (_t + 0x0001), a
+	   mov (_t + 0x0002), 0x00
+	  
+;	main_montgomery.c:34: for (i = 0; i < SIZE; i++) {
 	inc	_i
 	clr	a
-	cjne	a,_i,00129$
+	cjne	a,_i,00128$
 	inc	(_i + 1)
-00129$:
+00128$:
 	ljmp	00105$
 00108$:
-;	main_montgomery.c:233: for (i = SIZE; i < 2*SIZE; i++) {
+;	main_montgomery.c:223: for (i = SIZE; i < 2*SIZE; i++) {
 	mov	_i,#0x80
 	clr	a
 	mov	(_i + 1),a
-00113$:
+00112$:
 	mov	a,#0x100 - 0x01
 	add	a,(_i + 1)
-	jnc	00130$
-	ret
-00130$:
-;	main_montgomery.c:234: for (j = i-SIZE+1; j < SIZE; j++) {
+	jnc	00129$
+	ljmp	00115$
+00129$:
+;	main_montgomery.c:224: for (j = i-SIZE+1; j < SIZE; j++) {
 	mov	a,#0x81
 	add	a,_i
-	mov	_j,a
+	mov	r2,a
 	mov	a,#0xFF
 	addc	a,(_i + 1)
-	mov	(_j + 1),a
-00109$:
+	mov	r3,a
+	mov	a,#0x80
 	clr	c
-	mov	a,_j
-	subb	a,#0x80
-	mov	a,(_j + 1)
-	subb	a,#0x00
-	jc	00131$
-	ljmp	00112$
-00131$:
-;	main_montgomery.c:235: tmp = t[0] + a[j]*b[i-j];
-	mov	_fips_sloc2_1_0,_t
-	mov	(_fips_sloc2_1_0 + 1),#0x00
-	mov	a,_j
-	add	a,_fips_a_1_1
-	mov	r6,a
-	mov	a,(_j + 1)
-	addc	a,(_fips_a_1_1 + 1)
-	mov	r7,a
-	mov	r4,(_fips_a_1_1 + 2)
-	mov	dpl,r6
-	mov	dph,r7
-	mov	b,r4
-	lcall	__gptrget
-	mov	_fips_sloc1_1_0,a
-	mov	a,_i
-	clr	c
-	subb	a,_j
-	mov	_fips_sloc4_1_0,a
-	mov	a,(_i + 1)
-	subb	a,(_j + 1)
-	mov	(_fips_sloc4_1_0 + 1),a
-	mov	a,_fips_sloc4_1_0
-	add	a,_fips_sloc3_1_0
-	mov	r7,a
-	mov	a,(_fips_sloc4_1_0 + 1)
-	addc	a,(_fips_sloc3_1_0 + 1)
-	mov	r6,a
-	mov	r4,(_fips_sloc3_1_0 + 2)
-	mov	dpl,r7
-	mov	dph,r6
-	mov	b,r4
-	lcall	__gptrget
-	mov	b,_fips_sloc1_1_0
-	mul	ab
-	add	a,_fips_sloc2_1_0
-	mov	r2,a
-	mov	a,(_fips_sloc2_1_0 + 1)
-	addc	a,b
-	mov	r3,a
-;	main_montgomery.c:236: s = tmp;
-	mov	_fips_s_1_1,r2
-;	main_montgomery.c:237: c = tmp >> 8;
-	mov	_fips_c_1_1,r3
-;	main_montgomery.c:240: tmp = t[1] + c;
-	mov	r4,(_t + 0x0001)
-	mov	r5,#0x00
-	mov	r6,_fips_c_1_1
-	mov	r7,#0x00
-	mov	a,r6
-	add	a,r4
-	mov	r2,a
-	mov	a,r7
-	addc	a,r5
-	mov	r3,a
-;	main_montgomery.c:241: t[1] = tmp;
-	mov	ar4,r2
-	mov	(_t + 0x0001),r4
-;	main_montgomery.c:242: t[2] = t[2] + (tmp >> 8);
-	mov	a,r3
-	add	a,(_t + 0x0002)
-	mov	_fips_sloc1_1_0,a
-	mov	(_t + 0x0002),_fips_sloc1_1_0
-;	main_montgomery.c:244: tmp = s + m[j]*n[i-j];
-	mov	_fips_sloc2_1_0,_fips_s_1_1
-	mov	(_fips_sloc2_1_0 + 1),#0x00
-	mov	a,_j
-	add	a,_fips_PARM_5
-	mov	r6,a
-	mov	a,(_j + 1)
-	addc	a,(_fips_PARM_5 + 1)
-	mov	r7,a
-	mov	r5,(_fips_PARM_5 + 2)
-	mov	dpl,r6
-	mov	dph,r7
-	mov	b,r5
-	lcall	__gptrget
-	mov	_fips_sloc5_1_0,a
-	mov	a,_fips_sloc4_1_0
-	add	a,_fips_sloc0_1_0
-	mov	r5,a
-	mov	a,(_fips_sloc4_1_0 + 1)
-	addc	a,(_fips_sloc0_1_0 + 1)
-	mov	r7,a
-	mov	r6,(_fips_sloc0_1_0 + 2)
-	mov	dpl,r5
-	mov	dph,r7
-	mov	b,r6
-	lcall	__gptrget
-	mov	b,_fips_sloc5_1_0
-	mul	ab
-	add	a,_fips_sloc2_1_0
-	mov	r2,a
-	mov	a,(_fips_sloc2_1_0 + 1)
-	addc	a,b
-	mov	r3,a
-;	main_montgomery.c:245: s = tmp;
-	mov	_fips_s_1_1,r2
-;	main_montgomery.c:246: c = tmp >> 8;
-	mov	_fips_c_1_1,r3
-;	main_montgomery.c:248: t[0] = s;
-	mov	_t,_fips_s_1_1
-;	main_montgomery.c:251: tmp = t[1] + c;
-	mov	r5,#0x00
-	mov	r6,_fips_c_1_1
-	mov	r7,#0x00
-	mov	a,r6
-	add	a,r4
-	mov	r2,a
-	mov	a,r7
-	addc	a,r5
-	mov	r3,a
-;	main_montgomery.c:252: t[1] = tmp;
-	mov	ar4,r2
-	mov	(_t + 0x0001),r4
-;	main_montgomery.c:253: t[2] = t[2] + (tmp >> 8);
-	mov	a,r3
-	mov	r2,a
-	add	a,_fips_sloc1_1_0
-	mov	(_t + 0x0002),a
-;	main_montgomery.c:234: for (j = i-SIZE+1; j < SIZE; j++) {
-	inc	_j
+	subb	a,r2
+	mov	_j,a
 	clr	a
-	cjne	a,_j,00132$
-	inc	(_j + 1)
-00132$:
-	ljmp	00109$
-00112$:
-;	main_montgomery.c:256: m[i - SIZE] = t[0];
-	mov	a,_i
-	add	a,#0x80
-	mov	r2,a
-	mov	a,(_i + 1)
-	addc	a,#0xff
-	mov	r3,a
-	mov	a,r2
-	add	a,_fips_PARM_5
-	mov	r2,a
-	mov	a,r3
-	addc	a,(_fips_PARM_5 + 1)
-	mov	r3,a
-	mov	r4,(_fips_PARM_5 + 2)
-	mov	r5,_t
-	mov	dpl,r2
-	mov	dph,r3
-	mov	b,r4
-	mov	a,r5
-	lcall	__gptrput
-;	main_montgomery.c:257: t[0] = t[1];
-	mov	r2,(_t + 0x0001)
-	mov	_t,r2
-;	main_montgomery.c:258: t[1] = t[2];
-	mov	r2,(_t + 0x0002)
-	mov	(_t + 0x0001),r2
-;	main_montgomery.c:259: t[2] = 0;
-	mov	(_t + 0x0002),#0x00
-;	main_montgomery.c:233: for (i = SIZE; i < 2*SIZE; i++) {
+	subb	a,r3
+	mov	(_j + 1),a
+00111$:
+;	main_montgomery.c:323: __endasm;
+	
+	    mov dpl, _j
+	
+    ; load a[j]
+	    mov dph, #(_a >> 8)
+	    movx a, @dptr
+	    mov b, a
+	
+    ; load m[j]
+	    mov dph, #(_m >> 8)
+	    movx a, @dptr
+	    mov r0, a
+	
+    ; calculate i-j and store in r5
+	    mov a, _i
+	    clr c
+	    subb a, _j
+	    mov r5, a
+	
+    ; load b[i-j]
+	    add a, #_b
+	    mov dpl, a
+	    clr a
+	    addc a, #(_b >> 8)
+	    mov dph, a
+	    movx a, @dptr
+	
+    ; a[j] * b[i-j]
+	    mul ab
+	
+    ; t[0] + a[j]*b[i-j]
+	    add a, _t
+	
+    ; store result in r2 (this is s)
+	    mov r2, a
+    ; load t[1]
+	    mov a, (_t + 0x0001)
+	
+    ; add carry to t[1]
+	    addc a, b
+	    mov (_t + 0x0001), a
+    ; load t[2]
+	    mov a, (_t + 0x0002)
+    ; add carry to t[2]
+	    addc a, #0x00
+	    mov (_t + 0x0002), a
+	
+    ; load i-j
+	    mov a, r5
+	
+    ; load n[i-j]
+	    add a, #_n
+	    mov dpl, a
+	    clr a
+	    addc a, #(_n >> 8)
+	    mov dph, a
+	    movx a, @dptr
+	
+    ; load r0 (this is m[j])
+	    mov b, r0
+    ; m[j] * n[i-j]
+	    mul ab
+    ; s + m[j] * n[i-j]
+	    add a, r2
+	
+    ; t[0] = s
+	    mov _t, a
+	
+    ; load carry to a
+	    mov a, #0x00
+	    addc a, b
+	
+    ; t[1] + c
+	    add a, (_t + 0x0001)
+	    mov (_t + 0x0001), a
+	    mov a, (_t + 0x0002)
+	    addc a, 0x00
+	    mov (_t + 0x0002), a
+	   
+	dec	_j
+	mov	a,#0xff
+	cjne	a,_j,00130$
+	dec	(_j + 1)
+00130$:
+;	main_montgomery.c:224: for (j = i-SIZE+1; j < SIZE; j++) {
+	mov	a,_j
+	orl	a,(_j + 1)
+	jz	00131$
+	ljmp	00111$
+00131$:
+	mov	_j,#0x80
+	clr	a
+	mov	(_j + 1),a
+;	main_montgomery.c:346: __endasm;
+	
+   ; calculate i - 128
+	   mov a, _i
+	   subb a, #0x80
+	
+   ; m[i - 128] = t[0]
+	   mov dpl, a
+	   mov dph, (#_m >> 8)
+	   mov a, _t
+	   movx @dptr, a
+	
+   ; t[0] = t[1]
+	   mov _t, (_t + 0x0001)
+	   mov (_t + 0x0001), (_t + 0x0002)
+	   mov (_t + 0x0002), #0x00
+	  
+;	main_montgomery.c:223: for (i = SIZE; i < 2*SIZE; i++) {
 	inc	_i
 	clr	a
-	cjne	a,_i,00133$
+	cjne	a,_i,00132$
 	inc	(_i + 1)
-00133$:
-;	main_montgomery.c:277: return;
-	ljmp	00113$
+00132$:
+	ljmp	00112$
+00115$:
+;	main_montgomery.c:349: return;
+	ret
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
 	.area XINIT   (CODE)

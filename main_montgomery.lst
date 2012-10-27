@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 2.9.0 #5416 (Aug  6 2010) (UNIX)
-                              4 ; This file was generated Sat Oct 27 13:34:01 2012
+                              4 ; This file was generated Sat Oct 27 18:32:31 2012
                               5 ;--------------------------------------------------------
                               6 	.module main_montgomery
                               7 	.optsdcc -mmcs51 --model-small
@@ -113,1940 +113,1773 @@
                             113 	.globl _m
                             114 	.globl _endBrk
                             115 	.globl _startBrk
-                            116 	.globl _fips_PARM_5
-                            117 	.globl _fips_PARM_4
-                            118 	.globl _fips_PARM_3
-                            119 	.globl _fips_PARM_2
-                            120 	.globl _t
-                            121 	.globl _s
-                            122 	.globl _j
-                            123 	.globl _i
-                            124 	.globl _fips
-                            125 ;--------------------------------------------------------
-                            126 ; special function registers
-                            127 ;--------------------------------------------------------
-                            128 	.area RSEG    (DATA)
-                    0080    129 _P0	=	0x0080
-                    0081    130 _SP	=	0x0081
-                    0082    131 _DPL	=	0x0082
-                    0083    132 _DPH	=	0x0083
-                    0087    133 _PCON	=	0x0087
-                    0088    134 _TCON	=	0x0088
-                    0089    135 _TMOD	=	0x0089
-                    008A    136 _TL0	=	0x008a
-                    008B    137 _TL1	=	0x008b
-                    008C    138 _TH0	=	0x008c
-                    008D    139 _TH1	=	0x008d
-                    0090    140 _P1	=	0x0090
-                    0098    141 _SCON	=	0x0098
-                    0099    142 _SBUF	=	0x0099
-                    00A0    143 _P2	=	0x00a0
-                    00A8    144 _IE	=	0x00a8
-                    00B0    145 _P3	=	0x00b0
-                    00B8    146 _IP	=	0x00b8
-                    00D0    147 _PSW	=	0x00d0
-                    00E0    148 _ACC	=	0x00e0
-                    00F0    149 _B	=	0x00f0
-                            150 ;--------------------------------------------------------
-                            151 ; special function bits
-                            152 ;--------------------------------------------------------
-                            153 	.area RSEG    (DATA)
-                    0080    154 _P0_0	=	0x0080
-                    0081    155 _P0_1	=	0x0081
-                    0082    156 _P0_2	=	0x0082
-                    0083    157 _P0_3	=	0x0083
-                    0084    158 _P0_4	=	0x0084
-                    0085    159 _P0_5	=	0x0085
-                    0086    160 _P0_6	=	0x0086
-                    0087    161 _P0_7	=	0x0087
-                    0088    162 _IT0	=	0x0088
-                    0089    163 _IE0	=	0x0089
-                    008A    164 _IT1	=	0x008a
-                    008B    165 _IE1	=	0x008b
-                    008C    166 _TR0	=	0x008c
-                    008D    167 _TF0	=	0x008d
-                    008E    168 _TR1	=	0x008e
-                    008F    169 _TF1	=	0x008f
-                    0090    170 _P1_0	=	0x0090
-                    0091    171 _P1_1	=	0x0091
-                    0092    172 _P1_2	=	0x0092
-                    0093    173 _P1_3	=	0x0093
-                    0094    174 _P1_4	=	0x0094
-                    0095    175 _P1_5	=	0x0095
-                    0096    176 _P1_6	=	0x0096
-                    0097    177 _P1_7	=	0x0097
-                    0098    178 _RI	=	0x0098
-                    0099    179 _TI	=	0x0099
-                    009A    180 _RB8	=	0x009a
-                    009B    181 _TB8	=	0x009b
-                    009C    182 _REN	=	0x009c
-                    009D    183 _SM2	=	0x009d
-                    009E    184 _SM1	=	0x009e
-                    009F    185 _SM0	=	0x009f
-                    00A0    186 _P2_0	=	0x00a0
-                    00A1    187 _P2_1	=	0x00a1
-                    00A2    188 _P2_2	=	0x00a2
-                    00A3    189 _P2_3	=	0x00a3
-                    00A4    190 _P2_4	=	0x00a4
-                    00A5    191 _P2_5	=	0x00a5
-                    00A6    192 _P2_6	=	0x00a6
-                    00A7    193 _P2_7	=	0x00a7
-                    00A8    194 _EX0	=	0x00a8
-                    00A9    195 _ET0	=	0x00a9
-                    00AA    196 _EX1	=	0x00aa
-                    00AB    197 _ET1	=	0x00ab
-                    00AC    198 _ES	=	0x00ac
-                    00AF    199 _EA	=	0x00af
-                    00B0    200 _P3_0	=	0x00b0
-                    00B1    201 _P3_1	=	0x00b1
-                    00B2    202 _P3_2	=	0x00b2
-                    00B3    203 _P3_3	=	0x00b3
-                    00B4    204 _P3_4	=	0x00b4
-                    00B5    205 _P3_5	=	0x00b5
-                    00B6    206 _P3_6	=	0x00b6
-                    00B7    207 _P3_7	=	0x00b7
-                    00B0    208 _RXD	=	0x00b0
-                    00B1    209 _TXD	=	0x00b1
-                    00B2    210 _INT0	=	0x00b2
-                    00B3    211 _INT1	=	0x00b3
-                    00B4    212 _T0	=	0x00b4
-                    00B5    213 _T1	=	0x00b5
-                    00B6    214 _WR	=	0x00b6
-                    00B7    215 _RD	=	0x00b7
-                    00B8    216 _PX0	=	0x00b8
-                    00B9    217 _PT0	=	0x00b9
-                    00BA    218 _PX1	=	0x00ba
-                    00BB    219 _PT1	=	0x00bb
-                    00BC    220 _PS	=	0x00bc
-                    00D0    221 _P	=	0x00d0
-                    00D1    222 _F1	=	0x00d1
-                    00D2    223 _OV	=	0x00d2
-                    00D3    224 _RS0	=	0x00d3
-                    00D4    225 _RS1	=	0x00d4
-                    00D5    226 _F0	=	0x00d5
-                    00D6    227 _AC	=	0x00d6
-                    00D7    228 _CY	=	0x00d7
-                            229 ;--------------------------------------------------------
-                            230 ; overlayable register banks
-                            231 ;--------------------------------------------------------
-                            232 	.area REG_BANK_0	(REL,OVR,DATA)
-   0000                     233 	.ds 8
-                            234 ;--------------------------------------------------------
-                            235 ; internal ram data
-                            236 ;--------------------------------------------------------
-                            237 	.area DSEG    (DATA)
-   0000                     238 _i::
-   0000                     239 	.ds 2
-   0002                     240 _j::
-   0002                     241 	.ds 2
-   0004                     242 _s::
-   0004                     243 	.ds 1
-   0005                     244 _t::
-   0005                     245 	.ds 3
-   0008                     246 _fips_PARM_2:
-   0008                     247 	.ds 3
-   000B                     248 _fips_PARM_3:
-   000B                     249 	.ds 3
-   000E                     250 _fips_PARM_4:
-   000E                     251 	.ds 1
-   000F                     252 _fips_PARM_5:
-   000F                     253 	.ds 3
-   0012                     254 _fips_a_1_1:
-   0012                     255 	.ds 3
-   0015                     256 _fips_c_1_1:
-   0015                     257 	.ds 1
-   0016                     258 _fips_s_1_1:
-   0016                     259 	.ds 1
-   0017                     260 _fips_sloc0_1_0:
-   0017                     261 	.ds 3
-   001A                     262 _fips_sloc1_1_0:
-   001A                     263 	.ds 2
-   001C                     264 _fips_sloc2_1_0:
-   001C                     265 	.ds 3
-   001F                     266 _fips_sloc3_1_0:
-   001F                     267 	.ds 3
-   0022                     268 _fips_sloc4_1_0:
-   0022                     269 	.ds 2
-   0024                     270 _fips_sloc5_1_0:
-   0024                     271 	.ds 1
+                            116 	.globl _t
+                            117 	.globl _s
+                            118 	.globl _j
+                            119 	.globl _i
+                            120 	.globl _fips
+                            121 ;--------------------------------------------------------
+                            122 ; special function registers
+                            123 ;--------------------------------------------------------
+                            124 	.area RSEG    (DATA)
+                    0080    125 _P0	=	0x0080
+                    0081    126 _SP	=	0x0081
+                    0082    127 _DPL	=	0x0082
+                    0083    128 _DPH	=	0x0083
+                    0087    129 _PCON	=	0x0087
+                    0088    130 _TCON	=	0x0088
+                    0089    131 _TMOD	=	0x0089
+                    008A    132 _TL0	=	0x008a
+                    008B    133 _TL1	=	0x008b
+                    008C    134 _TH0	=	0x008c
+                    008D    135 _TH1	=	0x008d
+                    0090    136 _P1	=	0x0090
+                    0098    137 _SCON	=	0x0098
+                    0099    138 _SBUF	=	0x0099
+                    00A0    139 _P2	=	0x00a0
+                    00A8    140 _IE	=	0x00a8
+                    00B0    141 _P3	=	0x00b0
+                    00B8    142 _IP	=	0x00b8
+                    00D0    143 _PSW	=	0x00d0
+                    00E0    144 _ACC	=	0x00e0
+                    00F0    145 _B	=	0x00f0
+                            146 ;--------------------------------------------------------
+                            147 ; special function bits
+                            148 ;--------------------------------------------------------
+                            149 	.area RSEG    (DATA)
+                    0080    150 _P0_0	=	0x0080
+                    0081    151 _P0_1	=	0x0081
+                    0082    152 _P0_2	=	0x0082
+                    0083    153 _P0_3	=	0x0083
+                    0084    154 _P0_4	=	0x0084
+                    0085    155 _P0_5	=	0x0085
+                    0086    156 _P0_6	=	0x0086
+                    0087    157 _P0_7	=	0x0087
+                    0088    158 _IT0	=	0x0088
+                    0089    159 _IE0	=	0x0089
+                    008A    160 _IT1	=	0x008a
+                    008B    161 _IE1	=	0x008b
+                    008C    162 _TR0	=	0x008c
+                    008D    163 _TF0	=	0x008d
+                    008E    164 _TR1	=	0x008e
+                    008F    165 _TF1	=	0x008f
+                    0090    166 _P1_0	=	0x0090
+                    0091    167 _P1_1	=	0x0091
+                    0092    168 _P1_2	=	0x0092
+                    0093    169 _P1_3	=	0x0093
+                    0094    170 _P1_4	=	0x0094
+                    0095    171 _P1_5	=	0x0095
+                    0096    172 _P1_6	=	0x0096
+                    0097    173 _P1_7	=	0x0097
+                    0098    174 _RI	=	0x0098
+                    0099    175 _TI	=	0x0099
+                    009A    176 _RB8	=	0x009a
+                    009B    177 _TB8	=	0x009b
+                    009C    178 _REN	=	0x009c
+                    009D    179 _SM2	=	0x009d
+                    009E    180 _SM1	=	0x009e
+                    009F    181 _SM0	=	0x009f
+                    00A0    182 _P2_0	=	0x00a0
+                    00A1    183 _P2_1	=	0x00a1
+                    00A2    184 _P2_2	=	0x00a2
+                    00A3    185 _P2_3	=	0x00a3
+                    00A4    186 _P2_4	=	0x00a4
+                    00A5    187 _P2_5	=	0x00a5
+                    00A6    188 _P2_6	=	0x00a6
+                    00A7    189 _P2_7	=	0x00a7
+                    00A8    190 _EX0	=	0x00a8
+                    00A9    191 _ET0	=	0x00a9
+                    00AA    192 _EX1	=	0x00aa
+                    00AB    193 _ET1	=	0x00ab
+                    00AC    194 _ES	=	0x00ac
+                    00AF    195 _EA	=	0x00af
+                    00B0    196 _P3_0	=	0x00b0
+                    00B1    197 _P3_1	=	0x00b1
+                    00B2    198 _P3_2	=	0x00b2
+                    00B3    199 _P3_3	=	0x00b3
+                    00B4    200 _P3_4	=	0x00b4
+                    00B5    201 _P3_5	=	0x00b5
+                    00B6    202 _P3_6	=	0x00b6
+                    00B7    203 _P3_7	=	0x00b7
+                    00B0    204 _RXD	=	0x00b0
+                    00B1    205 _TXD	=	0x00b1
+                    00B2    206 _INT0	=	0x00b2
+                    00B3    207 _INT1	=	0x00b3
+                    00B4    208 _T0	=	0x00b4
+                    00B5    209 _T1	=	0x00b5
+                    00B6    210 _WR	=	0x00b6
+                    00B7    211 _RD	=	0x00b7
+                    00B8    212 _PX0	=	0x00b8
+                    00B9    213 _PT0	=	0x00b9
+                    00BA    214 _PX1	=	0x00ba
+                    00BB    215 _PT1	=	0x00bb
+                    00BC    216 _PS	=	0x00bc
+                    00D0    217 _P	=	0x00d0
+                    00D1    218 _F1	=	0x00d1
+                    00D2    219 _OV	=	0x00d2
+                    00D3    220 _RS0	=	0x00d3
+                    00D4    221 _RS1	=	0x00d4
+                    00D5    222 _F0	=	0x00d5
+                    00D6    223 _AC	=	0x00d6
+                    00D7    224 _CY	=	0x00d7
+                            225 ;--------------------------------------------------------
+                            226 ; overlayable register banks
+                            227 ;--------------------------------------------------------
+                            228 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     229 	.ds 8
+                            230 ;--------------------------------------------------------
+                            231 ; internal ram data
+                            232 ;--------------------------------------------------------
+                            233 	.area DSEG    (DATA)
+   0000                     234 _i::
+   0000                     235 	.ds 2
+   0002                     236 _j::
+   0002                     237 	.ds 2
+   0004                     238 _s::
+   0004                     239 	.ds 1
+   0005                     240 _t::
+   0005                     241 	.ds 3
+                            242 ;--------------------------------------------------------
+                            243 ; overlayable items in internal ram 
+                            244 ;--------------------------------------------------------
+                            245 	.area OSEG    (OVR,DATA)
+                            246 ;--------------------------------------------------------
+                            247 ; Stack segment in internal ram 
+                            248 ;--------------------------------------------------------
+                            249 	.area	SSEG	(DATA)
+   0000                     250 __start__stack:
+   0000                     251 	.ds	1
+                            252 
+                            253 ;--------------------------------------------------------
+                            254 ; indirectly addressable internal ram data
+                            255 ;--------------------------------------------------------
+                            256 	.area ISEG    (DATA)
+                            257 ;--------------------------------------------------------
+                            258 ; absolute internal ram data
+                            259 ;--------------------------------------------------------
+                            260 	.area IABS    (ABS,DATA)
+                            261 	.area IABS    (ABS,DATA)
+                            262 ;--------------------------------------------------------
+                            263 ; bit data
+                            264 ;--------------------------------------------------------
+                            265 	.area BSEG    (BIT)
+                            266 ;--------------------------------------------------------
+                            267 ; paged external ram data
+                            268 ;--------------------------------------------------------
+                            269 	.area PSEG    (PAG,XDATA)
+                            270 ;--------------------------------------------------------
+                            271 ; external ram data
                             272 ;--------------------------------------------------------
-                            273 ; overlayable items in internal ram 
-                            274 ;--------------------------------------------------------
-                            275 	.area OSEG    (OVR,DATA)
-                            276 ;--------------------------------------------------------
-                            277 ; Stack segment in internal ram 
-                            278 ;--------------------------------------------------------
-                            279 	.area	SSEG	(DATA)
-   0000                     280 __start__stack:
-   0000                     281 	.ds	1
-                            282 
-                            283 ;--------------------------------------------------------
-                            284 ; indirectly addressable internal ram data
-                            285 ;--------------------------------------------------------
-                            286 	.area ISEG    (DATA)
-                            287 ;--------------------------------------------------------
-                            288 ; absolute internal ram data
-                            289 ;--------------------------------------------------------
-                            290 	.area IABS    (ABS,DATA)
-                            291 	.area IABS    (ABS,DATA)
-                            292 ;--------------------------------------------------------
-                            293 ; bit data
-                            294 ;--------------------------------------------------------
-                            295 	.area BSEG    (BIT)
-                            296 ;--------------------------------------------------------
-                            297 ; paged external ram data
-                            298 ;--------------------------------------------------------
-                            299 	.area PSEG    (PAG,XDATA)
-                            300 ;--------------------------------------------------------
-                            301 ; external ram data
-                            302 ;--------------------------------------------------------
-                            303 	.area XSEG    (XDATA)
-                    FFFE    304 _startBrk	=	0xfffe
-                    FFFF    305 _endBrk	=	0xffff
-                    0400    306 _m	=	0x0400
-                    0500    307 _fips_result_1_1	=	0x0500
-                            308 ;--------------------------------------------------------
-                            309 ; absolute external ram data
-                            310 ;--------------------------------------------------------
-                            311 	.area XABS    (ABS,XDATA)
-   0000                     312 	.org 0x0000
-   0000                     313 _n::
-   0000                     314 	.ds 128
-   0080                     315 	.org 0x0080
-   0080                     316 _a::
-   0080                     317 	.ds 128
-   0100                     318 	.org 0x0100
-   0100                     319 _b::
-   0100                     320 	.ds 128
-   0300                     321 	.org 0x0300
-   0300                     322 _n_prime::
-   0300                     323 	.ds 1
-                            324 ;--------------------------------------------------------
-                            325 ; external initialized ram data
-                            326 ;--------------------------------------------------------
-                            327 	.area XISEG   (XDATA)
-                            328 	.area HOME    (CODE)
-                            329 	.area GSINIT0 (CODE)
-                            330 	.area GSINIT1 (CODE)
-                            331 	.area GSINIT2 (CODE)
-                            332 	.area GSINIT3 (CODE)
-                            333 	.area GSINIT4 (CODE)
-                            334 	.area GSINIT5 (CODE)
-                            335 	.area GSINIT  (CODE)
-                            336 	.area GSFINAL (CODE)
-                            337 	.area CSEG    (CODE)
-                            338 ;--------------------------------------------------------
-                            339 ; interrupt vector 
-                            340 ;--------------------------------------------------------
-                            341 	.area HOME    (CODE)
-   0000                     342 __interrupt_vect:
-   0000 02s00r00            343 	ljmp	__sdcc_gsinit_startup
-                            344 ;--------------------------------------------------------
-                            345 ; global & static initialisations
-                            346 ;--------------------------------------------------------
-                            347 	.area HOME    (CODE)
-                            348 	.area GSINIT  (CODE)
-                            349 	.area GSFINAL (CODE)
-                            350 	.area GSINIT  (CODE)
-                            351 	.globl __sdcc_gsinit_startup
-                            352 	.globl __sdcc_program_startup
-                            353 	.globl __start__stack
-                            354 	.globl __mcs51_genXINIT
-                            355 	.globl __mcs51_genXRAMCLEAR
-                            356 	.globl __mcs51_genRAMCLEAR
-                            357 ;	main_montgomery.c:16: unsigned short i = 0;
-   0000 E4                  358 	clr	a
-   0001 F5*00               359 	mov	_i,a
-   0003 F5*01               360 	mov	(_i + 1),a
-                            361 ;	main_montgomery.c:17: unsigned short j = 0;
-   0005 E4                  362 	clr	a
-   0006 F5*02               363 	mov	_j,a
-   0008 F5*03               364 	mov	(_j + 1),a
-                            365 ;	main_montgomery.c:18: unsigned char s = 0;
-   000A 75*04 00            366 	mov	_s,#0x00
-                            367 ;	main_montgomery.c:20: unsigned char t[3] = {0, 0, 0};
-   000D 75*05 00            368 	mov	_t,#0x00
-   0010 75*06 00            369 	mov	(_t + 0x0001),#0x00
-   0013 75*07 00            370 	mov	(_t + 0x0002),#0x00
-                            371 ;	main_montgomery.c:10: volatile __xdata __at (0x0000) unsigned char n[SIZE] = {0xD3,0x55,0xA4,0x5F,0x57,0xF3,0xF9,0x3E,0xCF,0x84,0x6D,0xFF,0x20,0xC1,0xAE,0x12,0xCF,0xF1,0x00,0x66,0x45,0xE2,0x34,0x61,0x27,0xF2,0x57,0xB3,0x42,0x21,0x80,0x95,0xAB,0x15,0xA2,0x1D,0x53,0xB2,0x27,0xE6,0x56,0x93,0x27,0xAF,0xC2,0xEE,0x2B,0x2F,0x9A,0xAE,0x6A,0x09,0xE5,0x7F,0xAE,0x7D,0x2B,0xDD,0x58,0x2F,0x87,0x70,0x05,0x1F,0xF8,0xBD,0x0B,0xE0,0xFD,0xF1,0x81,0x60,0xBF,0xD2,0xFE,0x8F,0x7B,0xB9,0xA9,0xA4,0x6A,0x0A,0xA3,0xA3,0x70,0x22,0xBF,0x4C,0x1B,0xB0,0x41,0x24,0x4C,0x3A,0x08,0xEC,0xF4,0x91,0xFF,0x93,0x8D,0xFC,0xFA,0x4C,0x26,0x2D,0xD2,0xE9,0xFC,0x76,0xB1,0x67,0x5E,0x24,0x9E,0x31,0x66,0x5D,0x98,0x4C,0x0D,0x79,0x81,0x76,0xAC,0x1D,0xE2,0xCA};
-   0016 90s00r00            372 	mov	dptr,#_n
-   0019 74 D3               373 	mov	a,#0xD3
-   001B F0                  374 	movx	@dptr,a
-   001C 90s00r01            375 	mov	dptr,#(_n + 0x0001)
-   001F 74 55               376 	mov	a,#0x55
-   0021 F0                  377 	movx	@dptr,a
-   0022 90s00r02            378 	mov	dptr,#(_n + 0x0002)
-   0025 74 A4               379 	mov	a,#0xA4
-   0027 F0                  380 	movx	@dptr,a
-   0028 90s00r03            381 	mov	dptr,#(_n + 0x0003)
-   002B 74 5F               382 	mov	a,#0x5F
-   002D F0                  383 	movx	@dptr,a
-   002E 90s00r04            384 	mov	dptr,#(_n + 0x0004)
-   0031 74 57               385 	mov	a,#0x57
-   0033 F0                  386 	movx	@dptr,a
-   0034 90s00r05            387 	mov	dptr,#(_n + 0x0005)
-   0037 74 F3               388 	mov	a,#0xF3
-   0039 F0                  389 	movx	@dptr,a
-   003A 90s00r06            390 	mov	dptr,#(_n + 0x0006)
-   003D 74 F9               391 	mov	a,#0xF9
-   003F F0                  392 	movx	@dptr,a
-   0040 90s00r07            393 	mov	dptr,#(_n + 0x0007)
-   0043 74 3E               394 	mov	a,#0x3E
-   0045 F0                  395 	movx	@dptr,a
-   0046 90s00r08            396 	mov	dptr,#(_n + 0x0008)
-   0049 74 CF               397 	mov	a,#0xCF
-   004B F0                  398 	movx	@dptr,a
-   004C 90s00r09            399 	mov	dptr,#(_n + 0x0009)
-   004F 74 84               400 	mov	a,#0x84
-   0051 F0                  401 	movx	@dptr,a
-   0052 90s00r0A            402 	mov	dptr,#(_n + 0x000a)
-   0055 74 6D               403 	mov	a,#0x6D
-   0057 F0                  404 	movx	@dptr,a
-   0058 90s00r0B            405 	mov	dptr,#(_n + 0x000b)
-   005B 74 FF               406 	mov	a,#0xFF
-   005D F0                  407 	movx	@dptr,a
-   005E 90s00r0C            408 	mov	dptr,#(_n + 0x000c)
-   0061 74 20               409 	mov	a,#0x20
-   0063 F0                  410 	movx	@dptr,a
-   0064 90s00r0D            411 	mov	dptr,#(_n + 0x000d)
-   0067 74 C1               412 	mov	a,#0xC1
-   0069 F0                  413 	movx	@dptr,a
-   006A 90s00r0E            414 	mov	dptr,#(_n + 0x000e)
-   006D 74 AE               415 	mov	a,#0xAE
-   006F F0                  416 	movx	@dptr,a
-   0070 90s00r0F            417 	mov	dptr,#(_n + 0x000f)
-   0073 74 12               418 	mov	a,#0x12
-   0075 F0                  419 	movx	@dptr,a
-   0076 90s00r10            420 	mov	dptr,#(_n + 0x0010)
-   0079 74 CF               421 	mov	a,#0xCF
-   007B F0                  422 	movx	@dptr,a
-   007C 90s00r11            423 	mov	dptr,#(_n + 0x0011)
-   007F 74 F1               424 	mov	a,#0xF1
-   0081 F0                  425 	movx	@dptr,a
-   0082 90s00r12            426 	mov	dptr,#(_n + 0x0012)
-   0085 E4                  427 	clr	a
-   0086 F0                  428 	movx	@dptr,a
-   0087 90s00r13            429 	mov	dptr,#(_n + 0x0013)
-   008A 74 66               430 	mov	a,#0x66
-   008C F0                  431 	movx	@dptr,a
-   008D 90s00r14            432 	mov	dptr,#(_n + 0x0014)
-   0090 74 45               433 	mov	a,#0x45
-   0092 F0                  434 	movx	@dptr,a
-   0093 90s00r15            435 	mov	dptr,#(_n + 0x0015)
-   0096 74 E2               436 	mov	a,#0xE2
-   0098 F0                  437 	movx	@dptr,a
-   0099 90s00r16            438 	mov	dptr,#(_n + 0x0016)
-   009C 74 34               439 	mov	a,#0x34
-   009E F0                  440 	movx	@dptr,a
-   009F 90s00r17            441 	mov	dptr,#(_n + 0x0017)
-   00A2 74 61               442 	mov	a,#0x61
-   00A4 F0                  443 	movx	@dptr,a
-   00A5 90s00r18            444 	mov	dptr,#(_n + 0x0018)
-   00A8 74 27               445 	mov	a,#0x27
-   00AA F0                  446 	movx	@dptr,a
-   00AB 90s00r19            447 	mov	dptr,#(_n + 0x0019)
-   00AE 74 F2               448 	mov	a,#0xF2
-   00B0 F0                  449 	movx	@dptr,a
-   00B1 90s00r1A            450 	mov	dptr,#(_n + 0x001a)
-   00B4 74 57               451 	mov	a,#0x57
-   00B6 F0                  452 	movx	@dptr,a
-   00B7 90s00r1B            453 	mov	dptr,#(_n + 0x001b)
-   00BA 74 B3               454 	mov	a,#0xB3
-   00BC F0                  455 	movx	@dptr,a
-   00BD 90s00r1C            456 	mov	dptr,#(_n + 0x001c)
-   00C0 74 42               457 	mov	a,#0x42
-   00C2 F0                  458 	movx	@dptr,a
-   00C3 90s00r1D            459 	mov	dptr,#(_n + 0x001d)
-   00C6 74 21               460 	mov	a,#0x21
-   00C8 F0                  461 	movx	@dptr,a
-   00C9 90s00r1E            462 	mov	dptr,#(_n + 0x001e)
-   00CC 74 80               463 	mov	a,#0x80
-   00CE F0                  464 	movx	@dptr,a
-   00CF 90s00r1F            465 	mov	dptr,#(_n + 0x001f)
-   00D2 74 95               466 	mov	a,#0x95
-   00D4 F0                  467 	movx	@dptr,a
-   00D5 90s00r20            468 	mov	dptr,#(_n + 0x0020)
-   00D8 74 AB               469 	mov	a,#0xAB
-   00DA F0                  470 	movx	@dptr,a
-   00DB 90s00r21            471 	mov	dptr,#(_n + 0x0021)
-   00DE 74 15               472 	mov	a,#0x15
-   00E0 F0                  473 	movx	@dptr,a
-   00E1 90s00r22            474 	mov	dptr,#(_n + 0x0022)
-   00E4 74 A2               475 	mov	a,#0xA2
-   00E6 F0                  476 	movx	@dptr,a
-   00E7 90s00r23            477 	mov	dptr,#(_n + 0x0023)
-   00EA 74 1D               478 	mov	a,#0x1D
-   00EC F0                  479 	movx	@dptr,a
-   00ED 90s00r24            480 	mov	dptr,#(_n + 0x0024)
-   00F0 74 53               481 	mov	a,#0x53
-   00F2 F0                  482 	movx	@dptr,a
-   00F3 90s00r25            483 	mov	dptr,#(_n + 0x0025)
-   00F6 74 B2               484 	mov	a,#0xB2
-   00F8 F0                  485 	movx	@dptr,a
-   00F9 90s00r26            486 	mov	dptr,#(_n + 0x0026)
-   00FC 74 27               487 	mov	a,#0x27
-   00FE F0                  488 	movx	@dptr,a
-   00FF 90s00r27            489 	mov	dptr,#(_n + 0x0027)
-   0102 74 E6               490 	mov	a,#0xE6
-   0104 F0                  491 	movx	@dptr,a
-   0105 90s00r28            492 	mov	dptr,#(_n + 0x0028)
-   0108 74 56               493 	mov	a,#0x56
-   010A F0                  494 	movx	@dptr,a
-   010B 90s00r29            495 	mov	dptr,#(_n + 0x0029)
-   010E 74 93               496 	mov	a,#0x93
-   0110 F0                  497 	movx	@dptr,a
-   0111 90s00r2A            498 	mov	dptr,#(_n + 0x002a)
-   0114 74 27               499 	mov	a,#0x27
-   0116 F0                  500 	movx	@dptr,a
-   0117 90s00r2B            501 	mov	dptr,#(_n + 0x002b)
-   011A 74 AF               502 	mov	a,#0xAF
-   011C F0                  503 	movx	@dptr,a
-   011D 90s00r2C            504 	mov	dptr,#(_n + 0x002c)
-   0120 74 C2               505 	mov	a,#0xC2
-   0122 F0                  506 	movx	@dptr,a
-   0123 90s00r2D            507 	mov	dptr,#(_n + 0x002d)
-   0126 74 EE               508 	mov	a,#0xEE
-   0128 F0                  509 	movx	@dptr,a
-   0129 90s00r2E            510 	mov	dptr,#(_n + 0x002e)
-   012C 74 2B               511 	mov	a,#0x2B
-   012E F0                  512 	movx	@dptr,a
-   012F 90s00r2F            513 	mov	dptr,#(_n + 0x002f)
-   0132 74 2F               514 	mov	a,#0x2F
-   0134 F0                  515 	movx	@dptr,a
-   0135 90s00r30            516 	mov	dptr,#(_n + 0x0030)
-   0138 74 9A               517 	mov	a,#0x9A
-   013A F0                  518 	movx	@dptr,a
-   013B 90s00r31            519 	mov	dptr,#(_n + 0x0031)
-   013E 74 AE               520 	mov	a,#0xAE
-   0140 F0                  521 	movx	@dptr,a
-   0141 90s00r32            522 	mov	dptr,#(_n + 0x0032)
-   0144 74 6A               523 	mov	a,#0x6A
-   0146 F0                  524 	movx	@dptr,a
-   0147 90s00r33            525 	mov	dptr,#(_n + 0x0033)
-   014A 74 09               526 	mov	a,#0x09
-   014C F0                  527 	movx	@dptr,a
-   014D 90s00r34            528 	mov	dptr,#(_n + 0x0034)
-   0150 74 E5               529 	mov	a,#0xE5
-   0152 F0                  530 	movx	@dptr,a
-   0153 90s00r35            531 	mov	dptr,#(_n + 0x0035)
-   0156 74 7F               532 	mov	a,#0x7F
-   0158 F0                  533 	movx	@dptr,a
-   0159 90s00r36            534 	mov	dptr,#(_n + 0x0036)
-   015C 74 AE               535 	mov	a,#0xAE
-   015E F0                  536 	movx	@dptr,a
-   015F 90s00r37            537 	mov	dptr,#(_n + 0x0037)
-   0162 74 7D               538 	mov	a,#0x7D
-   0164 F0                  539 	movx	@dptr,a
-   0165 90s00r38            540 	mov	dptr,#(_n + 0x0038)
-   0168 74 2B               541 	mov	a,#0x2B
-   016A F0                  542 	movx	@dptr,a
-   016B 90s00r39            543 	mov	dptr,#(_n + 0x0039)
-   016E 74 DD               544 	mov	a,#0xDD
-   0170 F0                  545 	movx	@dptr,a
-   0171 90s00r3A            546 	mov	dptr,#(_n + 0x003a)
-   0174 74 58               547 	mov	a,#0x58
-   0176 F0                  548 	movx	@dptr,a
-   0177 90s00r3B            549 	mov	dptr,#(_n + 0x003b)
-   017A 74 2F               550 	mov	a,#0x2F
-   017C F0                  551 	movx	@dptr,a
-   017D 90s00r3C            552 	mov	dptr,#(_n + 0x003c)
-   0180 74 87               553 	mov	a,#0x87
-   0182 F0                  554 	movx	@dptr,a
-   0183 90s00r3D            555 	mov	dptr,#(_n + 0x003d)
-   0186 74 70               556 	mov	a,#0x70
-   0188 F0                  557 	movx	@dptr,a
-   0189 90s00r3E            558 	mov	dptr,#(_n + 0x003e)
-   018C 74 05               559 	mov	a,#0x05
-   018E F0                  560 	movx	@dptr,a
-   018F 90s00r3F            561 	mov	dptr,#(_n + 0x003f)
-   0192 74 1F               562 	mov	a,#0x1F
-   0194 F0                  563 	movx	@dptr,a
-   0195 90s00r40            564 	mov	dptr,#(_n + 0x0040)
-   0198 74 F8               565 	mov	a,#0xF8
-   019A F0                  566 	movx	@dptr,a
-   019B 90s00r41            567 	mov	dptr,#(_n + 0x0041)
-   019E 74 BD               568 	mov	a,#0xBD
-   01A0 F0                  569 	movx	@dptr,a
-   01A1 90s00r42            570 	mov	dptr,#(_n + 0x0042)
-   01A4 74 0B               571 	mov	a,#0x0B
-   01A6 F0                  572 	movx	@dptr,a
-   01A7 90s00r43            573 	mov	dptr,#(_n + 0x0043)
-   01AA 74 E0               574 	mov	a,#0xE0
-   01AC F0                  575 	movx	@dptr,a
-   01AD 90s00r44            576 	mov	dptr,#(_n + 0x0044)
-   01B0 74 FD               577 	mov	a,#0xFD
-   01B2 F0                  578 	movx	@dptr,a
-   01B3 90s00r45            579 	mov	dptr,#(_n + 0x0045)
-   01B6 74 F1               580 	mov	a,#0xF1
-   01B8 F0                  581 	movx	@dptr,a
-   01B9 90s00r46            582 	mov	dptr,#(_n + 0x0046)
-   01BC 74 81               583 	mov	a,#0x81
-   01BE F0                  584 	movx	@dptr,a
-   01BF 90s00r47            585 	mov	dptr,#(_n + 0x0047)
-   01C2 74 60               586 	mov	a,#0x60
-   01C4 F0                  587 	movx	@dptr,a
-   01C5 90s00r48            588 	mov	dptr,#(_n + 0x0048)
-   01C8 74 BF               589 	mov	a,#0xBF
-   01CA F0                  590 	movx	@dptr,a
-   01CB 90s00r49            591 	mov	dptr,#(_n + 0x0049)
-   01CE 74 D2               592 	mov	a,#0xD2
-   01D0 F0                  593 	movx	@dptr,a
-   01D1 90s00r4A            594 	mov	dptr,#(_n + 0x004a)
-   01D4 74 FE               595 	mov	a,#0xFE
-   01D6 F0                  596 	movx	@dptr,a
-   01D7 90s00r4B            597 	mov	dptr,#(_n + 0x004b)
-   01DA 74 8F               598 	mov	a,#0x8F
-   01DC F0                  599 	movx	@dptr,a
-   01DD 90s00r4C            600 	mov	dptr,#(_n + 0x004c)
-   01E0 74 7B               601 	mov	a,#0x7B
-   01E2 F0                  602 	movx	@dptr,a
-   01E3 90s00r4D            603 	mov	dptr,#(_n + 0x004d)
-   01E6 74 B9               604 	mov	a,#0xB9
-   01E8 F0                  605 	movx	@dptr,a
-   01E9 90s00r4E            606 	mov	dptr,#(_n + 0x004e)
-   01EC 74 A9               607 	mov	a,#0xA9
-   01EE F0                  608 	movx	@dptr,a
-   01EF 90s00r4F            609 	mov	dptr,#(_n + 0x004f)
-   01F2 74 A4               610 	mov	a,#0xA4
-   01F4 F0                  611 	movx	@dptr,a
-   01F5 90s00r50            612 	mov	dptr,#(_n + 0x0050)
-   01F8 74 6A               613 	mov	a,#0x6A
-   01FA F0                  614 	movx	@dptr,a
-   01FB 90s00r51            615 	mov	dptr,#(_n + 0x0051)
-   01FE 74 0A               616 	mov	a,#0x0A
-   0200 F0                  617 	movx	@dptr,a
-   0201 90s00r52            618 	mov	dptr,#(_n + 0x0052)
-   0204 74 A3               619 	mov	a,#0xA3
-   0206 F0                  620 	movx	@dptr,a
-   0207 90s00r53            621 	mov	dptr,#(_n + 0x0053)
-   020A 74 A3               622 	mov	a,#0xA3
-   020C F0                  623 	movx	@dptr,a
-   020D 90s00r54            624 	mov	dptr,#(_n + 0x0054)
-   0210 74 70               625 	mov	a,#0x70
-   0212 F0                  626 	movx	@dptr,a
-   0213 90s00r55            627 	mov	dptr,#(_n + 0x0055)
-   0216 74 22               628 	mov	a,#0x22
-   0218 F0                  629 	movx	@dptr,a
-   0219 90s00r56            630 	mov	dptr,#(_n + 0x0056)
-   021C 74 BF               631 	mov	a,#0xBF
-   021E F0                  632 	movx	@dptr,a
-   021F 90s00r57            633 	mov	dptr,#(_n + 0x0057)
-   0222 74 4C               634 	mov	a,#0x4C
-   0224 F0                  635 	movx	@dptr,a
-   0225 90s00r58            636 	mov	dptr,#(_n + 0x0058)
-   0228 74 1B               637 	mov	a,#0x1B
-   022A F0                  638 	movx	@dptr,a
-   022B 90s00r59            639 	mov	dptr,#(_n + 0x0059)
-   022E 74 B0               640 	mov	a,#0xB0
-   0230 F0                  641 	movx	@dptr,a
-   0231 90s00r5A            642 	mov	dptr,#(_n + 0x005a)
-   0234 74 41               643 	mov	a,#0x41
-   0236 F0                  644 	movx	@dptr,a
-   0237 90s00r5B            645 	mov	dptr,#(_n + 0x005b)
-   023A 74 24               646 	mov	a,#0x24
-   023C F0                  647 	movx	@dptr,a
-   023D 90s00r5C            648 	mov	dptr,#(_n + 0x005c)
-   0240 74 4C               649 	mov	a,#0x4C
-   0242 F0                  650 	movx	@dptr,a
-   0243 90s00r5D            651 	mov	dptr,#(_n + 0x005d)
-   0246 74 3A               652 	mov	a,#0x3A
-   0248 F0                  653 	movx	@dptr,a
-   0249 90s00r5E            654 	mov	dptr,#(_n + 0x005e)
-   024C 74 08               655 	mov	a,#0x08
-   024E F0                  656 	movx	@dptr,a
-   024F 90s00r5F            657 	mov	dptr,#(_n + 0x005f)
-   0252 74 EC               658 	mov	a,#0xEC
-   0254 F0                  659 	movx	@dptr,a
-   0255 90s00r60            660 	mov	dptr,#(_n + 0x0060)
-   0258 74 F4               661 	mov	a,#0xF4
-   025A F0                  662 	movx	@dptr,a
-   025B 90s00r61            663 	mov	dptr,#(_n + 0x0061)
-   025E 74 91               664 	mov	a,#0x91
-   0260 F0                  665 	movx	@dptr,a
-   0261 90s00r62            666 	mov	dptr,#(_n + 0x0062)
-   0264 74 FF               667 	mov	a,#0xFF
-   0266 F0                  668 	movx	@dptr,a
-   0267 90s00r63            669 	mov	dptr,#(_n + 0x0063)
-   026A 74 93               670 	mov	a,#0x93
-   026C F0                  671 	movx	@dptr,a
-   026D 90s00r64            672 	mov	dptr,#(_n + 0x0064)
-   0270 74 8D               673 	mov	a,#0x8D
-   0272 F0                  674 	movx	@dptr,a
-   0273 90s00r65            675 	mov	dptr,#(_n + 0x0065)
-   0276 74 FC               676 	mov	a,#0xFC
-   0278 F0                  677 	movx	@dptr,a
-   0279 90s00r66            678 	mov	dptr,#(_n + 0x0066)
-   027C 74 FA               679 	mov	a,#0xFA
-   027E F0                  680 	movx	@dptr,a
-   027F 90s00r67            681 	mov	dptr,#(_n + 0x0067)
-   0282 74 4C               682 	mov	a,#0x4C
-   0284 F0                  683 	movx	@dptr,a
-   0285 90s00r68            684 	mov	dptr,#(_n + 0x0068)
-   0288 74 26               685 	mov	a,#0x26
-   028A F0                  686 	movx	@dptr,a
-   028B 90s00r69            687 	mov	dptr,#(_n + 0x0069)
-   028E 74 2D               688 	mov	a,#0x2D
-   0290 F0                  689 	movx	@dptr,a
-   0291 90s00r6A            690 	mov	dptr,#(_n + 0x006a)
-   0294 74 D2               691 	mov	a,#0xD2
-   0296 F0                  692 	movx	@dptr,a
-   0297 90s00r6B            693 	mov	dptr,#(_n + 0x006b)
-   029A 74 E9               694 	mov	a,#0xE9
-   029C F0                  695 	movx	@dptr,a
-   029D 90s00r6C            696 	mov	dptr,#(_n + 0x006c)
-   02A0 74 FC               697 	mov	a,#0xFC
-   02A2 F0                  698 	movx	@dptr,a
-   02A3 90s00r6D            699 	mov	dptr,#(_n + 0x006d)
-   02A6 74 76               700 	mov	a,#0x76
-   02A8 F0                  701 	movx	@dptr,a
-   02A9 90s00r6E            702 	mov	dptr,#(_n + 0x006e)
-   02AC 74 B1               703 	mov	a,#0xB1
-   02AE F0                  704 	movx	@dptr,a
-   02AF 90s00r6F            705 	mov	dptr,#(_n + 0x006f)
-   02B2 74 67               706 	mov	a,#0x67
-   02B4 F0                  707 	movx	@dptr,a
-   02B5 90s00r70            708 	mov	dptr,#(_n + 0x0070)
-   02B8 74 5E               709 	mov	a,#0x5E
-   02BA F0                  710 	movx	@dptr,a
-   02BB 90s00r71            711 	mov	dptr,#(_n + 0x0071)
-   02BE 74 24               712 	mov	a,#0x24
-   02C0 F0                  713 	movx	@dptr,a
-   02C1 90s00r72            714 	mov	dptr,#(_n + 0x0072)
-   02C4 74 9E               715 	mov	a,#0x9E
-   02C6 F0                  716 	movx	@dptr,a
-   02C7 90s00r73            717 	mov	dptr,#(_n + 0x0073)
-   02CA 74 31               718 	mov	a,#0x31
-   02CC F0                  719 	movx	@dptr,a
-   02CD 90s00r74            720 	mov	dptr,#(_n + 0x0074)
-   02D0 74 66               721 	mov	a,#0x66
-   02D2 F0                  722 	movx	@dptr,a
-   02D3 90s00r75            723 	mov	dptr,#(_n + 0x0075)
-   02D6 74 5D               724 	mov	a,#0x5D
-   02D8 F0                  725 	movx	@dptr,a
-   02D9 90s00r76            726 	mov	dptr,#(_n + 0x0076)
-   02DC 74 98               727 	mov	a,#0x98
-   02DE F0                  728 	movx	@dptr,a
-   02DF 90s00r77            729 	mov	dptr,#(_n + 0x0077)
-   02E2 74 4C               730 	mov	a,#0x4C
-   02E4 F0                  731 	movx	@dptr,a
-   02E5 90s00r78            732 	mov	dptr,#(_n + 0x0078)
-   02E8 74 0D               733 	mov	a,#0x0D
-   02EA F0                  734 	movx	@dptr,a
-   02EB 90s00r79            735 	mov	dptr,#(_n + 0x0079)
-   02EE 74 79               736 	mov	a,#0x79
-   02F0 F0                  737 	movx	@dptr,a
-   02F1 90s00r7A            738 	mov	dptr,#(_n + 0x007a)
-   02F4 74 81               739 	mov	a,#0x81
-   02F6 F0                  740 	movx	@dptr,a
-   02F7 90s00r7B            741 	mov	dptr,#(_n + 0x007b)
-   02FA 74 76               742 	mov	a,#0x76
-   02FC F0                  743 	movx	@dptr,a
-   02FD 90s00r7C            744 	mov	dptr,#(_n + 0x007c)
-   0300 74 AC               745 	mov	a,#0xAC
-   0302 F0                  746 	movx	@dptr,a
-   0303 90s00r7D            747 	mov	dptr,#(_n + 0x007d)
-   0306 74 1D               748 	mov	a,#0x1D
-   0308 F0                  749 	movx	@dptr,a
-   0309 90s00r7E            750 	mov	dptr,#(_n + 0x007e)
-   030C 74 E2               751 	mov	a,#0xE2
-   030E F0                  752 	movx	@dptr,a
-   030F 90s00r7F            753 	mov	dptr,#(_n + 0x007f)
-   0312 74 CA               754 	mov	a,#0xCA
-   0314 F0                  755 	movx	@dptr,a
-                            756 ;	main_montgomery.c:11: volatile __xdata __at (0x0080) unsigned char a[SIZE] = {0xFF,0x7F,0x14,0x64,0x47,0x68,0xC2,0xB6,0x27,0x32,0x63,0x2C,0xB0,0xC3,0x95,0x13,0xC5,0x7E,0x17,0x22,0xF3,0x7C,0x2D,0xE8,0x13,0x47,0x5E,0x15,0x4E,0xEF,0x83,0x81,0xDF,0xC3,0x47,0xD3,0x60,0xBB,0x8B,0x3E,0xB6,0x35,0xB1,0x6E,0xD1,0xD5,0xDA,0x6F,0x28,0x16,0x2C,0x74,0x36,0xF9,0x04,0x79,0xF9,0x76,0xE2,0xCC,0xA4,0x82,0xA7,0xA4,0x68,0x4E,0x24,0xA6,0xC1,0x58,0x68,0x24,0x58,0xDC,0x14,0xF9,0xFF,0x4D,0xA1,0xEF,0x53,0xA3,0xC2,0x84,0x1B,0x81,0x16,0x6C,0xDD,0xE3,0xDB,0xA8,0x03,0x8F,0xF2,0x31,0xFD,0x94,0x5D,0x26,0x13,0xC6,0x68,0xB4,0x0D,0xCD,0xF1,0xB8,0x66,0x0D,0x5D,0x3B,0x2F,0xC4,0x4A,0xD1,0x0B,0x36,0xC6,0x10,0x1A,0x2F,0x72,0xD1,0xBB,0x15,0x29,0xCA};
-   0315 90s00r80            757 	mov	dptr,#_a
-   0318 74 FF               758 	mov	a,#0xFF
-   031A F0                  759 	movx	@dptr,a
-   031B 90s00r81            760 	mov	dptr,#(_a + 0x0001)
-   031E 74 7F               761 	mov	a,#0x7F
-   0320 F0                  762 	movx	@dptr,a
-   0321 90s00r82            763 	mov	dptr,#(_a + 0x0002)
-   0324 74 14               764 	mov	a,#0x14
-   0326 F0                  765 	movx	@dptr,a
-   0327 90s00r83            766 	mov	dptr,#(_a + 0x0003)
-   032A 74 64               767 	mov	a,#0x64
-   032C F0                  768 	movx	@dptr,a
-   032D 90s00r84            769 	mov	dptr,#(_a + 0x0004)
-   0330 74 47               770 	mov	a,#0x47
-   0332 F0                  771 	movx	@dptr,a
-   0333 90s00r85            772 	mov	dptr,#(_a + 0x0005)
-   0336 74 68               773 	mov	a,#0x68
-   0338 F0                  774 	movx	@dptr,a
-   0339 90s00r86            775 	mov	dptr,#(_a + 0x0006)
-   033C 74 C2               776 	mov	a,#0xC2
-   033E F0                  777 	movx	@dptr,a
-   033F 90s00r87            778 	mov	dptr,#(_a + 0x0007)
-   0342 74 B6               779 	mov	a,#0xB6
-   0344 F0                  780 	movx	@dptr,a
-   0345 90s00r88            781 	mov	dptr,#(_a + 0x0008)
-   0348 74 27               782 	mov	a,#0x27
-   034A F0                  783 	movx	@dptr,a
-   034B 90s00r89            784 	mov	dptr,#(_a + 0x0009)
-   034E 74 32               785 	mov	a,#0x32
-   0350 F0                  786 	movx	@dptr,a
-   0351 90s00r8A            787 	mov	dptr,#(_a + 0x000a)
-   0354 74 63               788 	mov	a,#0x63
-   0356 F0                  789 	movx	@dptr,a
-   0357 90s00r8B            790 	mov	dptr,#(_a + 0x000b)
-   035A 74 2C               791 	mov	a,#0x2C
-   035C F0                  792 	movx	@dptr,a
-   035D 90s00r8C            793 	mov	dptr,#(_a + 0x000c)
-   0360 74 B0               794 	mov	a,#0xB0
-   0362 F0                  795 	movx	@dptr,a
-   0363 90s00r8D            796 	mov	dptr,#(_a + 0x000d)
-   0366 74 C3               797 	mov	a,#0xC3
-   0368 F0                  798 	movx	@dptr,a
-   0369 90s00r8E            799 	mov	dptr,#(_a + 0x000e)
-   036C 74 95               800 	mov	a,#0x95
-   036E F0                  801 	movx	@dptr,a
-   036F 90s00r8F            802 	mov	dptr,#(_a + 0x000f)
-   0372 74 13               803 	mov	a,#0x13
-   0374 F0                  804 	movx	@dptr,a
-   0375 90s00r90            805 	mov	dptr,#(_a + 0x0010)
-   0378 74 C5               806 	mov	a,#0xC5
-   037A F0                  807 	movx	@dptr,a
-   037B 90s00r91            808 	mov	dptr,#(_a + 0x0011)
-   037E 74 7E               809 	mov	a,#0x7E
-   0380 F0                  810 	movx	@dptr,a
-   0381 90s00r92            811 	mov	dptr,#(_a + 0x0012)
-   0384 74 17               812 	mov	a,#0x17
-   0386 F0                  813 	movx	@dptr,a
-   0387 90s00r93            814 	mov	dptr,#(_a + 0x0013)
-   038A 74 22               815 	mov	a,#0x22
-   038C F0                  816 	movx	@dptr,a
-   038D 90s00r94            817 	mov	dptr,#(_a + 0x0014)
-   0390 74 F3               818 	mov	a,#0xF3
-   0392 F0                  819 	movx	@dptr,a
-   0393 90s00r95            820 	mov	dptr,#(_a + 0x0015)
-   0396 74 7C               821 	mov	a,#0x7C
-   0398 F0                  822 	movx	@dptr,a
-   0399 90s00r96            823 	mov	dptr,#(_a + 0x0016)
-   039C 74 2D               824 	mov	a,#0x2D
-   039E F0                  825 	movx	@dptr,a
-   039F 90s00r97            826 	mov	dptr,#(_a + 0x0017)
-   03A2 74 E8               827 	mov	a,#0xE8
-   03A4 F0                  828 	movx	@dptr,a
-   03A5 90s00r98            829 	mov	dptr,#(_a + 0x0018)
-   03A8 74 13               830 	mov	a,#0x13
-   03AA F0                  831 	movx	@dptr,a
-   03AB 90s00r99            832 	mov	dptr,#(_a + 0x0019)
-   03AE 74 47               833 	mov	a,#0x47
-   03B0 F0                  834 	movx	@dptr,a
-   03B1 90s00r9A            835 	mov	dptr,#(_a + 0x001a)
-   03B4 74 5E               836 	mov	a,#0x5E
-   03B6 F0                  837 	movx	@dptr,a
-   03B7 90s00r9B            838 	mov	dptr,#(_a + 0x001b)
-   03BA 74 15               839 	mov	a,#0x15
-   03BC F0                  840 	movx	@dptr,a
-   03BD 90s00r9C            841 	mov	dptr,#(_a + 0x001c)
-   03C0 74 4E               842 	mov	a,#0x4E
-   03C2 F0                  843 	movx	@dptr,a
-   03C3 90s00r9D            844 	mov	dptr,#(_a + 0x001d)
-   03C6 74 EF               845 	mov	a,#0xEF
-   03C8 F0                  846 	movx	@dptr,a
-   03C9 90s00r9E            847 	mov	dptr,#(_a + 0x001e)
-   03CC 74 83               848 	mov	a,#0x83
-   03CE F0                  849 	movx	@dptr,a
-   03CF 90s00r9F            850 	mov	dptr,#(_a + 0x001f)
-   03D2 74 81               851 	mov	a,#0x81
-   03D4 F0                  852 	movx	@dptr,a
-   03D5 90s00rA0            853 	mov	dptr,#(_a + 0x0020)
-   03D8 74 DF               854 	mov	a,#0xDF
-   03DA F0                  855 	movx	@dptr,a
-   03DB 90s00rA1            856 	mov	dptr,#(_a + 0x0021)
-   03DE 74 C3               857 	mov	a,#0xC3
-   03E0 F0                  858 	movx	@dptr,a
-   03E1 90s00rA2            859 	mov	dptr,#(_a + 0x0022)
-   03E4 74 47               860 	mov	a,#0x47
-   03E6 F0                  861 	movx	@dptr,a
-   03E7 90s00rA3            862 	mov	dptr,#(_a + 0x0023)
-   03EA 74 D3               863 	mov	a,#0xD3
-   03EC F0                  864 	movx	@dptr,a
-   03ED 90s00rA4            865 	mov	dptr,#(_a + 0x0024)
-   03F0 74 60               866 	mov	a,#0x60
-   03F2 F0                  867 	movx	@dptr,a
-   03F3 90s00rA5            868 	mov	dptr,#(_a + 0x0025)
-   03F6 74 BB               869 	mov	a,#0xBB
-   03F8 F0                  870 	movx	@dptr,a
-   03F9 90s00rA6            871 	mov	dptr,#(_a + 0x0026)
-   03FC 74 8B               872 	mov	a,#0x8B
-   03FE F0                  873 	movx	@dptr,a
-   03FF 90s00rA7            874 	mov	dptr,#(_a + 0x0027)
-   0402 74 3E               875 	mov	a,#0x3E
-   0404 F0                  876 	movx	@dptr,a
-   0405 90s00rA8            877 	mov	dptr,#(_a + 0x0028)
-   0408 74 B6               878 	mov	a,#0xB6
-   040A F0                  879 	movx	@dptr,a
-   040B 90s00rA9            880 	mov	dptr,#(_a + 0x0029)
-   040E 74 35               881 	mov	a,#0x35
-   0410 F0                  882 	movx	@dptr,a
-   0411 90s00rAA            883 	mov	dptr,#(_a + 0x002a)
-   0414 74 B1               884 	mov	a,#0xB1
-   0416 F0                  885 	movx	@dptr,a
-   0417 90s00rAB            886 	mov	dptr,#(_a + 0x002b)
-   041A 74 6E               887 	mov	a,#0x6E
-   041C F0                  888 	movx	@dptr,a
-   041D 90s00rAC            889 	mov	dptr,#(_a + 0x002c)
-   0420 74 D1               890 	mov	a,#0xD1
-   0422 F0                  891 	movx	@dptr,a
-   0423 90s00rAD            892 	mov	dptr,#(_a + 0x002d)
-   0426 74 D5               893 	mov	a,#0xD5
-   0428 F0                  894 	movx	@dptr,a
-   0429 90s00rAE            895 	mov	dptr,#(_a + 0x002e)
-   042C 74 DA               896 	mov	a,#0xDA
-   042E F0                  897 	movx	@dptr,a
-   042F 90s00rAF            898 	mov	dptr,#(_a + 0x002f)
-   0432 74 6F               899 	mov	a,#0x6F
-   0434 F0                  900 	movx	@dptr,a
-   0435 90s00rB0            901 	mov	dptr,#(_a + 0x0030)
-   0438 74 28               902 	mov	a,#0x28
-   043A F0                  903 	movx	@dptr,a
-   043B 90s00rB1            904 	mov	dptr,#(_a + 0x0031)
-   043E 74 16               905 	mov	a,#0x16
-   0440 F0                  906 	movx	@dptr,a
-   0441 90s00rB2            907 	mov	dptr,#(_a + 0x0032)
-   0444 74 2C               908 	mov	a,#0x2C
-   0446 F0                  909 	movx	@dptr,a
-   0447 90s00rB3            910 	mov	dptr,#(_a + 0x0033)
-   044A 74 74               911 	mov	a,#0x74
-   044C F0                  912 	movx	@dptr,a
-   044D 90s00rB4            913 	mov	dptr,#(_a + 0x0034)
-   0450 74 36               914 	mov	a,#0x36
-   0452 F0                  915 	movx	@dptr,a
-   0453 90s00rB5            916 	mov	dptr,#(_a + 0x0035)
-   0456 74 F9               917 	mov	a,#0xF9
-   0458 F0                  918 	movx	@dptr,a
-   0459 90s00rB6            919 	mov	dptr,#(_a + 0x0036)
-   045C 74 04               920 	mov	a,#0x04
-   045E F0                  921 	movx	@dptr,a
-   045F 90s00rB7            922 	mov	dptr,#(_a + 0x0037)
-   0462 74 79               923 	mov	a,#0x79
-   0464 F0                  924 	movx	@dptr,a
-   0465 90s00rB8            925 	mov	dptr,#(_a + 0x0038)
-   0468 74 F9               926 	mov	a,#0xF9
-   046A F0                  927 	movx	@dptr,a
-   046B 90s00rB9            928 	mov	dptr,#(_a + 0x0039)
-   046E 74 76               929 	mov	a,#0x76
-   0470 F0                  930 	movx	@dptr,a
-   0471 90s00rBA            931 	mov	dptr,#(_a + 0x003a)
-   0474 74 E2               932 	mov	a,#0xE2
-   0476 F0                  933 	movx	@dptr,a
-   0477 90s00rBB            934 	mov	dptr,#(_a + 0x003b)
-   047A 74 CC               935 	mov	a,#0xCC
-   047C F0                  936 	movx	@dptr,a
-   047D 90s00rBC            937 	mov	dptr,#(_a + 0x003c)
-   0480 74 A4               938 	mov	a,#0xA4
-   0482 F0                  939 	movx	@dptr,a
-   0483 90s00rBD            940 	mov	dptr,#(_a + 0x003d)
-   0486 74 82               941 	mov	a,#0x82
-   0488 F0                  942 	movx	@dptr,a
-   0489 90s00rBE            943 	mov	dptr,#(_a + 0x003e)
-   048C 74 A7               944 	mov	a,#0xA7
-   048E F0                  945 	movx	@dptr,a
-   048F 90s00rBF            946 	mov	dptr,#(_a + 0x003f)
-   0492 74 A4               947 	mov	a,#0xA4
-   0494 F0                  948 	movx	@dptr,a
-   0495 90s00rC0            949 	mov	dptr,#(_a + 0x0040)
-   0498 74 68               950 	mov	a,#0x68
-   049A F0                  951 	movx	@dptr,a
-   049B 90s00rC1            952 	mov	dptr,#(_a + 0x0041)
-   049E 74 4E               953 	mov	a,#0x4E
-   04A0 F0                  954 	movx	@dptr,a
-   04A1 90s00rC2            955 	mov	dptr,#(_a + 0x0042)
-   04A4 74 24               956 	mov	a,#0x24
-   04A6 F0                  957 	movx	@dptr,a
-   04A7 90s00rC3            958 	mov	dptr,#(_a + 0x0043)
-   04AA 74 A6               959 	mov	a,#0xA6
-   04AC F0                  960 	movx	@dptr,a
-   04AD 90s00rC4            961 	mov	dptr,#(_a + 0x0044)
-   04B0 74 C1               962 	mov	a,#0xC1
-   04B2 F0                  963 	movx	@dptr,a
-   04B3 90s00rC5            964 	mov	dptr,#(_a + 0x0045)
-   04B6 74 58               965 	mov	a,#0x58
-   04B8 F0                  966 	movx	@dptr,a
-   04B9 90s00rC6            967 	mov	dptr,#(_a + 0x0046)
-   04BC 74 68               968 	mov	a,#0x68
-   04BE F0                  969 	movx	@dptr,a
-   04BF 90s00rC7            970 	mov	dptr,#(_a + 0x0047)
-   04C2 74 24               971 	mov	a,#0x24
-   04C4 F0                  972 	movx	@dptr,a
-   04C5 90s00rC8            973 	mov	dptr,#(_a + 0x0048)
-   04C8 74 58               974 	mov	a,#0x58
-   04CA F0                  975 	movx	@dptr,a
-   04CB 90s00rC9            976 	mov	dptr,#(_a + 0x0049)
-   04CE 74 DC               977 	mov	a,#0xDC
-   04D0 F0                  978 	movx	@dptr,a
-   04D1 90s00rCA            979 	mov	dptr,#(_a + 0x004a)
-   04D4 74 14               980 	mov	a,#0x14
-   04D6 F0                  981 	movx	@dptr,a
-   04D7 90s00rCB            982 	mov	dptr,#(_a + 0x004b)
-   04DA 74 F9               983 	mov	a,#0xF9
-   04DC F0                  984 	movx	@dptr,a
-   04DD 90s00rCC            985 	mov	dptr,#(_a + 0x004c)
-   04E0 74 FF               986 	mov	a,#0xFF
-   04E2 F0                  987 	movx	@dptr,a
-   04E3 90s00rCD            988 	mov	dptr,#(_a + 0x004d)
-   04E6 74 4D               989 	mov	a,#0x4D
-   04E8 F0                  990 	movx	@dptr,a
-   04E9 90s00rCE            991 	mov	dptr,#(_a + 0x004e)
-   04EC 74 A1               992 	mov	a,#0xA1
-   04EE F0                  993 	movx	@dptr,a
-   04EF 90s00rCF            994 	mov	dptr,#(_a + 0x004f)
-   04F2 74 EF               995 	mov	a,#0xEF
-   04F4 F0                  996 	movx	@dptr,a
-   04F5 90s00rD0            997 	mov	dptr,#(_a + 0x0050)
-   04F8 74 53               998 	mov	a,#0x53
-   04FA F0                  999 	movx	@dptr,a
-   04FB 90s00rD1           1000 	mov	dptr,#(_a + 0x0051)
-   04FE 74 A3              1001 	mov	a,#0xA3
-   0500 F0                 1002 	movx	@dptr,a
-   0501 90s00rD2           1003 	mov	dptr,#(_a + 0x0052)
-   0504 74 C2              1004 	mov	a,#0xC2
-   0506 F0                 1005 	movx	@dptr,a
-   0507 90s00rD3           1006 	mov	dptr,#(_a + 0x0053)
-   050A 74 84              1007 	mov	a,#0x84
-   050C F0                 1008 	movx	@dptr,a
-   050D 90s00rD4           1009 	mov	dptr,#(_a + 0x0054)
-   0510 74 1B              1010 	mov	a,#0x1B
-   0512 F0                 1011 	movx	@dptr,a
-   0513 90s00rD5           1012 	mov	dptr,#(_a + 0x0055)
-   0516 74 81              1013 	mov	a,#0x81
-   0518 F0                 1014 	movx	@dptr,a
-   0519 90s00rD6           1015 	mov	dptr,#(_a + 0x0056)
-   051C 74 16              1016 	mov	a,#0x16
-   051E F0                 1017 	movx	@dptr,a
-   051F 90s00rD7           1018 	mov	dptr,#(_a + 0x0057)
-   0522 74 6C              1019 	mov	a,#0x6C
-   0524 F0                 1020 	movx	@dptr,a
-   0525 90s00rD8           1021 	mov	dptr,#(_a + 0x0058)
-   0528 74 DD              1022 	mov	a,#0xDD
-   052A F0                 1023 	movx	@dptr,a
-   052B 90s00rD9           1024 	mov	dptr,#(_a + 0x0059)
-   052E 74 E3              1025 	mov	a,#0xE3
-   0530 F0                 1026 	movx	@dptr,a
-   0531 90s00rDA           1027 	mov	dptr,#(_a + 0x005a)
-   0534 74 DB              1028 	mov	a,#0xDB
-   0536 F0                 1029 	movx	@dptr,a
-   0537 90s00rDB           1030 	mov	dptr,#(_a + 0x005b)
-   053A 74 A8              1031 	mov	a,#0xA8
-   053C F0                 1032 	movx	@dptr,a
-   053D 90s00rDC           1033 	mov	dptr,#(_a + 0x005c)
-   0540 74 03              1034 	mov	a,#0x03
-   0542 F0                 1035 	movx	@dptr,a
-   0543 90s00rDD           1036 	mov	dptr,#(_a + 0x005d)
-   0546 74 8F              1037 	mov	a,#0x8F
-   0548 F0                 1038 	movx	@dptr,a
-   0549 90s00rDE           1039 	mov	dptr,#(_a + 0x005e)
-   054C 74 F2              1040 	mov	a,#0xF2
-   054E F0                 1041 	movx	@dptr,a
-   054F 90s00rDF           1042 	mov	dptr,#(_a + 0x005f)
-   0552 74 31              1043 	mov	a,#0x31
-   0554 F0                 1044 	movx	@dptr,a
-   0555 90s00rE0           1045 	mov	dptr,#(_a + 0x0060)
-   0558 74 FD              1046 	mov	a,#0xFD
-   055A F0                 1047 	movx	@dptr,a
-   055B 90s00rE1           1048 	mov	dptr,#(_a + 0x0061)
-   055E 74 94              1049 	mov	a,#0x94
-   0560 F0                 1050 	movx	@dptr,a
-   0561 90s00rE2           1051 	mov	dptr,#(_a + 0x0062)
-   0564 74 5D              1052 	mov	a,#0x5D
-   0566 F0                 1053 	movx	@dptr,a
-   0567 90s00rE3           1054 	mov	dptr,#(_a + 0x0063)
-   056A 74 26              1055 	mov	a,#0x26
-   056C F0                 1056 	movx	@dptr,a
-   056D 90s00rE4           1057 	mov	dptr,#(_a + 0x0064)
-   0570 74 13              1058 	mov	a,#0x13
-   0572 F0                 1059 	movx	@dptr,a
-   0573 90s00rE5           1060 	mov	dptr,#(_a + 0x0065)
-   0576 74 C6              1061 	mov	a,#0xC6
-   0578 F0                 1062 	movx	@dptr,a
-   0579 90s00rE6           1063 	mov	dptr,#(_a + 0x0066)
-   057C 74 68              1064 	mov	a,#0x68
-   057E F0                 1065 	movx	@dptr,a
-   057F 90s00rE7           1066 	mov	dptr,#(_a + 0x0067)
-   0582 74 B4              1067 	mov	a,#0xB4
-   0584 F0                 1068 	movx	@dptr,a
-   0585 90s00rE8           1069 	mov	dptr,#(_a + 0x0068)
-   0588 74 0D              1070 	mov	a,#0x0D
-   058A F0                 1071 	movx	@dptr,a
-   058B 90s00rE9           1072 	mov	dptr,#(_a + 0x0069)
-   058E 74 CD              1073 	mov	a,#0xCD
-   0590 F0                 1074 	movx	@dptr,a
-   0591 90s00rEA           1075 	mov	dptr,#(_a + 0x006a)
-   0594 74 F1              1076 	mov	a,#0xF1
-   0596 F0                 1077 	movx	@dptr,a
-   0597 90s00rEB           1078 	mov	dptr,#(_a + 0x006b)
-   059A 74 B8              1079 	mov	a,#0xB8
-   059C F0                 1080 	movx	@dptr,a
-   059D 90s00rEC           1081 	mov	dptr,#(_a + 0x006c)
-   05A0 74 66              1082 	mov	a,#0x66
-   05A2 F0                 1083 	movx	@dptr,a
-   05A3 90s00rED           1084 	mov	dptr,#(_a + 0x006d)
-   05A6 74 0D              1085 	mov	a,#0x0D
-   05A8 F0                 1086 	movx	@dptr,a
-   05A9 90s00rEE           1087 	mov	dptr,#(_a + 0x006e)
-   05AC 74 5D              1088 	mov	a,#0x5D
-   05AE F0                 1089 	movx	@dptr,a
-   05AF 90s00rEF           1090 	mov	dptr,#(_a + 0x006f)
-   05B2 74 3B              1091 	mov	a,#0x3B
-   05B4 F0                 1092 	movx	@dptr,a
-   05B5 90s00rF0           1093 	mov	dptr,#(_a + 0x0070)
-   05B8 74 2F              1094 	mov	a,#0x2F
-   05BA F0                 1095 	movx	@dptr,a
-   05BB 90s00rF1           1096 	mov	dptr,#(_a + 0x0071)
-   05BE 74 C4              1097 	mov	a,#0xC4
-   05C0 F0                 1098 	movx	@dptr,a
-   05C1 90s00rF2           1099 	mov	dptr,#(_a + 0x0072)
-   05C4 74 4A              1100 	mov	a,#0x4A
-   05C6 F0                 1101 	movx	@dptr,a
-   05C7 90s00rF3           1102 	mov	dptr,#(_a + 0x0073)
-   05CA 74 D1              1103 	mov	a,#0xD1
-   05CC F0                 1104 	movx	@dptr,a
-   05CD 90s00rF4           1105 	mov	dptr,#(_a + 0x0074)
-   05D0 74 0B              1106 	mov	a,#0x0B
-   05D2 F0                 1107 	movx	@dptr,a
-   05D3 90s00rF5           1108 	mov	dptr,#(_a + 0x0075)
-   05D6 74 36              1109 	mov	a,#0x36
-   05D8 F0                 1110 	movx	@dptr,a
-   05D9 90s00rF6           1111 	mov	dptr,#(_a + 0x0076)
-   05DC 74 C6              1112 	mov	a,#0xC6
-   05DE F0                 1113 	movx	@dptr,a
-   05DF 90s00rF7           1114 	mov	dptr,#(_a + 0x0077)
-   05E2 74 10              1115 	mov	a,#0x10
-   05E4 F0                 1116 	movx	@dptr,a
-   05E5 90s00rF8           1117 	mov	dptr,#(_a + 0x0078)
-   05E8 74 1A              1118 	mov	a,#0x1A
-   05EA F0                 1119 	movx	@dptr,a
-   05EB 90s00rF9           1120 	mov	dptr,#(_a + 0x0079)
-   05EE 74 2F              1121 	mov	a,#0x2F
-   05F0 F0                 1122 	movx	@dptr,a
-   05F1 90s00rFA           1123 	mov	dptr,#(_a + 0x007a)
-   05F4 74 72              1124 	mov	a,#0x72
-   05F6 F0                 1125 	movx	@dptr,a
-   05F7 90s00rFB           1126 	mov	dptr,#(_a + 0x007b)
-   05FA 74 D1              1127 	mov	a,#0xD1
-   05FC F0                 1128 	movx	@dptr,a
-   05FD 90s00rFC           1129 	mov	dptr,#(_a + 0x007c)
-   0600 74 BB              1130 	mov	a,#0xBB
-   0602 F0                 1131 	movx	@dptr,a
-   0603 90s00rFD           1132 	mov	dptr,#(_a + 0x007d)
-   0606 74 15              1133 	mov	a,#0x15
-   0608 F0                 1134 	movx	@dptr,a
-   0609 90s00rFE           1135 	mov	dptr,#(_a + 0x007e)
-   060C 74 29              1136 	mov	a,#0x29
-   060E F0                 1137 	movx	@dptr,a
-   060F 90s00rFF           1138 	mov	dptr,#(_a + 0x007f)
-   0612 74 CA              1139 	mov	a,#0xCA
-   0614 F0                 1140 	movx	@dptr,a
-                           1141 ;	main_montgomery.c:12: volatile __xdata __at (0x0100) unsigned char b[SIZE] = {0xE1,0x8A,0x03,0xDB,0xE0,0xD9,0xF6,0x55,0xB6,0x27,0x0A,0x28,0xF0,0x5E,0x74,0x7F,0xE6,0x9F,0x4C,0xFB,0x26,0x8C,0x9E,0x87,0x83,0x22,0xF2,0x75,0xD2,0xB3,0x61,0xA2,0x9D,0x50,0x71,0x5E,0xC9,0xDD,0xDD,0x74,0x0A,0x3C,0xC0,0x30,0x3E,0xE5,0x20,0x02,0xB3,0x12,0x4F,0xAB,0x60,0x27,0x07,0x17,0xDD,0x00,0xC2,0xE1,0xBC,0x04,0xAE,0x21,0x38,0xCA,0xAA,0x8F,0x74,0xD5,0x02,0x10,0x15,0x87,0x58,0x08,0xCC,0x9A,0x42,0xBD,0x02,0x97,0xCE,0x2B,0x39,0x38,0x99,0xAC,0x81,0xBB,0xC3,0xFF,0xBC,0xC1,0xB8,0xE1,0x24,0x8D,0xC5,0x20,0x89,0x98,0x0B,0x50,0xB1,0x16,0x9A,0x2D,0x6E,0x5A,0x7B,0x2F,0xD4,0x92,0xA1,0xAA,0xA6,0xE5,0xA6,0xD2,0x0D,0x0B,0xB7,0xB2,0x25,0x23,0x23,0xBE};
-   0615 90s01r00           1142 	mov	dptr,#_b
-   0618 74 E1              1143 	mov	a,#0xE1
-   061A F0                 1144 	movx	@dptr,a
-   061B 90s01r01           1145 	mov	dptr,#(_b + 0x0001)
-   061E 74 8A              1146 	mov	a,#0x8A
-   0620 F0                 1147 	movx	@dptr,a
-   0621 90s01r02           1148 	mov	dptr,#(_b + 0x0002)
-   0624 74 03              1149 	mov	a,#0x03
-   0626 F0                 1150 	movx	@dptr,a
-   0627 90s01r03           1151 	mov	dptr,#(_b + 0x0003)
-   062A 74 DB              1152 	mov	a,#0xDB
-   062C F0                 1153 	movx	@dptr,a
-   062D 90s01r04           1154 	mov	dptr,#(_b + 0x0004)
-   0630 74 E0              1155 	mov	a,#0xE0
-   0632 F0                 1156 	movx	@dptr,a
-   0633 90s01r05           1157 	mov	dptr,#(_b + 0x0005)
-   0636 74 D9              1158 	mov	a,#0xD9
-   0638 F0                 1159 	movx	@dptr,a
-   0639 90s01r06           1160 	mov	dptr,#(_b + 0x0006)
-   063C 74 F6              1161 	mov	a,#0xF6
-   063E F0                 1162 	movx	@dptr,a
-   063F 90s01r07           1163 	mov	dptr,#(_b + 0x0007)
-   0642 74 55              1164 	mov	a,#0x55
-   0644 F0                 1165 	movx	@dptr,a
-   0645 90s01r08           1166 	mov	dptr,#(_b + 0x0008)
-   0648 74 B6              1167 	mov	a,#0xB6
-   064A F0                 1168 	movx	@dptr,a
-   064B 90s01r09           1169 	mov	dptr,#(_b + 0x0009)
-   064E 74 27              1170 	mov	a,#0x27
-   0650 F0                 1171 	movx	@dptr,a
-   0651 90s01r0A           1172 	mov	dptr,#(_b + 0x000a)
-   0654 74 0A              1173 	mov	a,#0x0A
-   0656 F0                 1174 	movx	@dptr,a
-   0657 90s01r0B           1175 	mov	dptr,#(_b + 0x000b)
-   065A 74 28              1176 	mov	a,#0x28
-   065C F0                 1177 	movx	@dptr,a
-   065D 90s01r0C           1178 	mov	dptr,#(_b + 0x000c)
-   0660 74 F0              1179 	mov	a,#0xF0
-   0662 F0                 1180 	movx	@dptr,a
-   0663 90s01r0D           1181 	mov	dptr,#(_b + 0x000d)
-   0666 74 5E              1182 	mov	a,#0x5E
-   0668 F0                 1183 	movx	@dptr,a
-   0669 90s01r0E           1184 	mov	dptr,#(_b + 0x000e)
-   066C 74 74              1185 	mov	a,#0x74
-   066E F0                 1186 	movx	@dptr,a
-   066F 90s01r0F           1187 	mov	dptr,#(_b + 0x000f)
-   0672 74 7F              1188 	mov	a,#0x7F
-   0674 F0                 1189 	movx	@dptr,a
-   0675 90s01r10           1190 	mov	dptr,#(_b + 0x0010)
-   0678 74 E6              1191 	mov	a,#0xE6
-   067A F0                 1192 	movx	@dptr,a
-   067B 90s01r11           1193 	mov	dptr,#(_b + 0x0011)
-   067E 74 9F              1194 	mov	a,#0x9F
-   0680 F0                 1195 	movx	@dptr,a
-   0681 90s01r12           1196 	mov	dptr,#(_b + 0x0012)
-   0684 74 4C              1197 	mov	a,#0x4C
-   0686 F0                 1198 	movx	@dptr,a
-   0687 90s01r13           1199 	mov	dptr,#(_b + 0x0013)
-   068A 74 FB              1200 	mov	a,#0xFB
-   068C F0                 1201 	movx	@dptr,a
-   068D 90s01r14           1202 	mov	dptr,#(_b + 0x0014)
-   0690 74 26              1203 	mov	a,#0x26
-   0692 F0                 1204 	movx	@dptr,a
-   0693 90s01r15           1205 	mov	dptr,#(_b + 0x0015)
-   0696 74 8C              1206 	mov	a,#0x8C
-   0698 F0                 1207 	movx	@dptr,a
-   0699 90s01r16           1208 	mov	dptr,#(_b + 0x0016)
-   069C 74 9E              1209 	mov	a,#0x9E
-   069E F0                 1210 	movx	@dptr,a
-   069F 90s01r17           1211 	mov	dptr,#(_b + 0x0017)
-   06A2 74 87              1212 	mov	a,#0x87
-   06A4 F0                 1213 	movx	@dptr,a
-   06A5 90s01r18           1214 	mov	dptr,#(_b + 0x0018)
-   06A8 74 83              1215 	mov	a,#0x83
-   06AA F0                 1216 	movx	@dptr,a
-   06AB 90s01r19           1217 	mov	dptr,#(_b + 0x0019)
-   06AE 74 22              1218 	mov	a,#0x22
-   06B0 F0                 1219 	movx	@dptr,a
-   06B1 90s01r1A           1220 	mov	dptr,#(_b + 0x001a)
-   06B4 74 F2              1221 	mov	a,#0xF2
-   06B6 F0                 1222 	movx	@dptr,a
-   06B7 90s01r1B           1223 	mov	dptr,#(_b + 0x001b)
-   06BA 74 75              1224 	mov	a,#0x75
-   06BC F0                 1225 	movx	@dptr,a
-   06BD 90s01r1C           1226 	mov	dptr,#(_b + 0x001c)
-   06C0 74 D2              1227 	mov	a,#0xD2
-   06C2 F0                 1228 	movx	@dptr,a
-   06C3 90s01r1D           1229 	mov	dptr,#(_b + 0x001d)
-   06C6 74 B3              1230 	mov	a,#0xB3
-   06C8 F0                 1231 	movx	@dptr,a
-   06C9 90s01r1E           1232 	mov	dptr,#(_b + 0x001e)
-   06CC 74 61              1233 	mov	a,#0x61
-   06CE F0                 1234 	movx	@dptr,a
-   06CF 90s01r1F           1235 	mov	dptr,#(_b + 0x001f)
-   06D2 74 A2              1236 	mov	a,#0xA2
-   06D4 F0                 1237 	movx	@dptr,a
-   06D5 90s01r20           1238 	mov	dptr,#(_b + 0x0020)
-   06D8 74 9D              1239 	mov	a,#0x9D
-   06DA F0                 1240 	movx	@dptr,a
-   06DB 90s01r21           1241 	mov	dptr,#(_b + 0x0021)
-   06DE 74 50              1242 	mov	a,#0x50
-   06E0 F0                 1243 	movx	@dptr,a
-   06E1 90s01r22           1244 	mov	dptr,#(_b + 0x0022)
-   06E4 74 71              1245 	mov	a,#0x71
-   06E6 F0                 1246 	movx	@dptr,a
-   06E7 90s01r23           1247 	mov	dptr,#(_b + 0x0023)
-   06EA 74 5E              1248 	mov	a,#0x5E
-   06EC F0                 1249 	movx	@dptr,a
-   06ED 90s01r24           1250 	mov	dptr,#(_b + 0x0024)
-   06F0 74 C9              1251 	mov	a,#0xC9
-   06F2 F0                 1252 	movx	@dptr,a
-   06F3 90s01r25           1253 	mov	dptr,#(_b + 0x0025)
-   06F6 74 DD              1254 	mov	a,#0xDD
-   06F8 F0                 1255 	movx	@dptr,a
-   06F9 90s01r26           1256 	mov	dptr,#(_b + 0x0026)
-   06FC 74 DD              1257 	mov	a,#0xDD
-   06FE F0                 1258 	movx	@dptr,a
-   06FF 90s01r27           1259 	mov	dptr,#(_b + 0x0027)
-   0702 74 74              1260 	mov	a,#0x74
-   0704 F0                 1261 	movx	@dptr,a
-   0705 90s01r28           1262 	mov	dptr,#(_b + 0x0028)
-   0708 74 0A              1263 	mov	a,#0x0A
-   070A F0                 1264 	movx	@dptr,a
-   070B 90s01r29           1265 	mov	dptr,#(_b + 0x0029)
-   070E 74 3C              1266 	mov	a,#0x3C
-   0710 F0                 1267 	movx	@dptr,a
-   0711 90s01r2A           1268 	mov	dptr,#(_b + 0x002a)
-   0714 74 C0              1269 	mov	a,#0xC0
-   0716 F0                 1270 	movx	@dptr,a
-   0717 90s01r2B           1271 	mov	dptr,#(_b + 0x002b)
-   071A 74 30              1272 	mov	a,#0x30
-   071C F0                 1273 	movx	@dptr,a
-   071D 90s01r2C           1274 	mov	dptr,#(_b + 0x002c)
-   0720 74 3E              1275 	mov	a,#0x3E
-   0722 F0                 1276 	movx	@dptr,a
-   0723 90s01r2D           1277 	mov	dptr,#(_b + 0x002d)
-   0726 74 E5              1278 	mov	a,#0xE5
-   0728 F0                 1279 	movx	@dptr,a
-   0729 90s01r2E           1280 	mov	dptr,#(_b + 0x002e)
-   072C 74 20              1281 	mov	a,#0x20
-   072E F0                 1282 	movx	@dptr,a
-   072F 90s01r2F           1283 	mov	dptr,#(_b + 0x002f)
-   0732 74 02              1284 	mov	a,#0x02
-   0734 F0                 1285 	movx	@dptr,a
-   0735 90s01r30           1286 	mov	dptr,#(_b + 0x0030)
-   0738 74 B3              1287 	mov	a,#0xB3
-   073A F0                 1288 	movx	@dptr,a
-   073B 90s01r31           1289 	mov	dptr,#(_b + 0x0031)
-   073E 74 12              1290 	mov	a,#0x12
-   0740 F0                 1291 	movx	@dptr,a
-   0741 90s01r32           1292 	mov	dptr,#(_b + 0x0032)
-   0744 74 4F              1293 	mov	a,#0x4F
-   0746 F0                 1294 	movx	@dptr,a
-   0747 90s01r33           1295 	mov	dptr,#(_b + 0x0033)
-   074A 74 AB              1296 	mov	a,#0xAB
-   074C F0                 1297 	movx	@dptr,a
-   074D 90s01r34           1298 	mov	dptr,#(_b + 0x0034)
-   0750 74 60              1299 	mov	a,#0x60
-   0752 F0                 1300 	movx	@dptr,a
-   0753 90s01r35           1301 	mov	dptr,#(_b + 0x0035)
-   0756 74 27              1302 	mov	a,#0x27
-   0758 F0                 1303 	movx	@dptr,a
-   0759 90s01r36           1304 	mov	dptr,#(_b + 0x0036)
-   075C 74 07              1305 	mov	a,#0x07
-   075E F0                 1306 	movx	@dptr,a
-   075F 90s01r37           1307 	mov	dptr,#(_b + 0x0037)
-   0762 74 17              1308 	mov	a,#0x17
-   0764 F0                 1309 	movx	@dptr,a
-   0765 90s01r38           1310 	mov	dptr,#(_b + 0x0038)
-   0768 74 DD              1311 	mov	a,#0xDD
-   076A F0                 1312 	movx	@dptr,a
-   076B 90s01r39           1313 	mov	dptr,#(_b + 0x0039)
-   076E E4                 1314 	clr	a
-   076F F0                 1315 	movx	@dptr,a
-   0770 90s01r3A           1316 	mov	dptr,#(_b + 0x003a)
-   0773 74 C2              1317 	mov	a,#0xC2
-   0775 F0                 1318 	movx	@dptr,a
-   0776 90s01r3B           1319 	mov	dptr,#(_b + 0x003b)
-   0779 74 E1              1320 	mov	a,#0xE1
-   077B F0                 1321 	movx	@dptr,a
-   077C 90s01r3C           1322 	mov	dptr,#(_b + 0x003c)
-   077F 74 BC              1323 	mov	a,#0xBC
-   0781 F0                 1324 	movx	@dptr,a
-   0782 90s01r3D           1325 	mov	dptr,#(_b + 0x003d)
-   0785 74 04              1326 	mov	a,#0x04
-   0787 F0                 1327 	movx	@dptr,a
-   0788 90s01r3E           1328 	mov	dptr,#(_b + 0x003e)
-   078B 74 AE              1329 	mov	a,#0xAE
-   078D F0                 1330 	movx	@dptr,a
-   078E 90s01r3F           1331 	mov	dptr,#(_b + 0x003f)
-   0791 74 21              1332 	mov	a,#0x21
-   0793 F0                 1333 	movx	@dptr,a
-   0794 90s01r40           1334 	mov	dptr,#(_b + 0x0040)
-   0797 74 38              1335 	mov	a,#0x38
-   0799 F0                 1336 	movx	@dptr,a
-   079A 90s01r41           1337 	mov	dptr,#(_b + 0x0041)
-   079D 74 CA              1338 	mov	a,#0xCA
-   079F F0                 1339 	movx	@dptr,a
-   07A0 90s01r42           1340 	mov	dptr,#(_b + 0x0042)
-   07A3 74 AA              1341 	mov	a,#0xAA
-   07A5 F0                 1342 	movx	@dptr,a
-   07A6 90s01r43           1343 	mov	dptr,#(_b + 0x0043)
-   07A9 74 8F              1344 	mov	a,#0x8F
-   07AB F0                 1345 	movx	@dptr,a
-   07AC 90s01r44           1346 	mov	dptr,#(_b + 0x0044)
-   07AF 74 74              1347 	mov	a,#0x74
-   07B1 F0                 1348 	movx	@dptr,a
-   07B2 90s01r45           1349 	mov	dptr,#(_b + 0x0045)
-   07B5 74 D5              1350 	mov	a,#0xD5
-   07B7 F0                 1351 	movx	@dptr,a
-   07B8 90s01r46           1352 	mov	dptr,#(_b + 0x0046)
-   07BB 74 02              1353 	mov	a,#0x02
-   07BD F0                 1354 	movx	@dptr,a
-   07BE 90s01r47           1355 	mov	dptr,#(_b + 0x0047)
-   07C1 74 10              1356 	mov	a,#0x10
-   07C3 F0                 1357 	movx	@dptr,a
-   07C4 90s01r48           1358 	mov	dptr,#(_b + 0x0048)
-   07C7 74 15              1359 	mov	a,#0x15
-   07C9 F0                 1360 	movx	@dptr,a
-   07CA 90s01r49           1361 	mov	dptr,#(_b + 0x0049)
-   07CD 74 87              1362 	mov	a,#0x87
-   07CF F0                 1363 	movx	@dptr,a
-   07D0 90s01r4A           1364 	mov	dptr,#(_b + 0x004a)
-   07D3 74 58              1365 	mov	a,#0x58
-   07D5 F0                 1366 	movx	@dptr,a
-   07D6 90s01r4B           1367 	mov	dptr,#(_b + 0x004b)
-   07D9 74 08              1368 	mov	a,#0x08
-   07DB F0                 1369 	movx	@dptr,a
-   07DC 90s01r4C           1370 	mov	dptr,#(_b + 0x004c)
-   07DF 74 CC              1371 	mov	a,#0xCC
-   07E1 F0                 1372 	movx	@dptr,a
-   07E2 90s01r4D           1373 	mov	dptr,#(_b + 0x004d)
-   07E5 74 9A              1374 	mov	a,#0x9A
-   07E7 F0                 1375 	movx	@dptr,a
-   07E8 90s01r4E           1376 	mov	dptr,#(_b + 0x004e)
-   07EB 74 42              1377 	mov	a,#0x42
-   07ED F0                 1378 	movx	@dptr,a
-   07EE 90s01r4F           1379 	mov	dptr,#(_b + 0x004f)
-   07F1 74 BD              1380 	mov	a,#0xBD
-   07F3 F0                 1381 	movx	@dptr,a
-   07F4 90s01r50           1382 	mov	dptr,#(_b + 0x0050)
-   07F7 74 02              1383 	mov	a,#0x02
-   07F9 F0                 1384 	movx	@dptr,a
-   07FA 90s01r51           1385 	mov	dptr,#(_b + 0x0051)
-   07FD 74 97              1386 	mov	a,#0x97
-   07FF F0                 1387 	movx	@dptr,a
-   0800 90s01r52           1388 	mov	dptr,#(_b + 0x0052)
-   0803 74 CE              1389 	mov	a,#0xCE
-   0805 F0                 1390 	movx	@dptr,a
-   0806 90s01r53           1391 	mov	dptr,#(_b + 0x0053)
-   0809 74 2B              1392 	mov	a,#0x2B
-   080B F0                 1393 	movx	@dptr,a
-   080C 90s01r54           1394 	mov	dptr,#(_b + 0x0054)
-   080F 74 39              1395 	mov	a,#0x39
-   0811 F0                 1396 	movx	@dptr,a
-   0812 90s01r55           1397 	mov	dptr,#(_b + 0x0055)
-   0815 74 38              1398 	mov	a,#0x38
-   0817 F0                 1399 	movx	@dptr,a
-   0818 90s01r56           1400 	mov	dptr,#(_b + 0x0056)
-   081B 74 99              1401 	mov	a,#0x99
-   081D F0                 1402 	movx	@dptr,a
-   081E 90s01r57           1403 	mov	dptr,#(_b + 0x0057)
-   0821 74 AC              1404 	mov	a,#0xAC
-   0823 F0                 1405 	movx	@dptr,a
-   0824 90s01r58           1406 	mov	dptr,#(_b + 0x0058)
-   0827 74 81              1407 	mov	a,#0x81
-   0829 F0                 1408 	movx	@dptr,a
-   082A 90s01r59           1409 	mov	dptr,#(_b + 0x0059)
-   082D 74 BB              1410 	mov	a,#0xBB
-   082F F0                 1411 	movx	@dptr,a
-   0830 90s01r5A           1412 	mov	dptr,#(_b + 0x005a)
-   0833 74 C3              1413 	mov	a,#0xC3
-   0835 F0                 1414 	movx	@dptr,a
-   0836 90s01r5B           1415 	mov	dptr,#(_b + 0x005b)
-   0839 74 FF              1416 	mov	a,#0xFF
-   083B F0                 1417 	movx	@dptr,a
-   083C 90s01r5C           1418 	mov	dptr,#(_b + 0x005c)
-   083F 74 BC              1419 	mov	a,#0xBC
-   0841 F0                 1420 	movx	@dptr,a
-   0842 90s01r5D           1421 	mov	dptr,#(_b + 0x005d)
-   0845 74 C1              1422 	mov	a,#0xC1
-   0847 F0                 1423 	movx	@dptr,a
-   0848 90s01r5E           1424 	mov	dptr,#(_b + 0x005e)
-   084B 74 B8              1425 	mov	a,#0xB8
-   084D F0                 1426 	movx	@dptr,a
-   084E 90s01r5F           1427 	mov	dptr,#(_b + 0x005f)
-   0851 74 E1              1428 	mov	a,#0xE1
-   0853 F0                 1429 	movx	@dptr,a
-   0854 90s01r60           1430 	mov	dptr,#(_b + 0x0060)
-   0857 74 24              1431 	mov	a,#0x24
-   0859 F0                 1432 	movx	@dptr,a
-   085A 90s01r61           1433 	mov	dptr,#(_b + 0x0061)
-   085D 74 8D              1434 	mov	a,#0x8D
-   085F F0                 1435 	movx	@dptr,a
-   0860 90s01r62           1436 	mov	dptr,#(_b + 0x0062)
-   0863 74 C5              1437 	mov	a,#0xC5
-   0865 F0                 1438 	movx	@dptr,a
-   0866 90s01r63           1439 	mov	dptr,#(_b + 0x0063)
-   0869 74 20              1440 	mov	a,#0x20
-   086B F0                 1441 	movx	@dptr,a
-   086C 90s01r64           1442 	mov	dptr,#(_b + 0x0064)
-   086F 74 89              1443 	mov	a,#0x89
-   0871 F0                 1444 	movx	@dptr,a
-   0872 90s01r65           1445 	mov	dptr,#(_b + 0x0065)
-   0875 74 98              1446 	mov	a,#0x98
-   0877 F0                 1447 	movx	@dptr,a
-   0878 90s01r66           1448 	mov	dptr,#(_b + 0x0066)
-   087B 74 0B              1449 	mov	a,#0x0B
-   087D F0                 1450 	movx	@dptr,a
-   087E 90s01r67           1451 	mov	dptr,#(_b + 0x0067)
-   0881 74 50              1452 	mov	a,#0x50
-   0883 F0                 1453 	movx	@dptr,a
-   0884 90s01r68           1454 	mov	dptr,#(_b + 0x0068)
-   0887 74 B1              1455 	mov	a,#0xB1
-   0889 F0                 1456 	movx	@dptr,a
-   088A 90s01r69           1457 	mov	dptr,#(_b + 0x0069)
-   088D 74 16              1458 	mov	a,#0x16
-   088F F0                 1459 	movx	@dptr,a
-   0890 90s01r6A           1460 	mov	dptr,#(_b + 0x006a)
-   0893 74 9A              1461 	mov	a,#0x9A
-   0895 F0                 1462 	movx	@dptr,a
-   0896 90s01r6B           1463 	mov	dptr,#(_b + 0x006b)
-   0899 74 2D              1464 	mov	a,#0x2D
-   089B F0                 1465 	movx	@dptr,a
-   089C 90s01r6C           1466 	mov	dptr,#(_b + 0x006c)
-   089F 74 6E              1467 	mov	a,#0x6E
-   08A1 F0                 1468 	movx	@dptr,a
-   08A2 90s01r6D           1469 	mov	dptr,#(_b + 0x006d)
-   08A5 74 5A              1470 	mov	a,#0x5A
-   08A7 F0                 1471 	movx	@dptr,a
-   08A8 90s01r6E           1472 	mov	dptr,#(_b + 0x006e)
-   08AB 74 7B              1473 	mov	a,#0x7B
-   08AD F0                 1474 	movx	@dptr,a
-   08AE 90s01r6F           1475 	mov	dptr,#(_b + 0x006f)
-   08B1 74 2F              1476 	mov	a,#0x2F
-   08B3 F0                 1477 	movx	@dptr,a
-   08B4 90s01r70           1478 	mov	dptr,#(_b + 0x0070)
-   08B7 74 D4              1479 	mov	a,#0xD4
-   08B9 F0                 1480 	movx	@dptr,a
-   08BA 90s01r71           1481 	mov	dptr,#(_b + 0x0071)
-   08BD 74 92              1482 	mov	a,#0x92
-   08BF F0                 1483 	movx	@dptr,a
-   08C0 90s01r72           1484 	mov	dptr,#(_b + 0x0072)
-   08C3 74 A1              1485 	mov	a,#0xA1
-   08C5 F0                 1486 	movx	@dptr,a
-   08C6 90s01r73           1487 	mov	dptr,#(_b + 0x0073)
-   08C9 74 AA              1488 	mov	a,#0xAA
-   08CB F0                 1489 	movx	@dptr,a
-   08CC 90s01r74           1490 	mov	dptr,#(_b + 0x0074)
-   08CF 74 A6              1491 	mov	a,#0xA6
-   08D1 F0                 1492 	movx	@dptr,a
-   08D2 90s01r75           1493 	mov	dptr,#(_b + 0x0075)
-   08D5 74 E5              1494 	mov	a,#0xE5
-   08D7 F0                 1495 	movx	@dptr,a
-   08D8 90s01r76           1496 	mov	dptr,#(_b + 0x0076)
-   08DB 74 A6              1497 	mov	a,#0xA6
-   08DD F0                 1498 	movx	@dptr,a
-   08DE 90s01r77           1499 	mov	dptr,#(_b + 0x0077)
-   08E1 74 D2              1500 	mov	a,#0xD2
-   08E3 F0                 1501 	movx	@dptr,a
-   08E4 90s01r78           1502 	mov	dptr,#(_b + 0x0078)
-   08E7 74 0D              1503 	mov	a,#0x0D
-   08E9 F0                 1504 	movx	@dptr,a
-   08EA 90s01r79           1505 	mov	dptr,#(_b + 0x0079)
-   08ED 74 0B              1506 	mov	a,#0x0B
-   08EF F0                 1507 	movx	@dptr,a
-   08F0 90s01r7A           1508 	mov	dptr,#(_b + 0x007a)
-   08F3 74 B7              1509 	mov	a,#0xB7
-   08F5 F0                 1510 	movx	@dptr,a
-   08F6 90s01r7B           1511 	mov	dptr,#(_b + 0x007b)
-   08F9 74 B2              1512 	mov	a,#0xB2
-   08FB F0                 1513 	movx	@dptr,a
-   08FC 90s01r7C           1514 	mov	dptr,#(_b + 0x007c)
-   08FF 74 25              1515 	mov	a,#0x25
-   0901 F0                 1516 	movx	@dptr,a
-   0902 90s01r7D           1517 	mov	dptr,#(_b + 0x007d)
-   0905 74 23              1518 	mov	a,#0x23
-   0907 F0                 1519 	movx	@dptr,a
-   0908 90s01r7E           1520 	mov	dptr,#(_b + 0x007e)
-   090B 74 23              1521 	mov	a,#0x23
-   090D F0                 1522 	movx	@dptr,a
-   090E 90s01r7F           1523 	mov	dptr,#(_b + 0x007f)
-   0911 74 BE              1524 	mov	a,#0xBE
-   0913 F0                 1525 	movx	@dptr,a
-                           1526 ;	main_montgomery.c:13: volatile __xdata __at (0x0300) unsigned char n_prime = 0xA5;
-   0914 90s03r00           1527 	mov	dptr,#_n_prime
-   0917 74 A5              1528 	mov	a,#0xA5
-   0919 F0                 1529 	movx	@dptr,a
-                           1530 	.area GSFINAL (CODE)
-   0000 02s00r03           1531 	ljmp	__sdcc_program_startup
-                           1532 ;--------------------------------------------------------
-                           1533 ; Home
-                           1534 ;--------------------------------------------------------
-                           1535 	.area HOME    (CODE)
-                           1536 	.area HOME    (CODE)
-   0003                    1537 __sdcc_program_startup:
-   0003 12s00r00           1538 	lcall	_main
-                           1539 ;	return from main will lock up
-   0006 80 FE              1540 	sjmp .
-                           1541 ;--------------------------------------------------------
-                           1542 ; code
-                           1543 ;--------------------------------------------------------
-                           1544 	.area CSEG    (CODE)
-                           1545 ;------------------------------------------------------------
-                           1546 ;Allocation info for local variables in function 'main'
+                            273 	.area XSEG    (XDATA)
+                    FFFE    274 _startBrk	=	0xfffe
+                    FFFF    275 _endBrk	=	0xffff
+                    0400    276 _m	=	0x0400
+                            277 ;--------------------------------------------------------
+                            278 ; absolute external ram data
+                            279 ;--------------------------------------------------------
+                            280 	.area XABS    (ABS,XDATA)
+   0000                     281 	.org 0x0000
+   0000                     282 _n::
+   0000                     283 	.ds 128
+   0080                     284 	.org 0x0080
+   0080                     285 _a::
+   0080                     286 	.ds 128
+   0100                     287 	.org 0x0100
+   0100                     288 _b::
+   0100                     289 	.ds 128
+   0300                     290 	.org 0x0300
+   0300                     291 _n_prime::
+   0300                     292 	.ds 1
+                            293 ;--------------------------------------------------------
+                            294 ; external initialized ram data
+                            295 ;--------------------------------------------------------
+                            296 	.area XISEG   (XDATA)
+                            297 	.area HOME    (CODE)
+                            298 	.area GSINIT0 (CODE)
+                            299 	.area GSINIT1 (CODE)
+                            300 	.area GSINIT2 (CODE)
+                            301 	.area GSINIT3 (CODE)
+                            302 	.area GSINIT4 (CODE)
+                            303 	.area GSINIT5 (CODE)
+                            304 	.area GSINIT  (CODE)
+                            305 	.area GSFINAL (CODE)
+                            306 	.area CSEG    (CODE)
+                            307 ;--------------------------------------------------------
+                            308 ; interrupt vector 
+                            309 ;--------------------------------------------------------
+                            310 	.area HOME    (CODE)
+   0000                     311 __interrupt_vect:
+   0000 02s00r00            312 	ljmp	__sdcc_gsinit_startup
+                            313 ;--------------------------------------------------------
+                            314 ; global & static initialisations
+                            315 ;--------------------------------------------------------
+                            316 	.area HOME    (CODE)
+                            317 	.area GSINIT  (CODE)
+                            318 	.area GSFINAL (CODE)
+                            319 	.area GSINIT  (CODE)
+                            320 	.globl __sdcc_gsinit_startup
+                            321 	.globl __sdcc_program_startup
+                            322 	.globl __start__stack
+                            323 	.globl __mcs51_genXINIT
+                            324 	.globl __mcs51_genXRAMCLEAR
+                            325 	.globl __mcs51_genRAMCLEAR
+                            326 ;	main_montgomery.c:16: unsigned short i = 0;
+   0000 E4                  327 	clr	a
+   0001 F5*00               328 	mov	_i,a
+   0003 F5*01               329 	mov	(_i + 1),a
+                            330 ;	main_montgomery.c:17: unsigned short j = 0;
+   0005 E4                  331 	clr	a
+   0006 F5*02               332 	mov	_j,a
+   0008 F5*03               333 	mov	(_j + 1),a
+                            334 ;	main_montgomery.c:18: unsigned char s = 0;
+   000A 75*04 00            335 	mov	_s,#0x00
+                            336 ;	main_montgomery.c:20: unsigned char t[3] = {0, 0, 0};
+   000D 75*05 00            337 	mov	_t,#0x00
+   0010 75*06 00            338 	mov	(_t + 0x0001),#0x00
+   0013 75*07 00            339 	mov	(_t + 0x0002),#0x00
+                            340 ;	main_montgomery.c:10: volatile __xdata __at (0x0000) unsigned char n[SIZE] = {0xD3,0x55,0xA4,0x5F,0x57,0xF3,0xF9,0x3E,0xCF,0x84,0x6D,0xFF,0x20,0xC1,0xAE,0x12,0xCF,0xF1,0x00,0x66,0x45,0xE2,0x34,0x61,0x27,0xF2,0x57,0xB3,0x42,0x21,0x80,0x95,0xAB,0x15,0xA2,0x1D,0x53,0xB2,0x27,0xE6,0x56,0x93,0x27,0xAF,0xC2,0xEE,0x2B,0x2F,0x9A,0xAE,0x6A,0x09,0xE5,0x7F,0xAE,0x7D,0x2B,0xDD,0x58,0x2F,0x87,0x70,0x05,0x1F,0xF8,0xBD,0x0B,0xE0,0xFD,0xF1,0x81,0x60,0xBF,0xD2,0xFE,0x8F,0x7B,0xB9,0xA9,0xA4,0x6A,0x0A,0xA3,0xA3,0x70,0x22,0xBF,0x4C,0x1B,0xB0,0x41,0x24,0x4C,0x3A,0x08,0xEC,0xF4,0x91,0xFF,0x93,0x8D,0xFC,0xFA,0x4C,0x26,0x2D,0xD2,0xE9,0xFC,0x76,0xB1,0x67,0x5E,0x24,0x9E,0x31,0x66,0x5D,0x98,0x4C,0x0D,0x79,0x81,0x76,0xAC,0x1D,0xE2,0xCA};
+   0016 90s00r00            341 	mov	dptr,#_n
+   0019 74 D3               342 	mov	a,#0xD3
+   001B F0                  343 	movx	@dptr,a
+   001C 90s00r01            344 	mov	dptr,#(_n + 0x0001)
+   001F 74 55               345 	mov	a,#0x55
+   0021 F0                  346 	movx	@dptr,a
+   0022 90s00r02            347 	mov	dptr,#(_n + 0x0002)
+   0025 74 A4               348 	mov	a,#0xA4
+   0027 F0                  349 	movx	@dptr,a
+   0028 90s00r03            350 	mov	dptr,#(_n + 0x0003)
+   002B 74 5F               351 	mov	a,#0x5F
+   002D F0                  352 	movx	@dptr,a
+   002E 90s00r04            353 	mov	dptr,#(_n + 0x0004)
+   0031 74 57               354 	mov	a,#0x57
+   0033 F0                  355 	movx	@dptr,a
+   0034 90s00r05            356 	mov	dptr,#(_n + 0x0005)
+   0037 74 F3               357 	mov	a,#0xF3
+   0039 F0                  358 	movx	@dptr,a
+   003A 90s00r06            359 	mov	dptr,#(_n + 0x0006)
+   003D 74 F9               360 	mov	a,#0xF9
+   003F F0                  361 	movx	@dptr,a
+   0040 90s00r07            362 	mov	dptr,#(_n + 0x0007)
+   0043 74 3E               363 	mov	a,#0x3E
+   0045 F0                  364 	movx	@dptr,a
+   0046 90s00r08            365 	mov	dptr,#(_n + 0x0008)
+   0049 74 CF               366 	mov	a,#0xCF
+   004B F0                  367 	movx	@dptr,a
+   004C 90s00r09            368 	mov	dptr,#(_n + 0x0009)
+   004F 74 84               369 	mov	a,#0x84
+   0051 F0                  370 	movx	@dptr,a
+   0052 90s00r0A            371 	mov	dptr,#(_n + 0x000a)
+   0055 74 6D               372 	mov	a,#0x6D
+   0057 F0                  373 	movx	@dptr,a
+   0058 90s00r0B            374 	mov	dptr,#(_n + 0x000b)
+   005B 74 FF               375 	mov	a,#0xFF
+   005D F0                  376 	movx	@dptr,a
+   005E 90s00r0C            377 	mov	dptr,#(_n + 0x000c)
+   0061 74 20               378 	mov	a,#0x20
+   0063 F0                  379 	movx	@dptr,a
+   0064 90s00r0D            380 	mov	dptr,#(_n + 0x000d)
+   0067 74 C1               381 	mov	a,#0xC1
+   0069 F0                  382 	movx	@dptr,a
+   006A 90s00r0E            383 	mov	dptr,#(_n + 0x000e)
+   006D 74 AE               384 	mov	a,#0xAE
+   006F F0                  385 	movx	@dptr,a
+   0070 90s00r0F            386 	mov	dptr,#(_n + 0x000f)
+   0073 74 12               387 	mov	a,#0x12
+   0075 F0                  388 	movx	@dptr,a
+   0076 90s00r10            389 	mov	dptr,#(_n + 0x0010)
+   0079 74 CF               390 	mov	a,#0xCF
+   007B F0                  391 	movx	@dptr,a
+   007C 90s00r11            392 	mov	dptr,#(_n + 0x0011)
+   007F 74 F1               393 	mov	a,#0xF1
+   0081 F0                  394 	movx	@dptr,a
+   0082 90s00r12            395 	mov	dptr,#(_n + 0x0012)
+   0085 E4                  396 	clr	a
+   0086 F0                  397 	movx	@dptr,a
+   0087 90s00r13            398 	mov	dptr,#(_n + 0x0013)
+   008A 74 66               399 	mov	a,#0x66
+   008C F0                  400 	movx	@dptr,a
+   008D 90s00r14            401 	mov	dptr,#(_n + 0x0014)
+   0090 74 45               402 	mov	a,#0x45
+   0092 F0                  403 	movx	@dptr,a
+   0093 90s00r15            404 	mov	dptr,#(_n + 0x0015)
+   0096 74 E2               405 	mov	a,#0xE2
+   0098 F0                  406 	movx	@dptr,a
+   0099 90s00r16            407 	mov	dptr,#(_n + 0x0016)
+   009C 74 34               408 	mov	a,#0x34
+   009E F0                  409 	movx	@dptr,a
+   009F 90s00r17            410 	mov	dptr,#(_n + 0x0017)
+   00A2 74 61               411 	mov	a,#0x61
+   00A4 F0                  412 	movx	@dptr,a
+   00A5 90s00r18            413 	mov	dptr,#(_n + 0x0018)
+   00A8 74 27               414 	mov	a,#0x27
+   00AA F0                  415 	movx	@dptr,a
+   00AB 90s00r19            416 	mov	dptr,#(_n + 0x0019)
+   00AE 74 F2               417 	mov	a,#0xF2
+   00B0 F0                  418 	movx	@dptr,a
+   00B1 90s00r1A            419 	mov	dptr,#(_n + 0x001a)
+   00B4 74 57               420 	mov	a,#0x57
+   00B6 F0                  421 	movx	@dptr,a
+   00B7 90s00r1B            422 	mov	dptr,#(_n + 0x001b)
+   00BA 74 B3               423 	mov	a,#0xB3
+   00BC F0                  424 	movx	@dptr,a
+   00BD 90s00r1C            425 	mov	dptr,#(_n + 0x001c)
+   00C0 74 42               426 	mov	a,#0x42
+   00C2 F0                  427 	movx	@dptr,a
+   00C3 90s00r1D            428 	mov	dptr,#(_n + 0x001d)
+   00C6 74 21               429 	mov	a,#0x21
+   00C8 F0                  430 	movx	@dptr,a
+   00C9 90s00r1E            431 	mov	dptr,#(_n + 0x001e)
+   00CC 74 80               432 	mov	a,#0x80
+   00CE F0                  433 	movx	@dptr,a
+   00CF 90s00r1F            434 	mov	dptr,#(_n + 0x001f)
+   00D2 74 95               435 	mov	a,#0x95
+   00D4 F0                  436 	movx	@dptr,a
+   00D5 90s00r20            437 	mov	dptr,#(_n + 0x0020)
+   00D8 74 AB               438 	mov	a,#0xAB
+   00DA F0                  439 	movx	@dptr,a
+   00DB 90s00r21            440 	mov	dptr,#(_n + 0x0021)
+   00DE 74 15               441 	mov	a,#0x15
+   00E0 F0                  442 	movx	@dptr,a
+   00E1 90s00r22            443 	mov	dptr,#(_n + 0x0022)
+   00E4 74 A2               444 	mov	a,#0xA2
+   00E6 F0                  445 	movx	@dptr,a
+   00E7 90s00r23            446 	mov	dptr,#(_n + 0x0023)
+   00EA 74 1D               447 	mov	a,#0x1D
+   00EC F0                  448 	movx	@dptr,a
+   00ED 90s00r24            449 	mov	dptr,#(_n + 0x0024)
+   00F0 74 53               450 	mov	a,#0x53
+   00F2 F0                  451 	movx	@dptr,a
+   00F3 90s00r25            452 	mov	dptr,#(_n + 0x0025)
+   00F6 74 B2               453 	mov	a,#0xB2
+   00F8 F0                  454 	movx	@dptr,a
+   00F9 90s00r26            455 	mov	dptr,#(_n + 0x0026)
+   00FC 74 27               456 	mov	a,#0x27
+   00FE F0                  457 	movx	@dptr,a
+   00FF 90s00r27            458 	mov	dptr,#(_n + 0x0027)
+   0102 74 E6               459 	mov	a,#0xE6
+   0104 F0                  460 	movx	@dptr,a
+   0105 90s00r28            461 	mov	dptr,#(_n + 0x0028)
+   0108 74 56               462 	mov	a,#0x56
+   010A F0                  463 	movx	@dptr,a
+   010B 90s00r29            464 	mov	dptr,#(_n + 0x0029)
+   010E 74 93               465 	mov	a,#0x93
+   0110 F0                  466 	movx	@dptr,a
+   0111 90s00r2A            467 	mov	dptr,#(_n + 0x002a)
+   0114 74 27               468 	mov	a,#0x27
+   0116 F0                  469 	movx	@dptr,a
+   0117 90s00r2B            470 	mov	dptr,#(_n + 0x002b)
+   011A 74 AF               471 	mov	a,#0xAF
+   011C F0                  472 	movx	@dptr,a
+   011D 90s00r2C            473 	mov	dptr,#(_n + 0x002c)
+   0120 74 C2               474 	mov	a,#0xC2
+   0122 F0                  475 	movx	@dptr,a
+   0123 90s00r2D            476 	mov	dptr,#(_n + 0x002d)
+   0126 74 EE               477 	mov	a,#0xEE
+   0128 F0                  478 	movx	@dptr,a
+   0129 90s00r2E            479 	mov	dptr,#(_n + 0x002e)
+   012C 74 2B               480 	mov	a,#0x2B
+   012E F0                  481 	movx	@dptr,a
+   012F 90s00r2F            482 	mov	dptr,#(_n + 0x002f)
+   0132 74 2F               483 	mov	a,#0x2F
+   0134 F0                  484 	movx	@dptr,a
+   0135 90s00r30            485 	mov	dptr,#(_n + 0x0030)
+   0138 74 9A               486 	mov	a,#0x9A
+   013A F0                  487 	movx	@dptr,a
+   013B 90s00r31            488 	mov	dptr,#(_n + 0x0031)
+   013E 74 AE               489 	mov	a,#0xAE
+   0140 F0                  490 	movx	@dptr,a
+   0141 90s00r32            491 	mov	dptr,#(_n + 0x0032)
+   0144 74 6A               492 	mov	a,#0x6A
+   0146 F0                  493 	movx	@dptr,a
+   0147 90s00r33            494 	mov	dptr,#(_n + 0x0033)
+   014A 74 09               495 	mov	a,#0x09
+   014C F0                  496 	movx	@dptr,a
+   014D 90s00r34            497 	mov	dptr,#(_n + 0x0034)
+   0150 74 E5               498 	mov	a,#0xE5
+   0152 F0                  499 	movx	@dptr,a
+   0153 90s00r35            500 	mov	dptr,#(_n + 0x0035)
+   0156 74 7F               501 	mov	a,#0x7F
+   0158 F0                  502 	movx	@dptr,a
+   0159 90s00r36            503 	mov	dptr,#(_n + 0x0036)
+   015C 74 AE               504 	mov	a,#0xAE
+   015E F0                  505 	movx	@dptr,a
+   015F 90s00r37            506 	mov	dptr,#(_n + 0x0037)
+   0162 74 7D               507 	mov	a,#0x7D
+   0164 F0                  508 	movx	@dptr,a
+   0165 90s00r38            509 	mov	dptr,#(_n + 0x0038)
+   0168 74 2B               510 	mov	a,#0x2B
+   016A F0                  511 	movx	@dptr,a
+   016B 90s00r39            512 	mov	dptr,#(_n + 0x0039)
+   016E 74 DD               513 	mov	a,#0xDD
+   0170 F0                  514 	movx	@dptr,a
+   0171 90s00r3A            515 	mov	dptr,#(_n + 0x003a)
+   0174 74 58               516 	mov	a,#0x58
+   0176 F0                  517 	movx	@dptr,a
+   0177 90s00r3B            518 	mov	dptr,#(_n + 0x003b)
+   017A 74 2F               519 	mov	a,#0x2F
+   017C F0                  520 	movx	@dptr,a
+   017D 90s00r3C            521 	mov	dptr,#(_n + 0x003c)
+   0180 74 87               522 	mov	a,#0x87
+   0182 F0                  523 	movx	@dptr,a
+   0183 90s00r3D            524 	mov	dptr,#(_n + 0x003d)
+   0186 74 70               525 	mov	a,#0x70
+   0188 F0                  526 	movx	@dptr,a
+   0189 90s00r3E            527 	mov	dptr,#(_n + 0x003e)
+   018C 74 05               528 	mov	a,#0x05
+   018E F0                  529 	movx	@dptr,a
+   018F 90s00r3F            530 	mov	dptr,#(_n + 0x003f)
+   0192 74 1F               531 	mov	a,#0x1F
+   0194 F0                  532 	movx	@dptr,a
+   0195 90s00r40            533 	mov	dptr,#(_n + 0x0040)
+   0198 74 F8               534 	mov	a,#0xF8
+   019A F0                  535 	movx	@dptr,a
+   019B 90s00r41            536 	mov	dptr,#(_n + 0x0041)
+   019E 74 BD               537 	mov	a,#0xBD
+   01A0 F0                  538 	movx	@dptr,a
+   01A1 90s00r42            539 	mov	dptr,#(_n + 0x0042)
+   01A4 74 0B               540 	mov	a,#0x0B
+   01A6 F0                  541 	movx	@dptr,a
+   01A7 90s00r43            542 	mov	dptr,#(_n + 0x0043)
+   01AA 74 E0               543 	mov	a,#0xE0
+   01AC F0                  544 	movx	@dptr,a
+   01AD 90s00r44            545 	mov	dptr,#(_n + 0x0044)
+   01B0 74 FD               546 	mov	a,#0xFD
+   01B2 F0                  547 	movx	@dptr,a
+   01B3 90s00r45            548 	mov	dptr,#(_n + 0x0045)
+   01B6 74 F1               549 	mov	a,#0xF1
+   01B8 F0                  550 	movx	@dptr,a
+   01B9 90s00r46            551 	mov	dptr,#(_n + 0x0046)
+   01BC 74 81               552 	mov	a,#0x81
+   01BE F0                  553 	movx	@dptr,a
+   01BF 90s00r47            554 	mov	dptr,#(_n + 0x0047)
+   01C2 74 60               555 	mov	a,#0x60
+   01C4 F0                  556 	movx	@dptr,a
+   01C5 90s00r48            557 	mov	dptr,#(_n + 0x0048)
+   01C8 74 BF               558 	mov	a,#0xBF
+   01CA F0                  559 	movx	@dptr,a
+   01CB 90s00r49            560 	mov	dptr,#(_n + 0x0049)
+   01CE 74 D2               561 	mov	a,#0xD2
+   01D0 F0                  562 	movx	@dptr,a
+   01D1 90s00r4A            563 	mov	dptr,#(_n + 0x004a)
+   01D4 74 FE               564 	mov	a,#0xFE
+   01D6 F0                  565 	movx	@dptr,a
+   01D7 90s00r4B            566 	mov	dptr,#(_n + 0x004b)
+   01DA 74 8F               567 	mov	a,#0x8F
+   01DC F0                  568 	movx	@dptr,a
+   01DD 90s00r4C            569 	mov	dptr,#(_n + 0x004c)
+   01E0 74 7B               570 	mov	a,#0x7B
+   01E2 F0                  571 	movx	@dptr,a
+   01E3 90s00r4D            572 	mov	dptr,#(_n + 0x004d)
+   01E6 74 B9               573 	mov	a,#0xB9
+   01E8 F0                  574 	movx	@dptr,a
+   01E9 90s00r4E            575 	mov	dptr,#(_n + 0x004e)
+   01EC 74 A9               576 	mov	a,#0xA9
+   01EE F0                  577 	movx	@dptr,a
+   01EF 90s00r4F            578 	mov	dptr,#(_n + 0x004f)
+   01F2 74 A4               579 	mov	a,#0xA4
+   01F4 F0                  580 	movx	@dptr,a
+   01F5 90s00r50            581 	mov	dptr,#(_n + 0x0050)
+   01F8 74 6A               582 	mov	a,#0x6A
+   01FA F0                  583 	movx	@dptr,a
+   01FB 90s00r51            584 	mov	dptr,#(_n + 0x0051)
+   01FE 74 0A               585 	mov	a,#0x0A
+   0200 F0                  586 	movx	@dptr,a
+   0201 90s00r52            587 	mov	dptr,#(_n + 0x0052)
+   0204 74 A3               588 	mov	a,#0xA3
+   0206 F0                  589 	movx	@dptr,a
+   0207 90s00r53            590 	mov	dptr,#(_n + 0x0053)
+   020A 74 A3               591 	mov	a,#0xA3
+   020C F0                  592 	movx	@dptr,a
+   020D 90s00r54            593 	mov	dptr,#(_n + 0x0054)
+   0210 74 70               594 	mov	a,#0x70
+   0212 F0                  595 	movx	@dptr,a
+   0213 90s00r55            596 	mov	dptr,#(_n + 0x0055)
+   0216 74 22               597 	mov	a,#0x22
+   0218 F0                  598 	movx	@dptr,a
+   0219 90s00r56            599 	mov	dptr,#(_n + 0x0056)
+   021C 74 BF               600 	mov	a,#0xBF
+   021E F0                  601 	movx	@dptr,a
+   021F 90s00r57            602 	mov	dptr,#(_n + 0x0057)
+   0222 74 4C               603 	mov	a,#0x4C
+   0224 F0                  604 	movx	@dptr,a
+   0225 90s00r58            605 	mov	dptr,#(_n + 0x0058)
+   0228 74 1B               606 	mov	a,#0x1B
+   022A F0                  607 	movx	@dptr,a
+   022B 90s00r59            608 	mov	dptr,#(_n + 0x0059)
+   022E 74 B0               609 	mov	a,#0xB0
+   0230 F0                  610 	movx	@dptr,a
+   0231 90s00r5A            611 	mov	dptr,#(_n + 0x005a)
+   0234 74 41               612 	mov	a,#0x41
+   0236 F0                  613 	movx	@dptr,a
+   0237 90s00r5B            614 	mov	dptr,#(_n + 0x005b)
+   023A 74 24               615 	mov	a,#0x24
+   023C F0                  616 	movx	@dptr,a
+   023D 90s00r5C            617 	mov	dptr,#(_n + 0x005c)
+   0240 74 4C               618 	mov	a,#0x4C
+   0242 F0                  619 	movx	@dptr,a
+   0243 90s00r5D            620 	mov	dptr,#(_n + 0x005d)
+   0246 74 3A               621 	mov	a,#0x3A
+   0248 F0                  622 	movx	@dptr,a
+   0249 90s00r5E            623 	mov	dptr,#(_n + 0x005e)
+   024C 74 08               624 	mov	a,#0x08
+   024E F0                  625 	movx	@dptr,a
+   024F 90s00r5F            626 	mov	dptr,#(_n + 0x005f)
+   0252 74 EC               627 	mov	a,#0xEC
+   0254 F0                  628 	movx	@dptr,a
+   0255 90s00r60            629 	mov	dptr,#(_n + 0x0060)
+   0258 74 F4               630 	mov	a,#0xF4
+   025A F0                  631 	movx	@dptr,a
+   025B 90s00r61            632 	mov	dptr,#(_n + 0x0061)
+   025E 74 91               633 	mov	a,#0x91
+   0260 F0                  634 	movx	@dptr,a
+   0261 90s00r62            635 	mov	dptr,#(_n + 0x0062)
+   0264 74 FF               636 	mov	a,#0xFF
+   0266 F0                  637 	movx	@dptr,a
+   0267 90s00r63            638 	mov	dptr,#(_n + 0x0063)
+   026A 74 93               639 	mov	a,#0x93
+   026C F0                  640 	movx	@dptr,a
+   026D 90s00r64            641 	mov	dptr,#(_n + 0x0064)
+   0270 74 8D               642 	mov	a,#0x8D
+   0272 F0                  643 	movx	@dptr,a
+   0273 90s00r65            644 	mov	dptr,#(_n + 0x0065)
+   0276 74 FC               645 	mov	a,#0xFC
+   0278 F0                  646 	movx	@dptr,a
+   0279 90s00r66            647 	mov	dptr,#(_n + 0x0066)
+   027C 74 FA               648 	mov	a,#0xFA
+   027E F0                  649 	movx	@dptr,a
+   027F 90s00r67            650 	mov	dptr,#(_n + 0x0067)
+   0282 74 4C               651 	mov	a,#0x4C
+   0284 F0                  652 	movx	@dptr,a
+   0285 90s00r68            653 	mov	dptr,#(_n + 0x0068)
+   0288 74 26               654 	mov	a,#0x26
+   028A F0                  655 	movx	@dptr,a
+   028B 90s00r69            656 	mov	dptr,#(_n + 0x0069)
+   028E 74 2D               657 	mov	a,#0x2D
+   0290 F0                  658 	movx	@dptr,a
+   0291 90s00r6A            659 	mov	dptr,#(_n + 0x006a)
+   0294 74 D2               660 	mov	a,#0xD2
+   0296 F0                  661 	movx	@dptr,a
+   0297 90s00r6B            662 	mov	dptr,#(_n + 0x006b)
+   029A 74 E9               663 	mov	a,#0xE9
+   029C F0                  664 	movx	@dptr,a
+   029D 90s00r6C            665 	mov	dptr,#(_n + 0x006c)
+   02A0 74 FC               666 	mov	a,#0xFC
+   02A2 F0                  667 	movx	@dptr,a
+   02A3 90s00r6D            668 	mov	dptr,#(_n + 0x006d)
+   02A6 74 76               669 	mov	a,#0x76
+   02A8 F0                  670 	movx	@dptr,a
+   02A9 90s00r6E            671 	mov	dptr,#(_n + 0x006e)
+   02AC 74 B1               672 	mov	a,#0xB1
+   02AE F0                  673 	movx	@dptr,a
+   02AF 90s00r6F            674 	mov	dptr,#(_n + 0x006f)
+   02B2 74 67               675 	mov	a,#0x67
+   02B4 F0                  676 	movx	@dptr,a
+   02B5 90s00r70            677 	mov	dptr,#(_n + 0x0070)
+   02B8 74 5E               678 	mov	a,#0x5E
+   02BA F0                  679 	movx	@dptr,a
+   02BB 90s00r71            680 	mov	dptr,#(_n + 0x0071)
+   02BE 74 24               681 	mov	a,#0x24
+   02C0 F0                  682 	movx	@dptr,a
+   02C1 90s00r72            683 	mov	dptr,#(_n + 0x0072)
+   02C4 74 9E               684 	mov	a,#0x9E
+   02C6 F0                  685 	movx	@dptr,a
+   02C7 90s00r73            686 	mov	dptr,#(_n + 0x0073)
+   02CA 74 31               687 	mov	a,#0x31
+   02CC F0                  688 	movx	@dptr,a
+   02CD 90s00r74            689 	mov	dptr,#(_n + 0x0074)
+   02D0 74 66               690 	mov	a,#0x66
+   02D2 F0                  691 	movx	@dptr,a
+   02D3 90s00r75            692 	mov	dptr,#(_n + 0x0075)
+   02D6 74 5D               693 	mov	a,#0x5D
+   02D8 F0                  694 	movx	@dptr,a
+   02D9 90s00r76            695 	mov	dptr,#(_n + 0x0076)
+   02DC 74 98               696 	mov	a,#0x98
+   02DE F0                  697 	movx	@dptr,a
+   02DF 90s00r77            698 	mov	dptr,#(_n + 0x0077)
+   02E2 74 4C               699 	mov	a,#0x4C
+   02E4 F0                  700 	movx	@dptr,a
+   02E5 90s00r78            701 	mov	dptr,#(_n + 0x0078)
+   02E8 74 0D               702 	mov	a,#0x0D
+   02EA F0                  703 	movx	@dptr,a
+   02EB 90s00r79            704 	mov	dptr,#(_n + 0x0079)
+   02EE 74 79               705 	mov	a,#0x79
+   02F0 F0                  706 	movx	@dptr,a
+   02F1 90s00r7A            707 	mov	dptr,#(_n + 0x007a)
+   02F4 74 81               708 	mov	a,#0x81
+   02F6 F0                  709 	movx	@dptr,a
+   02F7 90s00r7B            710 	mov	dptr,#(_n + 0x007b)
+   02FA 74 76               711 	mov	a,#0x76
+   02FC F0                  712 	movx	@dptr,a
+   02FD 90s00r7C            713 	mov	dptr,#(_n + 0x007c)
+   0300 74 AC               714 	mov	a,#0xAC
+   0302 F0                  715 	movx	@dptr,a
+   0303 90s00r7D            716 	mov	dptr,#(_n + 0x007d)
+   0306 74 1D               717 	mov	a,#0x1D
+   0308 F0                  718 	movx	@dptr,a
+   0309 90s00r7E            719 	mov	dptr,#(_n + 0x007e)
+   030C 74 E2               720 	mov	a,#0xE2
+   030E F0                  721 	movx	@dptr,a
+   030F 90s00r7F            722 	mov	dptr,#(_n + 0x007f)
+   0312 74 CA               723 	mov	a,#0xCA
+   0314 F0                  724 	movx	@dptr,a
+                            725 ;	main_montgomery.c:11: volatile __xdata __at (0x0080) unsigned char a[SIZE] = {0xFF,0x7F,0x14,0x64,0x47,0x68,0xC2,0xB6,0x27,0x32,0x63,0x2C,0xB0,0xC3,0x95,0x13,0xC5,0x7E,0x17,0x22,0xF3,0x7C,0x2D,0xE8,0x13,0x47,0x5E,0x15,0x4E,0xEF,0x83,0x81,0xDF,0xC3,0x47,0xD3,0x60,0xBB,0x8B,0x3E,0xB6,0x35,0xB1,0x6E,0xD1,0xD5,0xDA,0x6F,0x28,0x16,0x2C,0x74,0x36,0xF9,0x04,0x79,0xF9,0x76,0xE2,0xCC,0xA4,0x82,0xA7,0xA4,0x68,0x4E,0x24,0xA6,0xC1,0x58,0x68,0x24,0x58,0xDC,0x14,0xF9,0xFF,0x4D,0xA1,0xEF,0x53,0xA3,0xC2,0x84,0x1B,0x81,0x16,0x6C,0xDD,0xE3,0xDB,0xA8,0x03,0x8F,0xF2,0x31,0xFD,0x94,0x5D,0x26,0x13,0xC6,0x68,0xB4,0x0D,0xCD,0xF1,0xB8,0x66,0x0D,0x5D,0x3B,0x2F,0xC4,0x4A,0xD1,0x0B,0x36,0xC6,0x10,0x1A,0x2F,0x72,0xD1,0xBB,0x15,0x29,0xCA};
+   0315 90s00r80            726 	mov	dptr,#_a
+   0318 74 FF               727 	mov	a,#0xFF
+   031A F0                  728 	movx	@dptr,a
+   031B 90s00r81            729 	mov	dptr,#(_a + 0x0001)
+   031E 74 7F               730 	mov	a,#0x7F
+   0320 F0                  731 	movx	@dptr,a
+   0321 90s00r82            732 	mov	dptr,#(_a + 0x0002)
+   0324 74 14               733 	mov	a,#0x14
+   0326 F0                  734 	movx	@dptr,a
+   0327 90s00r83            735 	mov	dptr,#(_a + 0x0003)
+   032A 74 64               736 	mov	a,#0x64
+   032C F0                  737 	movx	@dptr,a
+   032D 90s00r84            738 	mov	dptr,#(_a + 0x0004)
+   0330 74 47               739 	mov	a,#0x47
+   0332 F0                  740 	movx	@dptr,a
+   0333 90s00r85            741 	mov	dptr,#(_a + 0x0005)
+   0336 74 68               742 	mov	a,#0x68
+   0338 F0                  743 	movx	@dptr,a
+   0339 90s00r86            744 	mov	dptr,#(_a + 0x0006)
+   033C 74 C2               745 	mov	a,#0xC2
+   033E F0                  746 	movx	@dptr,a
+   033F 90s00r87            747 	mov	dptr,#(_a + 0x0007)
+   0342 74 B6               748 	mov	a,#0xB6
+   0344 F0                  749 	movx	@dptr,a
+   0345 90s00r88            750 	mov	dptr,#(_a + 0x0008)
+   0348 74 27               751 	mov	a,#0x27
+   034A F0                  752 	movx	@dptr,a
+   034B 90s00r89            753 	mov	dptr,#(_a + 0x0009)
+   034E 74 32               754 	mov	a,#0x32
+   0350 F0                  755 	movx	@dptr,a
+   0351 90s00r8A            756 	mov	dptr,#(_a + 0x000a)
+   0354 74 63               757 	mov	a,#0x63
+   0356 F0                  758 	movx	@dptr,a
+   0357 90s00r8B            759 	mov	dptr,#(_a + 0x000b)
+   035A 74 2C               760 	mov	a,#0x2C
+   035C F0                  761 	movx	@dptr,a
+   035D 90s00r8C            762 	mov	dptr,#(_a + 0x000c)
+   0360 74 B0               763 	mov	a,#0xB0
+   0362 F0                  764 	movx	@dptr,a
+   0363 90s00r8D            765 	mov	dptr,#(_a + 0x000d)
+   0366 74 C3               766 	mov	a,#0xC3
+   0368 F0                  767 	movx	@dptr,a
+   0369 90s00r8E            768 	mov	dptr,#(_a + 0x000e)
+   036C 74 95               769 	mov	a,#0x95
+   036E F0                  770 	movx	@dptr,a
+   036F 90s00r8F            771 	mov	dptr,#(_a + 0x000f)
+   0372 74 13               772 	mov	a,#0x13
+   0374 F0                  773 	movx	@dptr,a
+   0375 90s00r90            774 	mov	dptr,#(_a + 0x0010)
+   0378 74 C5               775 	mov	a,#0xC5
+   037A F0                  776 	movx	@dptr,a
+   037B 90s00r91            777 	mov	dptr,#(_a + 0x0011)
+   037E 74 7E               778 	mov	a,#0x7E
+   0380 F0                  779 	movx	@dptr,a
+   0381 90s00r92            780 	mov	dptr,#(_a + 0x0012)
+   0384 74 17               781 	mov	a,#0x17
+   0386 F0                  782 	movx	@dptr,a
+   0387 90s00r93            783 	mov	dptr,#(_a + 0x0013)
+   038A 74 22               784 	mov	a,#0x22
+   038C F0                  785 	movx	@dptr,a
+   038D 90s00r94            786 	mov	dptr,#(_a + 0x0014)
+   0390 74 F3               787 	mov	a,#0xF3
+   0392 F0                  788 	movx	@dptr,a
+   0393 90s00r95            789 	mov	dptr,#(_a + 0x0015)
+   0396 74 7C               790 	mov	a,#0x7C
+   0398 F0                  791 	movx	@dptr,a
+   0399 90s00r96            792 	mov	dptr,#(_a + 0x0016)
+   039C 74 2D               793 	mov	a,#0x2D
+   039E F0                  794 	movx	@dptr,a
+   039F 90s00r97            795 	mov	dptr,#(_a + 0x0017)
+   03A2 74 E8               796 	mov	a,#0xE8
+   03A4 F0                  797 	movx	@dptr,a
+   03A5 90s00r98            798 	mov	dptr,#(_a + 0x0018)
+   03A8 74 13               799 	mov	a,#0x13
+   03AA F0                  800 	movx	@dptr,a
+   03AB 90s00r99            801 	mov	dptr,#(_a + 0x0019)
+   03AE 74 47               802 	mov	a,#0x47
+   03B0 F0                  803 	movx	@dptr,a
+   03B1 90s00r9A            804 	mov	dptr,#(_a + 0x001a)
+   03B4 74 5E               805 	mov	a,#0x5E
+   03B6 F0                  806 	movx	@dptr,a
+   03B7 90s00r9B            807 	mov	dptr,#(_a + 0x001b)
+   03BA 74 15               808 	mov	a,#0x15
+   03BC F0                  809 	movx	@dptr,a
+   03BD 90s00r9C            810 	mov	dptr,#(_a + 0x001c)
+   03C0 74 4E               811 	mov	a,#0x4E
+   03C2 F0                  812 	movx	@dptr,a
+   03C3 90s00r9D            813 	mov	dptr,#(_a + 0x001d)
+   03C6 74 EF               814 	mov	a,#0xEF
+   03C8 F0                  815 	movx	@dptr,a
+   03C9 90s00r9E            816 	mov	dptr,#(_a + 0x001e)
+   03CC 74 83               817 	mov	a,#0x83
+   03CE F0                  818 	movx	@dptr,a
+   03CF 90s00r9F            819 	mov	dptr,#(_a + 0x001f)
+   03D2 74 81               820 	mov	a,#0x81
+   03D4 F0                  821 	movx	@dptr,a
+   03D5 90s00rA0            822 	mov	dptr,#(_a + 0x0020)
+   03D8 74 DF               823 	mov	a,#0xDF
+   03DA F0                  824 	movx	@dptr,a
+   03DB 90s00rA1            825 	mov	dptr,#(_a + 0x0021)
+   03DE 74 C3               826 	mov	a,#0xC3
+   03E0 F0                  827 	movx	@dptr,a
+   03E1 90s00rA2            828 	mov	dptr,#(_a + 0x0022)
+   03E4 74 47               829 	mov	a,#0x47
+   03E6 F0                  830 	movx	@dptr,a
+   03E7 90s00rA3            831 	mov	dptr,#(_a + 0x0023)
+   03EA 74 D3               832 	mov	a,#0xD3
+   03EC F0                  833 	movx	@dptr,a
+   03ED 90s00rA4            834 	mov	dptr,#(_a + 0x0024)
+   03F0 74 60               835 	mov	a,#0x60
+   03F2 F0                  836 	movx	@dptr,a
+   03F3 90s00rA5            837 	mov	dptr,#(_a + 0x0025)
+   03F6 74 BB               838 	mov	a,#0xBB
+   03F8 F0                  839 	movx	@dptr,a
+   03F9 90s00rA6            840 	mov	dptr,#(_a + 0x0026)
+   03FC 74 8B               841 	mov	a,#0x8B
+   03FE F0                  842 	movx	@dptr,a
+   03FF 90s00rA7            843 	mov	dptr,#(_a + 0x0027)
+   0402 74 3E               844 	mov	a,#0x3E
+   0404 F0                  845 	movx	@dptr,a
+   0405 90s00rA8            846 	mov	dptr,#(_a + 0x0028)
+   0408 74 B6               847 	mov	a,#0xB6
+   040A F0                  848 	movx	@dptr,a
+   040B 90s00rA9            849 	mov	dptr,#(_a + 0x0029)
+   040E 74 35               850 	mov	a,#0x35
+   0410 F0                  851 	movx	@dptr,a
+   0411 90s00rAA            852 	mov	dptr,#(_a + 0x002a)
+   0414 74 B1               853 	mov	a,#0xB1
+   0416 F0                  854 	movx	@dptr,a
+   0417 90s00rAB            855 	mov	dptr,#(_a + 0x002b)
+   041A 74 6E               856 	mov	a,#0x6E
+   041C F0                  857 	movx	@dptr,a
+   041D 90s00rAC            858 	mov	dptr,#(_a + 0x002c)
+   0420 74 D1               859 	mov	a,#0xD1
+   0422 F0                  860 	movx	@dptr,a
+   0423 90s00rAD            861 	mov	dptr,#(_a + 0x002d)
+   0426 74 D5               862 	mov	a,#0xD5
+   0428 F0                  863 	movx	@dptr,a
+   0429 90s00rAE            864 	mov	dptr,#(_a + 0x002e)
+   042C 74 DA               865 	mov	a,#0xDA
+   042E F0                  866 	movx	@dptr,a
+   042F 90s00rAF            867 	mov	dptr,#(_a + 0x002f)
+   0432 74 6F               868 	mov	a,#0x6F
+   0434 F0                  869 	movx	@dptr,a
+   0435 90s00rB0            870 	mov	dptr,#(_a + 0x0030)
+   0438 74 28               871 	mov	a,#0x28
+   043A F0                  872 	movx	@dptr,a
+   043B 90s00rB1            873 	mov	dptr,#(_a + 0x0031)
+   043E 74 16               874 	mov	a,#0x16
+   0440 F0                  875 	movx	@dptr,a
+   0441 90s00rB2            876 	mov	dptr,#(_a + 0x0032)
+   0444 74 2C               877 	mov	a,#0x2C
+   0446 F0                  878 	movx	@dptr,a
+   0447 90s00rB3            879 	mov	dptr,#(_a + 0x0033)
+   044A 74 74               880 	mov	a,#0x74
+   044C F0                  881 	movx	@dptr,a
+   044D 90s00rB4            882 	mov	dptr,#(_a + 0x0034)
+   0450 74 36               883 	mov	a,#0x36
+   0452 F0                  884 	movx	@dptr,a
+   0453 90s00rB5            885 	mov	dptr,#(_a + 0x0035)
+   0456 74 F9               886 	mov	a,#0xF9
+   0458 F0                  887 	movx	@dptr,a
+   0459 90s00rB6            888 	mov	dptr,#(_a + 0x0036)
+   045C 74 04               889 	mov	a,#0x04
+   045E F0                  890 	movx	@dptr,a
+   045F 90s00rB7            891 	mov	dptr,#(_a + 0x0037)
+   0462 74 79               892 	mov	a,#0x79
+   0464 F0                  893 	movx	@dptr,a
+   0465 90s00rB8            894 	mov	dptr,#(_a + 0x0038)
+   0468 74 F9               895 	mov	a,#0xF9
+   046A F0                  896 	movx	@dptr,a
+   046B 90s00rB9            897 	mov	dptr,#(_a + 0x0039)
+   046E 74 76               898 	mov	a,#0x76
+   0470 F0                  899 	movx	@dptr,a
+   0471 90s00rBA            900 	mov	dptr,#(_a + 0x003a)
+   0474 74 E2               901 	mov	a,#0xE2
+   0476 F0                  902 	movx	@dptr,a
+   0477 90s00rBB            903 	mov	dptr,#(_a + 0x003b)
+   047A 74 CC               904 	mov	a,#0xCC
+   047C F0                  905 	movx	@dptr,a
+   047D 90s00rBC            906 	mov	dptr,#(_a + 0x003c)
+   0480 74 A4               907 	mov	a,#0xA4
+   0482 F0                  908 	movx	@dptr,a
+   0483 90s00rBD            909 	mov	dptr,#(_a + 0x003d)
+   0486 74 82               910 	mov	a,#0x82
+   0488 F0                  911 	movx	@dptr,a
+   0489 90s00rBE            912 	mov	dptr,#(_a + 0x003e)
+   048C 74 A7               913 	mov	a,#0xA7
+   048E F0                  914 	movx	@dptr,a
+   048F 90s00rBF            915 	mov	dptr,#(_a + 0x003f)
+   0492 74 A4               916 	mov	a,#0xA4
+   0494 F0                  917 	movx	@dptr,a
+   0495 90s00rC0            918 	mov	dptr,#(_a + 0x0040)
+   0498 74 68               919 	mov	a,#0x68
+   049A F0                  920 	movx	@dptr,a
+   049B 90s00rC1            921 	mov	dptr,#(_a + 0x0041)
+   049E 74 4E               922 	mov	a,#0x4E
+   04A0 F0                  923 	movx	@dptr,a
+   04A1 90s00rC2            924 	mov	dptr,#(_a + 0x0042)
+   04A4 74 24               925 	mov	a,#0x24
+   04A6 F0                  926 	movx	@dptr,a
+   04A7 90s00rC3            927 	mov	dptr,#(_a + 0x0043)
+   04AA 74 A6               928 	mov	a,#0xA6
+   04AC F0                  929 	movx	@dptr,a
+   04AD 90s00rC4            930 	mov	dptr,#(_a + 0x0044)
+   04B0 74 C1               931 	mov	a,#0xC1
+   04B2 F0                  932 	movx	@dptr,a
+   04B3 90s00rC5            933 	mov	dptr,#(_a + 0x0045)
+   04B6 74 58               934 	mov	a,#0x58
+   04B8 F0                  935 	movx	@dptr,a
+   04B9 90s00rC6            936 	mov	dptr,#(_a + 0x0046)
+   04BC 74 68               937 	mov	a,#0x68
+   04BE F0                  938 	movx	@dptr,a
+   04BF 90s00rC7            939 	mov	dptr,#(_a + 0x0047)
+   04C2 74 24               940 	mov	a,#0x24
+   04C4 F0                  941 	movx	@dptr,a
+   04C5 90s00rC8            942 	mov	dptr,#(_a + 0x0048)
+   04C8 74 58               943 	mov	a,#0x58
+   04CA F0                  944 	movx	@dptr,a
+   04CB 90s00rC9            945 	mov	dptr,#(_a + 0x0049)
+   04CE 74 DC               946 	mov	a,#0xDC
+   04D0 F0                  947 	movx	@dptr,a
+   04D1 90s00rCA            948 	mov	dptr,#(_a + 0x004a)
+   04D4 74 14               949 	mov	a,#0x14
+   04D6 F0                  950 	movx	@dptr,a
+   04D7 90s00rCB            951 	mov	dptr,#(_a + 0x004b)
+   04DA 74 F9               952 	mov	a,#0xF9
+   04DC F0                  953 	movx	@dptr,a
+   04DD 90s00rCC            954 	mov	dptr,#(_a + 0x004c)
+   04E0 74 FF               955 	mov	a,#0xFF
+   04E2 F0                  956 	movx	@dptr,a
+   04E3 90s00rCD            957 	mov	dptr,#(_a + 0x004d)
+   04E6 74 4D               958 	mov	a,#0x4D
+   04E8 F0                  959 	movx	@dptr,a
+   04E9 90s00rCE            960 	mov	dptr,#(_a + 0x004e)
+   04EC 74 A1               961 	mov	a,#0xA1
+   04EE F0                  962 	movx	@dptr,a
+   04EF 90s00rCF            963 	mov	dptr,#(_a + 0x004f)
+   04F2 74 EF               964 	mov	a,#0xEF
+   04F4 F0                  965 	movx	@dptr,a
+   04F5 90s00rD0            966 	mov	dptr,#(_a + 0x0050)
+   04F8 74 53               967 	mov	a,#0x53
+   04FA F0                  968 	movx	@dptr,a
+   04FB 90s00rD1            969 	mov	dptr,#(_a + 0x0051)
+   04FE 74 A3               970 	mov	a,#0xA3
+   0500 F0                  971 	movx	@dptr,a
+   0501 90s00rD2            972 	mov	dptr,#(_a + 0x0052)
+   0504 74 C2               973 	mov	a,#0xC2
+   0506 F0                  974 	movx	@dptr,a
+   0507 90s00rD3            975 	mov	dptr,#(_a + 0x0053)
+   050A 74 84               976 	mov	a,#0x84
+   050C F0                  977 	movx	@dptr,a
+   050D 90s00rD4            978 	mov	dptr,#(_a + 0x0054)
+   0510 74 1B               979 	mov	a,#0x1B
+   0512 F0                  980 	movx	@dptr,a
+   0513 90s00rD5            981 	mov	dptr,#(_a + 0x0055)
+   0516 74 81               982 	mov	a,#0x81
+   0518 F0                  983 	movx	@dptr,a
+   0519 90s00rD6            984 	mov	dptr,#(_a + 0x0056)
+   051C 74 16               985 	mov	a,#0x16
+   051E F0                  986 	movx	@dptr,a
+   051F 90s00rD7            987 	mov	dptr,#(_a + 0x0057)
+   0522 74 6C               988 	mov	a,#0x6C
+   0524 F0                  989 	movx	@dptr,a
+   0525 90s00rD8            990 	mov	dptr,#(_a + 0x0058)
+   0528 74 DD               991 	mov	a,#0xDD
+   052A F0                  992 	movx	@dptr,a
+   052B 90s00rD9            993 	mov	dptr,#(_a + 0x0059)
+   052E 74 E3               994 	mov	a,#0xE3
+   0530 F0                  995 	movx	@dptr,a
+   0531 90s00rDA            996 	mov	dptr,#(_a + 0x005a)
+   0534 74 DB               997 	mov	a,#0xDB
+   0536 F0                  998 	movx	@dptr,a
+   0537 90s00rDB            999 	mov	dptr,#(_a + 0x005b)
+   053A 74 A8              1000 	mov	a,#0xA8
+   053C F0                 1001 	movx	@dptr,a
+   053D 90s00rDC           1002 	mov	dptr,#(_a + 0x005c)
+   0540 74 03              1003 	mov	a,#0x03
+   0542 F0                 1004 	movx	@dptr,a
+   0543 90s00rDD           1005 	mov	dptr,#(_a + 0x005d)
+   0546 74 8F              1006 	mov	a,#0x8F
+   0548 F0                 1007 	movx	@dptr,a
+   0549 90s00rDE           1008 	mov	dptr,#(_a + 0x005e)
+   054C 74 F2              1009 	mov	a,#0xF2
+   054E F0                 1010 	movx	@dptr,a
+   054F 90s00rDF           1011 	mov	dptr,#(_a + 0x005f)
+   0552 74 31              1012 	mov	a,#0x31
+   0554 F0                 1013 	movx	@dptr,a
+   0555 90s00rE0           1014 	mov	dptr,#(_a + 0x0060)
+   0558 74 FD              1015 	mov	a,#0xFD
+   055A F0                 1016 	movx	@dptr,a
+   055B 90s00rE1           1017 	mov	dptr,#(_a + 0x0061)
+   055E 74 94              1018 	mov	a,#0x94
+   0560 F0                 1019 	movx	@dptr,a
+   0561 90s00rE2           1020 	mov	dptr,#(_a + 0x0062)
+   0564 74 5D              1021 	mov	a,#0x5D
+   0566 F0                 1022 	movx	@dptr,a
+   0567 90s00rE3           1023 	mov	dptr,#(_a + 0x0063)
+   056A 74 26              1024 	mov	a,#0x26
+   056C F0                 1025 	movx	@dptr,a
+   056D 90s00rE4           1026 	mov	dptr,#(_a + 0x0064)
+   0570 74 13              1027 	mov	a,#0x13
+   0572 F0                 1028 	movx	@dptr,a
+   0573 90s00rE5           1029 	mov	dptr,#(_a + 0x0065)
+   0576 74 C6              1030 	mov	a,#0xC6
+   0578 F0                 1031 	movx	@dptr,a
+   0579 90s00rE6           1032 	mov	dptr,#(_a + 0x0066)
+   057C 74 68              1033 	mov	a,#0x68
+   057E F0                 1034 	movx	@dptr,a
+   057F 90s00rE7           1035 	mov	dptr,#(_a + 0x0067)
+   0582 74 B4              1036 	mov	a,#0xB4
+   0584 F0                 1037 	movx	@dptr,a
+   0585 90s00rE8           1038 	mov	dptr,#(_a + 0x0068)
+   0588 74 0D              1039 	mov	a,#0x0D
+   058A F0                 1040 	movx	@dptr,a
+   058B 90s00rE9           1041 	mov	dptr,#(_a + 0x0069)
+   058E 74 CD              1042 	mov	a,#0xCD
+   0590 F0                 1043 	movx	@dptr,a
+   0591 90s00rEA           1044 	mov	dptr,#(_a + 0x006a)
+   0594 74 F1              1045 	mov	a,#0xF1
+   0596 F0                 1046 	movx	@dptr,a
+   0597 90s00rEB           1047 	mov	dptr,#(_a + 0x006b)
+   059A 74 B8              1048 	mov	a,#0xB8
+   059C F0                 1049 	movx	@dptr,a
+   059D 90s00rEC           1050 	mov	dptr,#(_a + 0x006c)
+   05A0 74 66              1051 	mov	a,#0x66
+   05A2 F0                 1052 	movx	@dptr,a
+   05A3 90s00rED           1053 	mov	dptr,#(_a + 0x006d)
+   05A6 74 0D              1054 	mov	a,#0x0D
+   05A8 F0                 1055 	movx	@dptr,a
+   05A9 90s00rEE           1056 	mov	dptr,#(_a + 0x006e)
+   05AC 74 5D              1057 	mov	a,#0x5D
+   05AE F0                 1058 	movx	@dptr,a
+   05AF 90s00rEF           1059 	mov	dptr,#(_a + 0x006f)
+   05B2 74 3B              1060 	mov	a,#0x3B
+   05B4 F0                 1061 	movx	@dptr,a
+   05B5 90s00rF0           1062 	mov	dptr,#(_a + 0x0070)
+   05B8 74 2F              1063 	mov	a,#0x2F
+   05BA F0                 1064 	movx	@dptr,a
+   05BB 90s00rF1           1065 	mov	dptr,#(_a + 0x0071)
+   05BE 74 C4              1066 	mov	a,#0xC4
+   05C0 F0                 1067 	movx	@dptr,a
+   05C1 90s00rF2           1068 	mov	dptr,#(_a + 0x0072)
+   05C4 74 4A              1069 	mov	a,#0x4A
+   05C6 F0                 1070 	movx	@dptr,a
+   05C7 90s00rF3           1071 	mov	dptr,#(_a + 0x0073)
+   05CA 74 D1              1072 	mov	a,#0xD1
+   05CC F0                 1073 	movx	@dptr,a
+   05CD 90s00rF4           1074 	mov	dptr,#(_a + 0x0074)
+   05D0 74 0B              1075 	mov	a,#0x0B
+   05D2 F0                 1076 	movx	@dptr,a
+   05D3 90s00rF5           1077 	mov	dptr,#(_a + 0x0075)
+   05D6 74 36              1078 	mov	a,#0x36
+   05D8 F0                 1079 	movx	@dptr,a
+   05D9 90s00rF6           1080 	mov	dptr,#(_a + 0x0076)
+   05DC 74 C6              1081 	mov	a,#0xC6
+   05DE F0                 1082 	movx	@dptr,a
+   05DF 90s00rF7           1083 	mov	dptr,#(_a + 0x0077)
+   05E2 74 10              1084 	mov	a,#0x10
+   05E4 F0                 1085 	movx	@dptr,a
+   05E5 90s00rF8           1086 	mov	dptr,#(_a + 0x0078)
+   05E8 74 1A              1087 	mov	a,#0x1A
+   05EA F0                 1088 	movx	@dptr,a
+   05EB 90s00rF9           1089 	mov	dptr,#(_a + 0x0079)
+   05EE 74 2F              1090 	mov	a,#0x2F
+   05F0 F0                 1091 	movx	@dptr,a
+   05F1 90s00rFA           1092 	mov	dptr,#(_a + 0x007a)
+   05F4 74 72              1093 	mov	a,#0x72
+   05F6 F0                 1094 	movx	@dptr,a
+   05F7 90s00rFB           1095 	mov	dptr,#(_a + 0x007b)
+   05FA 74 D1              1096 	mov	a,#0xD1
+   05FC F0                 1097 	movx	@dptr,a
+   05FD 90s00rFC           1098 	mov	dptr,#(_a + 0x007c)
+   0600 74 BB              1099 	mov	a,#0xBB
+   0602 F0                 1100 	movx	@dptr,a
+   0603 90s00rFD           1101 	mov	dptr,#(_a + 0x007d)
+   0606 74 15              1102 	mov	a,#0x15
+   0608 F0                 1103 	movx	@dptr,a
+   0609 90s00rFE           1104 	mov	dptr,#(_a + 0x007e)
+   060C 74 29              1105 	mov	a,#0x29
+   060E F0                 1106 	movx	@dptr,a
+   060F 90s00rFF           1107 	mov	dptr,#(_a + 0x007f)
+   0612 74 CA              1108 	mov	a,#0xCA
+   0614 F0                 1109 	movx	@dptr,a
+                           1110 ;	main_montgomery.c:12: volatile __xdata __at (0x0100) unsigned char b[SIZE] = {0xE1,0x8A,0x03,0xDB,0xE0,0xD9,0xF6,0x55,0xB6,0x27,0x0A,0x28,0xF0,0x5E,0x74,0x7F,0xE6,0x9F,0x4C,0xFB,0x26,0x8C,0x9E,0x87,0x83,0x22,0xF2,0x75,0xD2,0xB3,0x61,0xA2,0x9D,0x50,0x71,0x5E,0xC9,0xDD,0xDD,0x74,0x0A,0x3C,0xC0,0x30,0x3E,0xE5,0x20,0x02,0xB3,0x12,0x4F,0xAB,0x60,0x27,0x07,0x17,0xDD,0x00,0xC2,0xE1,0xBC,0x04,0xAE,0x21,0x38,0xCA,0xAA,0x8F,0x74,0xD5,0x02,0x10,0x15,0x87,0x58,0x08,0xCC,0x9A,0x42,0xBD,0x02,0x97,0xCE,0x2B,0x39,0x38,0x99,0xAC,0x81,0xBB,0xC3,0xFF,0xBC,0xC1,0xB8,0xE1,0x24,0x8D,0xC5,0x20,0x89,0x98,0x0B,0x50,0xB1,0x16,0x9A,0x2D,0x6E,0x5A,0x7B,0x2F,0xD4,0x92,0xA1,0xAA,0xA6,0xE5,0xA6,0xD2,0x0D,0x0B,0xB7,0xB2,0x25,0x23,0x23,0xBE};
+   0615 90s01r00           1111 	mov	dptr,#_b
+   0618 74 E1              1112 	mov	a,#0xE1
+   061A F0                 1113 	movx	@dptr,a
+   061B 90s01r01           1114 	mov	dptr,#(_b + 0x0001)
+   061E 74 8A              1115 	mov	a,#0x8A
+   0620 F0                 1116 	movx	@dptr,a
+   0621 90s01r02           1117 	mov	dptr,#(_b + 0x0002)
+   0624 74 03              1118 	mov	a,#0x03
+   0626 F0                 1119 	movx	@dptr,a
+   0627 90s01r03           1120 	mov	dptr,#(_b + 0x0003)
+   062A 74 DB              1121 	mov	a,#0xDB
+   062C F0                 1122 	movx	@dptr,a
+   062D 90s01r04           1123 	mov	dptr,#(_b + 0x0004)
+   0630 74 E0              1124 	mov	a,#0xE0
+   0632 F0                 1125 	movx	@dptr,a
+   0633 90s01r05           1126 	mov	dptr,#(_b + 0x0005)
+   0636 74 D9              1127 	mov	a,#0xD9
+   0638 F0                 1128 	movx	@dptr,a
+   0639 90s01r06           1129 	mov	dptr,#(_b + 0x0006)
+   063C 74 F6              1130 	mov	a,#0xF6
+   063E F0                 1131 	movx	@dptr,a
+   063F 90s01r07           1132 	mov	dptr,#(_b + 0x0007)
+   0642 74 55              1133 	mov	a,#0x55
+   0644 F0                 1134 	movx	@dptr,a
+   0645 90s01r08           1135 	mov	dptr,#(_b + 0x0008)
+   0648 74 B6              1136 	mov	a,#0xB6
+   064A F0                 1137 	movx	@dptr,a
+   064B 90s01r09           1138 	mov	dptr,#(_b + 0x0009)
+   064E 74 27              1139 	mov	a,#0x27
+   0650 F0                 1140 	movx	@dptr,a
+   0651 90s01r0A           1141 	mov	dptr,#(_b + 0x000a)
+   0654 74 0A              1142 	mov	a,#0x0A
+   0656 F0                 1143 	movx	@dptr,a
+   0657 90s01r0B           1144 	mov	dptr,#(_b + 0x000b)
+   065A 74 28              1145 	mov	a,#0x28
+   065C F0                 1146 	movx	@dptr,a
+   065D 90s01r0C           1147 	mov	dptr,#(_b + 0x000c)
+   0660 74 F0              1148 	mov	a,#0xF0
+   0662 F0                 1149 	movx	@dptr,a
+   0663 90s01r0D           1150 	mov	dptr,#(_b + 0x000d)
+   0666 74 5E              1151 	mov	a,#0x5E
+   0668 F0                 1152 	movx	@dptr,a
+   0669 90s01r0E           1153 	mov	dptr,#(_b + 0x000e)
+   066C 74 74              1154 	mov	a,#0x74
+   066E F0                 1155 	movx	@dptr,a
+   066F 90s01r0F           1156 	mov	dptr,#(_b + 0x000f)
+   0672 74 7F              1157 	mov	a,#0x7F
+   0674 F0                 1158 	movx	@dptr,a
+   0675 90s01r10           1159 	mov	dptr,#(_b + 0x0010)
+   0678 74 E6              1160 	mov	a,#0xE6
+   067A F0                 1161 	movx	@dptr,a
+   067B 90s01r11           1162 	mov	dptr,#(_b + 0x0011)
+   067E 74 9F              1163 	mov	a,#0x9F
+   0680 F0                 1164 	movx	@dptr,a
+   0681 90s01r12           1165 	mov	dptr,#(_b + 0x0012)
+   0684 74 4C              1166 	mov	a,#0x4C
+   0686 F0                 1167 	movx	@dptr,a
+   0687 90s01r13           1168 	mov	dptr,#(_b + 0x0013)
+   068A 74 FB              1169 	mov	a,#0xFB
+   068C F0                 1170 	movx	@dptr,a
+   068D 90s01r14           1171 	mov	dptr,#(_b + 0x0014)
+   0690 74 26              1172 	mov	a,#0x26
+   0692 F0                 1173 	movx	@dptr,a
+   0693 90s01r15           1174 	mov	dptr,#(_b + 0x0015)
+   0696 74 8C              1175 	mov	a,#0x8C
+   0698 F0                 1176 	movx	@dptr,a
+   0699 90s01r16           1177 	mov	dptr,#(_b + 0x0016)
+   069C 74 9E              1178 	mov	a,#0x9E
+   069E F0                 1179 	movx	@dptr,a
+   069F 90s01r17           1180 	mov	dptr,#(_b + 0x0017)
+   06A2 74 87              1181 	mov	a,#0x87
+   06A4 F0                 1182 	movx	@dptr,a
+   06A5 90s01r18           1183 	mov	dptr,#(_b + 0x0018)
+   06A8 74 83              1184 	mov	a,#0x83
+   06AA F0                 1185 	movx	@dptr,a
+   06AB 90s01r19           1186 	mov	dptr,#(_b + 0x0019)
+   06AE 74 22              1187 	mov	a,#0x22
+   06B0 F0                 1188 	movx	@dptr,a
+   06B1 90s01r1A           1189 	mov	dptr,#(_b + 0x001a)
+   06B4 74 F2              1190 	mov	a,#0xF2
+   06B6 F0                 1191 	movx	@dptr,a
+   06B7 90s01r1B           1192 	mov	dptr,#(_b + 0x001b)
+   06BA 74 75              1193 	mov	a,#0x75
+   06BC F0                 1194 	movx	@dptr,a
+   06BD 90s01r1C           1195 	mov	dptr,#(_b + 0x001c)
+   06C0 74 D2              1196 	mov	a,#0xD2
+   06C2 F0                 1197 	movx	@dptr,a
+   06C3 90s01r1D           1198 	mov	dptr,#(_b + 0x001d)
+   06C6 74 B3              1199 	mov	a,#0xB3
+   06C8 F0                 1200 	movx	@dptr,a
+   06C9 90s01r1E           1201 	mov	dptr,#(_b + 0x001e)
+   06CC 74 61              1202 	mov	a,#0x61
+   06CE F0                 1203 	movx	@dptr,a
+   06CF 90s01r1F           1204 	mov	dptr,#(_b + 0x001f)
+   06D2 74 A2              1205 	mov	a,#0xA2
+   06D4 F0                 1206 	movx	@dptr,a
+   06D5 90s01r20           1207 	mov	dptr,#(_b + 0x0020)
+   06D8 74 9D              1208 	mov	a,#0x9D
+   06DA F0                 1209 	movx	@dptr,a
+   06DB 90s01r21           1210 	mov	dptr,#(_b + 0x0021)
+   06DE 74 50              1211 	mov	a,#0x50
+   06E0 F0                 1212 	movx	@dptr,a
+   06E1 90s01r22           1213 	mov	dptr,#(_b + 0x0022)
+   06E4 74 71              1214 	mov	a,#0x71
+   06E6 F0                 1215 	movx	@dptr,a
+   06E7 90s01r23           1216 	mov	dptr,#(_b + 0x0023)
+   06EA 74 5E              1217 	mov	a,#0x5E
+   06EC F0                 1218 	movx	@dptr,a
+   06ED 90s01r24           1219 	mov	dptr,#(_b + 0x0024)
+   06F0 74 C9              1220 	mov	a,#0xC9
+   06F2 F0                 1221 	movx	@dptr,a
+   06F3 90s01r25           1222 	mov	dptr,#(_b + 0x0025)
+   06F6 74 DD              1223 	mov	a,#0xDD
+   06F8 F0                 1224 	movx	@dptr,a
+   06F9 90s01r26           1225 	mov	dptr,#(_b + 0x0026)
+   06FC 74 DD              1226 	mov	a,#0xDD
+   06FE F0                 1227 	movx	@dptr,a
+   06FF 90s01r27           1228 	mov	dptr,#(_b + 0x0027)
+   0702 74 74              1229 	mov	a,#0x74
+   0704 F0                 1230 	movx	@dptr,a
+   0705 90s01r28           1231 	mov	dptr,#(_b + 0x0028)
+   0708 74 0A              1232 	mov	a,#0x0A
+   070A F0                 1233 	movx	@dptr,a
+   070B 90s01r29           1234 	mov	dptr,#(_b + 0x0029)
+   070E 74 3C              1235 	mov	a,#0x3C
+   0710 F0                 1236 	movx	@dptr,a
+   0711 90s01r2A           1237 	mov	dptr,#(_b + 0x002a)
+   0714 74 C0              1238 	mov	a,#0xC0
+   0716 F0                 1239 	movx	@dptr,a
+   0717 90s01r2B           1240 	mov	dptr,#(_b + 0x002b)
+   071A 74 30              1241 	mov	a,#0x30
+   071C F0                 1242 	movx	@dptr,a
+   071D 90s01r2C           1243 	mov	dptr,#(_b + 0x002c)
+   0720 74 3E              1244 	mov	a,#0x3E
+   0722 F0                 1245 	movx	@dptr,a
+   0723 90s01r2D           1246 	mov	dptr,#(_b + 0x002d)
+   0726 74 E5              1247 	mov	a,#0xE5
+   0728 F0                 1248 	movx	@dptr,a
+   0729 90s01r2E           1249 	mov	dptr,#(_b + 0x002e)
+   072C 74 20              1250 	mov	a,#0x20
+   072E F0                 1251 	movx	@dptr,a
+   072F 90s01r2F           1252 	mov	dptr,#(_b + 0x002f)
+   0732 74 02              1253 	mov	a,#0x02
+   0734 F0                 1254 	movx	@dptr,a
+   0735 90s01r30           1255 	mov	dptr,#(_b + 0x0030)
+   0738 74 B3              1256 	mov	a,#0xB3
+   073A F0                 1257 	movx	@dptr,a
+   073B 90s01r31           1258 	mov	dptr,#(_b + 0x0031)
+   073E 74 12              1259 	mov	a,#0x12
+   0740 F0                 1260 	movx	@dptr,a
+   0741 90s01r32           1261 	mov	dptr,#(_b + 0x0032)
+   0744 74 4F              1262 	mov	a,#0x4F
+   0746 F0                 1263 	movx	@dptr,a
+   0747 90s01r33           1264 	mov	dptr,#(_b + 0x0033)
+   074A 74 AB              1265 	mov	a,#0xAB
+   074C F0                 1266 	movx	@dptr,a
+   074D 90s01r34           1267 	mov	dptr,#(_b + 0x0034)
+   0750 74 60              1268 	mov	a,#0x60
+   0752 F0                 1269 	movx	@dptr,a
+   0753 90s01r35           1270 	mov	dptr,#(_b + 0x0035)
+   0756 74 27              1271 	mov	a,#0x27
+   0758 F0                 1272 	movx	@dptr,a
+   0759 90s01r36           1273 	mov	dptr,#(_b + 0x0036)
+   075C 74 07              1274 	mov	a,#0x07
+   075E F0                 1275 	movx	@dptr,a
+   075F 90s01r37           1276 	mov	dptr,#(_b + 0x0037)
+   0762 74 17              1277 	mov	a,#0x17
+   0764 F0                 1278 	movx	@dptr,a
+   0765 90s01r38           1279 	mov	dptr,#(_b + 0x0038)
+   0768 74 DD              1280 	mov	a,#0xDD
+   076A F0                 1281 	movx	@dptr,a
+   076B 90s01r39           1282 	mov	dptr,#(_b + 0x0039)
+   076E E4                 1283 	clr	a
+   076F F0                 1284 	movx	@dptr,a
+   0770 90s01r3A           1285 	mov	dptr,#(_b + 0x003a)
+   0773 74 C2              1286 	mov	a,#0xC2
+   0775 F0                 1287 	movx	@dptr,a
+   0776 90s01r3B           1288 	mov	dptr,#(_b + 0x003b)
+   0779 74 E1              1289 	mov	a,#0xE1
+   077B F0                 1290 	movx	@dptr,a
+   077C 90s01r3C           1291 	mov	dptr,#(_b + 0x003c)
+   077F 74 BC              1292 	mov	a,#0xBC
+   0781 F0                 1293 	movx	@dptr,a
+   0782 90s01r3D           1294 	mov	dptr,#(_b + 0x003d)
+   0785 74 04              1295 	mov	a,#0x04
+   0787 F0                 1296 	movx	@dptr,a
+   0788 90s01r3E           1297 	mov	dptr,#(_b + 0x003e)
+   078B 74 AE              1298 	mov	a,#0xAE
+   078D F0                 1299 	movx	@dptr,a
+   078E 90s01r3F           1300 	mov	dptr,#(_b + 0x003f)
+   0791 74 21              1301 	mov	a,#0x21
+   0793 F0                 1302 	movx	@dptr,a
+   0794 90s01r40           1303 	mov	dptr,#(_b + 0x0040)
+   0797 74 38              1304 	mov	a,#0x38
+   0799 F0                 1305 	movx	@dptr,a
+   079A 90s01r41           1306 	mov	dptr,#(_b + 0x0041)
+   079D 74 CA              1307 	mov	a,#0xCA
+   079F F0                 1308 	movx	@dptr,a
+   07A0 90s01r42           1309 	mov	dptr,#(_b + 0x0042)
+   07A3 74 AA              1310 	mov	a,#0xAA
+   07A5 F0                 1311 	movx	@dptr,a
+   07A6 90s01r43           1312 	mov	dptr,#(_b + 0x0043)
+   07A9 74 8F              1313 	mov	a,#0x8F
+   07AB F0                 1314 	movx	@dptr,a
+   07AC 90s01r44           1315 	mov	dptr,#(_b + 0x0044)
+   07AF 74 74              1316 	mov	a,#0x74
+   07B1 F0                 1317 	movx	@dptr,a
+   07B2 90s01r45           1318 	mov	dptr,#(_b + 0x0045)
+   07B5 74 D5              1319 	mov	a,#0xD5
+   07B7 F0                 1320 	movx	@dptr,a
+   07B8 90s01r46           1321 	mov	dptr,#(_b + 0x0046)
+   07BB 74 02              1322 	mov	a,#0x02
+   07BD F0                 1323 	movx	@dptr,a
+   07BE 90s01r47           1324 	mov	dptr,#(_b + 0x0047)
+   07C1 74 10              1325 	mov	a,#0x10
+   07C3 F0                 1326 	movx	@dptr,a
+   07C4 90s01r48           1327 	mov	dptr,#(_b + 0x0048)
+   07C7 74 15              1328 	mov	a,#0x15
+   07C9 F0                 1329 	movx	@dptr,a
+   07CA 90s01r49           1330 	mov	dptr,#(_b + 0x0049)
+   07CD 74 87              1331 	mov	a,#0x87
+   07CF F0                 1332 	movx	@dptr,a
+   07D0 90s01r4A           1333 	mov	dptr,#(_b + 0x004a)
+   07D3 74 58              1334 	mov	a,#0x58
+   07D5 F0                 1335 	movx	@dptr,a
+   07D6 90s01r4B           1336 	mov	dptr,#(_b + 0x004b)
+   07D9 74 08              1337 	mov	a,#0x08
+   07DB F0                 1338 	movx	@dptr,a
+   07DC 90s01r4C           1339 	mov	dptr,#(_b + 0x004c)
+   07DF 74 CC              1340 	mov	a,#0xCC
+   07E1 F0                 1341 	movx	@dptr,a
+   07E2 90s01r4D           1342 	mov	dptr,#(_b + 0x004d)
+   07E5 74 9A              1343 	mov	a,#0x9A
+   07E7 F0                 1344 	movx	@dptr,a
+   07E8 90s01r4E           1345 	mov	dptr,#(_b + 0x004e)
+   07EB 74 42              1346 	mov	a,#0x42
+   07ED F0                 1347 	movx	@dptr,a
+   07EE 90s01r4F           1348 	mov	dptr,#(_b + 0x004f)
+   07F1 74 BD              1349 	mov	a,#0xBD
+   07F3 F0                 1350 	movx	@dptr,a
+   07F4 90s01r50           1351 	mov	dptr,#(_b + 0x0050)
+   07F7 74 02              1352 	mov	a,#0x02
+   07F9 F0                 1353 	movx	@dptr,a
+   07FA 90s01r51           1354 	mov	dptr,#(_b + 0x0051)
+   07FD 74 97              1355 	mov	a,#0x97
+   07FF F0                 1356 	movx	@dptr,a
+   0800 90s01r52           1357 	mov	dptr,#(_b + 0x0052)
+   0803 74 CE              1358 	mov	a,#0xCE
+   0805 F0                 1359 	movx	@dptr,a
+   0806 90s01r53           1360 	mov	dptr,#(_b + 0x0053)
+   0809 74 2B              1361 	mov	a,#0x2B
+   080B F0                 1362 	movx	@dptr,a
+   080C 90s01r54           1363 	mov	dptr,#(_b + 0x0054)
+   080F 74 39              1364 	mov	a,#0x39
+   0811 F0                 1365 	movx	@dptr,a
+   0812 90s01r55           1366 	mov	dptr,#(_b + 0x0055)
+   0815 74 38              1367 	mov	a,#0x38
+   0817 F0                 1368 	movx	@dptr,a
+   0818 90s01r56           1369 	mov	dptr,#(_b + 0x0056)
+   081B 74 99              1370 	mov	a,#0x99
+   081D F0                 1371 	movx	@dptr,a
+   081E 90s01r57           1372 	mov	dptr,#(_b + 0x0057)
+   0821 74 AC              1373 	mov	a,#0xAC
+   0823 F0                 1374 	movx	@dptr,a
+   0824 90s01r58           1375 	mov	dptr,#(_b + 0x0058)
+   0827 74 81              1376 	mov	a,#0x81
+   0829 F0                 1377 	movx	@dptr,a
+   082A 90s01r59           1378 	mov	dptr,#(_b + 0x0059)
+   082D 74 BB              1379 	mov	a,#0xBB
+   082F F0                 1380 	movx	@dptr,a
+   0830 90s01r5A           1381 	mov	dptr,#(_b + 0x005a)
+   0833 74 C3              1382 	mov	a,#0xC3
+   0835 F0                 1383 	movx	@dptr,a
+   0836 90s01r5B           1384 	mov	dptr,#(_b + 0x005b)
+   0839 74 FF              1385 	mov	a,#0xFF
+   083B F0                 1386 	movx	@dptr,a
+   083C 90s01r5C           1387 	mov	dptr,#(_b + 0x005c)
+   083F 74 BC              1388 	mov	a,#0xBC
+   0841 F0                 1389 	movx	@dptr,a
+   0842 90s01r5D           1390 	mov	dptr,#(_b + 0x005d)
+   0845 74 C1              1391 	mov	a,#0xC1
+   0847 F0                 1392 	movx	@dptr,a
+   0848 90s01r5E           1393 	mov	dptr,#(_b + 0x005e)
+   084B 74 B8              1394 	mov	a,#0xB8
+   084D F0                 1395 	movx	@dptr,a
+   084E 90s01r5F           1396 	mov	dptr,#(_b + 0x005f)
+   0851 74 E1              1397 	mov	a,#0xE1
+   0853 F0                 1398 	movx	@dptr,a
+   0854 90s01r60           1399 	mov	dptr,#(_b + 0x0060)
+   0857 74 24              1400 	mov	a,#0x24
+   0859 F0                 1401 	movx	@dptr,a
+   085A 90s01r61           1402 	mov	dptr,#(_b + 0x0061)
+   085D 74 8D              1403 	mov	a,#0x8D
+   085F F0                 1404 	movx	@dptr,a
+   0860 90s01r62           1405 	mov	dptr,#(_b + 0x0062)
+   0863 74 C5              1406 	mov	a,#0xC5
+   0865 F0                 1407 	movx	@dptr,a
+   0866 90s01r63           1408 	mov	dptr,#(_b + 0x0063)
+   0869 74 20              1409 	mov	a,#0x20
+   086B F0                 1410 	movx	@dptr,a
+   086C 90s01r64           1411 	mov	dptr,#(_b + 0x0064)
+   086F 74 89              1412 	mov	a,#0x89
+   0871 F0                 1413 	movx	@dptr,a
+   0872 90s01r65           1414 	mov	dptr,#(_b + 0x0065)
+   0875 74 98              1415 	mov	a,#0x98
+   0877 F0                 1416 	movx	@dptr,a
+   0878 90s01r66           1417 	mov	dptr,#(_b + 0x0066)
+   087B 74 0B              1418 	mov	a,#0x0B
+   087D F0                 1419 	movx	@dptr,a
+   087E 90s01r67           1420 	mov	dptr,#(_b + 0x0067)
+   0881 74 50              1421 	mov	a,#0x50
+   0883 F0                 1422 	movx	@dptr,a
+   0884 90s01r68           1423 	mov	dptr,#(_b + 0x0068)
+   0887 74 B1              1424 	mov	a,#0xB1
+   0889 F0                 1425 	movx	@dptr,a
+   088A 90s01r69           1426 	mov	dptr,#(_b + 0x0069)
+   088D 74 16              1427 	mov	a,#0x16
+   088F F0                 1428 	movx	@dptr,a
+   0890 90s01r6A           1429 	mov	dptr,#(_b + 0x006a)
+   0893 74 9A              1430 	mov	a,#0x9A
+   0895 F0                 1431 	movx	@dptr,a
+   0896 90s01r6B           1432 	mov	dptr,#(_b + 0x006b)
+   0899 74 2D              1433 	mov	a,#0x2D
+   089B F0                 1434 	movx	@dptr,a
+   089C 90s01r6C           1435 	mov	dptr,#(_b + 0x006c)
+   089F 74 6E              1436 	mov	a,#0x6E
+   08A1 F0                 1437 	movx	@dptr,a
+   08A2 90s01r6D           1438 	mov	dptr,#(_b + 0x006d)
+   08A5 74 5A              1439 	mov	a,#0x5A
+   08A7 F0                 1440 	movx	@dptr,a
+   08A8 90s01r6E           1441 	mov	dptr,#(_b + 0x006e)
+   08AB 74 7B              1442 	mov	a,#0x7B
+   08AD F0                 1443 	movx	@dptr,a
+   08AE 90s01r6F           1444 	mov	dptr,#(_b + 0x006f)
+   08B1 74 2F              1445 	mov	a,#0x2F
+   08B3 F0                 1446 	movx	@dptr,a
+   08B4 90s01r70           1447 	mov	dptr,#(_b + 0x0070)
+   08B7 74 D4              1448 	mov	a,#0xD4
+   08B9 F0                 1449 	movx	@dptr,a
+   08BA 90s01r71           1450 	mov	dptr,#(_b + 0x0071)
+   08BD 74 92              1451 	mov	a,#0x92
+   08BF F0                 1452 	movx	@dptr,a
+   08C0 90s01r72           1453 	mov	dptr,#(_b + 0x0072)
+   08C3 74 A1              1454 	mov	a,#0xA1
+   08C5 F0                 1455 	movx	@dptr,a
+   08C6 90s01r73           1456 	mov	dptr,#(_b + 0x0073)
+   08C9 74 AA              1457 	mov	a,#0xAA
+   08CB F0                 1458 	movx	@dptr,a
+   08CC 90s01r74           1459 	mov	dptr,#(_b + 0x0074)
+   08CF 74 A6              1460 	mov	a,#0xA6
+   08D1 F0                 1461 	movx	@dptr,a
+   08D2 90s01r75           1462 	mov	dptr,#(_b + 0x0075)
+   08D5 74 E5              1463 	mov	a,#0xE5
+   08D7 F0                 1464 	movx	@dptr,a
+   08D8 90s01r76           1465 	mov	dptr,#(_b + 0x0076)
+   08DB 74 A6              1466 	mov	a,#0xA6
+   08DD F0                 1467 	movx	@dptr,a
+   08DE 90s01r77           1468 	mov	dptr,#(_b + 0x0077)
+   08E1 74 D2              1469 	mov	a,#0xD2
+   08E3 F0                 1470 	movx	@dptr,a
+   08E4 90s01r78           1471 	mov	dptr,#(_b + 0x0078)
+   08E7 74 0D              1472 	mov	a,#0x0D
+   08E9 F0                 1473 	movx	@dptr,a
+   08EA 90s01r79           1474 	mov	dptr,#(_b + 0x0079)
+   08ED 74 0B              1475 	mov	a,#0x0B
+   08EF F0                 1476 	movx	@dptr,a
+   08F0 90s01r7A           1477 	mov	dptr,#(_b + 0x007a)
+   08F3 74 B7              1478 	mov	a,#0xB7
+   08F5 F0                 1479 	movx	@dptr,a
+   08F6 90s01r7B           1480 	mov	dptr,#(_b + 0x007b)
+   08F9 74 B2              1481 	mov	a,#0xB2
+   08FB F0                 1482 	movx	@dptr,a
+   08FC 90s01r7C           1483 	mov	dptr,#(_b + 0x007c)
+   08FF 74 25              1484 	mov	a,#0x25
+   0901 F0                 1485 	movx	@dptr,a
+   0902 90s01r7D           1486 	mov	dptr,#(_b + 0x007d)
+   0905 74 23              1487 	mov	a,#0x23
+   0907 F0                 1488 	movx	@dptr,a
+   0908 90s01r7E           1489 	mov	dptr,#(_b + 0x007e)
+   090B 74 23              1490 	mov	a,#0x23
+   090D F0                 1491 	movx	@dptr,a
+   090E 90s01r7F           1492 	mov	dptr,#(_b + 0x007f)
+   0911 74 BE              1493 	mov	a,#0xBE
+   0913 F0                 1494 	movx	@dptr,a
+                           1495 ;	main_montgomery.c:13: volatile __xdata __at (0x0300) unsigned char n_prime = 0xA5;
+   0914 90s03r00           1496 	mov	dptr,#_n_prime
+   0917 74 A5              1497 	mov	a,#0xA5
+   0919 F0                 1498 	movx	@dptr,a
+                           1499 	.area GSFINAL (CODE)
+   0000 02s00r03           1500 	ljmp	__sdcc_program_startup
+                           1501 ;--------------------------------------------------------
+                           1502 ; Home
+                           1503 ;--------------------------------------------------------
+                           1504 	.area HOME    (CODE)
+                           1505 	.area HOME    (CODE)
+   0003                    1506 __sdcc_program_startup:
+   0003 12s00r00           1507 	lcall	_main
+                           1508 ;	return from main will lock up
+   0006 80 FE              1509 	sjmp .
+                           1510 ;--------------------------------------------------------
+                           1511 ; code
+                           1512 ;--------------------------------------------------------
+                           1513 	.area CSEG    (CODE)
+                           1514 ;------------------------------------------------------------
+                           1515 ;Allocation info for local variables in function 'main'
+                           1516 ;------------------------------------------------------------
+                           1517 ;------------------------------------------------------------
+                           1518 ;	main_montgomery.c:24: int main() {
+                           1519 ;	-----------------------------------------
+                           1520 ;	 function main
+                           1521 ;	-----------------------------------------
+   0000                    1522 _main:
+                    0002   1523 	ar2 = 0x02
+                    0003   1524 	ar3 = 0x03
+                    0004   1525 	ar4 = 0x04
+                    0005   1526 	ar5 = 0x05
+                    0006   1527 	ar6 = 0x06
+                    0007   1528 	ar7 = 0x07
+                    0000   1529 	ar0 = 0x00
+                    0001   1530 	ar1 = 0x01
+                           1531 ;	main_montgomery.c:25: startBrk=1;
+   0000 90 FF FE           1532 	mov	dptr,#_startBrk
+   0003 74 01              1533 	mov	a,#0x01
+   0005 F0                 1534 	movx	@dptr,a
+                           1535 ;	main_montgomery.c:27: fips();
+   0006 12s00r13           1536 	lcall	_fips
+                           1537 ;	main_montgomery.c:29: endBrk=1;
+   0009 90 FF FF           1538 	mov	dptr,#_endBrk
+   000C 74 01              1539 	mov	a,#0x01
+   000E F0                 1540 	movx	@dptr,a
+                           1541 ;	main_montgomery.c:30: return 0;
+   000F 90 00 00           1542 	mov	dptr,#0x0000
+   0012 22                 1543 	ret
+                           1544 ;------------------------------------------------------------
+                           1545 ;Allocation info for local variables in function 'fips'
+                           1546 ;------------------------------------------------------------
                            1547 ;------------------------------------------------------------
-                           1548 ;------------------------------------------------------------
-                           1549 ;	main_montgomery.c:24: int main() {
-                           1550 ;	-----------------------------------------
-                           1551 ;	 function main
-                           1552 ;	-----------------------------------------
-   0000                    1553 _main:
-                    0002   1554 	ar2 = 0x02
-                    0003   1555 	ar3 = 0x03
-                    0004   1556 	ar4 = 0x04
-                    0005   1557 	ar5 = 0x05
-                    0006   1558 	ar6 = 0x06
-                    0007   1559 	ar7 = 0x07
-                    0000   1560 	ar0 = 0x00
-                    0001   1561 	ar1 = 0x01
-                           1562 ;	main_montgomery.c:25: startBrk=1;
-   0000 90 FF FE           1563 	mov	dptr,#_startBrk
-   0003 74 01              1564 	mov	a,#0x01
-   0005 F0                 1565 	movx	@dptr,a
-                           1566 ;	main_montgomery.c:27: fips(a, b, n, n_prime, m);
-   0006 75*08r00           1567 	mov	_fips_PARM_2,#_b
-   0009 75*09s01           1568 	mov	(_fips_PARM_2 + 1),#(_b >> 8)
-   000C 75*0A 00           1569 	mov	(_fips_PARM_2 + 2),#0x00
-   000F 75*0Br00           1570 	mov	_fips_PARM_3,#_n
-   0012 75*0Cs00           1571 	mov	(_fips_PARM_3 + 1),#(_n >> 8)
-   0015 75*0D 00           1572 	mov	(_fips_PARM_3 + 2),#0x00
-   0018 90s03r00           1573 	mov	dptr,#_n_prime
-   001B E0                 1574 	movx	a,@dptr
-   001C F5*0E              1575 	mov	_fips_PARM_4,a
-   001E 75*0F 00           1576 	mov	_fips_PARM_5,#_m
-   0021 75*10 04           1577 	mov	(_fips_PARM_5 + 1),#(_m >> 8)
-   0024 75*11 00           1578 	mov	(_fips_PARM_5 + 2),#0x00
-   0027 90s00r80           1579 	mov	dptr,#_a
-   002A 75 F0 00           1580 	mov	b,#0x00
-   002D 12s00r3A           1581 	lcall	_fips
-                           1582 ;	main_montgomery.c:29: endBrk=1;
-   0030 90 FF FF           1583 	mov	dptr,#_endBrk
-   0033 74 01              1584 	mov	a,#0x01
-   0035 F0                 1585 	movx	@dptr,a
-                           1586 ;	main_montgomery.c:30: return 0;
-   0036 90 00 00           1587 	mov	dptr,#0x0000
-   0039 22                 1588 	ret
-                           1589 ;------------------------------------------------------------
-                           1590 ;Allocation info for local variables in function 'fips'
-                           1591 ;------------------------------------------------------------
-                           1592 ;b                         Allocated with name '_fips_PARM_2'
-                           1593 ;n                         Allocated with name '_fips_PARM_3'
-                           1594 ;n_prime                   Allocated with name '_fips_PARM_4'
-                           1595 ;m                         Allocated with name '_fips_PARM_5'
-                           1596 ;a                         Allocated with name '_fips_a_1_1'
-                           1597 ;tmp                       Allocated to registers r2 r3 
-                           1598 ;c                         Allocated with name '_fips_c_1_1'
-                           1599 ;s                         Allocated with name '_fips_s_1_1'
-                           1600 ;u                         Allocated to registers 
-                           1601 ;v                         Allocated to registers 
-                           1602 ;sloc0                     Allocated with name '_fips_sloc0_1_0'
-                           1603 ;sloc1                     Allocated with name '_fips_sloc1_1_0'
-                           1604 ;sloc2                     Allocated with name '_fips_sloc2_1_0'
-                           1605 ;sloc3                     Allocated with name '_fips_sloc3_1_0'
-                           1606 ;sloc4                     Allocated with name '_fips_sloc4_1_0'
-                           1607 ;sloc5                     Allocated with name '_fips_sloc5_1_0'
-                           1608 ;result                    Allocated with name '_fips_result_1_1'
-                           1609 ;------------------------------------------------------------
-                           1610 ;	main_montgomery.c:33: void fips(unsigned char *a, unsigned char *b, unsigned char *n, unsigned char n_prime, unsigned char *m) {
-                           1611 ;	-----------------------------------------
-                           1612 ;	 function fips
-                           1613 ;	-----------------------------------------
-   003A                    1614 _fips:
-   003A 85 82*12           1615 	mov	_fips_a_1_1,dpl
-   003D 85 83*13           1616 	mov	(_fips_a_1_1 + 1),dph
-   0040 85 F0*14           1617 	mov	(_fips_a_1_1 + 2),b
-                           1618 ;	main_montgomery.c:44: for (i = 0; i < SIZE; i++) {
-   0043 E4                 1619 	clr	a
-   0044 F5*00              1620 	mov	_i,a
-   0046 F5*01              1621 	mov	(_i + 1),a
-   0048 85*08*1F           1622 	mov	_fips_sloc3_1_0,_fips_PARM_2
-   004B 85*09*20           1623 	mov	(_fips_sloc3_1_0 + 1),(_fips_PARM_2 + 1)
-   004E 85*0A*21           1624 	mov	(_fips_sloc3_1_0 + 2),(_fips_PARM_2 + 2)
-   0051 85*0B*17           1625 	mov	_fips_sloc0_1_0,_fips_PARM_3
-   0054 85*0C*18           1626 	mov	(_fips_sloc0_1_0 + 1),(_fips_PARM_3 + 1)
-   0057 85*0D*19           1627 	mov	(_fips_sloc0_1_0 + 2),(_fips_PARM_3 + 2)
-   005A                    1628 00105$:
-   005A C3                 1629 	clr	c
-   005B E5*00              1630 	mov	a,_i
-   005D 94 80              1631 	subb	a,#0x80
-   005F E5*01              1632 	mov	a,(_i + 1)
-   0061 94 00              1633 	subb	a,#0x00
-   0063 40 03              1634 	jc	00127$
-   0065 02s01rA0           1635 	ljmp	00108$
-   0068                    1636 00127$:
-                           1637 ;	main_montgomery.c:45: for (j = 0; j < i; j++) {
-   0068 E4                 1638 	clr	a
-   0069 F5*02              1639 	mov	_j,a
-   006B F5*03              1640 	mov	(_j + 1),a
-   006D                    1641 00101$:
-   006D C3                 1642 	clr	c
-   006E E5*02              1643 	mov	a,_j
-   0070 95*00              1644 	subb	a,_i
-   0072 E5*03              1645 	mov	a,(_j + 1)
-   0074 95*01              1646 	subb	a,(_i + 1)
-   0076 40 03              1647 	jc	00128$
-   0078 02s00rD3           1648 	ljmp	00104$
-   007B                    1649 00128$:
-                           1650 ;	main_montgomery.c:145: __endasm;
-                           1651 	
-                           1652     ; load j in lower
-   007B 85*02 82           1653 	    mov dpl, _j
-                           1654 	
-                           1655     ; set address of a in higher
-   007E 75 83s00           1656 	    mov dph, #(_a >> 8)
-                           1657     ; load a[j]
-   0081 E0                 1658 	    movx a, @dptr
-   0082 F5 F0              1659 	    mov b, a
-                           1660 	
-                           1661     ; load m[j] in r0
-   0084 75 83 04           1662 	    mov dph, #(_m >> 8)
-   0087 E0                 1663 	    movx a, @dptr
-   0088 F8                 1664 	    mov r0, a
-                           1665 	
-                           1666     ; calculate i-j and store in r5
-   0089 E5*00              1667 	    mov a, _i
-   008B C3                 1668 	    clr c
-   008C 95*02              1669 	    subb a, _j
-   008E FD                 1670 	    mov r5, a
-                           1671 	
-                           1672     ; load b[i-j]
-   008F 24r00              1673 	    add a, #_b
-   0091 F5 82              1674 	    mov dpl, a
-   0093 E4                 1675 	    clr a
-   0094 34s01              1676 	    addc a, #(_b >> 8)
-   0096 F5 83              1677 	    mov dph, a
-   0098 E0                 1678 	    movx a, @dptr
-                           1679 	
-                           1680     ; a[j]*b[i-j]
-   0099 A4                 1681 	    mul ab
+                           1548 ;	main_montgomery.c:33: void fips() {
+                           1549 ;	-----------------------------------------
+                           1550 ;	 function fips
+                           1551 ;	-----------------------------------------
+   0013                    1552 _fips:
+                           1553 ;	main_montgomery.c:34: for (i = 0; i < SIZE; i++) {
+   0013 E4                 1554 	clr	a
+   0014 F5*00              1555 	mov	_i,a
+   0016 F5*01              1556 	mov	(_i + 1),a
+   0018                    1557 00105$:
+   0018 C3                 1558 	clr	c
+   0019 E5*00              1559 	mov	a,_i
+   001B 94 80              1560 	subb	a,#0x80
+   001D E5*01              1561 	mov	a,(_i + 1)
+   001F 94 00              1562 	subb	a,#0x00
+   0021 40 03              1563 	jc	00126$
+   0023 02s00rE5           1564 	ljmp	00108$
+   0026                    1565 00126$:
+                           1566 ;	main_montgomery.c:35: for (j = 0; j < i; j++) {
+   0026 E4                 1567 	clr	a
+   0027 F5*02              1568 	mov	_j,a
+   0029 F5*03              1569 	mov	(_j + 1),a
+   002B                    1570 00101$:
+   002B C3                 1571 	clr	c
+   002C E5*02              1572 	mov	a,_j
+   002E 95*00              1573 	subb	a,_i
+   0030 E5*03              1574 	mov	a,(_j + 1)
+   0032 95*01              1575 	subb	a,(_i + 1)
+   0034 40 03              1576 	jc	00127$
+   0036 02s00r91           1577 	ljmp	00104$
+   0039                    1578 00127$:
+                           1579 ;	main_montgomery.c:135: __endasm;
+                           1580 	
+                           1581     ; load j in lower
+   0039 85*02 82           1582 	    mov dpl, _j
+                           1583 	
+                           1584     ; set address of a in higher
+   003C 75 83s00           1585 	    mov dph, #(_a >> 8)
+                           1586     ; load a[j]
+   003F E0                 1587 	    movx a, @dptr
+   0040 F5 F0              1588 	    mov b, a
+                           1589 	
+                           1590     ; load m[j] in r0
+   0042 75 83 04           1591 	    mov dph, #(_m >> 8)
+   0045 E0                 1592 	    movx a, @dptr
+   0046 F8                 1593 	    mov r0, a
+                           1594 	
+                           1595     ; calculate i-j and store in r5
+   0047 E5*00              1596 	    mov a, _i
+   0049 C3                 1597 	    clr c
+   004A 95*02              1598 	    subb a, _j
+   004C FD                 1599 	    mov r5, a
+                           1600 	
+                           1601     ; load b[i-j]
+   004D 24r00              1602 	    add a, #_b
+   004F F5 82              1603 	    mov dpl, a
+   0051 E4                 1604 	    clr a
+   0052 34s01              1605 	    addc a, #(_b >> 8)
+   0054 F5 83              1606 	    mov dph, a
+   0056 E0                 1607 	    movx a, @dptr
+                           1608 	
+                           1609     ; a[j]*b[i-j]
+   0057 A4                 1610 	    mul ab
+                           1611 	
+                           1612     ; t[0] + a[j]*b[i-j]
+   0058 25*05              1613 	    add a, _t
+                           1614 	
+                           1615     ; store result in r2 (this is s)
+   005A FA                 1616 	    mov r2, a
+                           1617     ; load t[1]
+   005B E5*06              1618 	    mov a, (_t + 0x0001)
+                           1619 	
+                           1620     ; add carry to t[1]
+   005D 35 F0              1621 	    addc a, b
+   005F F5*06              1622 	    mov (_t + 0x0001), a
+                           1623     ; load t[2]
+   0061 E5*07              1624 	    mov a, (_t + 0x0002)
+                           1625     ; add carry to t[2]
+   0063 34 00              1626 	    addc a, #0x00
+   0065 F5*07              1627 	    mov (_t + 0x0002), a
+                           1628 	
+                           1629     ; load i-j
+   0067 ED                 1630 	    mov a, r5
+                           1631 	
+                           1632     ; load n[i-j]
+   0068 24r00              1633 	    add a, #_n
+   006A F5 82              1634 	    mov dpl, a
+   006C E4                 1635 	    clr a
+   006D 34s00              1636 	    addc a, #(_n >> 8)
+   006F F5 83              1637 	    mov dph, a
+   0071 E0                 1638 	    movx a, @dptr
+                           1639 	
+                           1640     ; load r0 (this is m[j])
+   0072 88 F0              1641 	    mov b, r0
+                           1642     ; m[j] * n[i-j]
+   0074 A4                 1643 	    mul ab
+                           1644     ; s + m[j] * n[i-j]
+   0075 2A                 1645 	    add a, r2
+                           1646 	
+                           1647     ; t[0] = s
+   0076 F5*05              1648 	    mov _t, a
+                           1649 	
+                           1650     ; load carry to a
+   0078 74 00              1651 	    mov a, #0x00
+   007A 35 F0              1652 	    addc a, b
+                           1653 	
+                           1654     ; t[1] + c
+   007C 25*06              1655 	    add a, (_t + 0x0001)
+   007E F5*06              1656 	    mov (_t + 0x0001), a
+   0080 E5*07              1657 	    mov a, (_t + 0x0002)
+   0082 35 00              1658 	    addc a, 0x00
+   0084 F5*07              1659 	    mov (_t + 0x0002), a
+                           1660 	    
+                           1661 ;	main_montgomery.c:35: for (j = 0; j < i; j++) {
+   0086 05*02              1662 	inc	_j
+   0088 E4                 1663 	clr	a
+   0089 B5*02 9F           1664 	cjne	a,_j,00101$
+   008C 05*03              1665 	inc	(_j + 1)
+   008E 02s00r2B           1666 	ljmp	00101$
+   0091                    1667 00104$:
+                           1668 ;	main_montgomery.c:220: __endasm;
+                           1669 	
+                           1670    ; load i in higher
+   0091 85*00 82           1671 	   mov dpl, _i
+                           1672 	
+                           1673    ; load a[i]
+   0094 75 83s00           1674 	   mov dph, #(_a >> 8)
+   0097 E0                 1675 	   movx a, @dptr
+   0098 F5 F0              1676 	   mov b, a
+                           1677 	
+                           1678    ; load b[0]
+   009A E4                 1679 	   clr a
+   009B 75 83s01           1680 	   mov dph, #(_b >> 8)
+   009E E0                 1681 	   movx a, @dptr
                            1682 	
-                           1683     ; t[0] + a[j]*b[i-j]
-   009A 25*05              1684 	    add a, _t
+                           1683    ; a[i] * b[0]
+   009F A4                 1684 	   mul ab
                            1685 	
-                           1686     ; store result in r2 (this is s)
-   009C FA                 1687 	    mov r2, a
-                           1688     ; load t[1]
-   009D E5*06              1689 	    mov a, (_t + 0x0001)
-                           1690 	
-                           1691     ; add carry to t[1]
-   009F 35 F0              1692 	    addc a, b
-   00A1 F5*06              1693 	    mov (_t + 0x0001), a
-                           1694     ; load t[2]
-   00A3 E5*07              1695 	    mov a, (_t + 0x0002)
-                           1696     ; add carry to t[2]
-   00A5 34 00              1697 	    addc a, #0x00
-   00A7 F5*07              1698 	    mov (_t + 0x0002), a
-                           1699 	
-                           1700     ; load i-j
-   00A9 ED                 1701 	    mov a, r5
-                           1702 	
-                           1703     ; load n[i-j]
-   00AA 24r00              1704 	    add a, #_n
-   00AC F5 82              1705 	    mov dpl, a
-   00AE E4                 1706 	    clr a
-   00AF 34s00              1707 	    addc a, #(_n >> 8)
-   00B1 F5 83              1708 	    mov dph, a
-   00B3 E0                 1709 	    movx a, @dptr
-                           1710 	
-                           1711     ; load r0 (this is m[j])
-   00B4 88 F0              1712 	    mov b, r0
-                           1713     ; m[j] * n[i-j]
-   00B6 A4                 1714 	    mul ab
-                           1715     ; s + m[j] * n[i-j]
-   00B7 2A                 1716 	    add a, r2
-                           1717 	
-                           1718     ; t[0] = s
-   00B8 F5*05              1719 	    mov _t, a
+                           1686    ; t[0] + a[i] * b[0]
+   00A0 25*05              1687 	   add a, _t
+                           1688 	
+                           1689    ; save result in variable s
+   00A2 F5*04              1690 	   mov _s, a
+                           1691    ; reset a
+   00A4 74 00              1692 	   mov a, #0x00
+                           1693    ; save b in a
+   00A6 35 F0              1694 	   addc a, b
+                           1695 	
+                           1696    ; t[1] = t[1] + c
+   00A8 25*06              1697 	   add a, (_t + 0x0001)
+   00AA F5*06              1698 	   mov (_t + 0x0001), a
+                           1699    ; t[2] = t[2] + carry
+   00AC E5*07              1700 	   mov a, (_t + 0x0002)
+   00AE 34 00              1701 	   addc a, #0x00
+   00B0 F5*07              1702 	   mov (_t + 0x0002), a
+                           1703 	
+                           1704    ; m[i] = (s*n_prime)%256
+   00B2 90s03r00           1705 	   mov dptr, #_n_prime
+   00B5 E0                 1706 	   movx a, @dptr
+   00B6 85*04 F0           1707 	   mov b, _s
+   00B9 A4                 1708 	   mul ab
+   00BA 85*00 82           1709 	   mov dpl, _i
+   00BD 75 83 04           1710 	   mov dph, #(_m >> 8)
+   00C0 F0                 1711 	   movx @dptr, a
+   00C1 F5 F0              1712 	   mov b, a
+                           1713 	
+                           1714    ; s + m[i] * n[0]
+   00C3 75 82 00           1715 	   mov dpl, #0x00
+   00C6 75 83r00           1716 	   mov dph, #_n
+   00C9 E0                 1717 	   movx a, @dptr
+   00CA A4                 1718 	   mul ab
+   00CB 25*04              1719 	   add a, _s
                            1720 	
-                           1721     ; load c
-   00BA 74 00              1722 	    mov a, #0x00
-   00BC 35 F0              1723 	    addc a, b
-                           1724 	
-                           1725     ; t[1] + c
-   00BE 25*06              1726 	    add a, (_t + 0x0001)
-   00C0 F5*06              1727 	    mov (_t + 0x0001), a
-   00C2 E5*07              1728 	    mov a, (_t + 0x0002)
-   00C4 35 00              1729 	    addc a, 0x00
-   00C6 F5*07              1730 	    mov (_t + 0x0002), a
-                           1731 	    
-                           1732 ;	main_montgomery.c:45: for (j = 0; j < i; j++) {
-   00C8 05*02              1733 	inc	_j
-   00CA E4                 1734 	clr	a
-   00CB B5*02 9F           1735 	cjne	a,_j,00101$
-   00CE 05*03              1736 	inc	(_j + 1)
-   00D0 02s00r6D           1737 	ljmp	00101$
-   00D3                    1738 00104$:
-                           1739 ;	main_montgomery.c:148: tmp = t[0] + a[i]*b[0];
-   00D3 85*05*1A           1740 	mov	_fips_sloc1_1_0,_t
-   00D6 75*1B 00           1741 	mov	(_fips_sloc1_1_0 + 1),#0x00
-   00D9 E5*00              1742 	mov	a,_i
-   00DB 25*12              1743 	add	a,_fips_a_1_1
-   00DD FC                 1744 	mov	r4,a
-   00DE E5*01              1745 	mov	a,(_i + 1)
-   00E0 35*13              1746 	addc	a,(_fips_a_1_1 + 1)
-   00E2 FA                 1747 	mov	r2,a
-   00E3 AB*14              1748 	mov	r3,(_fips_a_1_1 + 2)
-   00E5 8C 82              1749 	mov	dpl,r4
-   00E7 8A 83              1750 	mov	dph,r2
-   00E9 8B F0              1751 	mov	b,r3
-   00EB 12s00r00           1752 	lcall	__gptrget
-   00EE FC                 1753 	mov	r4,a
-   00EF 85*1F 82           1754 	mov	dpl,_fips_sloc3_1_0
-   00F2 85*20 83           1755 	mov	dph,(_fips_sloc3_1_0 + 1)
-   00F5 85*21 F0           1756 	mov	b,(_fips_sloc3_1_0 + 2)
-   00F8 12s00r00           1757 	lcall	__gptrget
-   00FB 8C F0              1758 	mov	b,r4
-   00FD A4                 1759 	mul	ab
-   00FE 25*1A              1760 	add	a,_fips_sloc1_1_0
-   0100 FA                 1761 	mov	r2,a
-   0101 E5*1B              1762 	mov	a,(_fips_sloc1_1_0 + 1)
-   0103 35 F0              1763 	addc	a,b
-   0105 FB                 1764 	mov	r3,a
-                           1765 ;	main_montgomery.c:149: s = tmp;
-   0106 8A*16              1766 	mov	_fips_s_1_1,r2
-                           1767 ;	main_montgomery.c:150: c = tmp >> 8;
-   0108 8B*15              1768 	mov	_fips_c_1_1,r3
-                           1769 ;	main_montgomery.c:153: tmp = t[1] + c;
-   010A AC*06              1770 	mov	r4,(_t + 0x0001)
-   010C 7D 00              1771 	mov	r5,#0x00
-   010E AE*15              1772 	mov	r6,_fips_c_1_1
-   0110 7F 00              1773 	mov	r7,#0x00
-   0112 EE                 1774 	mov	a,r6
-   0113 2C                 1775 	add	a,r4
-   0114 FA                 1776 	mov	r2,a
-   0115 EF                 1777 	mov	a,r7
-   0116 3D                 1778 	addc	a,r5
-   0117 FB                 1779 	mov	r3,a
-                           1780 ;	main_montgomery.c:154: t[1] = tmp;
-   0118 8A 04              1781 	mov	ar4,r2
-   011A 8C*06              1782 	mov	(_t + 0x0001),r4
-                           1783 ;	main_montgomery.c:155: t[2] = t[2] + (tmp >> 8);
-   011C EB                 1784 	mov	a,r3
-   011D 25*07              1785 	add	a,(_t + 0x0002)
-   011F F5*1A              1786 	mov	_fips_sloc1_1_0,a
-   0121 85*1A*07           1787 	mov	(_t + 0x0002),_fips_sloc1_1_0
-                           1788 ;	main_montgomery.c:157: m[i] = (s*n_prime)%256;
-   0124 E5*00              1789 	mov	a,_i
-   0126 25*0F              1790 	add	a,_fips_PARM_5
-   0128 F5*1C              1791 	mov	_fips_sloc2_1_0,a
-   012A E5*01              1792 	mov	a,(_i + 1)
-   012C 35*10              1793 	addc	a,(_fips_PARM_5 + 1)
-   012E F5*1D              1794 	mov	(_fips_sloc2_1_0 + 1),a
-   0130 85*11*1E           1795 	mov	(_fips_sloc2_1_0 + 2),(_fips_PARM_5 + 2)
-   0133 85*16 F0           1796 	mov	b,_fips_s_1_1
-   0136 E5*0E              1797 	mov	a,_fips_PARM_4
-   0138 A4                 1798 	mul	ab
-   0139 F5 82              1799 	mov	dpl,a
-   013B 85 F0 83           1800 	mov	dph,b
-   013E 75*00 00           1801 	mov	__modsint_PARM_2,#0x00
-   0141 75*01 01           1802 	mov	(__modsint_PARM_2 + 1),#0x01
-   0144 C0 04              1803 	push	ar4
-   0146 12s00r00           1804 	lcall	__modsint
-   0149 AD 82              1805 	mov	r5,dpl
-   014B D0 04              1806 	pop	ar4
-   014D 85*1C 82           1807 	mov	dpl,_fips_sloc2_1_0
-   0150 85*1D 83           1808 	mov	dph,(_fips_sloc2_1_0 + 1)
-   0153 85*1E F0           1809 	mov	b,(_fips_sloc2_1_0 + 2)
-   0156 ED                 1810 	mov	a,r5
-   0157 12s00r00           1811 	lcall	__gptrput
-                           1812 ;	main_montgomery.c:159: tmp = s + m[i]*n[0];
-   015A 85*16*1C           1813 	mov	_fips_sloc2_1_0,_fips_s_1_1
-   015D 75*1D 00           1814 	mov	(_fips_sloc2_1_0 + 1),#0x00
-   0160 85*17 82           1815 	mov	dpl,_fips_sloc0_1_0
-   0163 85*18 83           1816 	mov	dph,(_fips_sloc0_1_0 + 1)
-   0166 85*19 F0           1817 	mov	b,(_fips_sloc0_1_0 + 2)
-   0169 12s00r00           1818 	lcall	__gptrget
-   016C 8D F0              1819 	mov	b,r5
-   016E A4                 1820 	mul	ab
-   016F 25*1C              1821 	add	a,_fips_sloc2_1_0
-   0171 E5*1D              1822 	mov	a,(_fips_sloc2_1_0 + 1)
-   0173 35 F0              1823 	addc	a,b
-   0175 FB                 1824 	mov	r3,a
-                           1825 ;	main_montgomery.c:161: c = tmp >> 8;
-   0176 8B*15              1826 	mov	_fips_c_1_1,r3
-                           1827 ;	main_montgomery.c:164: tmp = t[1] + c;
-   0178 7D 00              1828 	mov	r5,#0x00
-   017A AE*15              1829 	mov	r6,_fips_c_1_1
-   017C 7F 00              1830 	mov	r7,#0x00
-   017E EE                 1831 	mov	a,r6
-   017F 2C                 1832 	add	a,r4
-   0180 FA                 1833 	mov	r2,a
-   0181 EF                 1834 	mov	a,r7
-   0182 3D                 1835 	addc	a,r5
-   0183 FB                 1836 	mov	r3,a
-                           1837 ;	main_montgomery.c:165: t[1] = tmp;
-   0184 8A 04              1838 	mov	ar4,r2
-   0186 8C*06              1839 	mov	(_t + 0x0001),r4
-                           1840 ;	main_montgomery.c:166: t[2] = t[2] + (tmp >> 8);
-   0188 EB                 1841 	mov	a,r3
-   0189 25*1A              1842 	add	a,_fips_sloc1_1_0
-   018B FD                 1843 	mov	r5,a
-   018C 8D*07              1844 	mov	(_t + 0x0002),r5
-                           1845 ;	main_montgomery.c:168: t[0] = t[1];
-   018E 8C*05              1846 	mov	_t,r4
-                           1847 ;	main_montgomery.c:169: t[1] = t[2];
-   0190 8D*06              1848 	mov	(_t + 0x0001),r5
-                           1849 ;	main_montgomery.c:170: t[2] = 0;
-   0192 75*07 00           1850 	mov	(_t + 0x0002),#0x00
-                           1851 ;	main_montgomery.c:44: for (i = 0; i < SIZE; i++) {
-   0195 05*00              1852 	inc	_i
-   0197 E4                 1853 	clr	a
-   0198 B5*00 02           1854 	cjne	a,_i,00129$
-   019B 05*01              1855 	inc	(_i + 1)
-   019D                    1856 00129$:
-   019D 02s00r5A           1857 	ljmp	00105$
-   01A0                    1858 00108$:
-                           1859 ;	main_montgomery.c:233: for (i = SIZE; i < 2*SIZE; i++) {
-   01A0 75*00 80           1860 	mov	_i,#0x80
-   01A3 E4                 1861 	clr	a
-   01A4 F5*01              1862 	mov	(_i + 1),a
-   01A6                    1863 00113$:
-   01A6 74 FF              1864 	mov	a,#0x100 - 0x01
-   01A8 25*01              1865 	add	a,(_i + 1)
-   01AA 50 01              1866 	jnc	00130$
-   01AC 22                 1867 	ret
-   01AD                    1868 00130$:
-                           1869 ;	main_montgomery.c:234: for (j = i-SIZE+1; j < SIZE; j++) {
-   01AD 74 81              1870 	mov	a,#0x81
-   01AF 25*00              1871 	add	a,_i
-   01B1 F5*02              1872 	mov	_j,a
-   01B3 74 FF              1873 	mov	a,#0xFF
-   01B5 35*01              1874 	addc	a,(_i + 1)
-   01B7 F5*03              1875 	mov	(_j + 1),a
-   01B9                    1876 00109$:
-   01B9 C3                 1877 	clr	c
-   01BA E5*02              1878 	mov	a,_j
-   01BC 94 80              1879 	subb	a,#0x80
-   01BE E5*03              1880 	mov	a,(_j + 1)
-   01C0 94 00              1881 	subb	a,#0x00
-   01C2 40 03              1882 	jc	00131$
-   01C4 02s02r96           1883 	ljmp	00112$
-   01C7                    1884 00131$:
-                           1885 ;	main_montgomery.c:235: tmp = t[0] + a[j]*b[i-j];
-   01C7 85*05*1C           1886 	mov	_fips_sloc2_1_0,_t
-   01CA 75*1D 00           1887 	mov	(_fips_sloc2_1_0 + 1),#0x00
-   01CD E5*02              1888 	mov	a,_j
-   01CF 25*12              1889 	add	a,_fips_a_1_1
-   01D1 FE                 1890 	mov	r6,a
-   01D2 E5*03              1891 	mov	a,(_j + 1)
-   01D4 35*13              1892 	addc	a,(_fips_a_1_1 + 1)
-   01D6 FF                 1893 	mov	r7,a
-   01D7 AC*14              1894 	mov	r4,(_fips_a_1_1 + 2)
-   01D9 8E 82              1895 	mov	dpl,r6
-   01DB 8F 83              1896 	mov	dph,r7
-   01DD 8C F0              1897 	mov	b,r4
-   01DF 12s00r00           1898 	lcall	__gptrget
-   01E2 F5*1A              1899 	mov	_fips_sloc1_1_0,a
-   01E4 E5*00              1900 	mov	a,_i
-   01E6 C3                 1901 	clr	c
-   01E7 95*02              1902 	subb	a,_j
-   01E9 F5*22              1903 	mov	_fips_sloc4_1_0,a
-   01EB E5*01              1904 	mov	a,(_i + 1)
-   01ED 95*03              1905 	subb	a,(_j + 1)
-   01EF F5*23              1906 	mov	(_fips_sloc4_1_0 + 1),a
-   01F1 E5*22              1907 	mov	a,_fips_sloc4_1_0
-   01F3 25*1F              1908 	add	a,_fips_sloc3_1_0
-   01F5 FF                 1909 	mov	r7,a
-   01F6 E5*23              1910 	mov	a,(_fips_sloc4_1_0 + 1)
-   01F8 35*20              1911 	addc	a,(_fips_sloc3_1_0 + 1)
-   01FA FE                 1912 	mov	r6,a
-   01FB AC*21              1913 	mov	r4,(_fips_sloc3_1_0 + 2)
-   01FD 8F 82              1914 	mov	dpl,r7
-   01FF 8E 83              1915 	mov	dph,r6
-   0201 8C F0              1916 	mov	b,r4
-   0203 12s00r00           1917 	lcall	__gptrget
-   0206 85*1A F0           1918 	mov	b,_fips_sloc1_1_0
-   0209 A4                 1919 	mul	ab
-   020A 25*1C              1920 	add	a,_fips_sloc2_1_0
-   020C FA                 1921 	mov	r2,a
-   020D E5*1D              1922 	mov	a,(_fips_sloc2_1_0 + 1)
-   020F 35 F0              1923 	addc	a,b
-   0211 FB                 1924 	mov	r3,a
-                           1925 ;	main_montgomery.c:236: s = tmp;
-   0212 8A*16              1926 	mov	_fips_s_1_1,r2
-                           1927 ;	main_montgomery.c:237: c = tmp >> 8;
-   0214 8B*15              1928 	mov	_fips_c_1_1,r3
-                           1929 ;	main_montgomery.c:240: tmp = t[1] + c;
-   0216 AC*06              1930 	mov	r4,(_t + 0x0001)
-   0218 7D 00              1931 	mov	r5,#0x00
-   021A AE*15              1932 	mov	r6,_fips_c_1_1
-   021C 7F 00              1933 	mov	r7,#0x00
-   021E EE                 1934 	mov	a,r6
-   021F 2C                 1935 	add	a,r4
-   0220 FA                 1936 	mov	r2,a
-   0221 EF                 1937 	mov	a,r7
-   0222 3D                 1938 	addc	a,r5
-   0223 FB                 1939 	mov	r3,a
-                           1940 ;	main_montgomery.c:241: t[1] = tmp;
-   0224 8A 04              1941 	mov	ar4,r2
-   0226 8C*06              1942 	mov	(_t + 0x0001),r4
-                           1943 ;	main_montgomery.c:242: t[2] = t[2] + (tmp >> 8);
-   0228 EB                 1944 	mov	a,r3
-   0229 25*07              1945 	add	a,(_t + 0x0002)
-   022B F5*1A              1946 	mov	_fips_sloc1_1_0,a
-   022D 85*1A*07           1947 	mov	(_t + 0x0002),_fips_sloc1_1_0
-                           1948 ;	main_montgomery.c:244: tmp = s + m[j]*n[i-j];
-   0230 85*16*1C           1949 	mov	_fips_sloc2_1_0,_fips_s_1_1
-   0233 75*1D 00           1950 	mov	(_fips_sloc2_1_0 + 1),#0x00
-   0236 E5*02              1951 	mov	a,_j
-   0238 25*0F              1952 	add	a,_fips_PARM_5
-   023A FE                 1953 	mov	r6,a
-   023B E5*03              1954 	mov	a,(_j + 1)
-   023D 35*10              1955 	addc	a,(_fips_PARM_5 + 1)
-   023F FF                 1956 	mov	r7,a
-   0240 AD*11              1957 	mov	r5,(_fips_PARM_5 + 2)
-   0242 8E 82              1958 	mov	dpl,r6
-   0244 8F 83              1959 	mov	dph,r7
-   0246 8D F0              1960 	mov	b,r5
-   0248 12s00r00           1961 	lcall	__gptrget
-   024B F5*24              1962 	mov	_fips_sloc5_1_0,a
-   024D E5*22              1963 	mov	a,_fips_sloc4_1_0
-   024F 25*17              1964 	add	a,_fips_sloc0_1_0
-   0251 FD                 1965 	mov	r5,a
-   0252 E5*23              1966 	mov	a,(_fips_sloc4_1_0 + 1)
-   0254 35*18              1967 	addc	a,(_fips_sloc0_1_0 + 1)
-   0256 FF                 1968 	mov	r7,a
-   0257 AE*19              1969 	mov	r6,(_fips_sloc0_1_0 + 2)
-   0259 8D 82              1970 	mov	dpl,r5
-   025B 8F 83              1971 	mov	dph,r7
-   025D 8E F0              1972 	mov	b,r6
-   025F 12s00r00           1973 	lcall	__gptrget
-   0262 85*24 F0           1974 	mov	b,_fips_sloc5_1_0
-   0265 A4                 1975 	mul	ab
-   0266 25*1C              1976 	add	a,_fips_sloc2_1_0
-   0268 FA                 1977 	mov	r2,a
-   0269 E5*1D              1978 	mov	a,(_fips_sloc2_1_0 + 1)
-   026B 35 F0              1979 	addc	a,b
-   026D FB                 1980 	mov	r3,a
-                           1981 ;	main_montgomery.c:245: s = tmp;
-   026E 8A*16              1982 	mov	_fips_s_1_1,r2
-                           1983 ;	main_montgomery.c:246: c = tmp >> 8;
-   0270 8B*15              1984 	mov	_fips_c_1_1,r3
-                           1985 ;	main_montgomery.c:248: t[0] = s;
-   0272 85*16*05           1986 	mov	_t,_fips_s_1_1
-                           1987 ;	main_montgomery.c:251: tmp = t[1] + c;
-   0275 7D 00              1988 	mov	r5,#0x00
-   0277 AE*15              1989 	mov	r6,_fips_c_1_1
-   0279 7F 00              1990 	mov	r7,#0x00
-   027B EE                 1991 	mov	a,r6
-   027C 2C                 1992 	add	a,r4
-   027D FA                 1993 	mov	r2,a
-   027E EF                 1994 	mov	a,r7
-   027F 3D                 1995 	addc	a,r5
-   0280 FB                 1996 	mov	r3,a
-                           1997 ;	main_montgomery.c:252: t[1] = tmp;
-   0281 8A 04              1998 	mov	ar4,r2
-   0283 8C*06              1999 	mov	(_t + 0x0001),r4
-                           2000 ;	main_montgomery.c:253: t[2] = t[2] + (tmp >> 8);
-   0285 EB                 2001 	mov	a,r3
-   0286 FA                 2002 	mov	r2,a
-   0287 25*1A              2003 	add	a,_fips_sloc1_1_0
-   0289 F5*07              2004 	mov	(_t + 0x0002),a
-                           2005 ;	main_montgomery.c:234: for (j = i-SIZE+1; j < SIZE; j++) {
-   028B 05*02              2006 	inc	_j
-   028D E4                 2007 	clr	a
-   028E B5*02 02           2008 	cjne	a,_j,00132$
-   0291 05*03              2009 	inc	(_j + 1)
-   0293                    2010 00132$:
-   0293 02s01rB9           2011 	ljmp	00109$
-   0296                    2012 00112$:
-                           2013 ;	main_montgomery.c:256: m[i - SIZE] = t[0];
-   0296 E5*00              2014 	mov	a,_i
-   0298 24 80              2015 	add	a,#0x80
-   029A FA                 2016 	mov	r2,a
-   029B E5*01              2017 	mov	a,(_i + 1)
-   029D 34 FF              2018 	addc	a,#0xff
-   029F FB                 2019 	mov	r3,a
-   02A0 EA                 2020 	mov	a,r2
-   02A1 25*0F              2021 	add	a,_fips_PARM_5
-   02A3 FA                 2022 	mov	r2,a
-   02A4 EB                 2023 	mov	a,r3
-   02A5 35*10              2024 	addc	a,(_fips_PARM_5 + 1)
-   02A7 FB                 2025 	mov	r3,a
-   02A8 AC*11              2026 	mov	r4,(_fips_PARM_5 + 2)
-   02AA AD*05              2027 	mov	r5,_t
-   02AC 8A 82              2028 	mov	dpl,r2
-   02AE 8B 83              2029 	mov	dph,r3
-   02B0 8C F0              2030 	mov	b,r4
-   02B2 ED                 2031 	mov	a,r5
-   02B3 12s00r00           2032 	lcall	__gptrput
-                           2033 ;	main_montgomery.c:257: t[0] = t[1];
-   02B6 AA*06              2034 	mov	r2,(_t + 0x0001)
-   02B8 8A*05              2035 	mov	_t,r2
-                           2036 ;	main_montgomery.c:258: t[1] = t[2];
-   02BA AA*07              2037 	mov	r2,(_t + 0x0002)
-   02BC 8A*06              2038 	mov	(_t + 0x0001),r2
-                           2039 ;	main_montgomery.c:259: t[2] = 0;
-   02BE 75*07 00           2040 	mov	(_t + 0x0002),#0x00
-                           2041 ;	main_montgomery.c:233: for (i = SIZE; i < 2*SIZE; i++) {
-   02C1 05*00              2042 	inc	_i
-   02C3 E4                 2043 	clr	a
-   02C4 B5*00 02           2044 	cjne	a,_i,00133$
-   02C7 05*01              2045 	inc	(_i + 1)
-   02C9                    2046 00133$:
-                           2047 ;	main_montgomery.c:277: return;
-   02C9 02s01rA6           2048 	ljmp	00113$
-                           2049 	.area CSEG    (CODE)
-                           2050 	.area CONST   (CODE)
-                           2051 	.area XINIT   (CODE)
-                           2052 	.area CABS    (ABS,CODE)
+   00CD 25*06              1721 	   add a, (_t + 0x0001)
+   00CF F5*05              1722 	   mov _t, a
+   00D1 E5*07              1723 	   mov a, (_t + 0x0002)
+   00D3 34 00              1724 	   addc a, #0x00
+   00D5 F5*06              1725 	   mov (_t + 0x0001), a
+   00D7 85 00*07           1726 	   mov (_t + 0x0002), 0x00
+                           1727 	  
+                           1728 ;	main_montgomery.c:34: for (i = 0; i < SIZE; i++) {
+   00DA 05*00              1729 	inc	_i
+   00DC E4                 1730 	clr	a
+   00DD B5*00 02           1731 	cjne	a,_i,00128$
+   00E0 05*01              1732 	inc	(_i + 1)
+   00E2                    1733 00128$:
+   00E2 02s00r18           1734 	ljmp	00105$
+   00E5                    1735 00108$:
+                           1736 ;	main_montgomery.c:223: for (i = SIZE; i < 2*SIZE; i++) {
+   00E5 75*00 80           1737 	mov	_i,#0x80
+   00E8 E4                 1738 	clr	a
+   00E9 F5*01              1739 	mov	(_i + 1),a
+   00EB                    1740 00112$:
+   00EB 74 FF              1741 	mov	a,#0x100 - 0x01
+   00ED 25*01              1742 	add	a,(_i + 1)
+   00EF 50 03              1743 	jnc	00129$
+   00F1 02s01r8D           1744 	ljmp	00115$
+   00F4                    1745 00129$:
+                           1746 ;	main_montgomery.c:224: for (j = i-SIZE+1; j < SIZE; j++) {
+   00F4 74 81              1747 	mov	a,#0x81
+   00F6 25*00              1748 	add	a,_i
+   00F8 FA                 1749 	mov	r2,a
+   00F9 74 FF              1750 	mov	a,#0xFF
+   00FB 35*01              1751 	addc	a,(_i + 1)
+   00FD FB                 1752 	mov	r3,a
+   00FE 74 80              1753 	mov	a,#0x80
+   0100 C3                 1754 	clr	c
+   0101 9A                 1755 	subb	a,r2
+   0102 F5*02              1756 	mov	_j,a
+   0104 E4                 1757 	clr	a
+   0105 9B                 1758 	subb	a,r3
+   0106 F5*03              1759 	mov	(_j + 1),a
+   0108                    1760 00111$:
+                           1761 ;	main_montgomery.c:323: __endasm;
+                           1762 	
+   0108 85*02 82           1763 	    mov dpl, _j
+                           1764 	
+                           1765     ; load a[j]
+   010B 75 83s00           1766 	    mov dph, #(_a >> 8)
+   010E E0                 1767 	    movx a, @dptr
+   010F F5 F0              1768 	    mov b, a
+                           1769 	
+                           1770     ; load m[j]
+   0111 75 83 04           1771 	    mov dph, #(_m >> 8)
+   0114 E0                 1772 	    movx a, @dptr
+   0115 F8                 1773 	    mov r0, a
+                           1774 	
+                           1775     ; calculate i-j and store in r5
+   0116 E5*00              1776 	    mov a, _i
+   0118 C3                 1777 	    clr c
+   0119 95*02              1778 	    subb a, _j
+   011B FD                 1779 	    mov r5, a
+                           1780 	
+                           1781     ; load b[i-j]
+   011C 24r00              1782 	    add a, #_b
+   011E F5 82              1783 	    mov dpl, a
+   0120 E4                 1784 	    clr a
+   0121 34s01              1785 	    addc a, #(_b >> 8)
+   0123 F5 83              1786 	    mov dph, a
+   0125 E0                 1787 	    movx a, @dptr
+                           1788 	
+                           1789     ; a[j] * b[i-j]
+   0126 A4                 1790 	    mul ab
+                           1791 	
+                           1792     ; t[0] + a[j]*b[i-j]
+   0127 25*05              1793 	    add a, _t
+                           1794 	
+                           1795     ; store result in r2 (this is s)
+   0129 FA                 1796 	    mov r2, a
+                           1797     ; load t[1]
+   012A E5*06              1798 	    mov a, (_t + 0x0001)
+                           1799 	
+                           1800     ; add carry to t[1]
+   012C 35 F0              1801 	    addc a, b
+   012E F5*06              1802 	    mov (_t + 0x0001), a
+                           1803     ; load t[2]
+   0130 E5*07              1804 	    mov a, (_t + 0x0002)
+                           1805     ; add carry to t[2]
+   0132 34 00              1806 	    addc a, #0x00
+   0134 F5*07              1807 	    mov (_t + 0x0002), a
+                           1808 	
+                           1809     ; load i-j
+   0136 ED                 1810 	    mov a, r5
+                           1811 	
+                           1812     ; load n[i-j]
+   0137 24r00              1813 	    add a, #_n
+   0139 F5 82              1814 	    mov dpl, a
+   013B E4                 1815 	    clr a
+   013C 34s00              1816 	    addc a, #(_n >> 8)
+   013E F5 83              1817 	    mov dph, a
+   0140 E0                 1818 	    movx a, @dptr
+                           1819 	
+                           1820     ; load r0 (this is m[j])
+   0141 88 F0              1821 	    mov b, r0
+                           1822     ; m[j] * n[i-j]
+   0143 A4                 1823 	    mul ab
+                           1824     ; s + m[j] * n[i-j]
+   0144 2A                 1825 	    add a, r2
+                           1826 	
+                           1827     ; t[0] = s
+   0145 F5*05              1828 	    mov _t, a
+                           1829 	
+                           1830     ; load carry to a
+   0147 74 00              1831 	    mov a, #0x00
+   0149 35 F0              1832 	    addc a, b
+                           1833 	
+                           1834     ; t[1] + c
+   014B 25*06              1835 	    add a, (_t + 0x0001)
+   014D F5*06              1836 	    mov (_t + 0x0001), a
+   014F E5*07              1837 	    mov a, (_t + 0x0002)
+   0151 35 00              1838 	    addc a, 0x00
+   0153 F5*07              1839 	    mov (_t + 0x0002), a
+                           1840 	   
+   0155 15*02              1841 	dec	_j
+   0157 74 FF              1842 	mov	a,#0xff
+   0159 B5*02 02           1843 	cjne	a,_j,00130$
+   015C 15*03              1844 	dec	(_j + 1)
+   015E                    1845 00130$:
+                           1846 ;	main_montgomery.c:224: for (j = i-SIZE+1; j < SIZE; j++) {
+   015E E5*02              1847 	mov	a,_j
+   0160 45*03              1848 	orl	a,(_j + 1)
+   0162 60 03              1849 	jz	00131$
+   0164 02s01r08           1850 	ljmp	00111$
+   0167                    1851 00131$:
+   0167 75*02 80           1852 	mov	_j,#0x80
+   016A E4                 1853 	clr	a
+   016B F5*03              1854 	mov	(_j + 1),a
+                           1855 ;	main_montgomery.c:346: __endasm;
+                           1856 	
+                           1857    ; calculate i - 128
+   016D E5*00              1858 	   mov a, _i
+   016F 94 80              1859 	   subb a, #0x80
+                           1860 	
+                           1861    ; m[i - 128] = t[0]
+   0171 F5 82              1862 	   mov dpl, a
+   0173 85 04 83           1863 	   mov dph, (#_m >> 8)
+   0176 E5*05              1864 	   mov a, _t
+   0178 F0                 1865 	   movx @dptr, a
+                           1866 	
+                           1867    ; t[0] = t[1]
+   0179 85*06*05           1868 	   mov _t, (_t + 0x0001)
+   017C 85*07*06           1869 	   mov (_t + 0x0001), (_t + 0x0002)
+   017F 75*07 00           1870 	   mov (_t + 0x0002), #0x00
+                           1871 	  
+                           1872 ;	main_montgomery.c:223: for (i = SIZE; i < 2*SIZE; i++) {
+   0182 05*00              1873 	inc	_i
+   0184 E4                 1874 	clr	a
+   0185 B5*00 02           1875 	cjne	a,_i,00132$
+   0188 05*01              1876 	inc	(_i + 1)
+   018A                    1877 00132$:
+   018A 02s00rEB           1878 	ljmp	00112$
+   018D                    1879 00115$:
+                           1880 ;	main_montgomery.c:349: return;
+   018D 22                 1881 	ret
+                           1882 	.area CSEG    (CODE)
+                           1883 	.area CONST   (CODE)
+                           1884 	.area XINIT   (CODE)
+                           1885 	.area CABS    (ABS,CODE)

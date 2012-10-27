@@ -17,6 +17,7 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:0000    l_GSINIT5
   0C:0000    l_IABS
   0C:0000    l_ISEG
+  0C:0000    l_OSEG
   0C:0000    l_PSEG
   0C:0000    l_REG_BANK_1
   0C:0000    l_REG_BANK_2
@@ -43,7 +44,6 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:0000    s_XISEG
   0C:0000    s_XSEG
   0C:0001    l_XABS3
-  0C:0002    l_OSEG
   0C:0003    l_GSFINAL
   0C:0003    l_GSINIT0
   0C:0008    l_HOME
@@ -54,15 +54,15 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:000B    s_GSINIT1
   0C:000B    s_GSINIT2
   0C:0010    s_REG_BANK_2
+  0C:0010    s_RSEG
+  0C:0010    s_SSEG
   0C:0015    s_GSINIT3
   0C:0018    s_BIT_BANK
+  0C:0018    s_OSEG
   0C:0018    s_REG_BANK_3
   0C:0020    s__CODE
   0C:0022    l_GSINIT3
   0C:002A    l_GSINIT4
-  0C:002D    s_OSEG
-  0C:002F    s_RSEG
-  0C:002F    s_SSEG
   0C:0037    s_GSINIT4
   0C:0061    s_GSINIT
   0C:0061    s_GSINIT5
@@ -70,14 +70,14 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:0080    l_XABS0
   0C:0080    l_XABS1
   0C:0080    l_XABS2
-  0C:00D1    l_SSEG
+  0C:00F0    l_SSEG
   0C:0100    l_IRAM
-  0C:0388    l_CSEG
+  0C:0192    l_CSEG
   0C:091A    l_GSINIT
   0C:097B    s_GSFINAL
   0C:097E    s_CSEG
-  0C:0D06    s_CONST
-  0C:0D06    s_XINIT
+  0C:0B10    s_CONST
+  0C:0B10    s_XINIT
 
 Hexadecimal
 
@@ -226,9 +226,6 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      00D7    _CY
      00E0    _ACC
      00F0    _B
-     00F5    _B_5
-     00F6    _B_6
-     00F7    _B_7
      0400    _m
      FFFE    _startBrk
      FFFF    _endBrk
@@ -253,33 +250,18 @@ DSEG                               0000   0080 =    128. bytes (REL,CON)
      000A    _j
      000C    _s
      000D    _t
-     0010    _fips_PARM_2
-     0013    _fips_PARM_3
-     0016    _fips_PARM_4
-     0017    _fips_PARM_5
 
-Hexadecimal
-
-Area                               Addr   Size   Decimal Bytes (Attributes)
---------------------------------   ----   ----   ------- ----- ------------
-OSEG                               002D   0002 =      2. bytes (REL,OVR)
-
-      Value  Global
-   --------  --------------------------------
-     002D    __gptrput_PARM_2
-     002D    __modsint_PARM_2
-     002D    __moduint_PARM_2
 
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-SSEG                               002F   00D1 =    209. bytes (REL,OVR)
+SSEG                               0010   00F0 =    240. bytes (REL,OVR)
 
       Value  Global
    --------  --------------------------------
-     002F    __start__stack
+     0010    __start__stack
 
 
 
@@ -335,17 +317,13 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CSEG                               097E   0388 =    904. bytes (REL,CON,CODE)
+CSEG                               097E   0192 =    402. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
   0C:097E    _main
-  0C:09B8    _fips
-  0C:0C4A    __gptrput
-  0C:0C63    __moduint
-  0C:0CB0    __gptrget
-  0C:0CCC    __modsint
-  0C:0D02    __sdcc_external_startup
+  0C:0991    _fips
+  0C:0B0C    __sdcc_external_startup
 
 
 ASxxxx Linker V01.75 + NoICE + SDCC Feb 1999,  page 1.
@@ -358,13 +336,9 @@ Libraries Linked            [   object  file   ]
 
 /usr/share/sdcc/lib/small/mcs51.lib    [     crtclear.rel ]
 /usr/share/sdcc/lib/small/mcs51.lib    [     crtxinit.rel ]
-/usr/share/sdcc/lib/small/libsdcc.lib    [     _gptrput.rel ]
-/usr/share/sdcc/lib/small/libint.lib    [     _moduint.rel ]
 /usr/share/sdcc/lib/small/mcs51.lib    [    crtxclear.rel ]
 /usr/share/sdcc/lib/small/mcs51.lib    [   crtpagesfr.rel ]
 /usr/share/sdcc/lib/small/mcs51.lib    [     crtstart.rel ]
-/usr/share/sdcc/lib/small/libsdcc.lib    [     _gptrget.rel ]
-/usr/share/sdcc/lib/small/libint.lib    [     _modsint.rel ]
 /usr/share/sdcc/lib/small/libsdcc.lib    [     _startup.rel ]
 
 ASxxxx Linker V01.75 + NoICE + SDCC Feb 1999,  page 2.

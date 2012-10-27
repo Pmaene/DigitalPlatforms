@@ -19,28 +19,18 @@ unsigned char s = 0;
 
 unsigned char t[3] = {0, 0, 0};
 
-void fips(unsigned char *a, unsigned char *b, unsigned char *n, unsigned char n_prime, unsigned char *m);
+void fips();
 
 int main() {
 	startBrk=1;
 	
-	fips(a, b, n, n_prime, m);
+	fips();
 
 	endBrk=1;
 	return 0;
 }
 
-void fips(unsigned char *a, unsigned char *b, unsigned char *n, unsigned char n_prime, unsigned char *m) {
-	unsigned short tmp  = 0;
-
-	unsigned char  c    = 0;
-	unsigned char  s    = 0;
-
-	signed   char  u    = 0;
-	signed   char  v    = 0;
-
-	__xdata __at (0x0500) unsigned char result[SIZE + 1];
-	
+void fips() {
 	for (i = 0; i < SIZE; i++) {
 		for (j = 0; j < i; j++) {
 			/*tmp = t[0] + a[j]*b[i-j];
@@ -132,7 +122,7 @@ void fips(unsigned char *a, unsigned char *b, unsigned char *n, unsigned char n_
 				; t[0] = s
 				mov _t, a
 				
-				; load c
+				; load carry to a
 				mov a, #0x00
 				addc a, b
 				
@@ -144,7 +134,7 @@ void fips(unsigned char *a, unsigned char *b, unsigned char *n, unsigned char n_
 				mov (_t + 0x0002), a
  			__endasm;
 		}
-		
+		/*
 		tmp = t[0] + a[i]*b[0];
 		s = tmp;
 		c = tmp >> 8;
@@ -168,8 +158,8 @@ void fips(unsigned char *a, unsigned char *b, unsigned char *n, unsigned char n_
 		t[0] = t[1];
 		t[1] = t[2];
 		t[2] = 0;
-		
-		/*__asm
+		*/
+		__asm
 			; load i in higher
 			mov dpl, _i
 			
@@ -227,12 +217,12 @@ void fips(unsigned char *a, unsigned char *b, unsigned char *n, unsigned char n_
 			addc a, #0x00
 			mov (_t + 0x0001), a
 			mov (_t + 0x0002), 0x00
-		__endasm;*/
+		__endasm;
 	}
 
 	for (i = SIZE; i < 2*SIZE; i++) {
 		for (j = i-SIZE+1; j < SIZE; j++) {
-			tmp = t[0] + a[j]*b[i-j];
+			/*tmp = t[0] + a[j]*b[i-j];
 			s = tmp;
 			c = tmp >> 8;
 	
@@ -250,29 +240,111 @@ void fips(unsigned char *a, unsigned char *b, unsigned char *n, unsigned char n_
 			// Add
 			tmp = t[1] + c;
 			t[1] = tmp;
-			t[2] = t[2] + (tmp >> 8);
-		}
+			t[2] = t[2] + (tmp >> 8);*/
 
+			__asm
+				mov dpl, _j
+			
+				; load a[j]
+				mov dph, #(_a >> 8)
+				movx a, @dptr
+				mov b, a
+
+				; load m[j]
+				mov dph, #(_m >> 8)
+				movx a, @dptr
+				mov r0, a
+
+				; calculate i-j and store in r5
+				mov a, _i
+				clr c
+				subb a, _j
+				mov r5, a
+
+				; load b[i-j]
+				add a, #_b
+				mov dpl, a
+				clr a
+				addc a, #(_b >> 8)
+				mov dph, a
+				movx a, @dptr
+
+				; a[j] * b[i-j]
+				mul ab
+
+				; t[0] + a[j]*b[i-j]
+				add a, _t
+
+				; store result in r2 (this is s)
+				mov r2, a
+				; load t[1]
+				mov a, (_t + 0x0001)
+
+				; add carry to t[1]
+				addc a, b
+				mov (_t + 0x0001), a
+				; load t[2]
+				mov a, (_t + 0x0002)
+				; add carry to t[2]
+				addc a, #0x00
+				mov (_t + 0x0002), a
+
+				; load i-j
+				mov a, r5
+				
+				; load n[i-j]
+				add a, #_n
+				mov dpl, a
+				clr a
+				addc a, #(_n >> 8)
+				mov dph, a
+				movx a, @dptr
+
+				; load r0 (this is m[j])
+				mov b, r0
+				; m[j] * n[i-j]
+				mul ab
+				; s + m[j] * n[i-j]
+				add a, r2
+
+				; t[0] = s
+				mov _t, a
+				
+				; load carry to a
+				mov a, #0x00
+				addc a, b
+				
+				; t[1] + c
+				add a, (_t + 0x0001)
+				mov (_t + 0x0001), a
+				mov a, (_t + 0x0002)
+				addc a, 0x00
+				mov (_t + 0x0002), a
+			__endasm;
+		}
+		/*
 		m[i - SIZE] = t[0];
 		t[0] = t[1];
 		t[1] = t[2];
 		t[2] = 0;
+		*/
+		__asm
+			; calculate i - SIZE
+			mov a, _i
+			subb a, #0x80
+
+			; m[i - SIZE] = t[0]
+			mov dpl, a
+			mov dph, (#_m >> 8)
+			mov a, _t
+			movx @dptr, a
+
+			; t[0] = t[1]
+			mov _t, (_t + 0x0001)
+			mov (_t + 0x0001), (_t + 0x0002)
+			mov (_t + 0x0002), #0x00
+		__endasm;
 	}
 
-	/*v = 0;
-	for (i = 0; i < SIZE; i++) {
-		tmp = m[i] - n[i] - v;
-		v = tmp;
-		u = tmp >> 8;
-
-		result[i] = v;
-	}
-
-	if (u == 0) {
-		for (i = 0; i < SIZE; i++) {
-			m[i] = result[i];
-		}
-	}*/
-	
 	return;
 }
