@@ -31,38 +31,35 @@ void fips() {
 	unsigned short i    = 0;
 	unsigned short j    = 0;
     
-	unsigned char  c    = 0;
-	unsigned char  s    = 0;
+	unsigned char c     = 0;
     
-	unsigned char t0 = 0;
-	unsigned short t1 = 0;
+	unsigned char t0    = 0;
+	unsigned short t1   = 0;
 
- 	unsigned char n0 = n[0];
-	unsigned char b0 = b[0];
+ 	unsigned char n0    = n[0];
+	unsigned char b0    = b[0];
     
 	for (i = 0; i < SIZE; i++) {
 		for (j = 0; j < i; j++) {
  			tmp = t0 + a[j]*b[i-j];
-			s = tmp;
             
 			t1 = t1 + (tmp >> 8);
             
-			tmp = s + m[j]*n[i-j];
+			tmp = (tmp & 0xFF) + m[j]*n[i-j];
         
 			t0 = tmp;
 			t1 = t1 + (tmp >> 8);
 		}
         
 		tmp = t0 + a[i]*b0;
-		s = tmp;
         
 		t1 = t1 + (tmp >> 8);
         
-		c = (s*n_prime);
+		c = (tmp & 0xFF)*n_prime;
 		m[i] = c;
 
-		tmp = s + c*n0;
-		s = tmp;
+		tmp = (tmp & 0xFF) + c*n0;
+		//s = tmp;
 
 		tmp = t1 + (tmp >> 8);
                 t0 = tmp;
@@ -72,11 +69,10 @@ void fips() {
 	for (i = SIZE; i < 2*SIZE; i++) {
 		for (j = i-SIZE+1; j < SIZE; j++) {
 			tmp = t0 + a[j]*b[i-j];
-			s = tmp;
             		
 			t1 = t1 + (tmp >> 8);
             
-			tmp = s + m[j]*n[i-j];
+			tmp = (tmp & 0xFF) + m[j]*n[i-j];
 
 			t0 = tmp;
             
