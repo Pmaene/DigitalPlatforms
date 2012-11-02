@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 2.9.0 #5416 (Aug  6 2010) (UNIX)
-                              4 ; This file was generated Fri Nov  2 17:40:06 2012
+                              4 ; This file was generated Fri Nov  2 17:59:43 2012
                               5 ;--------------------------------------------------------
                               6 	.module main
                               7 	.optsdcc -mmcs51 --model-small
@@ -1841,7 +1841,7 @@
    0B48 90 02 80           1841 	mov	dptr,#(_m + 0x0080)
    0B4B EA                 1842 	mov	a,r2
    0B4C F0                 1843 	movx	@dptr,a
-                           1844 ;	main.c:73: tmp = m[0] - n[0];
+                           1844 ;	main.c:73: tmp = (m[0] - n[0]) & 0xFF;
    0B4D 90 02 00           1845 	mov	dptr,#_m
    0B50 E0                 1846 	movx	a,@dptr
    0B51 FA                 1847 	mov	r2,a
@@ -1853,120 +1853,121 @@
    0B5B EA                 1853 	mov	a,r2
    0B5C C3                 1854 	clr	c
    0B5D 9C                 1855 	subb	a,r4
-   0B5E F5 08              1856 	mov	_main_tmp_1_1,a
-   0B60 EB                 1857 	mov	a,r3
-   0B61 9D                 1858 	subb	a,r5
-   0B62 F5 09              1859 	mov	(_main_tmp_1_1 + 1),a
-                           1860 ;	main.c:75: for (i=0; i < SIZE; i++) {
-   0B64 7A 00              1861 	mov	r2,#0x00
-   0B66 7B 00              1862 	mov	r3,#0x00
-   0B68                    1863 00119$:
-   0B68 C3                 1864 	clr	c
-   0B69 EA                 1865 	mov	a,r2
-   0B6A 94 80              1866 	subb	a,#0x80
-   0B6C EB                 1867 	mov	a,r3
-   0B6D 94 00              1868 	subb	a,#0x00
-   0B6F 50 3C              1869 	jnc	00122$
-                           1870 ;	main.c:76: tmp = m[i] - n[i] - (tmp >> 8);
-   0B71 8A 82              1871 	mov	dpl,r2
-   0B73 74 02              1872 	mov	a,#(_m >> 8)
-   0B75 2B                 1873 	add	a,r3
-   0B76 F5 83              1874 	mov	dph,a
-   0B78 E0                 1875 	movx	a,@dptr
-   0B79 FC                 1876 	mov	r4,a
-   0B7A 7D 00              1877 	mov	r5,#0x00
-   0B7C 8A 82              1878 	mov	dpl,r2
-   0B7E 74 00              1879 	mov	a,#(_n >> 8)
-   0B80 2B                 1880 	add	a,r3
-   0B81 F5 83              1881 	mov	dph,a
-   0B83 E0                 1882 	movx	a,@dptr
-   0B84 F8                 1883 	mov	r0,a
-   0B85 79 00              1884 	mov	r1,#0x00
-   0B87 EC                 1885 	mov	a,r4
-   0B88 C3                 1886 	clr	c
-   0B89 98                 1887 	subb	a,r0
-   0B8A FC                 1888 	mov	r4,a
-   0B8B ED                 1889 	mov	a,r5
-   0B8C 99                 1890 	subb	a,r1
-   0B8D FD                 1891 	mov	r5,a
-   0B8E A8 09              1892 	mov	r0,(_main_tmp_1_1 + 1)
-   0B90 79 00              1893 	mov	r1,#0x00
-   0B92 EC                 1894 	mov	a,r4
-   0B93 C3                 1895 	clr	c
-   0B94 98                 1896 	subb	a,r0
-   0B95 F5 08              1897 	mov	_main_tmp_1_1,a
-   0B97 ED                 1898 	mov	a,r5
-   0B98 99                 1899 	subb	a,r1
-   0B99 F5 09              1900 	mov	(_main_tmp_1_1 + 1),a
-                           1901 ;	main.c:77: u[i] = tmp;
-   0B9B 8A 82              1902 	mov	dpl,r2
-   0B9D 74 02              1903 	mov	a,#(_u >> 8)
-   0B9F 2B                 1904 	add	a,r3
-   0BA0 F5 83              1905 	mov	dph,a
-   0BA2 E5 08              1906 	mov	a,_main_tmp_1_1
-   0BA4 FC                 1907 	mov	r4,a
-   0BA5 F0                 1908 	movx	@dptr,a
-                           1909 ;	main.c:75: for (i=0; i < SIZE; i++) {
-   0BA6 0A                 1910 	inc	r2
-   0BA7 BA 00 BE           1911 	cjne	r2,#0x00,00119$
-   0BAA 0B                 1912 	inc	r3
-   0BAB 80 BB              1913 	sjmp	00119$
-   0BAD                    1914 00122$:
-                           1915 ;	main.c:80: j = m[SIZE] - (tmp >> 8);
-   0BAD 90 02 80           1916 	mov	dptr,#(_m + 0x0080)
-   0BB0 E0                 1917 	movx	a,@dptr
-   0BB1 FA                 1918 	mov	r2,a
-   0BB2 7B 00              1919 	mov	r3,#0x00
-   0BB4 AC 09              1920 	mov	r4,(_main_tmp_1_1 + 1)
-   0BB6 7D 00              1921 	mov	r5,#0x00
-   0BB8 EA                 1922 	mov	a,r2
-   0BB9 C3                 1923 	clr	c
-   0BBA 9C                 1924 	subb	a,r4
-   0BBB EB                 1925 	mov	a,r3
-   0BBC 9D                 1926 	subb	a,r5
-                           1927 ;	main.c:82: if ((j >> 8) == 0) {
-   0BBD FE                 1928 	mov	r6,a
-   0BBE 7F 00              1929 	mov	r7,#0x00
-   0BC0 4F                 1930 	orl	a,r7
-                           1931 ;	main.c:83: for (i = 0; i < SIZE; i++) {
-   0BC1 70 26              1932 	jnz	00102$
-   0BC3 FA                 1933 	mov	r2,a
-   0BC4 FB                 1934 	mov	r3,a
-   0BC5                    1935 00123$:
-   0BC5 C3                 1936 	clr	c
-   0BC6 EA                 1937 	mov	a,r2
-   0BC7 94 80              1938 	subb	a,#0x80
-   0BC9 EB                 1939 	mov	a,r3
-   0BCA 94 00              1940 	subb	a,#0x00
-   0BCC 50 1B              1941 	jnc	00102$
-                           1942 ;	main.c:84: m[i] = u[i];
-   0BCE 8A 04              1943 	mov	ar4,r2
-   0BD0 74 02              1944 	mov	a,#(_m >> 8)
-   0BD2 2B                 1945 	add	a,r3
-   0BD3 FD                 1946 	mov	r5,a
-   0BD4 8A 82              1947 	mov	dpl,r2
-   0BD6 74 02              1948 	mov	a,#(_u >> 8)
-   0BD8 2B                 1949 	add	a,r3
-   0BD9 F5 83              1950 	mov	dph,a
-   0BDB E0                 1951 	movx	a,@dptr
-   0BDC FE                 1952 	mov	r6,a
-   0BDD 8C 82              1953 	mov	dpl,r4
-   0BDF 8D 83              1954 	mov	dph,r5
-   0BE1 F0                 1955 	movx	@dptr,a
-                           1956 ;	main.c:83: for (i = 0; i < SIZE; i++) {
-   0BE2 0A                 1957 	inc	r2
-   0BE3 BA 00 DF           1958 	cjne	r2,#0x00,00123$
-   0BE6 0B                 1959 	inc	r3
-   0BE7 80 DC              1960 	sjmp	00123$
-   0BE9                    1961 00102$:
-                           1962 ;	main.c:88: endBrk = 1;
-   0BE9 90 FF FF           1963 	mov	dptr,#_endBrk
-   0BEC 74 01              1964 	mov	a,#0x01
-   0BEE F0                 1965 	movx	@dptr,a
-                           1966 ;	main.c:89: return 0;
-   0BEF 90 00 00           1967 	mov	dptr,#0x0000
-   0BF2 22                 1968 	ret
-                           1969 	.area CSEG    (CODE)
-                           1970 	.area CONST   (CODE)
-                           1971 	.area XINIT   (CODE)
-                           1972 	.area CABS    (ABS,CODE)
+   0B5E FA                 1856 	mov	r2,a
+   0B5F EB                 1857 	mov	a,r3
+   0B60 9D                 1858 	subb	a,r5
+   0B61 8A 08              1859 	mov	_main_tmp_1_1,r2
+   0B63 75 09 00           1860 	mov	(_main_tmp_1_1 + 1),#0x00
+                           1861 ;	main.c:75: for (i=0; i < SIZE; i++) {
+   0B66 7A 00              1862 	mov	r2,#0x00
+   0B68 7B 00              1863 	mov	r3,#0x00
+   0B6A                    1864 00119$:
+   0B6A C3                 1865 	clr	c
+   0B6B EA                 1866 	mov	a,r2
+   0B6C 94 80              1867 	subb	a,#0x80
+   0B6E EB                 1868 	mov	a,r3
+   0B6F 94 00              1869 	subb	a,#0x00
+   0B71 50 3C              1870 	jnc	00122$
+                           1871 ;	main.c:76: tmp = m[i] - n[i] - (tmp >> 8);
+   0B73 8A 82              1872 	mov	dpl,r2
+   0B75 74 02              1873 	mov	a,#(_m >> 8)
+   0B77 2B                 1874 	add	a,r3
+   0B78 F5 83              1875 	mov	dph,a
+   0B7A E0                 1876 	movx	a,@dptr
+   0B7B FC                 1877 	mov	r4,a
+   0B7C 7D 00              1878 	mov	r5,#0x00
+   0B7E 8A 82              1879 	mov	dpl,r2
+   0B80 74 00              1880 	mov	a,#(_n >> 8)
+   0B82 2B                 1881 	add	a,r3
+   0B83 F5 83              1882 	mov	dph,a
+   0B85 E0                 1883 	movx	a,@dptr
+   0B86 F8                 1884 	mov	r0,a
+   0B87 79 00              1885 	mov	r1,#0x00
+   0B89 EC                 1886 	mov	a,r4
+   0B8A C3                 1887 	clr	c
+   0B8B 98                 1888 	subb	a,r0
+   0B8C FC                 1889 	mov	r4,a
+   0B8D ED                 1890 	mov	a,r5
+   0B8E 99                 1891 	subb	a,r1
+   0B8F FD                 1892 	mov	r5,a
+   0B90 A8 09              1893 	mov	r0,(_main_tmp_1_1 + 1)
+   0B92 79 00              1894 	mov	r1,#0x00
+   0B94 EC                 1895 	mov	a,r4
+   0B95 C3                 1896 	clr	c
+   0B96 98                 1897 	subb	a,r0
+   0B97 F5 08              1898 	mov	_main_tmp_1_1,a
+   0B99 ED                 1899 	mov	a,r5
+   0B9A 99                 1900 	subb	a,r1
+   0B9B F5 09              1901 	mov	(_main_tmp_1_1 + 1),a
+                           1902 ;	main.c:77: u[i] = tmp;
+   0B9D 8A 82              1903 	mov	dpl,r2
+   0B9F 74 02              1904 	mov	a,#(_u >> 8)
+   0BA1 2B                 1905 	add	a,r3
+   0BA2 F5 83              1906 	mov	dph,a
+   0BA4 E5 08              1907 	mov	a,_main_tmp_1_1
+   0BA6 FC                 1908 	mov	r4,a
+   0BA7 F0                 1909 	movx	@dptr,a
+                           1910 ;	main.c:75: for (i=0; i < SIZE; i++) {
+   0BA8 0A                 1911 	inc	r2
+   0BA9 BA 00 BE           1912 	cjne	r2,#0x00,00119$
+   0BAC 0B                 1913 	inc	r3
+   0BAD 80 BB              1914 	sjmp	00119$
+   0BAF                    1915 00122$:
+                           1916 ;	main.c:80: j = m[SIZE] - (tmp >> 8);
+   0BAF 90 02 80           1917 	mov	dptr,#(_m + 0x0080)
+   0BB2 E0                 1918 	movx	a,@dptr
+   0BB3 FA                 1919 	mov	r2,a
+   0BB4 7B 00              1920 	mov	r3,#0x00
+   0BB6 AC 09              1921 	mov	r4,(_main_tmp_1_1 + 1)
+   0BB8 7D 00              1922 	mov	r5,#0x00
+   0BBA EA                 1923 	mov	a,r2
+   0BBB C3                 1924 	clr	c
+   0BBC 9C                 1925 	subb	a,r4
+   0BBD EB                 1926 	mov	a,r3
+   0BBE 9D                 1927 	subb	a,r5
+                           1928 ;	main.c:82: if ((j >> 8) == 0) {
+   0BBF FE                 1929 	mov	r6,a
+   0BC0 7F 00              1930 	mov	r7,#0x00
+   0BC2 4F                 1931 	orl	a,r7
+                           1932 ;	main.c:83: for (i = 0; i < SIZE; i++) {
+   0BC3 70 26              1933 	jnz	00102$
+   0BC5 FA                 1934 	mov	r2,a
+   0BC6 FB                 1935 	mov	r3,a
+   0BC7                    1936 00123$:
+   0BC7 C3                 1937 	clr	c
+   0BC8 EA                 1938 	mov	a,r2
+   0BC9 94 80              1939 	subb	a,#0x80
+   0BCB EB                 1940 	mov	a,r3
+   0BCC 94 00              1941 	subb	a,#0x00
+   0BCE 50 1B              1942 	jnc	00102$
+                           1943 ;	main.c:84: m[i] = u[i];
+   0BD0 8A 04              1944 	mov	ar4,r2
+   0BD2 74 02              1945 	mov	a,#(_m >> 8)
+   0BD4 2B                 1946 	add	a,r3
+   0BD5 FD                 1947 	mov	r5,a
+   0BD6 8A 82              1948 	mov	dpl,r2
+   0BD8 74 02              1949 	mov	a,#(_u >> 8)
+   0BDA 2B                 1950 	add	a,r3
+   0BDB F5 83              1951 	mov	dph,a
+   0BDD E0                 1952 	movx	a,@dptr
+   0BDE FE                 1953 	mov	r6,a
+   0BDF 8C 82              1954 	mov	dpl,r4
+   0BE1 8D 83              1955 	mov	dph,r5
+   0BE3 F0                 1956 	movx	@dptr,a
+                           1957 ;	main.c:83: for (i = 0; i < SIZE; i++) {
+   0BE4 0A                 1958 	inc	r2
+   0BE5 BA 00 DF           1959 	cjne	r2,#0x00,00123$
+   0BE8 0B                 1960 	inc	r3
+   0BE9 80 DC              1961 	sjmp	00123$
+   0BEB                    1962 00102$:
+                           1963 ;	main.c:88: endBrk = 1;
+   0BEB 90 FF FF           1964 	mov	dptr,#_endBrk
+   0BEE 74 01              1965 	mov	a,#0x01
+   0BF0 F0                 1966 	movx	@dptr,a
+                           1967 ;	main.c:89: return 0;
+   0BF1 90 00 00           1968 	mov	dptr,#0x0000
+   0BF4 22                 1969 	ret
+                           1970 	.area CSEG    (CODE)
+                           1971 	.area CONST   (CODE)
+                           1972 	.area XINIT   (CODE)
+                           1973 	.area CABS    (ABS,CODE)

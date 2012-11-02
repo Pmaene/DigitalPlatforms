@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 2.9.0 #5416 (Aug  6 2010) (UNIX)
-; This file was generated Fri Nov  2 17:40:06 2012
+; This file was generated Fri Nov  2 17:59:43 2012
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mmcs51 --model-small
@@ -1841,7 +1841,7 @@ _main:
 	mov	dptr,#(_m + 0x0080)
 	mov	a,r2
 	movx	@dptr,a
-;	main.c:73: tmp = m[0] - n[0];
+;	main.c:73: tmp = (m[0] - n[0]) & 0xFF;
 	mov	dptr,#_m
 	movx	a,@dptr
 	mov	r2,a
@@ -1853,10 +1853,11 @@ _main:
 	mov	a,r2
 	clr	c
 	subb	a,r4
-	mov	_main_tmp_1_1,a
+	mov	r2,a
 	mov	a,r3
 	subb	a,r5
-	mov	(_main_tmp_1_1 + 1),a
+	mov	_main_tmp_1_1,r2
+	mov	(_main_tmp_1_1 + 1),#0x00
 ;	main.c:75: for (i=0; i < SIZE; i++) {
 	mov	r2,#0x00
 	mov	r3,#0x00

@@ -70,7 +70,7 @@ int main() {
     }
 
     m[SIZE] = tmp;
-    tmp = m[0] - n[0];
+    tmp = (m[0] - n[0]) & 0xFF;
 
     for (i=0; i < SIZE; i++) {
         tmp = m[i] - n[i] - (tmp >> 8);
