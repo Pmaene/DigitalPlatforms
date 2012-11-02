@@ -52,7 +52,7 @@ int main() {
         tmp = (tmp & 0xFF) + c*n0;
 
         tmp = t + (tmp >> 8);
-        t = tmp >> 8;
+        t = ((tmp >> 8) & 0xFF);
     }
 
     for (i = SIZE; i < 2*SIZE; i++) {
@@ -66,7 +66,7 @@ int main() {
 
         m[i-SIZE] = (tmp & 0xFF);
         tmp = (t & 0xFF);
-        t = t >> 8;
+        t = ((t >> 8) & 0xFF);
     }
 
     m[SIZE] = tmp;
@@ -77,7 +77,9 @@ int main() {
         u[i] = tmp;
     }
 
-    if ((tmp >> 8) == 0) {
+    j = m[SIZE] - (tmp >> 8);
+    
+    if ((j >> 8) == 0) {
         for (i = 0; i < SIZE; i++) {
             m[i] = u[i];
         }

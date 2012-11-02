@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 2.9.0 #5416 (Aug  6 2010) (UNIX)
-; This file was generated Fri Nov  2 11:42:13 2012
+; This file was generated Fri Nov  2 17:40:06 2012
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mmcs51 --model-small
@@ -230,6 +230,8 @@ _CY	=	0x00d7
 ; overlayable items in internal ram 
 ;--------------------------------------------------------
 	.area	OSEG    (OVR,DATA)
+_main_tmp_1_1::
+	.ds 2
 _main_i_1_1::
 	.ds 2
 _main_j_1_1::
@@ -241,8 +243,10 @@ _main_n0_1_1::
 _main_b0_1_1::
 	.ds 1
 _main_sloc0_1_0::
-	.ds 1
+	.ds 2
 _main_sloc1_1_0::
+	.ds 1
+_main_sloc2_1_0::
 	.ds 1
 ;--------------------------------------------------------
 ; Stack segment in internal ram 
@@ -1495,7 +1499,7 @@ __sdcc_program_startup:
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'main'
 ;------------------------------------------------------------
-;tmp                       Allocated to registers r2 r3 
+;tmp                       Allocated with name '_main_tmp_1_1'
 ;i                         Allocated with name '_main_i_1_1'
 ;j                         Allocated with name '_main_j_1_1'
 ;c                         Allocated to registers r6 
@@ -1505,6 +1509,7 @@ __sdcc_program_startup:
 ;b0                        Allocated with name '_main_b0_1_1'
 ;sloc0                     Allocated with name '_main_sloc0_1_0'
 ;sloc1                     Allocated with name '_main_sloc1_1_0'
+;sloc2                     Allocated with name '_main_sloc2_1_0'
 ;------------------------------------------------------------
 ;	main.c:20: int main() {
 ;	-----------------------------------------
@@ -1522,8 +1527,8 @@ _main:
 ;	main.c:21: unsigned short tmp  = 0;
 ;	main.c:27: unsigned short t    = 0;
 	clr	a
-	mov	r2,a
-	mov	r3,a
+	mov	_main_tmp_1_1,a
+	mov	(_main_tmp_1_1 + 1),a
 	mov	_main_t_1_1,a
 	mov	(_main_t_1_1 + 1),a
 ;	main.c:31: unsigned char n0    = n[0];
@@ -1563,7 +1568,7 @@ _main:
 	subb	a,(_main_i_1_1 + 1)
 	jnc	00106$
 ;	main.c:38: tmp = (tmp & 0xFF) + a[j]*b[i-j];
-	mov	ar0,r2
+	mov	r0,_main_tmp_1_1
 	mov	r1,#0x00
 	mov	a,_main_j_1_1
 	add	a,#_a
@@ -1585,18 +1590,21 @@ _main:
 	mov	b,r6
 	mul	ab
 	add	a,r0
-	mov	r2,a
+	mov	_main_tmp_1_1,a
 	mov	a,r1
 	addc	a,b
+	mov	(_main_tmp_1_1 + 1),a
 ;	main.c:39: t = t + (tmp >> 8);
+	mov	r4,(_main_tmp_1_1 + 1)
 	mov	r5,#0x00
+	mov	a,r4
 	add	a,_main_t_1_1
 	mov	_main_t_1_1,a
 	mov	a,r5
 	addc	a,(_main_t_1_1 + 1)
 	mov	(_main_t_1_1 + 1),a
 ;	main.c:41: tmp = (tmp & 0xFF) + m[j]*n[i-j];
-	mov	ar4,r2
+	mov	r4,_main_tmp_1_1
 	mov	r5,#0x00
 	mov	dpl,_main_j_1_1
 	mov	a,#(_m >> 8)
@@ -1611,13 +1619,14 @@ _main:
 	mov	b,r6
 	mul	ab
 	add	a,r4
-	mov	r2,a
+	mov	_main_tmp_1_1,a
 	mov	a,r5
 	addc	a,b
+	mov	(_main_tmp_1_1 + 1),a
 ;	main.c:42: t = t + (tmp >> 8);
-	mov	r3,a
-	mov	r4,a
+	mov	r4,(_main_tmp_1_1 + 1)
 	mov	r5,#0x00
+	mov	a,r4
 	add	a,_main_t_1_1
 	mov	_main_t_1_1,a
 	mov	a,r5
@@ -1631,7 +1640,7 @@ _main:
 	sjmp	00103$
 00106$:
 ;	main.c:45: tmp = (tmp & 0xFF)  + a[i]*b0;
-	mov	ar4,r2
+	mov	r4,_main_tmp_1_1
 	mov	r5,#0x00
 	mov	a,_main_i_1_1
 	add	a,#_a
@@ -1645,18 +1654,21 @@ _main:
 	mov	a,_main_b0_1_1
 	mul	ab
 	add	a,r4
-	mov	r2,a
+	mov	_main_tmp_1_1,a
 	mov	a,r5
 	addc	a,b
+	mov	(_main_tmp_1_1 + 1),a
 ;	main.c:47: t = t + (tmp >> 8);
+	mov	r4,(_main_tmp_1_1 + 1)
 	mov	r5,#0x00
+	mov	a,r4
 	add	a,_main_t_1_1
 	mov	_main_t_1_1,a
 	mov	a,r5
 	addc	a,(_main_t_1_1 + 1)
 	mov	(_main_t_1_1 + 1),a
 ;	main.c:49: c = (tmp & 0xFF)*n_prime;
-	mov	ar4,r2
+	mov	r4,_main_tmp_1_1
 	mov	r5,#0x00
 	mov	ar6,r4
 	mov	a,r6
@@ -1675,18 +1687,22 @@ _main:
 	mov	a,_main_n0_1_1
 	mul	ab
 	add	a,r4
+	mov	_main_tmp_1_1,a
 	mov	a,r5
 	addc	a,b
+	mov	(_main_tmp_1_1 + 1),a
 ;	main.c:54: tmp = t + (tmp >> 8);
-	mov	r4,a
+	mov	r4,(_main_tmp_1_1 + 1)
 	mov	r5,#0x00
+	mov	a,r4
 	add	a,_main_t_1_1
-	mov	r2,a
+	mov	_main_tmp_1_1,a
 	mov	a,r5
 	addc	a,(_main_t_1_1 + 1)
-	mov	r3,a
-;	main.c:55: t = tmp >> 8;
-	mov	_main_t_1_1,r3
+	mov	(_main_tmp_1_1 + 1),a
+;	main.c:55: t = ((tmp >> 8) & 0xFF);
+	mov	r4,(_main_tmp_1_1 + 1)
+	mov	_main_t_1_1,r4
 	mov	(_main_t_1_1 + 1),#0x00
 ;	main.c:36: for (i = 0; i < SIZE; i++) {
 	inc	_main_i_1_1
@@ -1713,95 +1729,104 @@ _main:
 	mov	a,#0xFF
 	addc	a,(_main_i_1_1 + 1)
 	mov	r7,a
+	mov	ar0,r6
+	mov	ar1,r7
 00111$:
 	clr	c
-	mov	a,r6
+	mov	a,r0
 	subb	a,#0x80
-	mov	a,r7
+	mov	a,r1
 	subb	a,#0x00
 	jnc	00114$
 ;	main.c:60: tmp = (tmp & 0xFF)  + a[j]*b[i-j];
-	mov	ar0,r2
-	mov	r1,#0x00
-	mov	a,r6
+	mov	_main_sloc0_1_0,_main_tmp_1_1
+	mov	(_main_sloc0_1_0 + 1),#0x00
+	mov	a,r0
 	add	a,#_a
 	mov	dpl,a
-	mov	a,r7
+	mov	a,r1
 	addc	a,#(_a >> 8)
 	mov	dph,a
 	movx	a,@dptr
-	mov	_main_sloc1_1_0,a
-	mov	_main_sloc0_1_0,_main_i_1_1
-	mov	ar5,r6
-	mov	a,_main_sloc0_1_0
+	mov	_main_sloc2_1_0,a
+	mov	_main_sloc1_1_0,_main_i_1_1
+	mov	ar5,r0
+	mov	a,_main_sloc1_1_0
 	clr	c
 	subb	a,r5
 	mov	r5,a
 	mov	dpl,a
 	mov	dph,#(_b >> 8)
 	movx	a,@dptr
-	mov	b,_main_sloc1_1_0
+	mov	b,_main_sloc2_1_0
 	mul	ab
-	add	a,r0
-	mov	r2,a
-	mov	a,r1
+	add	a,_main_sloc0_1_0
+	mov	_main_tmp_1_1,a
+	mov	a,(_main_sloc0_1_0 + 1)
 	addc	a,b
+	mov	(_main_tmp_1_1 + 1),a
 ;	main.c:61: t = t + (tmp >> 8);
-	mov	r0,#0x00
+	mov	r4,(_main_tmp_1_1 + 1)
+	mov	r2,#0x00
+	mov	a,r4
 	add	a,_main_t_1_1
 	mov	_main_t_1_1,a
-	mov	a,r0
+	mov	a,r2
 	addc	a,(_main_t_1_1 + 1)
 	mov	(_main_t_1_1 + 1),a
 ;	main.c:63: tmp = (tmp & 0xFF) + m[j]*n[i-j];
-	mov	ar4,r2
-	mov	r0,#0x00
-	mov	dpl,r6
+	mov	r2,_main_tmp_1_1
+	mov	r3,#0x00
+	mov	dpl,r0
 	mov	a,#(_m >> 8)
-	add	a,r7
+	add	a,r1
 	mov	dph,a
 	movx	a,@dptr
-	mov	r1,a
+	mov	r4,a
 	mov	dpl,r5
 	mov	dph,#(_n >> 8)
 	movx	a,@dptr
-	mov	b,r1
+	mov	r5,a
+	mov	b,r4
 	mul	ab
-	add	a,r4
-	mov	r2,a
-	mov	a,r0
+	add	a,r2
+	mov	_main_tmp_1_1,a
+	mov	a,r3
 	addc	a,b
+	mov	(_main_tmp_1_1 + 1),a
 ;	main.c:64: t = t + (tmp >> 8);
-	mov	r3,a
-	mov	r4,a
-	mov	r5,#0x00
+	mov	r2,(_main_tmp_1_1 + 1)
+	mov	r3,#0x00
+	mov	a,r2
 	add	a,_main_t_1_1
 	mov	_main_t_1_1,a
-	mov	a,r5
+	mov	a,r3
 	addc	a,(_main_t_1_1 + 1)
 	mov	(_main_t_1_1 + 1),a
 ;	main.c:59: for (j = i-SIZE+1; j < SIZE; j++) {
-	inc	r6
-	cjne	r6,#0x00,00111$
-	inc	r7
+	inc	r0
+	cjne	r0,#0x00,00111$
+	inc	r1
 	sjmp	00111$
 00114$:
 ;	main.c:67: m[i-SIZE] = (tmp & 0xFF);
 	mov	a,_main_i_1_1
+	mov	r4,a
 	add	a,#0x80+_m
 	mov	dpl,a
 	clr	a
 	addc	a,#(_m >> 8)
 	mov	dph,a
-	mov	ar4,r2
-	mov	r5,#0x00
-	mov	a,r4
+	mov	r2,_main_tmp_1_1
+	mov	r3,#0x00
+	mov	a,r2
 	movx	@dptr,a
 ;	main.c:68: tmp = (t & 0xFF);
-	mov	r2,_main_t_1_1
-	mov	r3,#0x00
-;	main.c:69: t = t >> 8;
-	mov	_main_t_1_1,(_main_t_1_1 + 1)
+	mov	_main_tmp_1_1,_main_t_1_1
+	mov	(_main_tmp_1_1 + 1),#0x00
+;	main.c:69: t = ((t >> 8) & 0xFF);
+	mov	r2,(_main_t_1_1 + 1)
+	mov	_main_t_1_1,r2
 	mov	(_main_t_1_1 + 1),#0x00
 ;	main.c:58: for (i = SIZE; i < 2*SIZE; i++) {
 	inc	_main_i_1_1
@@ -1812,87 +1837,98 @@ _main:
 	ljmp	00115$
 00118$:
 ;	main.c:72: m[SIZE] = tmp;
-	mov	ar4,r2
+	mov	r2,_main_tmp_1_1
 	mov	dptr,#(_m + 0x0080)
-	mov	a,r4
+	mov	a,r2
 	movx	@dptr,a
 ;	main.c:73: tmp = m[0] - n[0];
 	mov	dptr,#_m
 	movx	a,@dptr
-	mov	r4,a
-	mov	r5,#0x00
+	mov	r2,a
+	mov	r3,#0x00
 	mov	dptr,#_n
 	movx	a,@dptr
-	mov	r6,a
-	mov	r7,#0x00
-	mov	a,r4
-	clr	c
-	subb	a,r6
-	mov	r2,a
-	mov	a,r5
-	subb	a,r7
-	mov	r3,a
-;	main.c:75: for (i=0; i < SIZE; i++) {
-	mov	r4,#0x00
+	mov	r4,a
 	mov	r5,#0x00
+	mov	a,r2
+	clr	c
+	subb	a,r4
+	mov	_main_tmp_1_1,a
+	mov	a,r3
+	subb	a,r5
+	mov	(_main_tmp_1_1 + 1),a
+;	main.c:75: for (i=0; i < SIZE; i++) {
+	mov	r2,#0x00
+	mov	r3,#0x00
 00119$:
 	clr	c
-	mov	a,r4
+	mov	a,r2
 	subb	a,#0x80
-	mov	a,r5
+	mov	a,r3
 	subb	a,#0x00
 	jnc	00122$
 ;	main.c:76: tmp = m[i] - n[i] - (tmp >> 8);
-	mov	dpl,r4
+	mov	dpl,r2
 	mov	a,#(_m >> 8)
-	add	a,r5
+	add	a,r3
 	mov	dph,a
 	movx	a,@dptr
-	mov	r6,a
-	mov	r7,#0x00
-	mov	dpl,r4
+	mov	r4,a
+	mov	r5,#0x00
+	mov	dpl,r2
 	mov	a,#(_n >> 8)
-	add	a,r5
+	add	a,r3
 	mov	dph,a
 	movx	a,@dptr
 	mov	r0,a
 	mov	r1,#0x00
-	mov	a,r6
+	mov	a,r4
 	clr	c
 	subb	a,r0
-	mov	r6,a
-	mov	a,r7
+	mov	r4,a
+	mov	a,r5
 	subb	a,r1
-	mov	r7,a
-	mov	ar0,r3
+	mov	r5,a
+	mov	r0,(_main_tmp_1_1 + 1)
 	mov	r1,#0x00
-	mov	a,r6
+	mov	a,r4
 	clr	c
 	subb	a,r0
-	mov	r2,a
-	mov	a,r7
+	mov	_main_tmp_1_1,a
+	mov	a,r5
 	subb	a,r1
-	mov	r3,a
+	mov	(_main_tmp_1_1 + 1),a
 ;	main.c:77: u[i] = tmp;
-	mov	dpl,r4
+	mov	dpl,r2
 	mov	a,#(_u >> 8)
-	add	a,r5
+	add	a,r3
 	mov	dph,a
-	mov	ar6,r2
-	mov	a,r6
+	mov	a,_main_tmp_1_1
+	mov	r4,a
 	movx	@dptr,a
 ;	main.c:75: for (i=0; i < SIZE; i++) {
-	inc	r4
-	cjne	r4,#0x00,00119$
-	inc	r5
+	inc	r2
+	cjne	r2,#0x00,00119$
+	inc	r3
 	sjmp	00119$
 00122$:
-;	main.c:80: if ((tmp >> 8) == 0) {
-	mov	ar2,r3
+;	main.c:80: j = m[SIZE] - (tmp >> 8);
+	mov	dptr,#(_m + 0x0080)
+	movx	a,@dptr
+	mov	r2,a
 	mov	r3,#0x00
+	mov	r4,(_main_tmp_1_1 + 1)
+	mov	r5,#0x00
 	mov	a,r2
-	orl	a,r3
-;	main.c:81: for (i = 0; i < SIZE; i++) {
+	clr	c
+	subb	a,r4
+	mov	a,r3
+	subb	a,r5
+;	main.c:82: if ((j >> 8) == 0) {
+	mov	r6,a
+	mov	r7,#0x00
+	orl	a,r7
+;	main.c:83: for (i = 0; i < SIZE; i++) {
 	jnz	00102$
 	mov	r2,a
 	mov	r3,a
@@ -1903,7 +1939,7 @@ _main:
 	mov	a,r3
 	subb	a,#0x00
 	jnc	00102$
-;	main.c:82: m[i] = u[i];
+;	main.c:84: m[i] = u[i];
 	mov	ar4,r2
 	mov	a,#(_m >> 8)
 	add	a,r3
@@ -1917,17 +1953,17 @@ _main:
 	mov	dpl,r4
 	mov	dph,r5
 	movx	@dptr,a
-;	main.c:81: for (i = 0; i < SIZE; i++) {
+;	main.c:83: for (i = 0; i < SIZE; i++) {
 	inc	r2
 	cjne	r2,#0x00,00123$
 	inc	r3
 	sjmp	00123$
 00102$:
-;	main.c:86: endBrk = 1;
+;	main.c:88: endBrk = 1;
 	mov	dptr,#_endBrk
 	mov	a,#0x01
 	movx	@dptr,a
-;	main.c:87: return 0;
+;	main.c:89: return 0;
 	mov	dptr,#0x0000
 	ret
 	.area CSEG    (CODE)
