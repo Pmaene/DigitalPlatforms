@@ -35,12 +35,96 @@ int main() {
 
     for (i = 0; i < SIZE; i++) {
         for (j = 0; j < i; j++) {
-            tmp = (tmp & 0xFF) + a[j]*b[i-j];
+            /*tmp = (tmp & 0xFF) + a[j]*b[i-j];
             t = t + (tmp >> 8);
 
             tmp = (tmp & 0xFF) + m[j]*n[i-j];
-            t = t + (tmp >> 8);
-        }
+            t = t + (tmp >> 8);*/
+            __asm
+            
+            	; load j in lower
+		mov dpl, _j
+
+		; set address of a in higher
+		mov dph, #(_a >> 8)
+		; load a[j]
+		movx a, @dptr
+		mov b, a
+
+		; load m[j] in r0
+		mov dph, #(_m >> 8)
+		movx a, @dptr
+		mov r0, a
+
+		; calculate i-j and store in r1
+		mov a, _i
+		clr c
+		subb a, _j
+		mov r1, a
+
+		; load b[i-j]
+		add a, #_b
+		mov dpl, a
+		clr a
+		add a, #(_b >> 8)
+		mov dph, a
+		movx a, @dptr
+
+		; a[j]*b[i-j]
+		mul ab
+
+		; tmp = (tmp & 0xFF) + a[j]*b[i-j]
+		addc a, (_tmp & 0xFF)
+		add b,c
+
+		; store lower part and higher part of tmp
+		mov (_tmp & 0xFF), (a & 0xFF)
+		mov (_tmp >> 8), b
+
+		;t + (tmp >> 8)
+		addc b, (_t & 0xFF)
+		mov (_t & 0xFF), b
+		
+		; load upper part of t and add carry of t1
+		mov a, (_t >> 8)
+		add a,c
+		mov (_t >> 8), a
+
+		;tmp = (tmp & 0xFF) + m[j]*n[i-j]
+		; load n[i-j]
+		mov a,r1
+		add a, #_n
+		mov dpl, a
+		clr a
+		add a, #(_n >> 8)
+		mov dph, a
+		movx a, @dptr
+
+		;load m[j]
+		mov b,r0
+
+		; m[j]*n[i-j]
+		mul ab
+
+		; tmp = (tmp & 0xFF) + m[j]*n[i-j]
+		addc a, (_tmp & 0xFF)
+		add b,c
+
+		; store lower part and higher part of tmp
+		mov (_tmp & 0xFF), (a & 0xFF)
+		mov (_tmp >> 8), b
+
+		;t + (tmp >> 8)
+		addc b, (_t & 0xFF)
+		mov (_t & 0xFF), b
+		
+		; load upper part of t and add carry of t1
+		mov a, (_t >> 8)
+		add a,c
+		mov (_t >> 8), a
+
+            __endasm;
+            }
 
         tmp = (tmp & 0xFF)  + a[i]*b0;
 
