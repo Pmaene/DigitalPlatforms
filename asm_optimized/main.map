@@ -51,9 +51,9 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:000A    l_GSINIT2
   0C:000B    s_GSINIT1
   0C:000B    s_GSINIT2
+  0C:000F    s_RSEG
+  0C:000F    s_SSEG
   0C:0010    s_REG_BANK_2
-  0C:0014    s_RSEG
-  0C:0014    s_SSEG
   0C:0015    s_GSINIT3
   0C:0018    s_BIT_BANK
   0C:0018    s_OSEG
@@ -68,14 +68,14 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:0080    l_XABS0
   0C:0080    l_XABS1
   0C:0080    l_XABS2
-  0C:00EC    l_SSEG
+  0C:00F1    l_SSEG
   0C:0100    l_IRAM
-  0C:0257    l_CSEG
-  0C:0915    l_GSINIT
-  0C:0976    s_GSFINAL
-  0C:0979    s_CSEG
-  0C:0BD0    s_CONST
-  0C:0BD0    s_XINIT
+  0C:078A    l_CSEG
+  0C:090E    l_GSINIT
+  0C:096F    s_GSFINAL
+  0C:0972    s_CSEG
+  0C:10FC    s_CONST
+  0C:10FC    s_XINIT
 
 Hexadecimal
 
@@ -85,7 +85,7 @@ XABS2                              0000   0080 =    128. bytes (ABS,CON,XDATA)
 
       Value  Global
    --------  --------------------------------
-  0D:0200    _b
+  0D:0000    _n
 
 Hexadecimal
 
@@ -95,7 +95,7 @@ XABS1                              0000   0080 =    128. bytes (ABS,CON,XDATA)
 
       Value  Global
    --------  --------------------------------
-  0D:0100    _a
+  0D:0200    _b
 
 Hexadecimal
 
@@ -105,7 +105,7 @@ XABS0                              0000   0080 =    128. bytes (ABS,CON,XDATA)
 
       Value  Global
    --------  --------------------------------
-  0D:0000    _n
+  0D:0100    _a
 
 
 
@@ -214,8 +214,8 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      00D7    _CY
      00E0    _ACC
      00F0    _B
-     0300    _m
-     0400    _u
+     0400    _m
+     0500    _u
      FFFE    _startBrk
      FFFF    _endBrk
 
@@ -237,12 +237,9 @@ DSEG                               0000   0080 =    128. bytes (REL,CON)
    --------  --------------------------------
      0008    _tmp
      000A    _i
-     000C    _j
-     000E    _c
-     000F    _t
-     0011    _stack
-     0012    _n0
-     0013    _b0
+     000B    _j
+     000C    _t
+     000E    _stack
 
 
 
@@ -250,11 +247,11 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-SSEG                               0014   00EC =    236. bytes (REL,OVR)
+SSEG                               000F   00F1 =    241. bytes (REL,OVR)
 
       Value  Global
    --------  --------------------------------
-     0014    __start__stack
+     000F    __start__stack
 
 
 
@@ -310,12 +307,13 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CSEG                               0979   0257 =    599. bytes (REL,CON,CODE)
+CSEG                               0972   078A =   1930. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:0979    _main
-  0C:0BCC    __sdcc_external_startup
+  0C:0972    _main
+  0C:0985    _fips
+  0C:10F8    __sdcc_external_startup
 
 
 ASxxxx Linker V01.75 + NoICE + SDCC Feb 1999,  page 1.

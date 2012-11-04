@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 2.9.0 #5416 (Aug  6 2010) (UNIX)
-; This file was generated Sun Nov  4 13:39:55 2012
+; This file was generated Sun Nov  4 14:45:40 2012
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mmcs51 --model-small
@@ -106,21 +106,19 @@
 	.globl _DPL
 	.globl _SP
 	.globl _P0
+	.globl _n
 	.globl _b
 	.globl _a
-	.globl _n
 	.globl _u
 	.globl _m
 	.globl _endBrk
 	.globl _startBrk
-	.globl _b0
-	.globl _n0
 	.globl _stack
 	.globl _t
-	.globl _c
 	.globl _j
 	.globl _i
 	.globl _tmp
+	.globl _fips
 ;--------------------------------------------------------
 ; special function registers
 ;--------------------------------------------------------
@@ -237,18 +235,12 @@ _CY	=	0x00d7
 _tmp::
 	.ds 2
 _i::
-	.ds 2
+	.ds 1
 _j::
-	.ds 2
-_c::
 	.ds 1
 _t::
 	.ds 2
 _stack::
-	.ds 1
-_n0::
-	.ds 1
-_b0::
 	.ds 1
 ;--------------------------------------------------------
 ; overlayable items in internal ram 
@@ -284,20 +276,20 @@ __start__stack:
 	.area XSEG    (XDATA)
 _startBrk	=	0xfffe
 _endBrk	=	0xffff
-_m	=	0x0300
-_u	=	0x0400
+_m	=	0x0400
+_u	=	0x0500
 ;--------------------------------------------------------
 ; absolute external ram data
 ;--------------------------------------------------------
 	.area XABS    (ABS,XDATA)
-	.org 0x0000
-_n::
-	.ds 128
 	.org 0x0100
 _a::
 	.ds 128
 	.org 0x0200
 _b::
+	.ds 128
+	.org 0x0000
+_n::
 	.ds 128
 ;--------------------------------------------------------
 ; external initialized ram data
@@ -332,410 +324,19 @@ __interrupt_vect:
 	.globl __mcs51_genXINIT
 	.globl __mcs51_genXRAMCLEAR
 	.globl __mcs51_genRAMCLEAR
-;	main.c:18: unsigned short tmp  = 0;
+;	main.c:26: unsigned short tmp   = 0;
 	clr	a
 	mov	_tmp,a
 	mov	(_tmp + 1),a
-;	main.c:19: unsigned short i    = 0;
-	clr	a
-	mov	_i,a
-	mov	(_i + 1),a
-;	main.c:20: unsigned short j    = 0;
-	clr	a
-	mov	_j,a
-	mov	(_j + 1),a
-;	main.c:22: unsigned char  c    = 0;
-	mov	_c,#0x00
-;	main.c:23: unsigned short t    = 0;
+;	main.c:27: unsigned char i      = 0;
+	mov	_i,#0x00
+;	main.c:28: unsigned char j      = 0;
+	mov	_j,#0x00
+;	main.c:30: unsigned short t     = 0;
 	clr	a
 	mov	_t,a
 	mov	(_t + 1),a
-;	main.c:11: __xdata __at (0x0000) unsigned char n[SIZE] = {0xD3,0x55,0xA4,0x5F,0x57,0xF3,0xF9,0x3E,0xCF,0x84,0x6D,0xFF,0x20,0xC1,0xAE,0x12,0xCF,0xF1,0x00,0x66,0x45,0xE2,0x34,0x61,0x27,0xF2,0x57,0xB3,0x42,0x21,0x80,0x95,0xAB,0x15,0xA2,0x1D,0x53,0xB2,0x27,0xE6,0x56,0x93,0x27,0xAF,0xC2,0xEE,0x2B,0x2F,0x9A,0xAE,0x6A,0x09,0xE5,0x7F,0xAE,0x7D,0x2B,0xDD,0x58,0x2F,0x87,0x70,0x05,0x1F,0xF8,0xBD,0x0B,0xE0,0xFD,0xF1,0x81,0x60,0xBF,0xD2,0xFE,0x8F,0x7B,0xB9,0xA9,0xA4,0x6A,0x0A,0xA3,0xA3,0x70,0x22,0xBF,0x4C,0x1B,0xB0,0x41,0x24,0x4C,0x3A,0x08,0xEC,0xF4,0x91,0xFF,0x93,0x8D,0xFC,0xFA,0x4C,0x26,0x2D,0xD2,0xE9,0xFC,0x76,0xB1,0x67,0x5E,0x24,0x9E,0x31,0x66,0x5D,0x98,0x4C,0x0D,0x79,0x81,0x76,0xAC,0x1D,0xE2,0xCA};
-	mov	dptr,#_n
-	mov	a,#0xD3
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0001)
-	mov	a,#0x55
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0002)
-	mov	a,#0xA4
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0003)
-	mov	a,#0x5F
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0004)
-	mov	a,#0x57
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0005)
-	mov	a,#0xF3
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0006)
-	mov	a,#0xF9
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0007)
-	mov	a,#0x3E
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0008)
-	mov	a,#0xCF
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0009)
-	mov	a,#0x84
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x000a)
-	mov	a,#0x6D
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x000b)
-	mov	a,#0xFF
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x000c)
-	mov	a,#0x20
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x000d)
-	mov	a,#0xC1
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x000e)
-	mov	a,#0xAE
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x000f)
-	mov	a,#0x12
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0010)
-	mov	a,#0xCF
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0011)
-	mov	a,#0xF1
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0012)
-	clr	a
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0013)
-	mov	a,#0x66
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0014)
-	mov	a,#0x45
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0015)
-	mov	a,#0xE2
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0016)
-	mov	a,#0x34
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0017)
-	mov	a,#0x61
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0018)
-	mov	a,#0x27
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0019)
-	mov	a,#0xF2
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x001a)
-	mov	a,#0x57
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x001b)
-	mov	a,#0xB3
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x001c)
-	mov	a,#0x42
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x001d)
-	mov	a,#0x21
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x001e)
-	mov	a,#0x80
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x001f)
-	mov	a,#0x95
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0020)
-	mov	a,#0xAB
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0021)
-	mov	a,#0x15
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0022)
-	mov	a,#0xA2
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0023)
-	mov	a,#0x1D
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0024)
-	mov	a,#0x53
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0025)
-	mov	a,#0xB2
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0026)
-	mov	a,#0x27
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0027)
-	mov	a,#0xE6
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0028)
-	mov	a,#0x56
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0029)
-	mov	a,#0x93
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x002a)
-	mov	a,#0x27
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x002b)
-	mov	a,#0xAF
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x002c)
-	mov	a,#0xC2
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x002d)
-	mov	a,#0xEE
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x002e)
-	mov	a,#0x2B
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x002f)
-	mov	a,#0x2F
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0030)
-	mov	a,#0x9A
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0031)
-	mov	a,#0xAE
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0032)
-	mov	a,#0x6A
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0033)
-	mov	a,#0x09
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0034)
-	mov	a,#0xE5
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0035)
-	mov	a,#0x7F
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0036)
-	mov	a,#0xAE
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0037)
-	mov	a,#0x7D
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0038)
-	mov	a,#0x2B
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0039)
-	mov	a,#0xDD
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x003a)
-	mov	a,#0x58
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x003b)
-	mov	a,#0x2F
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x003c)
-	mov	a,#0x87
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x003d)
-	mov	a,#0x70
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x003e)
-	mov	a,#0x05
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x003f)
-	mov	a,#0x1F
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0040)
-	mov	a,#0xF8
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0041)
-	mov	a,#0xBD
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0042)
-	mov	a,#0x0B
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0043)
-	mov	a,#0xE0
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0044)
-	mov	a,#0xFD
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0045)
-	mov	a,#0xF1
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0046)
-	mov	a,#0x81
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0047)
-	mov	a,#0x60
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0048)
-	mov	a,#0xBF
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0049)
-	mov	a,#0xD2
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x004a)
-	mov	a,#0xFE
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x004b)
-	mov	a,#0x8F
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x004c)
-	mov	a,#0x7B
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x004d)
-	mov	a,#0xB9
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x004e)
-	mov	a,#0xA9
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x004f)
-	mov	a,#0xA4
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0050)
-	mov	a,#0x6A
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0051)
-	mov	a,#0x0A
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0052)
-	mov	a,#0xA3
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0053)
-	mov	a,#0xA3
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0054)
-	mov	a,#0x70
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0055)
-	mov	a,#0x22
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0056)
-	mov	a,#0xBF
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0057)
-	mov	a,#0x4C
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0058)
-	mov	a,#0x1B
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0059)
-	mov	a,#0xB0
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x005a)
-	mov	a,#0x41
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x005b)
-	mov	a,#0x24
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x005c)
-	mov	a,#0x4C
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x005d)
-	mov	a,#0x3A
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x005e)
-	mov	a,#0x08
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x005f)
-	mov	a,#0xEC
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0060)
-	mov	a,#0xF4
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0061)
-	mov	a,#0x91
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0062)
-	mov	a,#0xFF
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0063)
-	mov	a,#0x93
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0064)
-	mov	a,#0x8D
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0065)
-	mov	a,#0xFC
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0066)
-	mov	a,#0xFA
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0067)
-	mov	a,#0x4C
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0068)
-	mov	a,#0x26
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0069)
-	mov	a,#0x2D
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x006a)
-	mov	a,#0xD2
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x006b)
-	mov	a,#0xE9
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x006c)
-	mov	a,#0xFC
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x006d)
-	mov	a,#0x76
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x006e)
-	mov	a,#0xB1
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x006f)
-	mov	a,#0x67
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0070)
-	mov	a,#0x5E
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0071)
-	mov	a,#0x24
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0072)
-	mov	a,#0x9E
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0073)
-	mov	a,#0x31
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0074)
-	mov	a,#0x66
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0075)
-	mov	a,#0x5D
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0076)
-	mov	a,#0x98
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0077)
-	mov	a,#0x4C
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0078)
-	mov	a,#0x0D
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x0079)
-	mov	a,#0x79
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x007a)
-	mov	a,#0x81
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x007b)
-	mov	a,#0x76
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x007c)
-	mov	a,#0xAC
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x007d)
-	mov	a,#0x1D
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x007e)
-	mov	a,#0xE2
-	movx	@dptr,a
-	mov	dptr,#(_n + 0x007f)
-	mov	a,#0xCA
-	movx	@dptr,a
-;	main.c:12: __xdata __at (0x0100) unsigned char a[SIZE] = {0xFF,0x7F,0x14,0x64,0x47,0x68,0xC2,0xB6,0x27,0x32,0x63,0x2C,0xB0,0xC3,0x95,0x13,0xC5,0x7E,0x17,0x22,0xF3,0x7C,0x2D,0xE8,0x13,0x47,0x5E,0x15,0x4E,0xEF,0x83,0x81,0xDF,0xC3,0x47,0xD3,0x60,0xBB,0x8B,0x3E,0xB6,0x35,0xB1,0x6E,0xD1,0xD5,0xDA,0x6F,0x28,0x16,0x2C,0x74,0x36,0xF9,0x04,0x79,0xF9,0x76,0xE2,0xCC,0xA4,0x82,0xA7,0xA4,0x68,0x4E,0x24,0xA6,0xC1,0x58,0x68,0x24,0x58,0xDC,0x14,0xF9,0xFF,0x4D,0xA1,0xEF,0x53,0xA3,0xC2,0x84,0x1B,0x81,0x16,0x6C,0xDD,0xE3,0xDB,0xA8,0x03,0x8F,0xF2,0x31,0xFD,0x94,0x5D,0x26,0x13,0xC6,0x68,0xB4,0x0D,0xCD,0xF1,0xB8,0x66,0x0D,0x5D,0x3B,0x2F,0xC4,0x4A,0xD1,0x0B,0x36,0xC6,0x10,0x1A,0x2F,0x72,0xD1,0xBB,0x15,0x29,0xCA};
+;	main.c:19: __xdata __at (0x0100) unsigned char a[SIZE] = {0xFF,0x7F,0x14,0x64,0x47,0x68,0xC2,0xB6,0x27,0x32,0x63,0x2C,0xB0,0xC3,0x95,0x13,0xC5,0x7E,0x17,0x22,0xF3,0x7C,0x2D,0xE8,0x13,0x47,0x5E,0x15,0x4E,0xEF,0x83,0x81,0xDF,0xC3,0x47,0xD3,0x60,0xBB,0x8B,0x3E,0xB6,0x35,0xB1,0x6E,0xD1,0xD5,0xDA,0x6F,0x28,0x16,0x2C,0x74,0x36,0xF9,0x04,0x79,0xF9,0x76,0xE2,0xCC,0xA4,0x82,0xA7,0xA4,0x68,0x4E,0x24,0xA6,0xC1,0x58,0x68,0x24,0x58,0xDC,0x14,0xF9,0xFF,0x4D,0xA1,0xEF,0x53,0xA3,0xC2,0x84,0x1B,0x81,0x16,0x6C,0xDD,0xE3,0xDB,0xA8,0x03,0x8F,0xF2,0x31,0xFD,0x94,0x5D,0x26,0x13,0xC6,0x68,0xB4,0x0D,0xCD,0xF1,0xB8,0x66,0x0D,0x5D,0x3B,0x2F,0xC4,0x4A,0xD1,0x0B,0x36,0xC6,0x10,0x1A,0x2F,0x72,0xD1,0xBB,0x15,0x29,0xCA};
 	mov	dptr,#_a
 	mov	a,#0xFF
 	movx	@dptr,a
@@ -1120,7 +721,7 @@ __interrupt_vect:
 	mov	dptr,#(_a + 0x007f)
 	mov	a,#0xCA
 	movx	@dptr,a
-;	main.c:13: __xdata __at (0x0200) unsigned char b[SIZE] = {0xE1,0x8A,0x03,0xDB,0xE0,0xD9,0xF6,0x55,0xB6,0x27,0x0A,0x28,0xF0,0x5E,0x74,0x7F,0xE6,0x9F,0x4C,0xFB,0x26,0x8C,0x9E,0x87,0x83,0x22,0xF2,0x75,0xD2,0xB3,0x61,0xA2,0x9D,0x50,0x71,0x5E,0xC9,0xDD,0xDD,0x74,0x0A,0x3C,0xC0,0x30,0x3E,0xE5,0x20,0x02,0xB3,0x12,0x4F,0xAB,0x60,0x27,0x07,0x17,0xDD,0x00,0xC2,0xE1,0xBC,0x04,0xAE,0x21,0x38,0xCA,0xAA,0x8F,0x74,0xD5,0x02,0x10,0x15,0x87,0x58,0x08,0xCC,0x9A,0x42,0xBD,0x02,0x97,0xCE,0x2B,0x39,0x38,0x99,0xAC,0x81,0xBB,0xC3,0xFF,0xBC,0xC1,0xB8,0xE1,0x24,0x8D,0xC5,0x20,0x89,0x98,0x0B,0x50,0xB1,0x16,0x9A,0x2D,0x6E,0x5A,0x7B,0x2F,0xD4,0x92,0xA1,0xAA,0xA6,0xE5,0xA6,0xD2,0x0D,0x0B,0xB7,0xB2,0x25,0x23,0x23,0xBE};
+;	main.c:20: __xdata __at (0x0200) unsigned char b[SIZE] = {0xE1,0x8A,0x03,0xDB,0xE0,0xD9,0xF6,0x55,0xB6,0x27,0x0A,0x28,0xF0,0x5E,0x74,0x7F,0xE6,0x9F,0x4C,0xFB,0x26,0x8C,0x9E,0x87,0x83,0x22,0xF2,0x75,0xD2,0xB3,0x61,0xA2,0x9D,0x50,0x71,0x5E,0xC9,0xDD,0xDD,0x74,0x0A,0x3C,0xC0,0x30,0x3E,0xE5,0x20,0x02,0xB3,0x12,0x4F,0xAB,0x60,0x27,0x07,0x17,0xDD,0x00,0xC2,0xE1,0xBC,0x04,0xAE,0x21,0x38,0xCA,0xAA,0x8F,0x74,0xD5,0x02,0x10,0x15,0x87,0x58,0x08,0xCC,0x9A,0x42,0xBD,0x02,0x97,0xCE,0x2B,0x39,0x38,0x99,0xAC,0x81,0xBB,0xC3,0xFF,0xBC,0xC1,0xB8,0xE1,0x24,0x8D,0xC5,0x20,0x89,0x98,0x0B,0x50,0xB1,0x16,0x9A,0x2D,0x6E,0x5A,0x7B,0x2F,0xD4,0x92,0xA1,0xAA,0xA6,0xE5,0xA6,0xD2,0x0D,0x0B,0xB7,0xB2,0x25,0x23,0x23,0xBE};
 	mov	dptr,#_b
 	mov	a,#0xE1
 	movx	@dptr,a
@@ -1505,6 +1106,391 @@ __interrupt_vect:
 	mov	dptr,#(_b + 0x007f)
 	mov	a,#0xBE
 	movx	@dptr,a
+;	main.c:21: __xdata __at (0x0000) unsigned char n[SIZE] = {0xD3,0x55,0xA4,0x5F,0x57,0xF3,0xF9,0x3E,0xCF,0x84,0x6D,0xFF,0x20,0xC1,0xAE,0x12,0xCF,0xF1,0x00,0x66,0x45,0xE2,0x34,0x61,0x27,0xF2,0x57,0xB3,0x42,0x21,0x80,0x95,0xAB,0x15,0xA2,0x1D,0x53,0xB2,0x27,0xE6,0x56,0x93,0x27,0xAF,0xC2,0xEE,0x2B,0x2F,0x9A,0xAE,0x6A,0x09,0xE5,0x7F,0xAE,0x7D,0x2B,0xDD,0x58,0x2F,0x87,0x70,0x05,0x1F,0xF8,0xBD,0x0B,0xE0,0xFD,0xF1,0x81,0x60,0xBF,0xD2,0xFE,0x8F,0x7B,0xB9,0xA9,0xA4,0x6A,0x0A,0xA3,0xA3,0x70,0x22,0xBF,0x4C,0x1B,0xB0,0x41,0x24,0x4C,0x3A,0x08,0xEC,0xF4,0x91,0xFF,0x93,0x8D,0xFC,0xFA,0x4C,0x26,0x2D,0xD2,0xE9,0xFC,0x76,0xB1,0x67,0x5E,0x24,0x9E,0x31,0x66,0x5D,0x98,0x4C,0x0D,0x79,0x81,0x76,0xAC,0x1D,0xE2,0xCA};
+	mov	dptr,#_n
+	mov	a,#0xD3
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0001)
+	mov	a,#0x55
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0002)
+	mov	a,#0xA4
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0003)
+	mov	a,#0x5F
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0004)
+	mov	a,#0x57
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0005)
+	mov	a,#0xF3
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0006)
+	mov	a,#0xF9
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0007)
+	mov	a,#0x3E
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0008)
+	mov	a,#0xCF
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0009)
+	mov	a,#0x84
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x000a)
+	mov	a,#0x6D
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x000b)
+	mov	a,#0xFF
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x000c)
+	mov	a,#0x20
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x000d)
+	mov	a,#0xC1
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x000e)
+	mov	a,#0xAE
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x000f)
+	mov	a,#0x12
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0010)
+	mov	a,#0xCF
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0011)
+	mov	a,#0xF1
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0012)
+	clr	a
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0013)
+	mov	a,#0x66
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0014)
+	mov	a,#0x45
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0015)
+	mov	a,#0xE2
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0016)
+	mov	a,#0x34
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0017)
+	mov	a,#0x61
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0018)
+	mov	a,#0x27
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0019)
+	mov	a,#0xF2
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x001a)
+	mov	a,#0x57
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x001b)
+	mov	a,#0xB3
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x001c)
+	mov	a,#0x42
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x001d)
+	mov	a,#0x21
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x001e)
+	mov	a,#0x80
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x001f)
+	mov	a,#0x95
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0020)
+	mov	a,#0xAB
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0021)
+	mov	a,#0x15
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0022)
+	mov	a,#0xA2
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0023)
+	mov	a,#0x1D
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0024)
+	mov	a,#0x53
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0025)
+	mov	a,#0xB2
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0026)
+	mov	a,#0x27
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0027)
+	mov	a,#0xE6
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0028)
+	mov	a,#0x56
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0029)
+	mov	a,#0x93
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x002a)
+	mov	a,#0x27
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x002b)
+	mov	a,#0xAF
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x002c)
+	mov	a,#0xC2
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x002d)
+	mov	a,#0xEE
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x002e)
+	mov	a,#0x2B
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x002f)
+	mov	a,#0x2F
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0030)
+	mov	a,#0x9A
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0031)
+	mov	a,#0xAE
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0032)
+	mov	a,#0x6A
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0033)
+	mov	a,#0x09
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0034)
+	mov	a,#0xE5
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0035)
+	mov	a,#0x7F
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0036)
+	mov	a,#0xAE
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0037)
+	mov	a,#0x7D
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0038)
+	mov	a,#0x2B
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0039)
+	mov	a,#0xDD
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x003a)
+	mov	a,#0x58
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x003b)
+	mov	a,#0x2F
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x003c)
+	mov	a,#0x87
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x003d)
+	mov	a,#0x70
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x003e)
+	mov	a,#0x05
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x003f)
+	mov	a,#0x1F
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0040)
+	mov	a,#0xF8
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0041)
+	mov	a,#0xBD
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0042)
+	mov	a,#0x0B
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0043)
+	mov	a,#0xE0
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0044)
+	mov	a,#0xFD
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0045)
+	mov	a,#0xF1
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0046)
+	mov	a,#0x81
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0047)
+	mov	a,#0x60
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0048)
+	mov	a,#0xBF
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0049)
+	mov	a,#0xD2
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x004a)
+	mov	a,#0xFE
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x004b)
+	mov	a,#0x8F
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x004c)
+	mov	a,#0x7B
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x004d)
+	mov	a,#0xB9
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x004e)
+	mov	a,#0xA9
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x004f)
+	mov	a,#0xA4
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0050)
+	mov	a,#0x6A
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0051)
+	mov	a,#0x0A
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0052)
+	mov	a,#0xA3
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0053)
+	mov	a,#0xA3
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0054)
+	mov	a,#0x70
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0055)
+	mov	a,#0x22
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0056)
+	mov	a,#0xBF
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0057)
+	mov	a,#0x4C
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0058)
+	mov	a,#0x1B
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0059)
+	mov	a,#0xB0
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x005a)
+	mov	a,#0x41
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x005b)
+	mov	a,#0x24
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x005c)
+	mov	a,#0x4C
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x005d)
+	mov	a,#0x3A
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x005e)
+	mov	a,#0x08
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x005f)
+	mov	a,#0xEC
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0060)
+	mov	a,#0xF4
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0061)
+	mov	a,#0x91
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0062)
+	mov	a,#0xFF
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0063)
+	mov	a,#0x93
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0064)
+	mov	a,#0x8D
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0065)
+	mov	a,#0xFC
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0066)
+	mov	a,#0xFA
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0067)
+	mov	a,#0x4C
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0068)
+	mov	a,#0x26
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0069)
+	mov	a,#0x2D
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x006a)
+	mov	a,#0xD2
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x006b)
+	mov	a,#0xE9
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x006c)
+	mov	a,#0xFC
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x006d)
+	mov	a,#0x76
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x006e)
+	mov	a,#0xB1
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x006f)
+	mov	a,#0x67
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0070)
+	mov	a,#0x5E
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0071)
+	mov	a,#0x24
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0072)
+	mov	a,#0x9E
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0073)
+	mov	a,#0x31
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0074)
+	mov	a,#0x66
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0075)
+	mov	a,#0x5D
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0076)
+	mov	a,#0x98
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0077)
+	mov	a,#0x4C
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0078)
+	mov	a,#0x0D
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x0079)
+	mov	a,#0x79
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x007a)
+	mov	a,#0x81
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x007b)
+	mov	a,#0x76
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x007c)
+	mov	a,#0xAC
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x007d)
+	mov	a,#0x1D
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x007e)
+	mov	a,#0xE2
+	movx	@dptr,a
+	mov	dptr,#(_n + 0x007f)
+	mov	a,#0xCA
+	movx	@dptr,a
 	.area GSFINAL (CODE)
 	ljmp	__sdcc_program_startup
 ;--------------------------------------------------------
@@ -1524,7 +1510,7 @@ __sdcc_program_startup:
 ;Allocation info for local variables in function 'main'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:29: int main() {
+;	main.c:34: int main() {
 ;	-----------------------------------------
 ;	 function main
 ;	-----------------------------------------
@@ -1537,39 +1523,58 @@ _main:
 	ar7 = 0x07
 	ar0 = 0x00
 	ar1 = 0x01
-;	main.c:30: startBrk=1;
+;	main.c:35: startBrk=1;
 	mov	dptr,#_startBrk
 	mov	a,#0x01
 	movx	@dptr,a
-;	main.c:38: __endasm;
+;	main.c:36: fips();
+	lcall	_fips
+;	main.c:37: endBrk=1;
+	mov	dptr,#_endBrk
+	mov	a,#0x01
+	movx	@dptr,a
+;	main.c:38: return 0;
+	mov	dptr,#0x0000
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'fips'
+;------------------------------------------------------------
+;------------------------------------------------------------
+;	main.c:41: void fips()
+;	-----------------------------------------
+;	 function fips
+;	-----------------------------------------
+_fips:
+;	main.c:49: __endasm;
 	
 	        mov dpl, 0x00
-	        mov dph,#(_n >> 8)
-	        movx a,@dptr
+	        mov dph, #(_n >> 8)
+	        movx a, @dptr
 	        mov r2, a
 	    
-;	main.c:46: __endasm;
+;	main.c:57: __endasm;
 	
 	        mov dpl, 0x00
-	        mov dph,#(_b >> 8)
-	        movx a,@dptr
+	        mov dph, #(_b >> 8)
+	        movx a, @dptr
 	        mov r3, a
 	    
-;	main.c:112: __endasm;
+;	main.c:127: _endasm;
 	
+        ; schrijf alle gebruikte registers naar de stack
 	        mov _stack, r1
 	        push _stack
 	
         ; load a[0]
 	        mov dpl, #0x00
 	        mov dph, #(_a >> 8)
-	        movx a, @dptr
+	        movx a,@dptr
 	        mov b, a
 	
         ; load b0
 	        mov a, r3
 	
-        ; a[0]*b0
+        ; a[0]*b[0]
 	        mul ab
 	
         ; tmp = (unsigned char)(tmp) + a[0]*b0
@@ -1590,112 +1595,118 @@ _main:
 	        mul ab
 	        mov r1, a
 	
-        ; m[0] = c
-	        mov dpl, #0x00
-	        mov dph, #(_m >> 8)
-	        mov a, r1
-	        movx @dptr, a
+        ;n[0] ophalen
+	        mov a, r2
 	
-        ; c*n0
-	        mov b, r2
-	        mov a, r3
+        ; c*n[0]
+	        mov b, r1
 	        mul ab
 	
         ; tmp = (unsigned char)(tmp) + c*n0
 	        add a, _tmp
 	        mov _tmp, a
 	
+        ; m[0] = c
+	        mov dpl, #0x00
+	        mov dph, #(_m >> 8)
+	        mov a,r1
+	        movx @dptr,a
+	
         ; tmp = t + (tmp >> 8)
 	        mov a, b
-	        addc a, _tmp
-	        mov _tmp, a
+	        addc a, _t
+	        mov _t, a
 	        clr a
-	        addc a, (_tmp + 1)
-	        mov (_tmp + 1), a
+	        addc a, (_t + 1)
+	        mov (_t + 1), a
 	
         ; t = tmp >> 8;
-	        mov _t, (_tmp + 1)
+	        mov _tmp, _t
+	        mov _t, (_t + 1)
 	        mov (_t + 1), #0x00
 	
 	        pop _stack
 	        mov r1, _stack
 	    
-;	main.c:114: for (i = 1; i < SIZE; i++) {
-	mov	_i,#0x7F
-	clr	a
-	mov	(_i + 1),a
-00105$:
-;	main.c:245: __endasm;
+;	main.c:129: for(i = 1; i < SIZE; i++) {
+	mov	_i,#0x01
+00103$:
+	mov	a,#0x100 - 0x80
+	add	a,_i
+	jnc	00129$
+	ljmp	00106$
+00129$:
+;	main.c:130: stack = i;
+	mov	_stack,_i
+;	main.c:262: _endasm;
+	
+	            mov _j, #0x00
 	
 	            mov _stack, r1
 	            push _stack
 	
-	            mov _j, #0x00
-	
 	            00001$:
-                ; load a[j]
-	                mov dpl, _j
-	                mov dph, #(_a >> 8)
-	                movx a, @dptr
-	                mov b, a
+            ; load a[j]
+	            mov dpl,_j
+	            mov dph, #(_a >> 8)
+	            movx a,@dptr
+	            mov b, a
 	
-                ; load b[i-j]
-	                mov a, _i
-	                clr c
-	                subb a, _j
-	                mov dpl, a
-	                mov dph, #(_b >> 8)
-	                movx a, @dptr
+            ; load b[i-j]
+	            mov a, _i
+	            clr c
+	            subb a, _j
+	            mov dpl, a
+	            mov r4, a
+	            mov dph, #(_b >> 8)
+	            movx a,@dptr
 	
-                ; a[j]*b[i-j]
-	                mul ab
+            ; a[j]*b[i-j]
+	            mul ab
 	
-                ; tmp = (unsigned char)(tmp) + a[j]*b[i-j]
-	                add a, _tmp
-	                mov _tmp, a
+            ; tmp = (unsigned char)(tmp) + a[j]*b[i-j]
+	            add a, _tmp
+	            mov _tmp, a
 	
-                ; t = t + (tmp >> 8)
-	                mov a, b
-	                addc a, _t
-	                mov _t, a
-	                clr a
-	                addc a, (_t + 1)
-	                mov (_t + 1), a
+            ; t = t + (tmp >> 8)
+	            mov a, b
+	            addc a, _t
+	            mov _t, a
+	            clr a
+	            addc a, (_t + 1)
+	            mov (_t + 1), a
 	
-                ; load m[j]
-	                mov dpl, _j
-	                mov dph, #(_m >> 8)
-	                movx a, @dptr
-	                mov b, a
+            ; load m[j]
+	            mov dpl, _j
+	            mov dph, #(_m >> 8)
+	            movx a,@dptr
+	            mov b, a
 	
-                ; load n[i-j]
-	                mov a, _i
-	                clr c
-	                subb a, _j
-	                mov dpl, a
-	                mov dph, #(_n >> 8)
-	                movx a, @dptr
+            ; load n[i-j]
+	            mov dpl, r4
+	            mov dph, #(_n >> 8)
+	            movx a,@dptr
 	
-                ; m[j]*n[i-j]
-	                mul ab
+            ; m[j]*n[i-j]
+	            mul ab
 	
-                ; tmp = (unsigned char)(tmp) + m[j]*n[i-j]
-	                add a, _tmp
-	                mov _tmp, a
+            ; tmp = (unsigned char)(tmp) + m[j]*n[i-j]
+	            add a, _tmp
+	            mov _tmp, a
 	
-                ; t = t + (tmp >> 8)
-	                mov a, b
-	                addc a, _t
-	                mov _t, a
-	                clr a
-	                addc a, (_t + 1)
-	                mov (_t + 1), a
+            ; t = t + (tmp >> 8)
+	            mov a, b
+	            addc a, _t
+	            mov _t, a
+	            clr a
+	            addc a, (_t + 1)
+	            mov (_t + 1), a
 	
-                ; for (j = 1; i < j; j++)
-	                mov a, _i
-	                inc _j
-	                subb a, _j
-	                jnz 00001$
+            ; for (j = 0; j < i; j++)
+	            mov a, _i
+	            inc _j
+	            subb a, _j
+	            jnz 00001$
 	
             ; load a[i]
 	            mov dpl, _i
@@ -1706,7 +1717,7 @@ _main:
             ; load b0
 	            mov a, r3
 	
-            ; a[i]*b0
+            ; a[i]*b[0]
 	            mul ab
 	
             ; tmp = (unsigned char)(tmp) + a[i]*b0
@@ -1727,273 +1738,363 @@ _main:
 	            mul ab
 	            mov r1, a
 	
-            ; m[i] = c
-	            mov dpl, _i
-	            mov dph, #(_m >> 8)
-	            mov a, r1
-	            movx @dptr, a
+            ; load n[0]
+	            mov a, r2
 	
-            ; c*n0
-	            mov b, r2
-	            mov a, r3
+            ; c*n[0]
+	            mov b, r1
 	            mul ab
 	
             ; tmp = (unsigned char)(tmp) + c*n0
 	            add a, _tmp
 	            mov _tmp, a
 	
+            ; m[i] = c
+	            mov dpl, _i
+	            mov dph, #(_m >> 8)
+	            mov a, r1
+	            movx @dptr,a
+	
             ; tmp = t + (tmp >> 8)
 	            mov a, b
-	            addc a, _tmp
-	            mov _tmp, a
+	            addc a, _t
+	            mov _t, a
 	            clr a
-	            addc a, (_tmp + 1)
-	            mov (_tmp + 1), a
+	            addc a, (_t + 1)
+	            mov (_t + 1), a
 	
             ; t = tmp >> 8;
-	            mov _t, (_tmp + 1)
+	            mov _tmp, _t
+	            mov _t, (_t + 1)
 	            mov (_t + 1), #0x00
 	
 	            pop _stack
 	            mov r1, _stack
 	        
-	dec	_i
-	mov	a,#0xff
-	cjne	a,_i,00129$
-	dec	(_i + 1)
-00129$:
-;	main.c:114: for (i = 1; i < SIZE; i++) {
-	mov	a,_i
-	orl	a,(_i + 1)
-	jz	00130$
-	ljmp	00105$
-00130$:
-;	main.c:248: for (i = SIZE; i < 2*SIZE; i++) {
-	mov	_i,#0x80
-	clr	a
-	mov	(_i + 1),a
+;	main.c:129: for(i = 1; i < SIZE; i++) {
+	inc	_i
+	ljmp	00103$
 00106$:
-	mov	a,#0x100 - 0x01
-	add	a,(_i + 1)
-	jnc	00131$
-	ljmp	00109$
-00131$:
-;	main.c:320: __endasm;
+;	main.c:283: for(i = SIZE; i < 255; i++) {
+	mov	_i,#0x80
+00107$:
+	mov	a,#0x100 - 0xFF
+	add	a,_i
+	jnc	00130$
+	ljmp	00110$
+00130$:
+;	main.c:284: stack = i;
+	mov	_stack,_i
+;	main.c:369: _endasm;
 	
-            ; j = i-128 +1
+            ; i - 128 + 1
 	            mov a, _i
-	            subb a, #0x80
-	            inc a
+	            clr c
+	            subb a, #0x81
 	            mov _j, a
 	
 	            00002$:
-                ; load a[j]
-	                mov dpl, _j
-	                mov dph, #(_a >> 8)
-	                movx a, @dptr
-	                mov b, a
 	
-                ; load b[i-j]
-	                mov a, _i
-	                clr c
-	                subb a, _j
-	                mov dpl, a
-	                mov dph, #(_b >> 8)
-	                movx a, @dptr
+            ; load a[j]
+	            mov dpl, _j
+	            mov dph, #(_a >> 8)
+	            movx a,@dptr
+	            mov b, a
 	
-                ; a[j]*b[i-j]
-	                mul ab
+            ; load b[i-j]
+	            clr c
+	            mov a, _i
+	            subb a, _j
+	            mov r4, a
+	            mov dpl, a
+	            mov dph, #(_b >> 8)
+	            movx a,@dptr
 	
-                ; tmp = (unsigned char)(tmp) + a[j]*b[i-j]
-	                add a, _tmp
-	                mov _tmp, a
+            ; a[j]*b[i-j]
+	            mul ab
 	
-                ; t = t + (tmp >> 8)
-	                mov a, b
-	                addc a, _t
-	                mov _t, a
-	                clr a
-	                addc a, (_t + 1)
-	                mov (_t + 1), a
+            ; tmp = (unsigned char)(tmp) + a[j]*b[i-j]
+	            add a, _tmp
+	            mov _tmp, a
 	
-                ; load m[j]
-	                mov dpl, _j
-	                mov dph, #(_m >> 8)
-	                movx a, @dptr
-	                mov b, a
+            ; t = t + (tmp >> 8)
+	            mov a, b
+	            addc a, _t
+	            mov _t, a
+	            clr a
+	            addc a, (_t + 1)
+	            mov (_t + 1), a
 	
-                ; load n[i-j]
-	                mov a, _i
-	                clr c
-	                subb a, _j
-	                mov dpl, a
-	                mov dph, #(_n >> 8)
-	                movx a, @dptr
+            ; load m[j]
+	            mov dpl, _j
+	            mov dph, #(_m >> 8)
+	            movx a,@dptr
+	            mov b, a
 	
-                ; a[j]*b[i-j]
-	                mul ab
+            ; load n[i-j]
+	            mov dpl, r4
+	            mov dph, #(_n >> 8)
+	            movx a, @dptr
 	
-                ; tmp = (unsigned char)(tmp) + m[j]*n[i-j]
-	                add a, _tmp
-	                mov _tmp, a
+            ; m[j]*n[i-j]
+	            mul ab
 	
-                ; t = t + (tmp >> 8)
-	                mov a, b
-	                addc a, _t
-	                mov _t, a
-	                clr a
-	                addc a, (_t + 1)
-	                mov (_t + 1), a
+            ; tmp = (unsigned char)(tmp) + m[j]*n[i-j]
+	            add a, _tmp
+	            mov _tmp, a
 	
-                ; for (j = i-128 +1; j < 128; j++)
-	                mov a, #0x80
-	                inc _j
-	                subb a, _j
-	                jnz 00002$
+            ; t = t + (tmp >> 8)
+	            mov a, b
+	            addc a, _t
+	            mov _t, a
+	            clr a
+	            addc a, (_t + 1)
+	            mov (_t + 1), a
+	
+            ; for (j = i-128 +1; j < 128; j++)
+	            inc _j
+	            mov a, #0x80
+	            subb a, _j
+	            jnz 00002$
+	
+            ; m[i-128] = (unsigned char)tmp
+	            mov a, _i
+	            clr c
+	            subb a, #0x80
+	            mov dpl, a
+	            mov dph, #(_m >> 8)
+	            mov a, _tmp
+	            movx @dptr, a
+	
+            ; tmp = (unsigned char)t
+	            mov _tmp, _t
+	            mov _t, (_t + 1)
+	            mov (_t + 1), #0x00
 	        
-;	main.c:322: m[i-SIZE] = (unsigned char)(tmp);
-	mov	a,_i
-	add	a,#0x80+_m
-	mov	dpl,a
-	clr	a
-	addc	a,#(_m >> 8)
-	mov	dph,a
-	mov	a,_tmp
-	movx	@dptr,a
-;	main.c:323: tmp = (unsigned char)(t);
-	mov	r2,_t
-	mov	_tmp,r2
-	mov	(_tmp + 1),#0x00
-;	main.c:324: t = t >> 8;
-	mov	_t,(_t + 1)
-	mov	(_t + 1),#0x00
-;	main.c:248: for (i = SIZE; i < 2*SIZE; i++) {
+;	main.c:283: for(i = SIZE; i < 255; i++) {
 	inc	_i
-	clr	a
-	cjne	a,_i,00132$
-	inc	(_i + 1)
-00132$:
-	ljmp	00106$
-00109$:
-;	main.c:327: m[SIZE] = tmp;
-	mov	r2,_tmp
-	mov	dptr,#(_m + 0x0080)
-	mov	a,r2
-	movx	@dptr,a
-;	main.c:328: tmp = m[0] - n0;
-	mov	dptr,#_m
-	movx	a,@dptr
-	mov	r2,a
-	mov	r3,#0x00
-	mov	r4,_n0
-	mov	r5,#0x00
-	mov	a,r2
-	clr	c
-	subb	a,r4
-	mov	_tmp,a
-	mov	a,r3
-	subb	a,r5
-	mov	(_tmp + 1),a
-;	main.c:330: for (i = 0; i < SIZE; i++) {
-	clr	a
-	mov	_i,a
-	mov	(_i + 1),a
+	ljmp	00107$
 00110$:
-	clr	c
-	mov	a,_i
-	subb	a,#0x80
-	mov	a,(_i + 1)
-	subb	a,#0x00
-	jnc	00113$
-;	main.c:331: tmp = m[i] - n[i] - (tmp >> 8);
-	mov	dpl,_i
-	mov	a,#(_m >> 8)
-	add	a,(_i + 1)
-	mov	dph,a
-	movx	a,@dptr
-	mov	r2,a
-	mov	r3,#0x00
-	mov	dpl,_i
-	mov	a,#(_n >> 8)
-	add	a,(_i + 1)
-	mov	dph,a
-	movx	a,@dptr
-	mov	r4,a
-	mov	r5,#0x00
-	mov	a,r2
-	clr	c
-	subb	a,r4
-	mov	r2,a
-	mov	a,r3
-	subb	a,r5
-	mov	r3,a
-	mov	r4,(_tmp + 1)
-	mov	r5,#0x00
-	mov	a,r2
-	clr	c
-	subb	a,r4
-	mov	_tmp,a
-	mov	a,r3
-	subb	a,r5
-	mov	(_tmp + 1),a
-;	main.c:332: u[i] = tmp;
-	mov	dpl,_i
-	mov	a,#(_u >> 8)
-	add	a,(_i + 1)
-	mov	dph,a
-	mov	a,_tmp
-	mov	r2,a
-	movx	@dptr,a
-;	main.c:330: for (i = 0; i < SIZE; i++) {
-	inc	_i
-	clr	a
-	cjne	a,_i,00110$
-	inc	(_i + 1)
-	sjmp	00110$
+;	main.c:403: _endasm;
+	
+        ; m[127] = (unsigned char)(tmp);
+	        mov dpl, #0x7F
+	        mov a, _tmp
+	        movx @dptr, a
+	
+        ; m[128] = (unsigned char)(t);
+	        mov dpl, #0x80
+	        mov a, _t
+	        movx @dptr, a
+	
+        ; load m[0]
+	        mov dpl, #0x00
+	        movx a, @dptr
+	
+        ; tmp = m[0] - n[0]
+	        clr c
+	        subb a, r2
+	        mov _tmp, a
+	    
+;	main.c:409: for(i = 1; i <= SIZE; i++) {
+	mov	_i,#0x80
 00113$:
-;	main.c:335: if ((tmp >> 8) == 0) {
-	mov	r2,(_tmp + 1)
-	mov	r3,#0x00
-	mov	a,r2
-	orl	a,r3
-;	main.c:336: for (i = 0; i < SIZE; i++) {
-	jnz	00102$
-	mov	_i,a
-	mov	(_i + 1),a
-00114$:
-	clr	c
+;	main.c:433: _endasm;
+	
+	            mov _stack, r1
+	            push _stack
+	
+            ; load m[i]
+	            mov dpl, _i
+	            mov dph, #(_m >> 8)
+	            movx a, @dptr
+	            mov r1, a
+	
+            ; load n[i]
+	            mov dph, #(_n >> 8)
+	            movx a, @dptr
+	
+            ; m[i] - n[i]
+	            subb a, r1
+	
+            ; u[i] = (unsigned char)tmp;
+	            mov dph, #(_u >> 8)
+	            movx @dptr, a
+	
+	            pop _stack
+	            mov r1, _stack
+	        
+	dec	_i
+;	main.c:409: for(i = 1; i <= SIZE; i++) {
 	mov	a,_i
-	subb	a,#0x80
-	mov	a,(_i + 1)
-	subb	a,#0x00
-	jnc	00102$
-;	main.c:337: m[i] = u[i];
+	jz	00131$
+	ljmp	00113$
+00131$:
+	mov	_i,#0x81
+;	main.c:585: _endasm;
+	
+	        clr a
+	        addc a, #0x00
+	        mov _tmp, a
+	
+	        jnz 00003$
+	        ret
+	
+	        00003$:
+	        mov dpl, 0x00 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x01 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x02 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x03 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x04 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x05 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x06 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x07 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x08 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x09 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x0A mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x0B mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x0C mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x0D mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x0E mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x0F mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x10 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x11 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x12 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x13 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x14 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x15 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x16 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x17 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x18 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x19 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x1A mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x1B mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x1C mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x1D mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x1E mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x1F mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x20 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x21 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x22 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x23 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x24 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x25 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x26 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x27 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x28 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x29 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x2A mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x2B mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x2C mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x2D mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x2E mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x2F mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x30 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x31 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x32 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x33 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x34 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x35 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x36 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x37 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x38 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x39 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x3A mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x3B mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x3C mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x3D mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x3E mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x3F mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x40 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x41 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x42 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x43 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x44 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x45 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x46 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x47 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x48 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x49 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x4A mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x4B mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x4C mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x4D mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x4E mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x4F mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x50 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x51 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x52 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x53 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x54 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x55 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x56 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x57 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x58 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x59 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x5A mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x5B mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x5C mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x5D mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x5E mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x5F mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x60 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x61 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x62 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x63 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x64 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x65 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x66 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x67 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x68 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x69 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x6A mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x6B mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x6C mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x6D mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x6E mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x6F mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x70 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x71 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x72 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x73 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x74 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x75 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x76 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x77 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x78 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x79 mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x7A mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x7B mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x7C mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x7D mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x7E mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        mov dpl, 0x7F mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
+	        ret
+	    
+;	main.c:587: if (tmp == 0) {
+	mov	a,_tmp
+	orl	a,(_tmp + 1)
+;	main.c:588: for (i = 0; i < SIZE; i++) {
+	jnz	00118$
+	mov	_i,a
+00114$:
+	mov	a,#0x100 - 0x80
+	add	a,_i
+	jc	00118$
+;	main.c:589: m[i] = u[i];
 	mov	r2,_i
-	mov	a,#(_m >> 8)
-	add	a,(_i + 1)
-	mov	r3,a
+	mov	r3,#(_m >> 8)
 	mov	dpl,_i
-	mov	a,#(_u >> 8)
-	add	a,(_i + 1)
-	mov	dph,a
+	mov	dph,#(_u >> 8)
 	movx	a,@dptr
 	mov	r4,a
 	mov	dpl,r2
 	mov	dph,r3
 	movx	@dptr,a
-;	main.c:336: for (i = 0; i < SIZE; i++) {
+;	main.c:588: for (i = 0; i < SIZE; i++) {
 	inc	_i
-	clr	a
-	cjne	a,_i,00114$
-	inc	(_i + 1)
 	sjmp	00114$
-00102$:
-;	main.c:341: endBrk=1;
-	mov	dptr,#_endBrk
-	mov	a,#0x01
-	movx	@dptr,a
-;	main.c:343: return 0;
-	mov	dptr,#0x0000
+00118$:
 	ret
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
