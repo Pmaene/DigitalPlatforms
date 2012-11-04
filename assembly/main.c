@@ -45,17 +45,45 @@ void fips() {
             t = t + (tmp >> 8);
 
             tmp = (unsigned char)(tmp) + m[j]*n[i-j];
-            t = t + (tmp >> 8);
+
+            //t = t + (tmp >> 8);
+            __asm
+                mov r3,a
+                mov r0,a
+                add a,_fips_t_1_1
+                mov _fips_t_1_1,a
+                clr a
+                addc    a,(_fips_t_1_1 + 1)
+                mov (_fips_t_1_1 + 1),a
+            __endasm;
         }
 
         tmp = (unsigned char)(tmp) + a[i]*b0;
-        t = t + (tmp >> 8);
+
+        //t = t + (tmp >> 8);
+        __asm
+            add a,_fips_t_1_1
+            mov _fips_t_1_1,a
+            clr a
+            addc    a,(_fips_t_1_1 + 1)
+            mov (_fips_t_1_1 + 1),a
+        __endasm;
 
         c = (unsigned char)(tmp)*n_prime;
         m[i] = c;
 
         tmp = (unsigned char)(tmp) + c*n0;
-        tmp = t + (tmp >> 8);
+
+        //tmp = t + (tmp >> 8);
+        __asm
+            mov r0,a
+            add a,_fips_t_1_1
+            mov r2,a
+            clr a
+            addc    a,(_fips_t_1_1 + 1)
+            mov r3,a
+        __endasm;
+
         t = tmp >> 8;
     }
 
@@ -65,7 +93,16 @@ void fips() {
             t = t + (tmp >> 8);
 
             tmp = (unsigned char)(tmp) + m[j]*n[i-j];
-            t = t + (tmp >> 8);
+
+            //t = t + (tmp >> 8);
+            __asm
+                mov r0,a
+                add a,_fips_t_1_1
+                mov _fips_t_1_1,a
+                clr a
+                addc    a,(_fips_t_1_1 + 1)
+                mov (_fips_t_1_1 + 1),a
+            __endasm;
         }
 
         m[i-SIZE] = (unsigned char)(tmp);

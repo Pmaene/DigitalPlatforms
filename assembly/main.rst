@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 2.9.0 #5416 (Aug  6 2010) (UNIX)
-                              4 ; This file was generated Sun Nov  4 11:41:51 2012
+                              4 ; This file was generated Sun Nov  4 11:40:01 2012
                               5 ;--------------------------------------------------------
                               6 	.module main
                               7 	.optsdcc -mmcs51 --model-small
@@ -1567,7 +1567,7 @@
    0992 E5 09              1567 	mov	a,(_fips_i_1_1 + 1)
    0994 94 00              1568 	subb	a,#0x00
    0996 40 03              1569 	jc	00148$
-   0998 02 0A 72           1570 	ljmp	00110$
+   0998 02 0A 74           1570 	ljmp	00110$
    099B                    1571 00148$:
                            1572 ;	main.c:42: for (j = 0; j < i; j++) {
    099B E4                 1573 	clr	a
@@ -1579,369 +1579,384 @@
    09A3 95 08              1579 	subb	a,_fips_i_1_1
    09A5 E5 0B              1580 	mov	a,(_fips_j_1_1 + 1)
    09A7 95 09              1581 	subb	a,(_fips_i_1_1 + 1)
-   09A9 50 68              1582 	jnc	00106$
-                           1583 ;	main.c:43: tmp = (unsigned char)(tmp) + a[j]*b[i-j];
-   09AB 8A 00              1584 	mov	ar0,r2
-   09AD 79 00              1585 	mov	r1,#0x00
-   09AF E5 0A              1586 	mov	a,_fips_j_1_1
-   09B1 24 80              1587 	add	a,#_a
-   09B3 F5 82              1588 	mov	dpl,a
-   09B5 E5 0B              1589 	mov	a,(_fips_j_1_1 + 1)
-   09B7 34 00              1590 	addc	a,#(_a >> 8)
-   09B9 F5 83              1591 	mov	dph,a
-   09BB E0                 1592 	movx	a,@dptr
-   09BC FE                 1593 	mov	r6,a
-   09BD AF 08              1594 	mov	r7,_fips_i_1_1
-   09BF AC 0A              1595 	mov	r4,_fips_j_1_1
-   09C1 EF                 1596 	mov	a,r7
-   09C2 C3                 1597 	clr	c
-   09C3 9C                 1598 	subb	a,r4
-   09C4 FF                 1599 	mov	r7,a
-   09C5 F5 82              1600 	mov	dpl,a
-   09C7 75 83 01           1601 	mov	dph,#(_b >> 8)
-   09CA E0                 1602 	movx	a,@dptr
-   09CB 8E F0              1603 	mov	b,r6
-   09CD A4                 1604 	mul	ab
-   09CE 28                 1605 	add	a,r0
-   09CF FA                 1606 	mov	r2,a
-   09D0 E9                 1607 	mov	a,r1
-   09D1 35 F0              1608 	addc	a,b
-                           1609 ;	main.c:45: t = t + (tmp >> 8);
-   09D3 7D 00              1610 	mov	r5,#0x00
-   09D5 25 0C              1611 	add	a,_fips_t_1_1
-   09D7 F5 0C              1612 	mov	_fips_t_1_1,a
-   09D9 ED                 1613 	mov	a,r5
-   09DA 35 0D              1614 	addc	a,(_fips_t_1_1 + 1)
-   09DC F5 0D              1615 	mov	(_fips_t_1_1 + 1),a
-                           1616 ;	main.c:47: tmp = (unsigned char)(tmp) + m[j]*n[i-j];
-   09DE 8A 04              1617 	mov	ar4,r2
-   09E0 7D 00              1618 	mov	r5,#0x00
-   09E2 85 0A 82           1619 	mov	dpl,_fips_j_1_1
-   09E5 74 02              1620 	mov	a,#(_m >> 8)
-   09E7 25 0B              1621 	add	a,(_fips_j_1_1 + 1)
-   09E9 F5 83              1622 	mov	dph,a
-   09EB E0                 1623 	movx	a,@dptr
-   09EC FE                 1624 	mov	r6,a
-   09ED 8F 82              1625 	mov	dpl,r7
-   09EF 75 83 00           1626 	mov	dph,#(_n >> 8)
-   09F2 E0                 1627 	movx	a,@dptr
-   09F3 FF                 1628 	mov	r7,a
-   09F4 8E F0              1629 	mov	b,r6
-   09F6 A4                 1630 	mul	ab
-   09F7 2C                 1631 	add	a,r4
-   09F8 FA                 1632 	mov	r2,a
-   09F9 ED                 1633 	mov	a,r5
-   09FA 35 F0              1634 	addc	a,b
-                           1635 ;	main.c:48: t = t + (tmp >> 8);
-   09FC FB                 1636 	mov	r3,a
-   09FD FC                 1637 	mov	r4,a
-   09FE 7D 00              1638 	mov	r5,#0x00
-   0A00 25 0C              1639 	add	a,_fips_t_1_1
-   0A02 F5 0C              1640 	mov	_fips_t_1_1,a
-   0A04 ED                 1641 	mov	a,r5
-   0A05 35 0D              1642 	addc	a,(_fips_t_1_1 + 1)
-   0A07 F5 0D              1643 	mov	(_fips_t_1_1 + 1),a
-                           1644 ;	main.c:42: for (j = 0; j < i; j++) {
-   0A09 05 0A              1645 	inc	_fips_j_1_1
-   0A0B E4                 1646 	clr	a
-   0A0C B5 0A 91           1647 	cjne	a,_fips_j_1_1,00103$
-   0A0F 05 0B              1648 	inc	(_fips_j_1_1 + 1)
-   0A11 80 8D              1649 	sjmp	00103$
-   0A13                    1650 00106$:
-                           1651 ;	main.c:51: tmp = (unsigned char)(tmp) + a[i]*b0;
-   0A13 8A 04              1652 	mov	ar4,r2
-   0A15 7D 00              1653 	mov	r5,#0x00
-   0A17 E5 08              1654 	mov	a,_fips_i_1_1
-   0A19 24 80              1655 	add	a,#_a
-   0A1B F5 82              1656 	mov	dpl,a
-   0A1D E5 09              1657 	mov	a,(_fips_i_1_1 + 1)
-   0A1F 34 00              1658 	addc	a,#(_a >> 8)
-   0A21 F5 83              1659 	mov	dph,a
-   0A23 E0                 1660 	movx	a,@dptr
-   0A24 FE                 1661 	mov	r6,a
-   0A25 8E F0              1662 	mov	b,r6
-   0A27 E5 0F              1663 	mov	a,_fips_b0_1_1
-   0A29 A4                 1664 	mul	ab
-   0A2A 2C                 1665 	add	a,r4
-   0A2B FA                 1666 	mov	r2,a
-   0A2C ED                 1667 	mov	a,r5
-   0A2D 35 F0              1668 	addc	a,b
-                           1669 ;	main.c:52: t = t + (tmp >> 8);
-   0A2F 7D 00              1670 	mov	r5,#0x00
-   0A31 25 0C              1671 	add	a,_fips_t_1_1
-   0A33 F5 0C              1672 	mov	_fips_t_1_1,a
-   0A35 ED                 1673 	mov	a,r5
-   0A36 35 0D              1674 	addc	a,(_fips_t_1_1 + 1)
-   0A38 F5 0D              1675 	mov	(_fips_t_1_1 + 1),a
-                           1676 ;	main.c:54: c = (unsigned char)(tmp)*n_prime;
-   0A3A 8A 04              1677 	mov	ar4,r2
-   0A3C EC                 1678 	mov	a,r4
-   0A3D 75 F0 A5           1679 	mov	b,#0xA5
-   0A40 A4                 1680 	mul	ab
-   0A41 FD                 1681 	mov	r5,a
-                           1682 ;	main.c:55: m[i] = c;
-   0A42 85 08 82           1683 	mov	dpl,_fips_i_1_1
-   0A45 74 02              1684 	mov	a,#(_m >> 8)
-   0A47 25 09              1685 	add	a,(_fips_i_1_1 + 1)
-   0A49 F5 83              1686 	mov	dph,a
-   0A4B ED                 1687 	mov	a,r5
-   0A4C F0                 1688 	movx	@dptr,a
-                           1689 ;	main.c:57: tmp = (unsigned char)(tmp) + c*n0;
-   0A4D 7E 00              1690 	mov	r6,#0x00
-   0A4F 8D F0              1691 	mov	b,r5
-   0A51 E5 0E              1692 	mov	a,_fips_n0_1_1
-   0A53 A4                 1693 	mul	ab
-   0A54 2C                 1694 	add	a,r4
-   0A55 EE                 1695 	mov	a,r6
-   0A56 35 F0              1696 	addc	a,b
-                           1697 ;	main.c:58: tmp = t + (tmp >> 8);
-   0A58 FC                 1698 	mov	r4,a
-   0A59 7D 00              1699 	mov	r5,#0x00
-   0A5B 25 0C              1700 	add	a,_fips_t_1_1
-   0A5D FA                 1701 	mov	r2,a
-   0A5E ED                 1702 	mov	a,r5
-   0A5F 35 0D              1703 	addc	a,(_fips_t_1_1 + 1)
-   0A61 FB                 1704 	mov	r3,a
-                           1705 ;	main.c:59: t = tmp >> 8;
-   0A62 8B 0C              1706 	mov	_fips_t_1_1,r3
-   0A64 75 0D 00           1707 	mov	(_fips_t_1_1 + 1),#0x00
-                           1708 ;	main.c:41: for (i = 0; i < SIZE; i++) {
-   0A67 05 08              1709 	inc	_fips_i_1_1
-   0A69 E4                 1710 	clr	a
-   0A6A B5 08 02           1711 	cjne	a,_fips_i_1_1,00151$
-   0A6D 05 09              1712 	inc	(_fips_i_1_1 + 1)
-   0A6F                    1713 00151$:
-   0A6F 02 09 8D           1714 	ljmp	00107$
-   0A72                    1715 00110$:
-                           1716 ;	main.c:62: for (i = SIZE; i < 2*SIZE; i++) {
-   0A72 75 08 80           1717 	mov	_fips_i_1_1,#0x80
-   0A75 E4                 1718 	clr	a
-   0A76 F5 09              1719 	mov	(_fips_i_1_1 + 1),a
-   0A78                    1720 00115$:
-   0A78 74 FF              1721 	mov	a,#0x100 - 0x01
-   0A7A 25 09              1722 	add	a,(_fips_i_1_1 + 1)
-   0A7C 50 03              1723 	jnc	00152$
-   0A7E 02 0B 1E           1724 	ljmp	00118$
-   0A81                    1725 00152$:
-                           1726 ;	main.c:63: for (j = i-SIZE+1; j < SIZE; j++) {
-   0A81 74 81              1727 	mov	a,#0x81
-   0A83 25 08              1728 	add	a,_fips_i_1_1
-   0A85 FE                 1729 	mov	r6,a
-   0A86 74 FF              1730 	mov	a,#0xFF
-   0A88 35 09              1731 	addc	a,(_fips_i_1_1 + 1)
-   0A8A FF                 1732 	mov	r7,a
-   0A8B                    1733 00111$:
-   0A8B C3                 1734 	clr	c
-   0A8C EE                 1735 	mov	a,r6
-   0A8D 94 80              1736 	subb	a,#0x80
-   0A8F EF                 1737 	mov	a,r7
-   0A90 94 00              1738 	subb	a,#0x00
-   0A92 50 64              1739 	jnc	00114$
-                           1740 ;	main.c:64: tmp = (unsigned char)(tmp)  + a[j]*b[i-j];
-   0A94 8A 00              1741 	mov	ar0,r2
-   0A96 79 00              1742 	mov	r1,#0x00
-   0A98 EE                 1743 	mov	a,r6
-   0A99 24 80              1744 	add	a,#_a
-   0A9B F5 82              1745 	mov	dpl,a
-   0A9D EF                 1746 	mov	a,r7
-   0A9E 34 00              1747 	addc	a,#(_a >> 8)
-   0AA0 F5 83              1748 	mov	dph,a
-   0AA2 E0                 1749 	movx	a,@dptr
-   0AA3 F5 11              1750 	mov	_fips_sloc1_1_0,a
-   0AA5 85 08 10           1751 	mov	_fips_sloc0_1_0,_fips_i_1_1
-   0AA8 8E 05              1752 	mov	ar5,r6
-   0AAA E5 10              1753 	mov	a,_fips_sloc0_1_0
-   0AAC C3                 1754 	clr	c
-   0AAD 9D                 1755 	subb	a,r5
-   0AAE FD                 1756 	mov	r5,a
-   0AAF F5 82              1757 	mov	dpl,a
-   0AB1 75 83 01           1758 	mov	dph,#(_b >> 8)
-   0AB4 E0                 1759 	movx	a,@dptr
-   0AB5 85 11 F0           1760 	mov	b,_fips_sloc1_1_0
-   0AB8 A4                 1761 	mul	ab
-   0AB9 28                 1762 	add	a,r0
-   0ABA FA                 1763 	mov	r2,a
-   0ABB E9                 1764 	mov	a,r1
-   0ABC 35 F0              1765 	addc	a,b
-                           1766 ;	main.c:65: t = t + (tmp >> 8);
-   0ABE 78 00              1767 	mov	r0,#0x00
-   0AC0 25 0C              1768 	add	a,_fips_t_1_1
-   0AC2 F5 0C              1769 	mov	_fips_t_1_1,a
-   0AC4 E8                 1770 	mov	a,r0
-   0AC5 35 0D              1771 	addc	a,(_fips_t_1_1 + 1)
-   0AC7 F5 0D              1772 	mov	(_fips_t_1_1 + 1),a
-                           1773 ;	main.c:67: tmp = (unsigned char)(tmp) + m[j]*n[i-j];
-   0AC9 8A 04              1774 	mov	ar4,r2
-   0ACB 78 00              1775 	mov	r0,#0x00
-   0ACD 8E 82              1776 	mov	dpl,r6
-   0ACF 74 02              1777 	mov	a,#(_m >> 8)
-   0AD1 2F                 1778 	add	a,r7
-   0AD2 F5 83              1779 	mov	dph,a
-   0AD4 E0                 1780 	movx	a,@dptr
-   0AD5 F9                 1781 	mov	r1,a
-   0AD6 8D 82              1782 	mov	dpl,r5
-   0AD8 75 83 00           1783 	mov	dph,#(_n >> 8)
-   0ADB E0                 1784 	movx	a,@dptr
-   0ADC 89 F0              1785 	mov	b,r1
-   0ADE A4                 1786 	mul	ab
-   0ADF 2C                 1787 	add	a,r4
-   0AE0 FA                 1788 	mov	r2,a
-   0AE1 E8                 1789 	mov	a,r0
-   0AE2 35 F0              1790 	addc	a,b
-                           1791 ;	main.c:68: t = t + (tmp >> 8);
-   0AE4 FB                 1792 	mov	r3,a
-   0AE5 FC                 1793 	mov	r4,a
-   0AE6 7D 00              1794 	mov	r5,#0x00
-   0AE8 25 0C              1795 	add	a,_fips_t_1_1
-   0AEA F5 0C              1796 	mov	_fips_t_1_1,a
-   0AEC ED                 1797 	mov	a,r5
-   0AED 35 0D              1798 	addc	a,(_fips_t_1_1 + 1)
-   0AEF F5 0D              1799 	mov	(_fips_t_1_1 + 1),a
-                           1800 ;	main.c:63: for (j = i-SIZE+1; j < SIZE; j++) {
-   0AF1 0E                 1801 	inc	r6
-   0AF2 BE 00 96           1802 	cjne	r6,#0x00,00111$
-   0AF5 0F                 1803 	inc	r7
-   0AF6 80 93              1804 	sjmp	00111$
-   0AF8                    1805 00114$:
-                           1806 ;	main.c:71: m[i-SIZE] = (unsigned char)(tmp);
-   0AF8 E5 08              1807 	mov	a,_fips_i_1_1
-   0AFA 24 80              1808 	add	a,#0x80+_m
-   0AFC F5 82              1809 	mov	dpl,a
-   0AFE E4                 1810 	clr	a
-   0AFF 34 02              1811 	addc	a,#(_m >> 8)
-   0B01 F5 83              1812 	mov	dph,a
-   0B03 8A 04              1813 	mov	ar4,r2
-   0B05 EC                 1814 	mov	a,r4
-   0B06 F0                 1815 	movx	@dptr,a
-                           1816 ;	main.c:72: tmp = (unsigned char)(t);
-   0B07 AC 0C              1817 	mov	r4,_fips_t_1_1
-   0B09 8C 02              1818 	mov	ar2,r4
-   0B0B 7B 00              1819 	mov	r3,#0x00
-                           1820 ;	main.c:73: t = t >> 8;
-   0B0D 85 0D 0C           1821 	mov	_fips_t_1_1,(_fips_t_1_1 + 1)
-   0B10 75 0D 00           1822 	mov	(_fips_t_1_1 + 1),#0x00
-                           1823 ;	main.c:62: for (i = SIZE; i < 2*SIZE; i++) {
-   0B13 05 08              1824 	inc	_fips_i_1_1
-   0B15 E4                 1825 	clr	a
-   0B16 B5 08 02           1826 	cjne	a,_fips_i_1_1,00155$
-   0B19 05 09              1827 	inc	(_fips_i_1_1 + 1)
-   0B1B                    1828 00155$:
-   0B1B 02 0A 78           1829 	ljmp	00115$
-   0B1E                    1830 00118$:
-                           1831 ;	main.c:76: m[SIZE] = tmp;
-   0B1E 8A 04              1832 	mov	ar4,r2
-   0B20 90 02 80           1833 	mov	dptr,#(_m + 0x0080)
-   0B23 EC                 1834 	mov	a,r4
-   0B24 F0                 1835 	movx	@dptr,a
-                           1836 ;	main.c:77: tmp = m[0] - n[0];
-   0B25 90 02 00           1837 	mov	dptr,#_m
-   0B28 E0                 1838 	movx	a,@dptr
-   0B29 FC                 1839 	mov	r4,a
-   0B2A 7D 00              1840 	mov	r5,#0x00
-   0B2C 90 00 00           1841 	mov	dptr,#_n
-   0B2F E0                 1842 	movx	a,@dptr
-   0B30 FE                 1843 	mov	r6,a
-   0B31 7F 00              1844 	mov	r7,#0x00
-   0B33 EC                 1845 	mov	a,r4
-   0B34 C3                 1846 	clr	c
-   0B35 9E                 1847 	subb	a,r6
-   0B36 FA                 1848 	mov	r2,a
-   0B37 ED                 1849 	mov	a,r5
-   0B38 9F                 1850 	subb	a,r7
-   0B39 FB                 1851 	mov	r3,a
-                           1852 ;	main.c:79: for (i=0; i < SIZE; i++) {
-   0B3A 7C 00              1853 	mov	r4,#0x00
-   0B3C 7D 00              1854 	mov	r5,#0x00
-   0B3E                    1855 00119$:
-   0B3E C3                 1856 	clr	c
-   0B3F EC                 1857 	mov	a,r4
-   0B40 94 80              1858 	subb	a,#0x80
-   0B42 ED                 1859 	mov	a,r5
-   0B43 94 00              1860 	subb	a,#0x00
-   0B45 50 3A              1861 	jnc	00122$
-                           1862 ;	main.c:80: tmp = m[i] - n[i] - (tmp >> 8);
-   0B47 8C 82              1863 	mov	dpl,r4
-   0B49 74 02              1864 	mov	a,#(_m >> 8)
-   0B4B 2D                 1865 	add	a,r5
-   0B4C F5 83              1866 	mov	dph,a
-   0B4E E0                 1867 	movx	a,@dptr
-   0B4F FE                 1868 	mov	r6,a
-   0B50 7F 00              1869 	mov	r7,#0x00
-   0B52 8C 82              1870 	mov	dpl,r4
-   0B54 74 00              1871 	mov	a,#(_n >> 8)
-   0B56 2D                 1872 	add	a,r5
-   0B57 F5 83              1873 	mov	dph,a
-   0B59 E0                 1874 	movx	a,@dptr
-   0B5A F8                 1875 	mov	r0,a
-   0B5B 79 00              1876 	mov	r1,#0x00
-   0B5D EE                 1877 	mov	a,r6
-   0B5E C3                 1878 	clr	c
-   0B5F 98                 1879 	subb	a,r0
-   0B60 FE                 1880 	mov	r6,a
-   0B61 EF                 1881 	mov	a,r7
-   0B62 99                 1882 	subb	a,r1
-   0B63 FF                 1883 	mov	r7,a
-   0B64 8B 00              1884 	mov	ar0,r3
-   0B66 79 00              1885 	mov	r1,#0x00
-   0B68 EE                 1886 	mov	a,r6
-   0B69 C3                 1887 	clr	c
-   0B6A 98                 1888 	subb	a,r0
-   0B6B FA                 1889 	mov	r2,a
-   0B6C EF                 1890 	mov	a,r7
-   0B6D 99                 1891 	subb	a,r1
-   0B6E FB                 1892 	mov	r3,a
-                           1893 ;	main.c:81: u[i] = tmp;
-   0B6F 8C 82              1894 	mov	dpl,r4
-   0B71 74 04              1895 	mov	a,#(_fips_u_1_1 >> 8)
-   0B73 2D                 1896 	add	a,r5
-   0B74 F5 83              1897 	mov	dph,a
-   0B76 8A 06              1898 	mov	ar6,r2
-   0B78 EE                 1899 	mov	a,r6
-   0B79 F0                 1900 	movx	@dptr,a
-                           1901 ;	main.c:79: for (i=0; i < SIZE; i++) {
-   0B7A 0C                 1902 	inc	r4
-   0B7B BC 00 C0           1903 	cjne	r4,#0x00,00119$
-   0B7E 0D                 1904 	inc	r5
-   0B7F 80 BD              1905 	sjmp	00119$
-   0B81                    1906 00122$:
-                           1907 ;	main.c:84: if ((tmp >> 8) == 0) {
-   0B81 8B 02              1908 	mov	ar2,r3
-   0B83 7B 00              1909 	mov	r3,#0x00
-   0B85 EA                 1910 	mov	a,r2
-   0B86 4B                 1911 	orl	a,r3
-                           1912 ;	main.c:85: for (i = 0; i < SIZE; i++) {
-   0B87 70 26              1913 	jnz	00127$
-   0B89 FA                 1914 	mov	r2,a
-   0B8A FB                 1915 	mov	r3,a
-   0B8B                    1916 00123$:
-   0B8B C3                 1917 	clr	c
-   0B8C EA                 1918 	mov	a,r2
-   0B8D 94 80              1919 	subb	a,#0x80
-   0B8F EB                 1920 	mov	a,r3
-   0B90 94 00              1921 	subb	a,#0x00
-   0B92 50 1B              1922 	jnc	00127$
-                           1923 ;	main.c:86: m[i] = u[i];
-   0B94 8A 04              1924 	mov	ar4,r2
-   0B96 74 02              1925 	mov	a,#(_m >> 8)
-   0B98 2B                 1926 	add	a,r3
-   0B99 FD                 1927 	mov	r5,a
-   0B9A 8A 82              1928 	mov	dpl,r2
-   0B9C 74 04              1929 	mov	a,#(_fips_u_1_1 >> 8)
-   0B9E 2B                 1930 	add	a,r3
-   0B9F F5 83              1931 	mov	dph,a
-   0BA1 E0                 1932 	movx	a,@dptr
-   0BA2 FE                 1933 	mov	r6,a
-   0BA3 8C 82              1934 	mov	dpl,r4
-   0BA5 8D 83              1935 	mov	dph,r5
-   0BA7 F0                 1936 	movx	@dptr,a
-                           1937 ;	main.c:85: for (i = 0; i < SIZE; i++) {
-   0BA8 0A                 1938 	inc	r2
-   0BA9 BA 00 DF           1939 	cjne	r2,#0x00,00123$
-   0BAC 0B                 1940 	inc	r3
-   0BAD 80 DC              1941 	sjmp	00123$
-   0BAF                    1942 00127$:
-   0BAF 22                 1943 	ret
-                           1944 	.area CSEG    (CODE)
-                           1945 	.area CONST   (CODE)
-                           1946 	.area XINIT   (CODE)
-                           1947 	.area CABS    (ABS,CODE)
+   09A9 40 03              1582 	jc	00149$
+   09AB 02 0A 16           1583 	ljmp	00106$
+   09AE                    1584 00149$:
+                           1585 ;	main.c:43: tmp = (unsigned char)(tmp) + a[j]*b[i-j];
+   09AE 8A 04              1586 	mov	ar4,r2
+   09B0 7D 00              1587 	mov	r5,#0x00
+   09B2 E5 0A              1588 	mov	a,_fips_j_1_1
+   09B4 24 80              1589 	add	a,#_a
+   09B6 F5 82              1590 	mov	dpl,a
+   09B8 E5 0B              1591 	mov	a,(_fips_j_1_1 + 1)
+   09BA 34 00              1592 	addc	a,#(_a >> 8)
+   09BC F5 83              1593 	mov	dph,a
+   09BE E0                 1594 	movx	a,@dptr
+   09BF F8                 1595 	mov	r0,a
+   09C0 A9 08              1596 	mov	r1,_fips_i_1_1
+   09C2 AE 0A              1597 	mov	r6,_fips_j_1_1
+   09C4 E9                 1598 	mov	a,r1
+   09C5 C3                 1599 	clr	c
+   09C6 9E                 1600 	subb	a,r6
+   09C7 F9                 1601 	mov	r1,a
+   09C8 F5 82              1602 	mov	dpl,a
+   09CA 75 83 01           1603 	mov	dph,#(_b >> 8)
+   09CD E0                 1604 	movx	a,@dptr
+   09CE 88 F0              1605 	mov	b,r0
+   09D0 A4                 1606 	mul	ab
+   09D1 2C                 1607 	add	a,r4
+   09D2 FA                 1608 	mov	r2,a
+   09D3 ED                 1609 	mov	a,r5
+   09D4 35 F0              1610 	addc	a,b
+                           1611 ;	main.c:45: t = t + (tmp >> 8);
+   09D6 7D 00              1612 	mov	r5,#0x00
+   09D8 25 0C              1613 	add	a,_fips_t_1_1
+   09DA F5 0C              1614 	mov	_fips_t_1_1,a
+   09DC ED                 1615 	mov	a,r5
+   09DD 35 0D              1616 	addc	a,(_fips_t_1_1 + 1)
+   09DF F5 0D              1617 	mov	(_fips_t_1_1 + 1),a
+                           1618 ;	main.c:47: tmp = (unsigned char)(tmp) + m[j]*n[i-j];
+   09E1 8A 04              1619 	mov	ar4,r2
+   09E3 7D 00              1620 	mov	r5,#0x00
+   09E5 85 0A 82           1621 	mov	dpl,_fips_j_1_1
+   09E8 74 02              1622 	mov	a,#(_m >> 8)
+   09EA 25 0B              1623 	add	a,(_fips_j_1_1 + 1)
+   09EC F5 83              1624 	mov	dph,a
+   09EE E0                 1625 	movx	a,@dptr
+   09EF FE                 1626 	mov	r6,a
+   09F0 89 82              1627 	mov	dpl,r1
+   09F2 75 83 00           1628 	mov	dph,#(_n >> 8)
+   09F5 E0                 1629 	movx	a,@dptr
+   09F6 FF                 1630 	mov	r7,a
+   09F7 8E F0              1631 	mov	b,r6
+   09F9 A4                 1632 	mul	ab
+   09FA 2C                 1633 	add	a,r4
+   09FB FA                 1634 	mov	r2,a
+   09FC ED                 1635 	mov	a,r5
+   09FD 35 F0              1636 	addc	a,b
+   09FF FB                 1637 	mov	r3,a
+                           1638 ;	main.c:58: __endasm;
+                           1639 	
+   0A00 FB                 1640 	                mov r3,a
+   0A01 F8                 1641 	                mov r0,a
+   0A02 25 0C              1642 	                add a,_fips_t_1_1
+   0A04 F5 0C              1643 	                mov _fips_t_1_1,a
+   0A06 E4                 1644 	                clr a
+   0A07 35 0D              1645 	                addc a,(_fips_t_1_1 + 1)
+   0A09 F5 0D              1646 	                mov (_fips_t_1_1 + 1),a
+                           1647 	            
+                           1648 ;	main.c:42: for (j = 0; j < i; j++) {
+   0A0B 05 0A              1649 	inc	_fips_j_1_1
+   0A0D E4                 1650 	clr	a
+   0A0E B5 0A 02           1651 	cjne	a,_fips_j_1_1,00150$
+   0A11 05 0B              1652 	inc	(_fips_j_1_1 + 1)
+   0A13                    1653 00150$:
+   0A13 02 09 A0           1654 	ljmp	00103$
+   0A16                    1655 00106$:
+                           1656 ;	main.c:61: tmp = (unsigned char)(tmp) + a[i]*b0;
+   0A16 8A 04              1657 	mov	ar4,r2
+   0A18 7D 00              1658 	mov	r5,#0x00
+   0A1A E5 08              1659 	mov	a,_fips_i_1_1
+   0A1C 24 80              1660 	add	a,#_a
+   0A1E F5 82              1661 	mov	dpl,a
+   0A20 E5 09              1662 	mov	a,(_fips_i_1_1 + 1)
+   0A22 34 00              1663 	addc	a,#(_a >> 8)
+   0A24 F5 83              1664 	mov	dph,a
+   0A26 E0                 1665 	movx	a,@dptr
+   0A27 FE                 1666 	mov	r6,a
+   0A28 8E F0              1667 	mov	b,r6
+   0A2A E5 0F              1668 	mov	a,_fips_b0_1_1
+   0A2C A4                 1669 	mul	ab
+   0A2D 2C                 1670 	add	a,r4
+   0A2E FA                 1671 	mov	r2,a
+   0A2F ED                 1672 	mov	a,r5
+   0A30 35 F0              1673 	addc	a,b
+   0A32 FB                 1674 	mov	r3,a
+                           1675 ;	main.c:70: __endasm;
+                           1676 	
+   0A33 25 0C              1677 	            add a,_fips_t_1_1
+   0A35 F5 0C              1678 	            mov _fips_t_1_1,a
+   0A37 E4                 1679 	            clr a
+   0A38 35 0D              1680 	            addc a,(_fips_t_1_1 + 1)
+   0A3A F5 0D              1681 	            mov (_fips_t_1_1 + 1),a
+                           1682 	        
+                           1683 ;	main.c:72: c = (unsigned char)(tmp)*n_prime;
+   0A3C 8A 04              1684 	mov	ar4,r2
+   0A3E EC                 1685 	mov	a,r4
+   0A3F 75 F0 A5           1686 	mov	b,#0xA5
+   0A42 A4                 1687 	mul	ab
+   0A43 FD                 1688 	mov	r5,a
+                           1689 ;	main.c:73: m[i] = c;
+   0A44 85 08 82           1690 	mov	dpl,_fips_i_1_1
+   0A47 74 02              1691 	mov	a,#(_m >> 8)
+   0A49 25 09              1692 	add	a,(_fips_i_1_1 + 1)
+   0A4B F5 83              1693 	mov	dph,a
+   0A4D ED                 1694 	mov	a,r5
+   0A4E F0                 1695 	movx	@dptr,a
+                           1696 ;	main.c:75: tmp = (unsigned char)(tmp) + c*n0;
+   0A4F 7E 00              1697 	mov	r6,#0x00
+   0A51 8D F0              1698 	mov	b,r5
+   0A53 E5 0E              1699 	mov	a,_fips_n0_1_1
+   0A55 A4                 1700 	mul	ab
+   0A56 2C                 1701 	add	a,r4
+   0A57 FA                 1702 	mov	r2,a
+   0A58 EE                 1703 	mov	a,r6
+   0A59 35 F0              1704 	addc	a,b
+   0A5B FB                 1705 	mov	r3,a
+                           1706 ;	main.c:85: __endasm;
+                           1707 	
+   0A5C F8                 1708 	            mov r0,a
+   0A5D 25 0C              1709 	            add a,_fips_t_1_1
+   0A5F FA                 1710 	            mov r2,a
+   0A60 E4                 1711 	            clr a
+   0A61 35 0D              1712 	            addc a,(_fips_t_1_1 + 1)
+   0A63 FB                 1713 	            mov r3,a
+                           1714 	        
+                           1715 ;	main.c:87: t = tmp >> 8;
+   0A64 8B 0C              1716 	mov	_fips_t_1_1,r3
+   0A66 75 0D 00           1717 	mov	(_fips_t_1_1 + 1),#0x00
+                           1718 ;	main.c:41: for (i = 0; i < SIZE; i++) {
+   0A69 05 08              1719 	inc	_fips_i_1_1
+   0A6B E4                 1720 	clr	a
+   0A6C B5 08 02           1721 	cjne	a,_fips_i_1_1,00151$
+   0A6F 05 09              1722 	inc	(_fips_i_1_1 + 1)
+   0A71                    1723 00151$:
+   0A71 02 09 8D           1724 	ljmp	00107$
+   0A74                    1725 00110$:
+                           1726 ;	main.c:90: for (i = SIZE; i < 2*SIZE; i++) {
+   0A74 75 08 80           1727 	mov	_fips_i_1_1,#0x80
+   0A77 E4                 1728 	clr	a
+   0A78 F5 09              1729 	mov	(_fips_i_1_1 + 1),a
+   0A7A                    1730 00115$:
+   0A7A 74 FF              1731 	mov	a,#0x100 - 0x01
+   0A7C 25 09              1732 	add	a,(_fips_i_1_1 + 1)
+   0A7E 50 03              1733 	jnc	00152$
+   0A80 02 0B 23           1734 	ljmp	00118$
+   0A83                    1735 00152$:
+                           1736 ;	main.c:91: for (j = i-SIZE+1; j < SIZE; j++) {
+   0A83 74 81              1737 	mov	a,#0x81
+   0A85 25 08              1738 	add	a,_fips_i_1_1
+   0A87 FE                 1739 	mov	r6,a
+   0A88 74 FF              1740 	mov	a,#0xFF
+   0A8A 35 09              1741 	addc	a,(_fips_i_1_1 + 1)
+   0A8C FF                 1742 	mov	r7,a
+   0A8D                    1743 00111$:
+   0A8D C3                 1744 	clr	c
+   0A8E EE                 1745 	mov	a,r6
+   0A8F 94 80              1746 	subb	a,#0x80
+   0A91 EF                 1747 	mov	a,r7
+   0A92 94 00              1748 	subb	a,#0x00
+   0A94 40 03              1749 	jc	00153$
+   0A96 02 0A FD           1750 	ljmp	00114$
+   0A99                    1751 00153$:
+                           1752 ;	main.c:92: tmp = (unsigned char)(tmp)  + a[j]*b[i-j];
+   0A99 8A 00              1753 	mov	ar0,r2
+   0A9B 79 00              1754 	mov	r1,#0x00
+   0A9D EE                 1755 	mov	a,r6
+   0A9E 24 80              1756 	add	a,#_a
+   0AA0 F5 82              1757 	mov	dpl,a
+   0AA2 EF                 1758 	mov	a,r7
+   0AA3 34 00              1759 	addc	a,#(_a >> 8)
+   0AA5 F5 83              1760 	mov	dph,a
+   0AA7 E0                 1761 	movx	a,@dptr
+   0AA8 F5 11              1762 	mov	_fips_sloc1_1_0,a
+   0AAA 85 08 10           1763 	mov	_fips_sloc0_1_0,_fips_i_1_1
+   0AAD 8E 05              1764 	mov	ar5,r6
+   0AAF E5 10              1765 	mov	a,_fips_sloc0_1_0
+   0AB1 C3                 1766 	clr	c
+   0AB2 9D                 1767 	subb	a,r5
+   0AB3 FD                 1768 	mov	r5,a
+   0AB4 F5 82              1769 	mov	dpl,a
+   0AB6 75 83 01           1770 	mov	dph,#(_b >> 8)
+   0AB9 E0                 1771 	movx	a,@dptr
+   0ABA 85 11 F0           1772 	mov	b,_fips_sloc1_1_0
+   0ABD A4                 1773 	mul	ab
+   0ABE 28                 1774 	add	a,r0
+   0ABF FA                 1775 	mov	r2,a
+   0AC0 E9                 1776 	mov	a,r1
+   0AC1 35 F0              1777 	addc	a,b
+                           1778 ;	main.c:93: t = t + (tmp >> 8);
+   0AC3 78 00              1779 	mov	r0,#0x00
+   0AC5 25 0C              1780 	add	a,_fips_t_1_1
+   0AC7 F5 0C              1781 	mov	_fips_t_1_1,a
+   0AC9 E8                 1782 	mov	a,r0
+   0ACA 35 0D              1783 	addc	a,(_fips_t_1_1 + 1)
+   0ACC F5 0D              1784 	mov	(_fips_t_1_1 + 1),a
+                           1785 ;	main.c:95: tmp = (unsigned char)(tmp) + m[j]*n[i-j];
+   0ACE 8A 04              1786 	mov	ar4,r2
+   0AD0 78 00              1787 	mov	r0,#0x00
+   0AD2 8E 82              1788 	mov	dpl,r6
+   0AD4 74 02              1789 	mov	a,#(_m >> 8)
+   0AD6 2F                 1790 	add	a,r7
+   0AD7 F5 83              1791 	mov	dph,a
+   0AD9 E0                 1792 	movx	a,@dptr
+   0ADA F9                 1793 	mov	r1,a
+   0ADB 8D 82              1794 	mov	dpl,r5
+   0ADD 75 83 00           1795 	mov	dph,#(_n >> 8)
+   0AE0 E0                 1796 	movx	a,@dptr
+   0AE1 FD                 1797 	mov	r5,a
+   0AE2 89 F0              1798 	mov	b,r1
+   0AE4 A4                 1799 	mul	ab
+   0AE5 2C                 1800 	add	a,r4
+   0AE6 FA                 1801 	mov	r2,a
+   0AE7 E8                 1802 	mov	a,r0
+   0AE8 35 F0              1803 	addc	a,b
+   0AEA FB                 1804 	mov	r3,a
+                           1805 ;	main.c:105: __endasm;
+                           1806 	
+   0AEB F8                 1807 	                mov r0,a
+   0AEC 25 0C              1808 	                add a,_fips_t_1_1
+   0AEE F5 0C              1809 	                mov _fips_t_1_1,a
+   0AF0 E4                 1810 	                clr a
+   0AF1 35 0D              1811 	                addc a,(_fips_t_1_1 + 1)
+   0AF3 F5 0D              1812 	                mov (_fips_t_1_1 + 1),a
+                           1813 	            
+                           1814 ;	main.c:91: for (j = i-SIZE+1; j < SIZE; j++) {
+   0AF5 0E                 1815 	inc	r6
+   0AF6 BE 00 01           1816 	cjne	r6,#0x00,00154$
+   0AF9 0F                 1817 	inc	r7
+   0AFA                    1818 00154$:
+   0AFA 02 0A 8D           1819 	ljmp	00111$
+   0AFD                    1820 00114$:
+                           1821 ;	main.c:108: m[i-SIZE] = (unsigned char)(tmp);
+   0AFD E5 08              1822 	mov	a,_fips_i_1_1
+   0AFF 24 80              1823 	add	a,#0x80+_m
+   0B01 F5 82              1824 	mov	dpl,a
+   0B03 E4                 1825 	clr	a
+   0B04 34 02              1826 	addc	a,#(_m >> 8)
+   0B06 F5 83              1827 	mov	dph,a
+   0B08 8A 04              1828 	mov	ar4,r2
+   0B0A EC                 1829 	mov	a,r4
+   0B0B F0                 1830 	movx	@dptr,a
+                           1831 ;	main.c:109: tmp = (unsigned char)(t);
+   0B0C AC 0C              1832 	mov	r4,_fips_t_1_1
+   0B0E 8C 02              1833 	mov	ar2,r4
+   0B10 7B 00              1834 	mov	r3,#0x00
+                           1835 ;	main.c:110: t = t >> 8;
+   0B12 85 0D 0C           1836 	mov	_fips_t_1_1,(_fips_t_1_1 + 1)
+   0B15 75 0D 00           1837 	mov	(_fips_t_1_1 + 1),#0x00
+                           1838 ;	main.c:90: for (i = SIZE; i < 2*SIZE; i++) {
+   0B18 05 08              1839 	inc	_fips_i_1_1
+   0B1A E4                 1840 	clr	a
+   0B1B B5 08 02           1841 	cjne	a,_fips_i_1_1,00155$
+   0B1E 05 09              1842 	inc	(_fips_i_1_1 + 1)
+   0B20                    1843 00155$:
+   0B20 02 0A 7A           1844 	ljmp	00115$
+   0B23                    1845 00118$:
+                           1846 ;	main.c:113: m[SIZE] = tmp;
+   0B23 8A 04              1847 	mov	ar4,r2
+   0B25 90 02 80           1848 	mov	dptr,#(_m + 0x0080)
+   0B28 EC                 1849 	mov	a,r4
+   0B29 F0                 1850 	movx	@dptr,a
+                           1851 ;	main.c:114: tmp = m[0] - n[0];
+   0B2A 90 02 00           1852 	mov	dptr,#_m
+   0B2D E0                 1853 	movx	a,@dptr
+   0B2E FC                 1854 	mov	r4,a
+   0B2F 7D 00              1855 	mov	r5,#0x00
+   0B31 90 00 00           1856 	mov	dptr,#_n
+   0B34 E0                 1857 	movx	a,@dptr
+   0B35 FE                 1858 	mov	r6,a
+   0B36 7F 00              1859 	mov	r7,#0x00
+   0B38 EC                 1860 	mov	a,r4
+   0B39 C3                 1861 	clr	c
+   0B3A 9E                 1862 	subb	a,r6
+   0B3B FA                 1863 	mov	r2,a
+   0B3C ED                 1864 	mov	a,r5
+   0B3D 9F                 1865 	subb	a,r7
+   0B3E FB                 1866 	mov	r3,a
+                           1867 ;	main.c:116: for (i=0; i < SIZE; i++) {
+   0B3F 7C 00              1868 	mov	r4,#0x00
+   0B41 7D 00              1869 	mov	r5,#0x00
+   0B43                    1870 00119$:
+   0B43 C3                 1871 	clr	c
+   0B44 EC                 1872 	mov	a,r4
+   0B45 94 80              1873 	subb	a,#0x80
+   0B47 ED                 1874 	mov	a,r5
+   0B48 94 00              1875 	subb	a,#0x00
+   0B4A 50 3A              1876 	jnc	00122$
+                           1877 ;	main.c:117: tmp = m[i] - n[i] - (tmp >> 8);
+   0B4C 8C 82              1878 	mov	dpl,r4
+   0B4E 74 02              1879 	mov	a,#(_m >> 8)
+   0B50 2D                 1880 	add	a,r5
+   0B51 F5 83              1881 	mov	dph,a
+   0B53 E0                 1882 	movx	a,@dptr
+   0B54 FE                 1883 	mov	r6,a
+   0B55 7F 00              1884 	mov	r7,#0x00
+   0B57 8C 82              1885 	mov	dpl,r4
+   0B59 74 00              1886 	mov	a,#(_n >> 8)
+   0B5B 2D                 1887 	add	a,r5
+   0B5C F5 83              1888 	mov	dph,a
+   0B5E E0                 1889 	movx	a,@dptr
+   0B5F F8                 1890 	mov	r0,a
+   0B60 79 00              1891 	mov	r1,#0x00
+   0B62 EE                 1892 	mov	a,r6
+   0B63 C3                 1893 	clr	c
+   0B64 98                 1894 	subb	a,r0
+   0B65 FE                 1895 	mov	r6,a
+   0B66 EF                 1896 	mov	a,r7
+   0B67 99                 1897 	subb	a,r1
+   0B68 FF                 1898 	mov	r7,a
+   0B69 8B 00              1899 	mov	ar0,r3
+   0B6B 79 00              1900 	mov	r1,#0x00
+   0B6D EE                 1901 	mov	a,r6
+   0B6E C3                 1902 	clr	c
+   0B6F 98                 1903 	subb	a,r0
+   0B70 FA                 1904 	mov	r2,a
+   0B71 EF                 1905 	mov	a,r7
+   0B72 99                 1906 	subb	a,r1
+   0B73 FB                 1907 	mov	r3,a
+                           1908 ;	main.c:118: u[i] = tmp;
+   0B74 8C 82              1909 	mov	dpl,r4
+   0B76 74 04              1910 	mov	a,#(_fips_u_1_1 >> 8)
+   0B78 2D                 1911 	add	a,r5
+   0B79 F5 83              1912 	mov	dph,a
+   0B7B 8A 06              1913 	mov	ar6,r2
+   0B7D EE                 1914 	mov	a,r6
+   0B7E F0                 1915 	movx	@dptr,a
+                           1916 ;	main.c:116: for (i=0; i < SIZE; i++) {
+   0B7F 0C                 1917 	inc	r4
+   0B80 BC 00 C0           1918 	cjne	r4,#0x00,00119$
+   0B83 0D                 1919 	inc	r5
+   0B84 80 BD              1920 	sjmp	00119$
+   0B86                    1921 00122$:
+                           1922 ;	main.c:121: if ((tmp >> 8) == 0) {
+   0B86 8B 02              1923 	mov	ar2,r3
+   0B88 7B 00              1924 	mov	r3,#0x00
+   0B8A EA                 1925 	mov	a,r2
+   0B8B 4B                 1926 	orl	a,r3
+                           1927 ;	main.c:122: for (i = 0; i < SIZE; i++) {
+   0B8C 70 26              1928 	jnz	00127$
+   0B8E FA                 1929 	mov	r2,a
+   0B8F FB                 1930 	mov	r3,a
+   0B90                    1931 00123$:
+   0B90 C3                 1932 	clr	c
+   0B91 EA                 1933 	mov	a,r2
+   0B92 94 80              1934 	subb	a,#0x80
+   0B94 EB                 1935 	mov	a,r3
+   0B95 94 00              1936 	subb	a,#0x00
+   0B97 50 1B              1937 	jnc	00127$
+                           1938 ;	main.c:123: m[i] = u[i];
+   0B99 8A 04              1939 	mov	ar4,r2
+   0B9B 74 02              1940 	mov	a,#(_m >> 8)
+   0B9D 2B                 1941 	add	a,r3
+   0B9E FD                 1942 	mov	r5,a
+   0B9F 8A 82              1943 	mov	dpl,r2
+   0BA1 74 04              1944 	mov	a,#(_fips_u_1_1 >> 8)
+   0BA3 2B                 1945 	add	a,r3
+   0BA4 F5 83              1946 	mov	dph,a
+   0BA6 E0                 1947 	movx	a,@dptr
+   0BA7 FE                 1948 	mov	r6,a
+   0BA8 8C 82              1949 	mov	dpl,r4
+   0BAA 8D 83              1950 	mov	dph,r5
+   0BAC F0                 1951 	movx	@dptr,a
+                           1952 ;	main.c:122: for (i = 0; i < SIZE; i++) {
+   0BAD 0A                 1953 	inc	r2
+   0BAE BA 00 DF           1954 	cjne	r2,#0x00,00123$
+   0BB1 0B                 1955 	inc	r3
+   0BB2 80 DC              1956 	sjmp	00123$
+   0BB4                    1957 00127$:
+   0BB4 22                 1958 	ret
+                           1959 	.area CSEG    (CODE)
+                           1960 	.area CONST   (CODE)
+                           1961 	.area XINIT   (CODE)
+                           1962 	.area CABS    (ABS,CODE)

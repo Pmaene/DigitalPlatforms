@@ -1,0 +1,8 @@
+fill xram 0 65535 0
+break xram w 65535
+break xram w 65534
+run
+timer get
+run
+dump xram 0 65535
+timer get

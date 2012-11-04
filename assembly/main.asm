@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 2.9.0 #5416 (Aug  6 2010) (UNIX)
-; This file was generated Sun Nov  4 11:41:51 2012
+; This file was generated Sun Nov  4 11:40:01 2012
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mmcs51 --model-small
@@ -1579,10 +1579,12 @@ _fips:
 	subb	a,_fips_i_1_1
 	mov	a,(_fips_j_1_1 + 1)
 	subb	a,(_fips_i_1_1 + 1)
-	jnc	00106$
+	jc	00149$
+	ljmp	00106$
+00149$:
 ;	main.c:43: tmp = (unsigned char)(tmp) + a[j]*b[i-j];
-	mov	ar0,r2
-	mov	r1,#0x00
+	mov	ar4,r2
+	mov	r5,#0x00
 	mov	a,_fips_j_1_1
 	add	a,#_a
 	mov	dpl,a
@@ -1590,21 +1592,21 @@ _fips:
 	addc	a,#(_a >> 8)
 	mov	dph,a
 	movx	a,@dptr
-	mov	r6,a
-	mov	r7,_fips_i_1_1
-	mov	r4,_fips_j_1_1
-	mov	a,r7
+	mov	r0,a
+	mov	r1,_fips_i_1_1
+	mov	r6,_fips_j_1_1
+	mov	a,r1
 	clr	c
-	subb	a,r4
-	mov	r7,a
+	subb	a,r6
+	mov	r1,a
 	mov	dpl,a
 	mov	dph,#(_b >> 8)
 	movx	a,@dptr
-	mov	b,r6
+	mov	b,r0
 	mul	ab
-	add	a,r0
+	add	a,r4
 	mov	r2,a
-	mov	a,r1
+	mov	a,r5
 	addc	a,b
 ;	main.c:45: t = t + (tmp >> 8);
 	mov	r5,#0x00
@@ -1622,7 +1624,7 @@ _fips:
 	mov	dph,a
 	movx	a,@dptr
 	mov	r6,a
-	mov	dpl,r7
+	mov	dpl,r1
 	mov	dph,#(_n >> 8)
 	movx	a,@dptr
 	mov	r7,a
@@ -1632,23 +1634,26 @@ _fips:
 	mov	r2,a
 	mov	a,r5
 	addc	a,b
-;	main.c:48: t = t + (tmp >> 8);
 	mov	r3,a
-	mov	r4,a
-	mov	r5,#0x00
-	add	a,_fips_t_1_1
-	mov	_fips_t_1_1,a
-	mov	a,r5
-	addc	a,(_fips_t_1_1 + 1)
-	mov	(_fips_t_1_1 + 1),a
+;	main.c:58: __endasm;
+	
+	                mov r3,a
+	                mov r0,a
+	                add a,_fips_t_1_1
+	                mov _fips_t_1_1,a
+	                clr a
+	                addc a,(_fips_t_1_1 + 1)
+	                mov (_fips_t_1_1 + 1),a
+	            
 ;	main.c:42: for (j = 0; j < i; j++) {
 	inc	_fips_j_1_1
 	clr	a
-	cjne	a,_fips_j_1_1,00103$
+	cjne	a,_fips_j_1_1,00150$
 	inc	(_fips_j_1_1 + 1)
-	sjmp	00103$
+00150$:
+	ljmp	00103$
 00106$:
-;	main.c:51: tmp = (unsigned char)(tmp) + a[i]*b0;
+;	main.c:61: tmp = (unsigned char)(tmp) + a[i]*b0;
 	mov	ar4,r2
 	mov	r5,#0x00
 	mov	a,_fips_i_1_1
@@ -1666,43 +1671,48 @@ _fips:
 	mov	r2,a
 	mov	a,r5
 	addc	a,b
-;	main.c:52: t = t + (tmp >> 8);
-	mov	r5,#0x00
-	add	a,_fips_t_1_1
-	mov	_fips_t_1_1,a
-	mov	a,r5
-	addc	a,(_fips_t_1_1 + 1)
-	mov	(_fips_t_1_1 + 1),a
-;	main.c:54: c = (unsigned char)(tmp)*n_prime;
+	mov	r3,a
+;	main.c:70: __endasm;
+	
+	            add a,_fips_t_1_1
+	            mov _fips_t_1_1,a
+	            clr a
+	            addc a,(_fips_t_1_1 + 1)
+	            mov (_fips_t_1_1 + 1),a
+	        
+;	main.c:72: c = (unsigned char)(tmp)*n_prime;
 	mov	ar4,r2
 	mov	a,r4
 	mov	b,#0xA5
 	mul	ab
 	mov	r5,a
-;	main.c:55: m[i] = c;
+;	main.c:73: m[i] = c;
 	mov	dpl,_fips_i_1_1
 	mov	a,#(_m >> 8)
 	add	a,(_fips_i_1_1 + 1)
 	mov	dph,a
 	mov	a,r5
 	movx	@dptr,a
-;	main.c:57: tmp = (unsigned char)(tmp) + c*n0;
+;	main.c:75: tmp = (unsigned char)(tmp) + c*n0;
 	mov	r6,#0x00
 	mov	b,r5
 	mov	a,_fips_n0_1_1
 	mul	ab
 	add	a,r4
+	mov	r2,a
 	mov	a,r6
 	addc	a,b
-;	main.c:58: tmp = t + (tmp >> 8);
-	mov	r4,a
-	mov	r5,#0x00
-	add	a,_fips_t_1_1
-	mov	r2,a
-	mov	a,r5
-	addc	a,(_fips_t_1_1 + 1)
 	mov	r3,a
-;	main.c:59: t = tmp >> 8;
+;	main.c:85: __endasm;
+	
+	            mov r0,a
+	            add a,_fips_t_1_1
+	            mov r2,a
+	            clr a
+	            addc a,(_fips_t_1_1 + 1)
+	            mov r3,a
+	        
+;	main.c:87: t = tmp >> 8;
 	mov	_fips_t_1_1,r3
 	mov	(_fips_t_1_1 + 1),#0x00
 ;	main.c:41: for (i = 0; i < SIZE; i++) {
@@ -1713,7 +1723,7 @@ _fips:
 00151$:
 	ljmp	00107$
 00110$:
-;	main.c:62: for (i = SIZE; i < 2*SIZE; i++) {
+;	main.c:90: for (i = SIZE; i < 2*SIZE; i++) {
 	mov	_fips_i_1_1,#0x80
 	clr	a
 	mov	(_fips_i_1_1 + 1),a
@@ -1723,7 +1733,7 @@ _fips:
 	jnc	00152$
 	ljmp	00118$
 00152$:
-;	main.c:63: for (j = i-SIZE+1; j < SIZE; j++) {
+;	main.c:91: for (j = i-SIZE+1; j < SIZE; j++) {
 	mov	a,#0x81
 	add	a,_fips_i_1_1
 	mov	r6,a
@@ -1736,8 +1746,10 @@ _fips:
 	subb	a,#0x80
 	mov	a,r7
 	subb	a,#0x00
-	jnc	00114$
-;	main.c:64: tmp = (unsigned char)(tmp)  + a[j]*b[i-j];
+	jc	00153$
+	ljmp	00114$
+00153$:
+;	main.c:92: tmp = (unsigned char)(tmp)  + a[j]*b[i-j];
 	mov	ar0,r2
 	mov	r1,#0x00
 	mov	a,r6
@@ -1763,14 +1775,14 @@ _fips:
 	mov	r2,a
 	mov	a,r1
 	addc	a,b
-;	main.c:65: t = t + (tmp >> 8);
+;	main.c:93: t = t + (tmp >> 8);
 	mov	r0,#0x00
 	add	a,_fips_t_1_1
 	mov	_fips_t_1_1,a
 	mov	a,r0
 	addc	a,(_fips_t_1_1 + 1)
 	mov	(_fips_t_1_1 + 1),a
-;	main.c:67: tmp = (unsigned char)(tmp) + m[j]*n[i-j];
+;	main.c:95: tmp = (unsigned char)(tmp) + m[j]*n[i-j];
 	mov	ar4,r2
 	mov	r0,#0x00
 	mov	dpl,r6
@@ -1782,28 +1794,31 @@ _fips:
 	mov	dpl,r5
 	mov	dph,#(_n >> 8)
 	movx	a,@dptr
+	mov	r5,a
 	mov	b,r1
 	mul	ab
 	add	a,r4
 	mov	r2,a
 	mov	a,r0
 	addc	a,b
-;	main.c:68: t = t + (tmp >> 8);
 	mov	r3,a
-	mov	r4,a
-	mov	r5,#0x00
-	add	a,_fips_t_1_1
-	mov	_fips_t_1_1,a
-	mov	a,r5
-	addc	a,(_fips_t_1_1 + 1)
-	mov	(_fips_t_1_1 + 1),a
-;	main.c:63: for (j = i-SIZE+1; j < SIZE; j++) {
+;	main.c:105: __endasm;
+	
+	                mov r0,a
+	                add a,_fips_t_1_1
+	                mov _fips_t_1_1,a
+	                clr a
+	                addc a,(_fips_t_1_1 + 1)
+	                mov (_fips_t_1_1 + 1),a
+	            
+;	main.c:91: for (j = i-SIZE+1; j < SIZE; j++) {
 	inc	r6
-	cjne	r6,#0x00,00111$
+	cjne	r6,#0x00,00154$
 	inc	r7
-	sjmp	00111$
+00154$:
+	ljmp	00111$
 00114$:
-;	main.c:71: m[i-SIZE] = (unsigned char)(tmp);
+;	main.c:108: m[i-SIZE] = (unsigned char)(tmp);
 	mov	a,_fips_i_1_1
 	add	a,#0x80+_m
 	mov	dpl,a
@@ -1813,14 +1828,14 @@ _fips:
 	mov	ar4,r2
 	mov	a,r4
 	movx	@dptr,a
-;	main.c:72: tmp = (unsigned char)(t);
+;	main.c:109: tmp = (unsigned char)(t);
 	mov	r4,_fips_t_1_1
 	mov	ar2,r4
 	mov	r3,#0x00
-;	main.c:73: t = t >> 8;
+;	main.c:110: t = t >> 8;
 	mov	_fips_t_1_1,(_fips_t_1_1 + 1)
 	mov	(_fips_t_1_1 + 1),#0x00
-;	main.c:62: for (i = SIZE; i < 2*SIZE; i++) {
+;	main.c:90: for (i = SIZE; i < 2*SIZE; i++) {
 	inc	_fips_i_1_1
 	clr	a
 	cjne	a,_fips_i_1_1,00155$
@@ -1828,12 +1843,12 @@ _fips:
 00155$:
 	ljmp	00115$
 00118$:
-;	main.c:76: m[SIZE] = tmp;
+;	main.c:113: m[SIZE] = tmp;
 	mov	ar4,r2
 	mov	dptr,#(_m + 0x0080)
 	mov	a,r4
 	movx	@dptr,a
-;	main.c:77: tmp = m[0] - n[0];
+;	main.c:114: tmp = m[0] - n[0];
 	mov	dptr,#_m
 	movx	a,@dptr
 	mov	r4,a
@@ -1849,7 +1864,7 @@ _fips:
 	mov	a,r5
 	subb	a,r7
 	mov	r3,a
-;	main.c:79: for (i=0; i < SIZE; i++) {
+;	main.c:116: for (i=0; i < SIZE; i++) {
 	mov	r4,#0x00
 	mov	r5,#0x00
 00119$:
@@ -1859,7 +1874,7 @@ _fips:
 	mov	a,r5
 	subb	a,#0x00
 	jnc	00122$
-;	main.c:80: tmp = m[i] - n[i] - (tmp >> 8);
+;	main.c:117: tmp = m[i] - n[i] - (tmp >> 8);
 	mov	dpl,r4
 	mov	a,#(_m >> 8)
 	add	a,r5
@@ -1890,7 +1905,7 @@ _fips:
 	mov	a,r7
 	subb	a,r1
 	mov	r3,a
-;	main.c:81: u[i] = tmp;
+;	main.c:118: u[i] = tmp;
 	mov	dpl,r4
 	mov	a,#(_fips_u_1_1 >> 8)
 	add	a,r5
@@ -1898,18 +1913,18 @@ _fips:
 	mov	ar6,r2
 	mov	a,r6
 	movx	@dptr,a
-;	main.c:79: for (i=0; i < SIZE; i++) {
+;	main.c:116: for (i=0; i < SIZE; i++) {
 	inc	r4
 	cjne	r4,#0x00,00119$
 	inc	r5
 	sjmp	00119$
 00122$:
-;	main.c:84: if ((tmp >> 8) == 0) {
+;	main.c:121: if ((tmp >> 8) == 0) {
 	mov	ar2,r3
 	mov	r3,#0x00
 	mov	a,r2
 	orl	a,r3
-;	main.c:85: for (i = 0; i < SIZE; i++) {
+;	main.c:122: for (i = 0; i < SIZE; i++) {
 	jnz	00127$
 	mov	r2,a
 	mov	r3,a
@@ -1920,7 +1935,7 @@ _fips:
 	mov	a,r3
 	subb	a,#0x00
 	jnc	00127$
-;	main.c:86: m[i] = u[i];
+;	main.c:123: m[i] = u[i];
 	mov	ar4,r2
 	mov	a,#(_m >> 8)
 	add	a,r3
@@ -1934,7 +1949,7 @@ _fips:
 	mov	dpl,r4
 	mov	dph,r5
 	movx	@dptr,a
-;	main.c:85: for (i = 0; i < SIZE; i++) {
+;	main.c:122: for (i = 0; i < SIZE; i++) {
 	inc	r2
 	cjne	r2,#0x00,00123$
 	inc	r3
