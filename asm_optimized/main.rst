@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 2.9.0 #5416 (Aug  6 2010) (UNIX)
-                              4 ; This file was generated Sun Nov  4 14:45:40 2012
+                              4 ; This file was generated Sun Nov  4 14:46:59 2012
                               5 ;--------------------------------------------------------
                               6 	.module main
                               7 	.optsdcc -mmcs51 --model-small
@@ -1630,12 +1630,12 @@
                            1630 	    
                            1631 ;	main.c:129: for(i = 1; i < SIZE; i++) {
    09E2 75 0A 01           1632 	mov	_i,#0x01
-   09E5                    1633 00103$:
+   09E5                    1633 00101$:
    09E5 74 80              1634 	mov	a,#0x100 - 0x80
    09E7 25 0A              1635 	add	a,_i
-   09E9 50 03              1636 	jnc	00129$
-   09EB 02 0A 92           1637 	ljmp	00106$
-   09EE                    1638 00129$:
+   09E9 50 03              1636 	jnc	00120$
+   09EB 02 0A 92           1637 	ljmp	00104$
+   09EE                    1638 00120$:
                            1639 ;	main.c:130: stack = i;
    09EE 85 0A 0E           1640 	mov	_stack,_i
                            1641 ;	main.c:262: _endasm;
@@ -1773,16 +1773,16 @@
                            1773 	        
                            1774 ;	main.c:129: for(i = 1; i < SIZE; i++) {
    0A8D 05 0A              1775 	inc	_i
-   0A8F 02 09 E5           1776 	ljmp	00103$
-   0A92                    1777 00106$:
+   0A8F 02 09 E5           1776 	ljmp	00101$
+   0A92                    1777 00104$:
                            1778 ;	main.c:283: for(i = SIZE; i < 255; i++) {
    0A92 75 0A 80           1779 	mov	_i,#0x80
-   0A95                    1780 00107$:
+   0A95                    1780 00105$:
    0A95 74 01              1781 	mov	a,#0x100 - 0xFF
    0A97 25 0A              1782 	add	a,_i
-   0A99 50 03              1783 	jnc	00130$
-   0A9B 02 0B 0F           1784 	ljmp	00110$
-   0A9E                    1785 00130$:
+   0A99 50 03              1783 	jnc	00121$
+   0A9B 02 0B 0F           1784 	ljmp	00108$
+   0A9E                    1785 00121$:
                            1786 ;	main.c:284: stack = i;
    0A9E 85 0A 0E           1787 	mov	_stack,_i
                            1788 ;	main.c:369: _endasm;
@@ -1873,8 +1873,8 @@
                            1873 	        
                            1874 ;	main.c:283: for(i = SIZE; i < 255; i++) {
    0B0A 05 0A              1875 	inc	_i
-   0B0C 02 0A 95           1876 	ljmp	00107$
-   0B0F                    1877 00110$:
+   0B0C 02 0A 95           1876 	ljmp	00105$
+   0B0F                    1877 00108$:
                            1878 ;	main.c:403: _endasm;
                            1879 	
                            1880         ; m[127] = (unsigned char)(tmp);
@@ -1898,7 +1898,7 @@
                            1898 	    
                            1899 ;	main.c:409: for(i = 1; i <= SIZE; i++) {
    0B23 75 0A 80           1900 	mov	_i,#0x80
-   0B26                    1901 00113$:
+   0B26                    1901 00111$:
                            1902 ;	main.c:433: _endasm;
                            1903 	
    0B26 89 0E              1904 	            mov _stack, r1
@@ -1927,9 +1927,9 @@
    0B3F 15 0A              1927 	dec	_i
                            1928 ;	main.c:409: for(i = 1; i <= SIZE; i++) {
    0B41 E5 0A              1929 	mov	a,_i
-   0B43 60 03              1930 	jz	00131$
-   0B45 02 0B 26           1931 	ljmp	00113$
-   0B48                    1932 00131$:
+   0B43 60 03              1930 	jz	00122$
+   0B45 02 0B 26           1931 	ljmp	00111$
+   0B48                    1932 00122$:
    0B48 75 0A 81           1933 	mov	_i,#0x81
                            1934 ;	main.c:585: _endasm;
                            1935 	
@@ -2199,32 +2199,8 @@
         E0 75 83 04 F0
    10D3 22                 2072 	        ret
                            2073 	    
-                           2074 ;	main.c:587: if (tmp == 0) {
-   10D4 E5 08              2075 	mov	a,_tmp
-   10D6 45 09              2076 	orl	a,(_tmp + 1)
-                           2077 ;	main.c:588: for (i = 0; i < SIZE; i++) {
-   10D8 70 1D              2078 	jnz	00118$
-   10DA F5 0A              2079 	mov	_i,a
-   10DC                    2080 00114$:
-   10DC 74 80              2081 	mov	a,#0x100 - 0x80
-   10DE 25 0A              2082 	add	a,_i
-   10E0 40 15              2083 	jc	00118$
-                           2084 ;	main.c:589: m[i] = u[i];
-   10E2 AA 0A              2085 	mov	r2,_i
-   10E4 7B 04              2086 	mov	r3,#(_m >> 8)
-   10E6 85 0A 82           2087 	mov	dpl,_i
-   10E9 75 83 05           2088 	mov	dph,#(_u >> 8)
-   10EC E0                 2089 	movx	a,@dptr
-   10ED FC                 2090 	mov	r4,a
-   10EE 8A 82              2091 	mov	dpl,r2
-   10F0 8B 83              2092 	mov	dph,r3
-   10F2 F0                 2093 	movx	@dptr,a
-                           2094 ;	main.c:588: for (i = 0; i < SIZE; i++) {
-   10F3 05 0A              2095 	inc	_i
-   10F5 80 E5              2096 	sjmp	00114$
-   10F7                    2097 00118$:
-   10F7 22                 2098 	ret
-                           2099 	.area CSEG    (CODE)
-                           2100 	.area CONST   (CODE)
-                           2101 	.area XINIT   (CODE)
-                           2102 	.area CABS    (ABS,CODE)
+   10D4 22                 2074 	ret
+                           2075 	.area CSEG    (CODE)
+                           2076 	.area CONST   (CODE)
+                           2077 	.area XINIT   (CODE)
+                           2078 	.area CABS    (ABS,CODE)

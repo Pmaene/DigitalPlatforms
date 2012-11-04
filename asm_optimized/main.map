@@ -70,12 +70,12 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:0080    l_XABS2
   0C:00F1    l_SSEG
   0C:0100    l_IRAM
-  0C:078A    l_CSEG
+  0C:0767    l_CSEG
   0C:090E    l_GSINIT
   0C:096F    s_GSFINAL
   0C:0972    s_CSEG
-  0C:10FC    s_CONST
-  0C:10FC    s_XINIT
+  0C:10D9    s_CONST
+  0C:10D9    s_XINIT
 
 Hexadecimal
 
@@ -307,13 +307,13 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CSEG                               0972   078A =   1930. bytes (REL,CON,CODE)
+CSEG                               0972   0767 =   1895. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
   0C:0972    _main
   0C:0985    _fips
-  0C:10F8    __sdcc_external_startup
+  0C:10D5    __sdcc_external_startup
 
 
 ASxxxx Linker V01.75 + NoICE + SDCC Feb 1999,  page 1.

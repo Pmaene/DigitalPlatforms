@@ -583,10 +583,4 @@ void fips()
         moveResult(0x7F)
         ret
     _endasm;
-
-    if (tmp == 0) {
-        for (i = 0; i < SIZE; i++) {
-            m[i] = u[i];
-        }
-    }
 }

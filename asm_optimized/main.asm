@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 2.9.0 #5416 (Aug  6 2010) (UNIX)
-; This file was generated Sun Nov  4 14:45:40 2012
+; This file was generated Sun Nov  4 14:46:59 2012
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mmcs51 --model-small
@@ -1630,12 +1630,12 @@ _fips:
 	    
 ;	main.c:129: for(i = 1; i < SIZE; i++) {
 	mov	_i,#0x01
-00103$:
+00101$:
 	mov	a,#0x100 - 0x80
 	add	a,_i
-	jnc	00129$
-	ljmp	00106$
-00129$:
+	jnc	00120$
+	ljmp	00104$
+00120$:
 ;	main.c:130: stack = i;
 	mov	_stack,_i
 ;	main.c:262: _endasm;
@@ -1773,16 +1773,16 @@ _fips:
 	        
 ;	main.c:129: for(i = 1; i < SIZE; i++) {
 	inc	_i
-	ljmp	00103$
-00106$:
+	ljmp	00101$
+00104$:
 ;	main.c:283: for(i = SIZE; i < 255; i++) {
 	mov	_i,#0x80
-00107$:
+00105$:
 	mov	a,#0x100 - 0xFF
 	add	a,_i
-	jnc	00130$
-	ljmp	00110$
-00130$:
+	jnc	00121$
+	ljmp	00108$
+00121$:
 ;	main.c:284: stack = i;
 	mov	_stack,_i
 ;	main.c:369: _endasm;
@@ -1873,8 +1873,8 @@ _fips:
 	        
 ;	main.c:283: for(i = SIZE; i < 255; i++) {
 	inc	_i
-	ljmp	00107$
-00110$:
+	ljmp	00105$
+00108$:
 ;	main.c:403: _endasm;
 	
         ; m[127] = (unsigned char)(tmp);
@@ -1898,7 +1898,7 @@ _fips:
 	    
 ;	main.c:409: for(i = 1; i <= SIZE; i++) {
 	mov	_i,#0x80
-00113$:
+00111$:
 ;	main.c:433: _endasm;
 	
 	            mov _stack, r1
@@ -1927,9 +1927,9 @@ _fips:
 	dec	_i
 ;	main.c:409: for(i = 1; i <= SIZE; i++) {
 	mov	a,_i
-	jz	00131$
-	ljmp	00113$
-00131$:
+	jz	00122$
+	ljmp	00111$
+00122$:
 	mov	_i,#0x81
 ;	main.c:585: _endasm;
 	
@@ -2071,30 +2071,6 @@ _fips:
 	        mov dpl, 0x7F mov dph, #(_u >> 8) movx a, @dptr mov dph, #(_m >> 8) movx @dptr, a
 	        ret
 	    
-;	main.c:587: if (tmp == 0) {
-	mov	a,_tmp
-	orl	a,(_tmp + 1)
-;	main.c:588: for (i = 0; i < SIZE; i++) {
-	jnz	00118$
-	mov	_i,a
-00114$:
-	mov	a,#0x100 - 0x80
-	add	a,_i
-	jc	00118$
-;	main.c:589: m[i] = u[i];
-	mov	r2,_i
-	mov	r3,#(_m >> 8)
-	mov	dpl,_i
-	mov	dph,#(_u >> 8)
-	movx	a,@dptr
-	mov	r4,a
-	mov	dpl,r2
-	mov	dph,r3
-	movx	@dptr,a
-;	main.c:588: for (i = 0; i < SIZE; i++) {
-	inc	_i
-	sjmp	00114$
-00118$:
 	ret
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
