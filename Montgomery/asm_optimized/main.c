@@ -1,14 +1,15 @@
 #include <8051.h>
+
 #define SIZE 128
 #define n_prime 0xA5
 
 #pragma sdcc_hash +
 
 #define moveResult(i) \
-    mov dpl, i\
+    mov dpl, i \
     mov dph, #(_u >> 8) \
-    movx a, @dptr\
-    mov dph, #(_m >> 8)\
+    movx a, @dptr \
+    mov dph, #(_m >> 8) \
     movx @dptr, a
 
 volatile __xdata __at (0xFFFE) unsigned char startBrk;
@@ -40,7 +41,7 @@ int main() {
 
 void fips()
 {
-    //unsigned char n0    = n[0];
+    // unsigned char n0 = n[0];
     _asm
         mov dpl, 0x00
         mov dph, #(_n >> 8)
@@ -48,7 +49,7 @@ void fips()
         mov r2, a
     __endasm;
 
-    //unsigned char b0    = b[0];
+    // unsigned char b0 = b[0];
     _asm
         mov dpl, 0x00
         mov dph, #(_b >> 8)
@@ -58,9 +59,9 @@ void fips()
 
     // loop for i = 0 (j loop is not executed)
     _asm
-        ; schrijf alle gebruikte registers naar de stack
+        ; write registers to stack
         mov _stack, r1
-        push    _stack
+        push _stack
 
         ; load a[0]
         mov dpl, #0x00
