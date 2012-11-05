@@ -10,6 +10,6 @@
 -l libint
 -l liblong
 -l libfloat
-main_montgomery.rel
+main.rel
 
 -e

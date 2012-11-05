@@ -266,26 +266,48 @@ Symbol Table
     _TR1                                                        =  008E G
     _TXD                                                        =  00B1 G
     _WR                                                         =  00B6 G
- 11 __interrupt_vect                                               0000 R
+    __gptrget                                                      **** GX
+    __gptrput                                                      **** GX
+  D __interrupt_vect                                               0000 R
     __mcs51_genRAMCLEAR                                            **** GX
     __mcs51_genXINIT                                               **** GX
     __mcs51_genXRAMCLEAR                                           **** GX
+    __modsint                                                      **** GX
+    __modsint_PARM_2                                               **** GX
     __sdcc_gsinit_startup                                          **** GX
- 11 __sdcc_program_startup                                         0003 GR
+  D __sdcc_program_startup                                         0003 GR
   5 __start__stack                                                 0000 GR
-  D _a                                                             0080 GR
-  E _b                                                             0100 GR
+ 16 _add                                                           0D11 GR
+  4 _add_PARM_2                                                    0000 GR
+  4 _add_t_1_1                                                     0001 GR
     _endBrk                                                     =  FFFF G
- 1A _fips                                                          0013 GR
-  3 _i                                                             0000 GR
-  3 _j                                                             0002 GR
-    _m                                                          =  0400 G
- 1A _main                                                          0000 GR
-  C _n                                                             0000 GR
-  F _n_prime                                                       0300 GR
-  3 _s                                                             0004 GR
+ 16 _fips                                                          093E GR
+  3 _fips_PARM_2                                                   0000 GR
+  3 _fips_PARM_3                                                   0003 GR
+  3 _fips_PARM_4                                                   0006 GR
+  3 _fips_PARM_5                                                   0007 GR
+  3 _fips_a_1_1                                                    000A R
+  3 _fips_c_1_1                                                    0013 R
+  3 _fips_i_1_1                                                    000F R
+  3 _fips_j_1_1                                                    0011 R
+    _fips_result_1_1                                            =  0300 
+  3 _fips_s_1_1                                                    0014 R
+  3 _fips_sloc0_1_0                                                0019 R
+  3 _fips_sloc1_1_0                                                001C R
+  3 _fips_sloc2_1_0                                                001F R
+  3 _fips_sloc3_1_0                                                0020 R
+  3 _fips_sloc4_1_0                                                0022 R
+  3 _fips_sloc5_1_0                                                0025 R
+  3 _fips_t_1_1                                                    0016 R
+  3 _fips_tmp_1_1                                                  000D R
+  3 _fips_v_1_1                                                    0015 R
+ 16 _main                                                          0000 GR
+    _main_a_1_1                                                 =  0080 
+    _main_b_1_1                                                 =  0100 
+    _main_m_1_1                                                 =  0200 
+    _main_n_1_1                                                 =  0000 
+    _main_n_prime_1_1                                           =  0180 
     _startBrk                                                   =  FFFE G
-  3 _t                                                             0005 GR
     a                                                              00D6 
     ac                                                             00D6 
     acc                                                            00E0 
@@ -470,8 +492,8 @@ Area Table
    0 _CODE                                                                              size    0   flags 0
    1 RSEG                                                                               size    0   flags 0
    2 REG_BANK_0                                                                         size    8   flags 4
-   3 DSEG                                                                               size    8   flags 0
-   4 OSEG                                                                               size    0   flags 4
+   3 DSEG                                                                               size   27   flags 0
+   4 OSEG                                                                               size    4   flags 4
    5 SSEG                                                                               size    1   flags 0
    6 ISEG                                                                               size    0   flags 0
    7 IABS                                                                               size    0   flags 8
@@ -479,21 +501,17 @@ Area Table
    9 PSEG                                                                               size    0   flags 50
    A XSEG                                                                               size    0   flags 40
    B XABS                                                                               size    0   flags 48
-   C XABS0                                                                              size   80   flags 48
-   D XABS1                                                                              size   80   flags 48
-   E XABS2                                                                              size   80   flags 48
-   F XABS3                                                                              size    1   flags 48
-  10 XISEG                                                                              size    0   flags 40
-  11 HOME                                                                               size    8   flags 20
-  12 GSINIT0                                                                            size    0   flags 20
-  13 GSINIT1                                                                            size    0   flags 20
-  14 GSINIT2                                                                            size    0   flags 20
-  15 GSINIT3                                                                            size    0   flags 20
-  16 GSINIT4                                                                            size    0   flags 20
-  17 GSINIT5                                                                            size    0   flags 20
-  18 GSINIT                                                                             size  91A   flags 20
-  19 GSFINAL                                                                            size    3   flags 20
-  1A CSEG                                                                               size  18E   flags 20
-  1B CONST                                                                              size    0   flags 20
-  1C XINIT                                                                              size    0   flags 20
-  1D CABS                                                                               size    0   flags 28
+   C XISEG                                                                              size    0   flags 40
+   D HOME                                                                               size    8   flags 20
+   E GSINIT0                                                                            size    0   flags 20
+   F GSINIT1                                                                            size    0   flags 20
+  10 GSINIT2                                                                            size    0   flags 20
+  11 GSINIT3                                                                            size    0   flags 20
+  12 GSINIT4                                                                            size    0   flags 20
+  13 GSINIT5                                                                            size    0   flags 20
+  14 GSINIT                                                                             size    0   flags 20
+  15 GSFINAL                                                                            size    3   flags 20
+  16 CSEG                                                                               size  D67   flags 20
+  17 CONST                                                                              size    0   flags 20
+  18 XINIT                                                                              size    0   flags 20
+  19 CABS                                                                               size    0   flags 28
