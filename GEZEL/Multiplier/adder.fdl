@@ -1,0 +1,45 @@
+dp full_adder_dp (in sel : ns(1); in a, b : ns(1026); out s: ns(1027)) {
+    sig b_eff : ns(1026);
+
+    always {
+        b_eff = sel == 1 ? (~b + 1) : b;
+	    s = a + b_eff;
+    }
+}
+
+dp display_dp (in sel : ns(1); in a, b : ns(1026); in s: ns(1027)) {
+    always {
+	    $display("Select: ", $dec, sel, " A: ", $dec, a, " B: ", $dec, b, " Sum: ", $dec, s);
+        $finish;
+    }
+}
+
+dp full_adder_test (out sel : ns(1); out a, b : ns(1026))
+{
+	sfg do_always
+	{
+        sel = 1;
+
+		a = 112;
+		b = 50;
+    }
+}
+
+hardwired full_adder_hw (full_adder_test) { do_always; }
+
+dp full_adder_sys
+{
+    sig sel : ns(1);
+	sig a   : ns(1026);
+	sig b   : ns(1026);
+	sig s   : ns(1027);
+	
+	use full_adder_test(sel, a, b);
+	use full_adder_dp(sel, a, b, s);
+	use display_dp(sel, a, b, s);
+}
+
+system S
+{
+	full_adder_sys;
+}
