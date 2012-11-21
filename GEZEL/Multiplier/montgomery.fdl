@@ -1,0 +1,134 @@
+dp adder_dp (in sel : ns(1); in a, b : ns(1026); out s: ns(1027)) {
+    sig b_eff : ns(1026);
+
+    always {
+        b_eff = sel == 1 ? (~b + 1) : b;
+	    s = a + b_eff;
+    }
+}
+
+dp montgomery_dp (in a, b, m : ns(1024); out r : ns(1027))
+{
+    reg counter : ns(11);
+    reg r_reg   : ns(1027);
+    reg a_reg   : ns(1024);
+
+    sig r_tmp   : ns(1027);
+    sig sel     : ns(1);
+    sig x       : ns(1026);
+    sig y       : ns(1026);
+
+    use adder_dp(sel, x, y, r_tmp);
+
+    sfg init {
+	    counter = 0;
+	    r = 0;
+	    r_reg = 0;
+        
+        x = 0;
+        y = 0;
+        sel = 0;
+
+        a_reg = a;
+    }
+
+    sfg loop {
+    }
+
+    sfg count_inc {
+	    counter = counter + 1;
+        a_reg = a_reg >> 1;
+    }
+
+    sfg count_rst {
+	    counter = 0;
+    }
+
+    sfg sum {
+        x = r_reg;
+        y = a_reg[0] == 0 ? 0 : b;
+        sel = 0;
+        r_reg = r_tmp;
+    }
+
+    sfg equal_to_zero {
+        sel = 0;
+        x = 0;
+        y = 0;
+	    r_reg = r_reg >> 1;
+    }
+
+    sfg not_equal_to_zero {
+        sel = 0;
+        x = r_reg;
+        y = m;
+	    r_reg = r_tmp >> 1;
+    }
+
+    sfg overflow_check {
+        sel = 1;
+        x = r_reg;
+        y = r_reg >= m ? m : 0;
+        r_reg = r_tmp;
+    }
+
+    sfg stop {
+        sel = 0;
+        x = 0;
+        y = 0;
+        r = r_reg;
+
+        $display("A: ", $dec, a, " B: ", $dec, b, " M: ", $dec, m, " R: ", $dec, r);
+	    $finish;
+    }
+
+    sfg reset_r {
+        r = 0;
+    }
+}
+
+fsm montgomery (montgomery_dp)
+{
+    initial init;
+    state loop, stop, if_else;
+
+    @init	    (init) -> loop;
+    @loop	    if (counter >= 1024) then
+			        (count_rst, overflow_check, reset_r) -> stop;
+		        else
+                    (sum, reset_r) -> if_else;
+    @if_else    if (r_reg[0] == 0) then
+			        (equal_to_zero, count_inc, reset_r) -> loop;
+		        else 
+			        (not_equal_to_zero, count_inc, reset_r) -> loop;
+    @stop       (stop) -> stop;
+}
+
+dp montgomery_test (out a, b, m : ns(1024))
+{
+	sfg do_always
+	{
+		a = 141961922344227189923304044674466259216849139914571548463026685087456952073320283567353956436423691990006925279380409798444651995839360240803449976730763257878317164187950501766146018885608500549779996329875392964006867908865978811384600885619746888819556246510538669443482377154725376450443917379508305690623;
+        b = 133518921130163465724205375951027205152103919058163320355598750951451352240749495037977692115299036696058564623670986183083024835167240855070109586884091070677963209257239430806972445203584052409064878299165618106683887102259851685408345098495204698467282990235628752524312936897024077914680768091532759894753;
+		m = 142469473898573440356695276830095297341807723798001973684650488988606433829875435617090912536801954429674763845008067112267225020649562301765838181046652327258434431800384431322324447530542188341951078054433098069407786590339704377060979874894104096248591825085111588666323520997935225535355645048944347862483;
+    }
+}
+
+hardwired montgomery_hw (montgomery_test) { do_always; }
+
+dp montgomery_sys
+{
+	sig a : ns(1024);
+	sig b : ns(1024);
+	sig m : ns(1024);
+    reg r : ns(1027);
+	
+	use montgomery_test(a, b, m);
+	use montgomery_dp(a, b, m, r);
+}
+
+system S
+{
+	montgomery_sys;
+}
+
