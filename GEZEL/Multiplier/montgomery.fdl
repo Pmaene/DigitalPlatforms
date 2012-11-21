@@ -121,7 +121,7 @@ dp montgomery_sys
 	sig a : ns(1024);
 	sig b : ns(1024);
 	sig m : ns(1024);
-    reg r : ns(1027);
+    sig r : ns(1027);
 	
 	use montgomery_test(a, b, m);
 	use montgomery_dp(a, b, m, r);
