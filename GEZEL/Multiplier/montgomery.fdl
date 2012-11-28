@@ -7,6 +7,54 @@ dp adder_dp (in sel : ns(1); in a, b : ns(1026); out s: ns(1027)) {
     }
 }
 
+dp decoder_dp(in ins : ns(8); in din : ns(1027); out dout: ns(1024); out address: ns(8); out wr : ns(1); out done : ns(8)) {
+    reg data    : ns(1024);
+	reg i       : ns(8);
+    reg ins_reg : ns(8);
+    reg din_reg : ns(1027);
+
+    sfg decode {
+        ins_reg = ins;
+        din_reg = din;
+    }
+
+    sfg push { 
+	    wr = 0;
+		address = i;
+		i = i+1;
+		dout = 0;
+		data = data << 8 | din;
+		$display($cycle, " fetching at address ", i, " getting ", din," having ", data);
+    }
+   
+    sfg pull    { 
+		wr = 0;
+		address = 0;
+		i = 0;
+		dout = 0;
+		$display($cycle, " i is reset ");
+	}
+}
+
+fsm decoder(decoder_dp) {
+    initial init;
+    state do, done, get_data;
+
+    @init       (decode, pull) -> do;
+    @do         if (ins_reg == 1) then
+                    (push, decode) -> get_data;
+                else
+                    (decode, pull) -> do;
+    @done       if (ins_reg == 0) then
+                    (decode, pull) -> do;
+                else
+                    (decode, pull) -> done;
+	@get_data   if (i > 3) then
+                    (decode, pull) -> done;
+				else
+                    (push) -> get_data;
+}
+
 dp montgomery_dp (in a, b, m : ns(1024); out r : ns(1027))
 {
     reg counter : ns(11);
@@ -61,7 +109,7 @@ dp montgomery_dp (in a, b, m : ns(1024); out r : ns(1027))
     sfg sum_and_divide {
         x = r_reg;
         y = b;
-        sel = 0;
+        sel = 0;volatile xdata __at 0x4000 unsigned char SHARED[4];
         r_reg = r_tmp >> 1;
     }
 
@@ -144,6 +192,31 @@ dp montgomery_test (out a, b, m : ns(1024))
 }
 
 hardwired montgomery_hw (montgomery_test) { do_always; }
+
+ipblock my8051 {
+   iptype "i8051system";
+   ipparm "exec=montgomery.ihx";
+   ipparm "verbose=1";
+}
+ 
+ipblock my8051_instruction(out data : ns(8)) {
+   iptype "i8051systemsource";
+   ipparm "core=my8051";
+   ipparm "port=P0";
+}
+
+ipblock my8051_variable(out data : ns(8)) {
+   iptype "i8051systemsource";
+   ipparm "core=my8051";
+   ipparm "port=P1";
+}
+
+ipblock my_ram(in idata : ns(8); out odata : ns(1024); in address : ns(8); in wr : ns(1)) {
+	iptype "i8051buffer";
+	ipparm "core=my8051";
+	ipparm "xbus=0x4000";
+	ipparm "xrange=0x80";
+}
 
 dp montgomery_sys
 {
