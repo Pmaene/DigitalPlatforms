@@ -3,7 +3,7 @@
 #include <8051.h>
 #define SIZE 128
 
-enum {ins_read_a, ins_read_b, ins_read_c, ins_write_r, ins_idle, ins_montgomery};
+enum {ins_idle, ins_write_data, ins_montgomery, ins_read_r, ins_ack};
 
 volatile __xdata __at (0xFFFE) unsigned char startBrk;
 volatile __xdata __at (0xFFFF) unsigned char endBrk;
@@ -14,50 +14,38 @@ volatile __xdata __at (0x0100) unsigned char b[SIZE] = {0xE1,0x8A,0x03,0xDB,0xE0
 
 volatile __xdata __at (0x0200) unsigned char r[SIZE];
 
-volatile __xdata __at (0x4000) unsigned char shared[SIZE];
+volatile __xdata __at (0x4000) unsigned char shared_a[SIZE];
+volatile __xdata __at (0x4080) unsigned char shared_b[SIZE];
+volatile __xdata __at (0x4100) unsigned char shared_m[SIZE];
 
-unsigned char i;
+unsigned short i;
 
-void read_a() {
+void write_montgomery() {
     P1 = 0;
     
     for (i = 0; i < SIZE; i++) {
-        shared[i] = a[i];
+        shared_a[i] = a[i];
     }
 
-    P0 = ins_read_a;
-    P0 = ins_idle;
-}
-
-void read_b() {
-    P1 = 0;
-
-    for (i = 0; i < SIZE; i++) {
-        shared[i] = b[i];
+	for (i = 0; i < SIZE; i++) {
+        shared_b[i] = b[i];
     }
 
-    P0 = ins_read_b;
-    P0 = ins_idle;
-}
-
-void read_m() {
-    P1 = 0;
-
-    for (i = 0; i < SIZE; i++) {
-        shared[i] = m[i];
+	for (i = 0; i < SIZE; i++) {
+        shared_m[i] = m[i];
     }
 
-    P0 = ins_read_c;
+    P0 = ins_write_data;
     P0 = ins_idle;
-}
 
-void write_r() {
-    P0 = ins_write_r;
     while (P1 == 0) {}
+	P0 = ins_ack;
+}
 
-    for (i = 0; i < SIZE; i++) {
-        r[i] = shared[i];
-    }
+void read_r() {
+    P0 = ins_read_r;
+    while (P1 == 0) {}
+	P0 = ins_ack;
 
     P0 = ins_idle;
 }
@@ -72,11 +60,7 @@ void terminate() {
 }
 
 int main() {
-    read_a();
-    while (P1 == 0) {}
-    read_b();
-    while (P1 == 0) {}
-    read_m();
+    write_montgomery();
     
 	startBrk=1;
     
@@ -84,7 +68,7 @@ int main() {
     
 	endBrk=1;
 
-    write_r();
+    read_r();
 
     terminate();
 	return 0;

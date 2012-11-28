@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 2.9.0 #5416 (Aug  6 2010) (UNIX)
-; This file was generated Wed Nov 21 18:34:50 2012
+; This file was generated Wed Nov 28 18:58:41 2012
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mmcs51 --model-small
@@ -12,10 +12,8 @@
 	.globl _main
 	.globl _terminate
 	.globl _montgomery
-	.globl _write_r
-	.globl _read_m
-	.globl _read_b
-	.globl _read_a
+	.globl _read_r
+	.globl _write_montgomery
 	.globl _CY
 	.globl _AC
 	.globl _F0
@@ -115,7 +113,9 @@
 	.globl _b
 	.globl _a
 	.globl _m
-	.globl _shared
+	.globl _shared_m
+	.globl _shared_b
+	.globl _shared_a
 	.globl _r
 	.globl _endBrk
 	.globl _startBrk
@@ -234,7 +234,7 @@ _CY	=	0x00d7
 ;--------------------------------------------------------
 	.area DSEG    (DATA)
 _i::
-	.ds 1
+	.ds 2
 ;--------------------------------------------------------
 ; overlayable items in internal ram 
 ;--------------------------------------------------------
@@ -270,7 +270,9 @@ __start__stack:
 _startBrk	=	0xfffe
 _endBrk	=	0xffff
 _r	=	0x0200
-_shared	=	0x4000
+_shared_a	=	0x4000
+_shared_b	=	0x4080
+_shared_m	=	0x4100
 ;--------------------------------------------------------
 ; absolute external ram data
 ;--------------------------------------------------------
@@ -1488,14 +1490,14 @@ __sdcc_program_startup:
 ;--------------------------------------------------------
 	.area CSEG    (CODE)
 ;------------------------------------------------------------
-;Allocation info for local variables in function 'read_a'
+;Allocation info for local variables in function 'write_montgomery'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:21: void read_a() {
+;	main.c:23: void write_montgomery() {
 ;	-----------------------------------------
-;	 function read_a
+;	 function write_montgomery
 ;	-----------------------------------------
-_read_a:
+_write_montgomery:
 	ar2 = 0x02
 	ar3 = 0x03
 	ar4 = 0x04
@@ -1504,21 +1506,28 @@ _read_a:
 	ar7 = 0x07
 	ar0 = 0x00
 	ar1 = 0x01
-;	main.c:22: P1 = 0;
-	mov	_P1,#0x00
-;	main.c:24: for (i = 0; i < SIZE; i++) {
-	mov	_i,#0x00
-00101$:
-	mov	a,#0x100 - 0x80
-	add	a,_i
-	jc	00104$
-;	main.c:25: shared[i] = a[i];
+;	main.c:24: P1 = 0;
+;	main.c:26: for (i = 0; i < SIZE; i++) {
+	clr	a
+	mov	_P1,a
+	mov	_i,a
+	mov	(_i + 1),a
+00104$:
+	clr	c
+	mov	a,_i
+	subb	a,#0x80
+	mov	a,(_i + 1)
+	subb	a,#0x00
+	jnc	00107$
+;	main.c:27: shared_a[i] = a[i];
 	mov	r2,_i
-	mov	r3,#(_shared >> 8)
+	mov	a,#(_shared_a >> 8)
+	add	a,(_i + 1)
+	mov	r3,a
 	mov	a,_i
 	add	a,#_a
 	mov	dpl,a
-	clr	a
+	mov	a,(_i + 1)
 	addc	a,#(_a >> 8)
 	mov	dph,a
 	movx	a,@dptr
@@ -1526,185 +1535,162 @@ _read_a:
 	mov	dpl,r2
 	mov	dph,r3
 	movx	@dptr,a
-;	main.c:24: for (i = 0; i < SIZE; i++) {
+;	main.c:26: for (i = 0; i < SIZE; i++) {
 	inc	_i
-	sjmp	00101$
-00104$:
-;	main.c:28: P0 = ins_read_a;
-	mov	_P0,#0x00
-;	main.c:29: P0 = ins_idle;
-	mov	_P0,#0x04
-	ret
-;------------------------------------------------------------
-;Allocation info for local variables in function 'read_b'
-;------------------------------------------------------------
-;------------------------------------------------------------
-;	main.c:32: void read_b() {
-;	-----------------------------------------
-;	 function read_b
-;	-----------------------------------------
-_read_b:
-;	main.c:33: P1 = 0;
-	mov	_P1,#0x00
-;	main.c:35: for (i = 0; i < SIZE; i++) {
-	mov	_i,#0x00
-00101$:
-	mov	a,#0x100 - 0x80
-	add	a,_i
-	jc	00104$
-;	main.c:36: shared[i] = b[i];
-	mov	r2,_i
-	mov	r3,#(_shared >> 8)
+	clr	a
+	cjne	a,_i,00104$
+	inc	(_i + 1)
+	sjmp	00104$
+00107$:
+;	main.c:30: for (i = 0; i < SIZE; i++) {
+	clr	a
+	mov	_i,a
+	mov	(_i + 1),a
+00108$:
+	clr	c
+	mov	a,_i
+	subb	a,#0x80
+	mov	a,(_i + 1)
+	subb	a,#0x00
+	jnc	00111$
+;	main.c:31: shared_b[i] = b[i];
+	mov	a,_i
+	add	a,#_shared_b
+	mov	r2,a
+	mov	a,(_i + 1)
+	addc	a,#(_shared_b >> 8)
+	mov	r3,a
 	mov	dpl,_i
-	mov	dph,#(_b >> 8)
+	mov	a,#(_b >> 8)
+	add	a,(_i + 1)
+	mov	dph,a
 	movx	a,@dptr
 	mov	r4,a
 	mov	dpl,r2
 	mov	dph,r3
 	movx	@dptr,a
-;	main.c:35: for (i = 0; i < SIZE; i++) {
+;	main.c:30: for (i = 0; i < SIZE; i++) {
 	inc	_i
-	sjmp	00101$
-00104$:
-;	main.c:39: P0 = ins_read_b;
+	clr	a
+	cjne	a,_i,00108$
+	inc	(_i + 1)
+	sjmp	00108$
+00111$:
+;	main.c:34: for (i = 0; i < SIZE; i++) {
+	clr	a
+	mov	_i,a
+	mov	(_i + 1),a
+00112$:
+	clr	c
+	mov	a,_i
+	subb	a,#0x80
+	mov	a,(_i + 1)
+	subb	a,#0x00
+	jnc	00115$
+;	main.c:35: shared_m[i] = m[i];
+	mov	r2,_i
+	mov	a,#(_shared_m >> 8)
+	add	a,(_i + 1)
+	mov	r3,a
+	mov	dpl,_i
+	mov	a,#(_m >> 8)
+	add	a,(_i + 1)
+	mov	dph,a
+	movx	a,@dptr
+	mov	r4,a
+	mov	dpl,r2
+	mov	dph,r3
+	movx	@dptr,a
+;	main.c:34: for (i = 0; i < SIZE; i++) {
+	inc	_i
+	clr	a
+	cjne	a,_i,00112$
+	inc	(_i + 1)
+	sjmp	00112$
+00115$:
+;	main.c:38: P0 = ins_write_data;
 	mov	_P0,#0x01
-;	main.c:40: P0 = ins_idle;
-	mov	_P0,#0x04
-	ret
-;------------------------------------------------------------
-;Allocation info for local variables in function 'read_m'
-;------------------------------------------------------------
-;------------------------------------------------------------
-;	main.c:43: void read_m() {
-;	-----------------------------------------
-;	 function read_m
-;	-----------------------------------------
-_read_m:
-;	main.c:44: P1 = 0;
-	mov	_P1,#0x00
-;	main.c:46: for (i = 0; i < SIZE; i++) {
-	mov	_i,#0x00
+;	main.c:39: P0 = ins_idle;
+	mov	_P0,#0x00
+;	main.c:41: while (P1 == 0) {}
 00101$:
-	mov	a,#0x100 - 0x80
-	add	a,_i
-	jc	00104$
-;	main.c:47: shared[i] = m[i];
-	mov	r2,_i
-	mov	r3,#(_shared >> 8)
-	mov	dpl,_i
-	mov	dph,#(_m >> 8)
-	movx	a,@dptr
-	mov	r4,a
-	mov	dpl,r2
-	mov	dph,r3
-	movx	@dptr,a
-;	main.c:46: for (i = 0; i < SIZE; i++) {
-	inc	_i
-	sjmp	00101$
-00104$:
-;	main.c:50: P0 = ins_read_c;
-	mov	_P0,#0x02
-;	main.c:51: P0 = ins_idle;
+	mov	a,_P1
+	jz	00101$
+;	main.c:42: P0 = ins_ack;
 	mov	_P0,#0x04
 	ret
 ;------------------------------------------------------------
-;Allocation info for local variables in function 'write_r'
+;Allocation info for local variables in function 'read_r'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:54: void write_r() {
+;	main.c:45: void read_r() {
 ;	-----------------------------------------
-;	 function write_r
+;	 function read_r
 ;	-----------------------------------------
-_write_r:
-;	main.c:55: P0 = ins_write_r;
+_read_r:
+;	main.c:46: P0 = ins_read_r;
 	mov	_P0,#0x03
-;	main.c:57: for (i = 0; i < SIZE; i++) {
-	mov	_i,#0x00
+;	main.c:47: while (P1 == 0) {}
 00101$:
-	mov	a,#0x100 - 0x80
-	add	a,_i
-	jc	00104$
-;	main.c:58: r[i] = shared[i];
-	mov	r2,_i
-	mov	r3,#(_r >> 8)
-	mov	dpl,_i
-	mov	dph,#(_shared >> 8)
-	movx	a,@dptr
-	mov	r4,a
-	mov	dpl,r2
-	mov	dph,r3
-	movx	@dptr,a
-;	main.c:57: for (i = 0; i < SIZE; i++) {
-	inc	_i
-	sjmp	00101$
-00104$:
-;	main.c:61: P0 = ins_idle;
+	mov	a,_P1
+	jz	00101$
+;	main.c:48: P0 = ins_ack;
 	mov	_P0,#0x04
+;	main.c:50: P0 = ins_idle;
+	mov	_P0,#0x00
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'montgomery'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:64: void montgomery() {
+;	main.c:53: void montgomery() {
 ;	-----------------------------------------
 ;	 function montgomery
 ;	-----------------------------------------
 _montgomery:
-;	main.c:65: P0 = ins_montgomery;
-	mov	_P0,#0x05
-;	main.c:66: P0 = ins_idle;
-	mov	_P0,#0x04
+;	main.c:54: P0 = ins_montgomery;
+	mov	_P0,#0x02
+;	main.c:55: P0 = ins_idle;
+	mov	_P0,#0x00
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'terminate'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:69: void terminate() {
+;	main.c:58: void terminate() {
 ;	-----------------------------------------
 ;	 function terminate
 ;	-----------------------------------------
 _terminate:
-;	main.c:70: P3 = 0x55;
+;	main.c:59: P3 = 0x55;
 	mov	_P3,#0x55
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'main'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:73: int main() {
+;	main.c:62: int main() {
 ;	-----------------------------------------
 ;	 function main
 ;	-----------------------------------------
 _main:
-;	main.c:74: read_a();
-	lcall	_read_a
-;	main.c:75: if (P1 == 1)
-	mov	a,#0x01
-	cjne	a,_P1,00102$
-;	main.c:76: read_b();
-	lcall	_read_b
-00102$:
-;	main.c:77: if (P1 == 1)
-	mov	a,#0x01
-	cjne	a,_P1,00104$
-;	main.c:78: read_m();
-	lcall	_read_m
-00104$:
-;	main.c:80: startBrk=1;
+;	main.c:63: write_montgomery();
+	lcall	_write_montgomery
+;	main.c:65: startBrk=1;
 	mov	dptr,#_startBrk
 	mov	a,#0x01
 	movx	@dptr,a
-;	main.c:82: montgomery();
+;	main.c:67: montgomery();
 	lcall	_montgomery
-;	main.c:84: endBrk=1;
+;	main.c:69: endBrk=1;
 	mov	dptr,#_endBrk
 	mov	a,#0x01
 	movx	@dptr,a
-;	main.c:86: write_r();
-	lcall	_write_r
-;	main.c:88: terminate();
+;	main.c:71: read_r();
+	lcall	_read_r
+;	main.c:73: terminate();
 	lcall	_terminate
-;	main.c:89: return 0;
+;	main.c:74: return 0;
 	mov	dptr,#0x0000
 	ret
 	.area CSEG    (CODE)
