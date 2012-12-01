@@ -110,9 +110,13 @@ dp montgomery_dp (in a, b, m : ns(1024); out r : ns(1027))
 fsm montgomery (montgomery_dp)
 {
     initial init;
-    state loop, stop, if_else;
+    state loop, stop, if_else, wait;
 
-    @init       (init) -> loop;
+    @init       (init) -> wait;
+    @wait       if (m == 0) then
+                    (init) -> wait;
+                else
+                    (init) -> loop;
     @loop       if (counter >= 1024) then
                     (count_rst, overflow_check, reset_r) -> stop;
                 else if (r_reg[0] == 0 & a_reg[0] == 0) then
@@ -129,7 +133,7 @@ fsm montgomery (montgomery_dp)
                     (equal_to_zero, count_inc, reset_r) -> loop;
                 else
                     (not_equal_to_zero, count_inc, reset_r) -> loop;
-    @stop       (stop) -> stop;
+    @stop       (stop) -> wait;
 }
 
 dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(1027); out address: ns(9); out data_wr, result_wr : ns(1)) {
@@ -200,7 +204,7 @@ dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(102
         r_reg = r_sig;
         data_wr = 0;
         result_wr = 0;
-        $display($cycle, "mont");
+        $display($cycle, "mont", r_reg);
     }
 
     sfg write_result {
@@ -208,6 +212,7 @@ dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(102
         dout = 0;
         data_wr = 0;
         result_wr = 0;
+	sync = 0;
     }
 }
 
@@ -243,7 +248,7 @@ fsm decoder(decoder_dp) {
     @do_montgomery  if (r_reg > 0) then
                         (no_montgomery, no_sync, no_write, no_address, decode) -> do;
                     else
-                        (no_montgomery, no_sync, no_write, no_address, decode) -> do_montgomery;
+                        (montgomery, no_sync, no_write, no_address, decode) -> do_montgomery;
     @write_result   (no_montgomery, no_sync, no_address, decode) -> write_result;
 }
 
