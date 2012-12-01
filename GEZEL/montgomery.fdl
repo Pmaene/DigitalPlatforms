@@ -222,7 +222,6 @@ dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(8);
     }
 
     sfg reset_counter {
-        a_reg = 0;
         i = 0;    
     }
 }
