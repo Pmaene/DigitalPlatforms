@@ -98,8 +98,6 @@ dp montgomery_dp (in a, b, m : ns(1024); out r : ns(1027))
         x = 0;
         y = 0;
         r = r_reg;
-
-        //$display("A: ", a, " B: ", b, " M: ", m, " R: ", r);
     }
 
     sfg reset_r {
@@ -136,7 +134,7 @@ fsm montgomery (montgomery_dp)
     @stop       (stop) -> wait;
 }
 
-dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(1027); out address: ns(9); out data_wr, result_wr : ns(1)) {
+dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(8); out address: ns(9); out data_wr, result_wr : ns(1)) {
     reg i       : ns(9);
     reg ins_reg : ns(8);
     reg din_reg : ns(8);
@@ -158,9 +156,6 @@ dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(102
         a_sig = 0;
         b_sig = 0;
         m_sig = 0;
-        data_wr = 0;
-        result_wr = 0;
-        //$display("insref", $dec, ins_reg);
     }
 
     sfg no_sync {
@@ -168,6 +163,9 @@ dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(102
     }
 
     sfg no_write {
+        data_wr = 0;
+        result_wr = 0;        
+
         dout = 0;
     }
 
@@ -179,6 +177,8 @@ dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(102
         address = i;
         i = i+1;
         a_reg = a_reg << 8 | din;
+
+        $display($cycle, "Read A: ", a_reg);
     }
 
     sfg read_b {
@@ -202,31 +202,42 @@ dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(102
         b_sig = b_reg;
         m_sig = m_reg;
         r_reg = r_sig;
-        data_wr = 0;
-        result_wr = 0;
-        $display($cycle, "mont", r_reg);
+
+        $display($cycle, "Montgomery: ", r_reg);
     }
 
     sfg write_result {
-        address = 0;
-        dout = 0;
+        address = 0x80-i;
+        i = i+1;
+        dout = r_reg;
+        r_reg = r_reg >> 8;
         data_wr = 0;
-        result_wr = 0;
-	sync = 0;
+        result_wr = 1;
+
+        $display($cycle, "Writing: ", dout);
+    }
+
+    sfg write_done {
+        sync = 1;    
+    }
+
+    sfg reset_counter {
+        a_reg = 0;
+        i = 0;    
     }
 }
 
 fsm decoder(decoder_dp) {
     initial init;
-    state do, done, get_data, do_montgomery, write_result, read_done;
+    state do, done, get_data, do_montgomery, write_result, read_done, write_done;
 
     @init           (no_montgomery, no_sync, no_write, no_address, decode) -> do;
     @do             if (ins_reg == 1) then
-                        (no_montgomery, no_sync, no_write, read_a, decode) -> get_data;
+                        (no_montgomery, no_sync, no_write, no_address, reset_counter, decode) -> get_data;
                     else if (ins_reg == 2) then
                         (montgomery, no_sync, no_write, no_address, decode) -> do_montgomery;
                     else if (ins_reg == 3) then
-                        (no_montgomery, write_result, decode) -> write_result;
+                        (no_montgomery, no_sync, no_write, no_address, reset_counter, decode) -> write_result;
                     else
                         (no_montgomery, no_sync, no_write, no_address, decode) -> do;
     @done           if (ins_reg == 0) then
@@ -249,7 +260,14 @@ fsm decoder(decoder_dp) {
                         (no_montgomery, no_sync, no_write, no_address, decode) -> do;
                     else
                         (montgomery, no_sync, no_write, no_address, decode) -> do_montgomery;
-    @write_result   (no_montgomery, no_sync, no_address, decode) -> write_result;
+    @write_result   if (i < 0x81) then
+                        (no_montgomery, no_sync, write_result, decode) -> write_result;
+                    else
+                        (no_montgomery, no_write, no_address, write_done, decode) -> write_done;
+    @write_done     if (ins_reg == 4) then
+                        (no_montgomery, no_write, no_address, no_sync, decode) -> do;
+                    else
+                        (no_montgomery, no_write, no_address, write_done, decode) -> write_done;
 }
 
 ipblock my8051 {

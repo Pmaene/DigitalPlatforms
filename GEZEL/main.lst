@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 2.9.0 #5416 (Aug  6 2010) (UNIX)
-                              4 ; This file was generated Wed Nov 28 18:58:41 2012
+                              4 ; This file was generated Sat Dec  1 20:11:48 2012
                               5 ;--------------------------------------------------------
                               6 	.module main
                               7 	.optsdcc -mmcs51 --model-small
@@ -1688,12 +1688,56 @@
    00D3 F0                 1688 	movx	@dptr,a
                            1689 ;	main.c:71: read_r();
    00D4 12s00rA9           1690 	lcall	_read_r
-                           1691 ;	main.c:73: terminate();
-   00D7 12s00rBE           1692 	lcall	_terminate
-                           1693 ;	main.c:74: return 0;
-   00DA 90 00 00           1694 	mov	dptr,#0x0000
-   00DD 22                 1695 	ret
-                           1696 	.area CSEG    (CODE)
-                           1697 	.area CONST   (CODE)
-                           1698 	.area XINIT   (CODE)
-                           1699 	.area CABS    (ABS,CODE)
+                           1691 ;	main.c:73: P1 = 0;
+                           1692 ;	main.c:75: for (i = 0; i < SIZE; i++) {
+   00D7 E4                 1693 	clr	a
+   00D8 F5 90              1694 	mov	_P1,a
+   00DA F5*00              1695 	mov	_i,a
+   00DC F5*01              1696 	mov	(_i + 1),a
+   00DE                    1697 00104$:
+   00DE C3                 1698 	clr	c
+   00DF E5*00              1699 	mov	a,_i
+   00E1 94 80              1700 	subb	a,#0x80
+   00E3 E5*01              1701 	mov	a,(_i + 1)
+   00E5 94 00              1702 	subb	a,#0x00
+   00E7 50 21              1703 	jnc	00107$
+                           1704 ;	main.c:76: shared_a[i] = r[i];
+   00E9 AA*00              1705 	mov	r2,_i
+   00EB 74 40              1706 	mov	a,#(_shared_a >> 8)
+   00ED 25*01              1707 	add	a,(_i + 1)
+   00EF FB                 1708 	mov	r3,a
+   00F0 85*00 82           1709 	mov	dpl,_i
+   00F3 74 02              1710 	mov	a,#(_r >> 8)
+   00F5 25*01              1711 	add	a,(_i + 1)
+   00F7 F5 83              1712 	mov	dph,a
+   00F9 E0                 1713 	movx	a,@dptr
+   00FA FC                 1714 	mov	r4,a
+   00FB 8A 82              1715 	mov	dpl,r2
+   00FD 8B 83              1716 	mov	dph,r3
+   00FF F0                 1717 	movx	@dptr,a
+                           1718 ;	main.c:75: for (i = 0; i < SIZE; i++) {
+   0100 05*00              1719 	inc	_i
+   0102 E4                 1720 	clr	a
+   0103 B5*00 D8           1721 	cjne	a,_i,00104$
+   0106 05*01              1722 	inc	(_i + 1)
+   0108 80 D4              1723 	sjmp	00104$
+   010A                    1724 00107$:
+                           1725 ;	main.c:79: P0 = ins_write_data;
+   010A 75 80 01           1726 	mov	_P0,#0x01
+                           1727 ;	main.c:80: P0 = ins_idle;
+   010D 75 80 00           1728 	mov	_P0,#0x00
+                           1729 ;	main.c:82: while (P1 == 0) {}
+   0110                    1730 00101$:
+   0110 E5 90              1731 	mov	a,_P1
+   0112 60 FC              1732 	jz	00101$
+                           1733 ;	main.c:83: P0 = ins_ack;
+   0114 75 80 04           1734 	mov	_P0,#0x04
+                           1735 ;	main.c:85: terminate();
+   0117 12s00rBE           1736 	lcall	_terminate
+                           1737 ;	main.c:86: return 0;
+   011A 90 00 00           1738 	mov	dptr,#0x0000
+   011D 22                 1739 	ret
+                           1740 	.area CSEG    (CODE)
+                           1741 	.area CONST   (CODE)
+                           1742 	.area XINIT   (CODE)
+                           1743 	.area CABS    (ABS,CODE)

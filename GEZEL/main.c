@@ -69,6 +69,18 @@ int main() {
 	endBrk=1;
 
     read_r();
+    
+    P1 = 0;
+
+    for (i = 0; i < SIZE; i++) {
+        shared_a[i] = r[i];
+    }
+
+    P0 = ins_write_data;
+    P0 = ins_idle;
+
+    while (P1 == 0) {}
+	P0 = ins_ack;
 
     terminate();
 	return 0;
