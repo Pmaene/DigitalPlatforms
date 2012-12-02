@@ -178,7 +178,7 @@ dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(8);
         i = i+1;
         a_reg = a_reg << 8 | din;
 
-        $display($cycle, "Read A: ", a_reg);
+        $display($cycle, "Read A: ", a_reg);	
     }
 
     sfg read_b {

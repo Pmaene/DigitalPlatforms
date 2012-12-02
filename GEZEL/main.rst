@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 2.9.0 #5416 (Aug  6 2010) (UNIX)
-                              4 ; This file was generated Sun Dec  2 11:31:30 2012
+                              4 ; This file was generated Sun Dec  2 13:56:32 2012
                               5 ;--------------------------------------------------------
                               6 	.module main
                               7 	.optsdcc -mmcs51 --model-small
@@ -319,7 +319,7 @@
                             319 	.globl __mcs51_genXINIT
                             320 	.globl __mcs51_genXRAMCLEAR
                             321 	.globl __mcs51_genRAMCLEAR
-                            322 ;	main.c:12: volatile __xdata __at (0x0000) unsigned char m[SIZE] = {0x0D,0xD5,0x0F,0x26,0x8F,0x95,0xAD,0x59,0x24,0xA0,0xDA,0x8F,0xAE,0x27,0x9F,0xD4,0x7A,0xE7,0x7E,0xBF,0xDF,0x2D,0x12,0xDA,0x43,0x14,0x0F,0x20,0xFA,0x90,0x46,0xD5,0x39,0xF1,0xAA,0x90,0x02,0xE4,0xDC,0xA3,0x9C,0xA4,0xF2,0xFF,0x30,0xC1,0x14,0x22,0x7E,0x11,0xE3,0x77,0x00,0x1A,0xAD,0x50,0xE1,0x7B,0x91,0x4A,0x92,0x08,0x65,0x20,0x75,0x68,0x74,0xB3,0x65,0xB0,0x0C,0xC6,0x8B,0xC9,0x10,0xEF,0xC4,0x4E,0x45,0xAD,0xFA,0xD2,0x4F,0x06,0xEC,0x29,0x5C,0xF3,0xAA,0x97,0x82,0x70,0xB8,0x44,0x06,0x86,0xE0,0x67,0xFC,0x70,0x79,0xA4,0xF0,0xB3,0x0B,0x48,0xCD,0xF0,0x6C,0x6F,0x0B,0x8B,0x25,0x67,0x46,0x8F,0xEC,0xA4,0xC1,0xE3,0x6A,0x47,0x0D,0xEB,0xA3,0x81,0xB5,0xBA};
+                            322 ;	main.c:13: volatile __xdata __at (0x0000) unsigned char m[SIZE] = {0x0D,0xD5,0x0F,0x26,0x8F,0x95,0xAD,0x59,0x24,0xA0,0xDA,0x8F,0xAE,0x27,0x9F,0xD4,0x7A,0xE7,0x7E,0xBF,0xDF,0x2D,0x12,0xDA,0x43,0x14,0x0F,0x20,0xFA,0x90,0x46,0xD5,0x39,0xF1,0xAA,0x90,0x02,0xE4,0xDC,0xA3,0x9C,0xA4,0xF2,0xFF,0x30,0xC1,0x14,0x22,0x7E,0x11,0xE3,0x77,0x00,0x1A,0xAD,0x50,0xE1,0x7B,0x91,0x4A,0x92,0x08,0x65,0x20,0x75,0x68,0x74,0xB3,0x65,0xB0,0x0C,0xC6,0x8B,0xC9,0x10,0xEF,0xC4,0x4E,0x45,0xAD,0xFA,0xD2,0x4F,0x06,0xEC,0x29,0x5C,0xF3,0xAA,0x97,0x82,0x70,0xB8,0x44,0x06,0x86,0xE0,0x67,0xFC,0x70,0x79,0xA4,0xF0,0xB3,0x0B,0x48,0xCD,0xF0,0x6C,0x6F,0x0B,0x8B,0x25,0x67,0x46,0x8F,0xEC,0xA4,0xC1,0xE3,0x6A,0x47,0x0D,0xEB,0xA3,0x81,0xB5,0xBA};
    0061 90 00 00            323 	mov	dptr,#_m
    0064 74 0D               324 	mov	a,#0x0D
    0066 F0                  325 	movx	@dptr,a
@@ -704,7 +704,7 @@
    035A 90 00 7F            704 	mov	dptr,#(_m + 0x007f)
    035D 74 BA               705 	mov	a,#0xBA
    035F F0                  706 	movx	@dptr,a
-                            707 ;	main.c:15: volatile __xdata __at (0x0080) unsigned char a[SIZE] = {0xA3,0x71,0x79,0x01,0xFC,0xF2,0x93,0xC7,0x1C,0x69,0x2D,0x67,0x38,0x2B,0x7C,0x1A,0x40,0x88,0xBA,0x9B,0x10,0x53,0x65,0xED,0xFE,0x39,0xB4,0x77,0x3B,0xC8,0x9B,0xB2,0xE4,0xB1,0xA3,0xC9,0xCD,0xC8,0xF2,0x69,0x01,0x91,0x87,0x67,0xAC,0x6E,0x56,0xF1,0x60,0xBF,0x1E,0x0F,0x53,0xA8,0xAF,0x40,0xDB,0x76,0xB2,0xEA,0x90,0xDD,0xFF,0x40,0x0C,0xD2,0x4D,0xDC,0x5E,0xB3,0xE7,0xFA,0xB4,0x53,0x5E,0x75,0x0B,0x91,0x92,0x14,0x7E,0xD8,0xB8,0xA7,0x05,0x95,0xD0,0x55,0x97,0x30,0x78,0x41,0x81,0xEF,0xC6,0x64,0x9F,0x4A,0x9C,0x4A,0x3A,0x0B,0xCA,0xD8,0x9C,0x1A,0x64,0xA7,0xA9,0x6E,0xC8,0x0A,0xE5,0xCE,0xE2,0x3B,0x73,0x8A,0xEF,0xF0,0xE4,0xA6,0x40,0x26,0xF3,0xD9,0x50,0x1F};
+                            707 ;	main.c:16: volatile __xdata __at (0x0080) unsigned char a[SIZE] = {0xA3,0x71,0x79,0x01,0xFC,0xF2,0x93,0xC7,0x1C,0x69,0x2D,0x67,0x38,0x2B,0x7C,0x1A,0x40,0x88,0xBA,0x9B,0x10,0x53,0x65,0xED,0xFE,0x39,0xB4,0x77,0x3B,0xC8,0x9B,0xB2,0xE4,0xB1,0xA3,0xC9,0xCD,0xC8,0xF2,0x69,0x01,0x91,0x87,0x67,0xAC,0x6E,0x56,0xF1,0x60,0xBF,0x1E,0x0F,0x53,0xA8,0xAF,0x40,0xDB,0x76,0xB2,0xEA,0x90,0xDD,0xFF,0x40,0x0C,0xD2,0x4D,0xDC,0x5E,0xB3,0xE7,0xFA,0xB4,0x53,0x5E,0x75,0x0B,0x91,0x92,0x14,0x7E,0xD8,0xB8,0xA7,0x05,0x95,0xD0,0x55,0x97,0x30,0x78,0x41,0x81,0xEF,0xC6,0x64,0x9F,0x4A,0x9C,0x4A,0x3A,0x0B,0xCA,0xD8,0x9C,0x1A,0x64,0xA7,0xA9,0x6E,0xC8,0x0A,0xE5,0xCE,0xE2,0x3B,0x73,0x8A,0xEF,0xF0,0xE4,0xA6,0x40,0x26,0xF3,0xD9,0x50,0x1F};
    0360 90 00 80            708 	mov	dptr,#_a
    0363 74 A3               709 	mov	a,#0xA3
    0365 F0                  710 	movx	@dptr,a
@@ -1089,7 +1089,7 @@
    065A 90 00 FF           1089 	mov	dptr,#(_a + 0x007f)
    065D 74 1F              1090 	mov	a,#0x1F
    065F F0                 1091 	movx	@dptr,a
-                           1092 ;	main.c:18: volatile __xdata __at (0x0100) unsigned char b[SIZE] = {0x08,0xA2,0x1A,0xDB,0xCB,0x27,0x58,0x66,0x6C,0xC0,0xA2,0x58,0x7E,0x96,0x9D,0x15,0xAD,0x00,0xF5,0xAD,0xBD,0xC6,0x62,0xDE,0xB3,0xC9,0xF9,0x5C,0xB8,0xC8,0x3A,0xD1,0x2A,0xCE,0x1C,0xFA,0x3F,0x88,0x60,0xC6,0xFA,0x04,0xC9,0x08,0x68,0xB5,0x2F,0x01,0x88,0x67,0xDC,0xFA,0xD2,0xF3,0x3E,0xF6,0x80,0x97,0xA0,0x7F,0x9D,0x98,0x4D,0x1B,0x20,0xEA,0xAE,0x9A,0xF8,0x5C,0x53,0x71,0xC4,0x4C,0xBD,0xDA,0xBB,0x4F,0x03,0x14,0x30,0xE4,0x94,0x72,0x49,0xAF,0x02,0xFF,0x68,0x73,0xED,0x8B,0x46,0xCF,0xD0,0x89,0xA7,0xB5,0x64,0x76,0xC2,0xBD,0x68,0xD3,0xAC,0x0F,0xD1,0x80,0xE8,0x3E,0x02,0x27,0x82,0xB3,0xEA,0x8E,0x32,0x7A,0xD0,0xE9,0x9C,0x59,0x68,0x81,0x0F,0x3C,0x9E,0xBA};
+                           1092 ;	main.c:19: volatile __xdata __at (0x0100) unsigned char b[SIZE] = {0x08,0xA2,0x1A,0xDB,0xCB,0x27,0x58,0x66,0x6C,0xC0,0xA2,0x58,0x7E,0x96,0x9D,0x15,0xAD,0x00,0xF5,0xAD,0xBD,0xC6,0x62,0xDE,0xB3,0xC9,0xF9,0x5C,0xB8,0xC8,0x3A,0xD1,0x2A,0xCE,0x1C,0xFA,0x3F,0x88,0x60,0xC6,0xFA,0x04,0xC9,0x08,0x68,0xB5,0x2F,0x01,0x88,0x67,0xDC,0xFA,0xD2,0xF3,0x3E,0xF6,0x80,0x97,0xA0,0x7F,0x9D,0x98,0x4D,0x1B,0x20,0xEA,0xAE,0x9A,0xF8,0x5C,0x53,0x71,0xC4,0x4C,0xBD,0xDA,0xBB,0x4F,0x03,0x14,0x30,0xE4,0x94,0x72,0x49,0xAF,0x02,0xFF,0x68,0x73,0xED,0x8B,0x46,0xCF,0xD0,0x89,0xA7,0xB5,0x64,0x76,0xC2,0xBD,0x68,0xD3,0xAC,0x0F,0xD1,0x80,0xE8,0x3E,0x02,0x27,0x82,0xB3,0xEA,0x8E,0x32,0x7A,0xD0,0xE9,0x9C,0x59,0x68,0x81,0x0F,0x3C,0x9E,0xBA};
    0660 90 01 00           1093 	mov	dptr,#_b
    0663 74 08              1094 	mov	a,#0x08
    0665 F0                 1095 	movx	@dptr,a
@@ -1482,7 +1482,7 @@
                            1482 	.area HOME    (CODE)
                            1483 	.area HOME    (CODE)
    0003                    1484 __sdcc_program_startup:
-   0003 12 0A 24           1485 	lcall	_main
+   0003 12 0A 33           1485 	lcall	_main
                            1486 ;	return from main will lock up
    0006 80 FE              1487 	sjmp .
                            1488 ;--------------------------------------------------------
@@ -1493,7 +1493,7 @@
                            1493 ;Allocation info for local variables in function 'write_montgomery'
                            1494 ;------------------------------------------------------------
                            1495 ;------------------------------------------------------------
-                           1496 ;	main.c:29: void write_montgomery() {
+                           1496 ;	main.c:30: void write_montgomery() {
                            1497 ;	-----------------------------------------
                            1498 ;	 function write_montgomery
                            1499 ;	-----------------------------------------
@@ -1506,8 +1506,8 @@
                     0007   1506 	ar7 = 0x07
                     0000   1507 	ar0 = 0x00
                     0001   1508 	ar1 = 0x01
-                           1509 ;	main.c:30: P1 = 0;
-                           1510 ;	main.c:32: for (i = 0; i < SIZE; i++) {
+                           1509 ;	main.c:31: P1 = 0;
+                           1510 ;	main.c:33: for (i = 0; i < SIZE; i++) {
    0962 E4                 1511 	clr	a
    0963 F5 90              1512 	mov	_P1,a
    0965 F5 08              1513 	mov	_i,a
@@ -1518,226 +1518,229 @@
    096C 94 80              1518 	subb	a,#0x80
    096E E5 09              1519 	mov	a,(_i + 1)
    0970 94 00              1520 	subb	a,#0x00
-   0972 50 24              1521 	jnc	00107$
-                           1522 ;	main.c:33: shared_a[i] = a[i];
+   0972 50 27              1521 	jnc	00107$
+                           1522 ;	main.c:34: shared_a[i] = a[SIZE-1-i];
    0974 AA 08              1523 	mov	r2,_i
    0976 74 40              1524 	mov	a,#(_shared_a >> 8)
    0978 25 09              1525 	add	a,(_i + 1)
    097A FB                 1526 	mov	r3,a
-   097B E5 08              1527 	mov	a,_i
-   097D 24 80              1528 	add	a,#_a
-   097F F5 82              1529 	mov	dpl,a
-   0981 E5 09              1530 	mov	a,(_i + 1)
-   0983 34 00              1531 	addc	a,#(_a >> 8)
-   0985 F5 83              1532 	mov	dph,a
-   0987 E0                 1533 	movx	a,@dptr
-   0988 FC                 1534 	mov	r4,a
-   0989 8A 82              1535 	mov	dpl,r2
-   098B 8B 83              1536 	mov	dph,r3
-   098D F0                 1537 	movx	@dptr,a
-                           1538 ;	main.c:32: for (i = 0; i < SIZE; i++) {
-   098E 05 08              1539 	inc	_i
-   0990 E4                 1540 	clr	a
-   0991 B5 08 D5           1541 	cjne	a,_i,00104$
-   0994 05 09              1542 	inc	(_i + 1)
-   0996 80 D1              1543 	sjmp	00104$
-   0998                    1544 00107$:
-                           1545 ;	main.c:36: for (i = 0; i < SIZE; i++) {
-   0998 E4                 1546 	clr	a
-   0999 F5 08              1547 	mov	_i,a
-   099B F5 09              1548 	mov	(_i + 1),a
-   099D                    1549 00108$:
-   099D C3                 1550 	clr	c
-   099E E5 08              1551 	mov	a,_i
-   09A0 94 80              1552 	subb	a,#0x80
-   09A2 E5 09              1553 	mov	a,(_i + 1)
-   09A4 94 00              1554 	subb	a,#0x00
-   09A6 50 24              1555 	jnc	00111$
-                           1556 ;	main.c:37: shared_b[i] = b[i];
-   09A8 E5 08              1557 	mov	a,_i
-   09AA 24 80              1558 	add	a,#_shared_b
-   09AC FA                 1559 	mov	r2,a
-   09AD E5 09              1560 	mov	a,(_i + 1)
-   09AF 34 40              1561 	addc	a,#(_shared_b >> 8)
-   09B1 FB                 1562 	mov	r3,a
-   09B2 85 08 82           1563 	mov	dpl,_i
-   09B5 74 01              1564 	mov	a,#(_b >> 8)
-   09B7 25 09              1565 	add	a,(_i + 1)
-   09B9 F5 83              1566 	mov	dph,a
-   09BB E0                 1567 	movx	a,@dptr
-   09BC FC                 1568 	mov	r4,a
-   09BD 8A 82              1569 	mov	dpl,r2
-   09BF 8B 83              1570 	mov	dph,r3
-   09C1 F0                 1571 	movx	@dptr,a
-                           1572 ;	main.c:36: for (i = 0; i < SIZE; i++) {
-   09C2 05 08              1573 	inc	_i
-   09C4 E4                 1574 	clr	a
-   09C5 B5 08 D5           1575 	cjne	a,_i,00108$
-   09C8 05 09              1576 	inc	(_i + 1)
-   09CA 80 D1              1577 	sjmp	00108$
-   09CC                    1578 00111$:
-                           1579 ;	main.c:40: for (i = 0; i < SIZE; i++) {
-   09CC E4                 1580 	clr	a
-   09CD F5 08              1581 	mov	_i,a
-   09CF F5 09              1582 	mov	(_i + 1),a
-   09D1                    1583 00112$:
-   09D1 C3                 1584 	clr	c
-   09D2 E5 08              1585 	mov	a,_i
-   09D4 94 80              1586 	subb	a,#0x80
-   09D6 E5 09              1587 	mov	a,(_i + 1)
-   09D8 94 00              1588 	subb	a,#0x00
-   09DA 50 21              1589 	jnc	00115$
-                           1590 ;	main.c:41: shared_m[i] = m[i];
-   09DC AA 08              1591 	mov	r2,_i
-   09DE 74 41              1592 	mov	a,#(_shared_m >> 8)
-   09E0 25 09              1593 	add	a,(_i + 1)
-   09E2 FB                 1594 	mov	r3,a
-   09E3 85 08 82           1595 	mov	dpl,_i
-   09E6 74 00              1596 	mov	a,#(_m >> 8)
-   09E8 25 09              1597 	add	a,(_i + 1)
-   09EA F5 83              1598 	mov	dph,a
-   09EC E0                 1599 	movx	a,@dptr
-   09ED FC                 1600 	mov	r4,a
-   09EE 8A 82              1601 	mov	dpl,r2
-   09F0 8B 83              1602 	mov	dph,r3
-   09F2 F0                 1603 	movx	@dptr,a
-                           1604 ;	main.c:40: for (i = 0; i < SIZE; i++) {
-   09F3 05 08              1605 	inc	_i
-   09F5 E4                 1606 	clr	a
-   09F6 B5 08 D8           1607 	cjne	a,_i,00112$
-   09F9 05 09              1608 	inc	(_i + 1)
-   09FB 80 D4              1609 	sjmp	00112$
-   09FD                    1610 00115$:
-                           1611 ;	main.c:44: P0 = ins_write_data;
-   09FD 75 80 01           1612 	mov	_P0,#0x01
-                           1613 ;	main.c:45: P0 = ins_idle;
-   0A00 75 80 00           1614 	mov	_P0,#0x00
-                           1615 ;	main.c:47: while (P1 == 0) {}
-   0A03                    1616 00101$:
-   0A03 E5 90              1617 	mov	a,_P1
-   0A05 60 FC              1618 	jz	00101$
-                           1619 ;	main.c:48: P0 = ins_ack;
-   0A07 75 80 04           1620 	mov	_P0,#0x04
-   0A0A 22                 1621 	ret
-                           1622 ;------------------------------------------------------------
-                           1623 ;Allocation info for local variables in function 'read_r'
-                           1624 ;------------------------------------------------------------
-                           1625 ;------------------------------------------------------------
-                           1626 ;	main.c:51: void read_r() {
-                           1627 ;	-----------------------------------------
-                           1628 ;	 function read_r
-                           1629 ;	-----------------------------------------
-   0A0B                    1630 _read_r:
-                           1631 ;	main.c:52: P0 = ins_read_r;
-   0A0B 75 80 03           1632 	mov	_P0,#0x03
-                           1633 ;	main.c:53: while (P1 == 0) {}
-   0A0E                    1634 00101$:
-   0A0E E5 90              1635 	mov	a,_P1
-   0A10 60 FC              1636 	jz	00101$
-                           1637 ;	main.c:54: P0 = ins_ack;
-   0A12 75 80 04           1638 	mov	_P0,#0x04
-                           1639 ;	main.c:56: P0 = ins_idle;
-   0A15 75 80 00           1640 	mov	_P0,#0x00
-   0A18 22                 1641 	ret
-                           1642 ;------------------------------------------------------------
-                           1643 ;Allocation info for local variables in function 'montgomery'
-                           1644 ;------------------------------------------------------------
-                           1645 ;------------------------------------------------------------
-                           1646 ;	main.c:59: void montgomery() {
-                           1647 ;	-----------------------------------------
-                           1648 ;	 function montgomery
-                           1649 ;	-----------------------------------------
-   0A19                    1650 _montgomery:
-                           1651 ;	main.c:60: P0 = ins_montgomery;
-   0A19 75 80 02           1652 	mov	_P0,#0x02
-                           1653 ;	main.c:61: P0 = ins_idle;
-   0A1C 75 80 00           1654 	mov	_P0,#0x00
-   0A1F 22                 1655 	ret
-                           1656 ;------------------------------------------------------------
-                           1657 ;Allocation info for local variables in function 'terminate'
+   097B AC 08              1527 	mov	r4,_i
+   097D 74 7F              1528 	mov	a,#0x7F
+   097F C3                 1529 	clr	c
+   0980 9C                 1530 	subb	a,r4
+   0981 24 80              1531 	add	a,#_a
+   0983 F5 82              1532 	mov	dpl,a
+   0985 E4                 1533 	clr	a
+   0986 34 00              1534 	addc	a,#(_a >> 8)
+   0988 F5 83              1535 	mov	dph,a
+   098A E0                 1536 	movx	a,@dptr
+   098B FC                 1537 	mov	r4,a
+   098C 8A 82              1538 	mov	dpl,r2
+   098E 8B 83              1539 	mov	dph,r3
+   0990 F0                 1540 	movx	@dptr,a
+                           1541 ;	main.c:33: for (i = 0; i < SIZE; i++) {
+   0991 05 08              1542 	inc	_i
+   0993 E4                 1543 	clr	a
+   0994 B5 08 D2           1544 	cjne	a,_i,00104$
+   0997 05 09              1545 	inc	(_i + 1)
+   0999 80 CE              1546 	sjmp	00104$
+   099B                    1547 00107$:
+                           1548 ;	main.c:37: for (i = 0; i < SIZE; i++) {
+   099B E4                 1549 	clr	a
+   099C F5 08              1550 	mov	_i,a
+   099E F5 09              1551 	mov	(_i + 1),a
+   09A0                    1552 00108$:
+   09A0 C3                 1553 	clr	c
+   09A1 E5 08              1554 	mov	a,_i
+   09A3 94 80              1555 	subb	a,#0x80
+   09A5 E5 09              1556 	mov	a,(_i + 1)
+   09A7 94 00              1557 	subb	a,#0x00
+   09A9 50 2A              1558 	jnc	00111$
+                           1559 ;	main.c:38: shared_b[i] = b[SIZE-1-i];
+   09AB E5 08              1560 	mov	a,_i
+   09AD 24 80              1561 	add	a,#_shared_b
+   09AF FA                 1562 	mov	r2,a
+   09B0 E5 09              1563 	mov	a,(_i + 1)
+   09B2 34 40              1564 	addc	a,#(_shared_b >> 8)
+   09B4 FB                 1565 	mov	r3,a
+   09B5 AC 08              1566 	mov	r4,_i
+   09B7 74 7F              1567 	mov	a,#0x7F
+   09B9 C3                 1568 	clr	c
+   09BA 9C                 1569 	subb	a,r4
+   09BB 24 00              1570 	add	a,#_b
+   09BD F5 82              1571 	mov	dpl,a
+   09BF E4                 1572 	clr	a
+   09C0 34 01              1573 	addc	a,#(_b >> 8)
+   09C2 F5 83              1574 	mov	dph,a
+   09C4 E0                 1575 	movx	a,@dptr
+   09C5 FC                 1576 	mov	r4,a
+   09C6 8A 82              1577 	mov	dpl,r2
+   09C8 8B 83              1578 	mov	dph,r3
+   09CA F0                 1579 	movx	@dptr,a
+                           1580 ;	main.c:37: for (i = 0; i < SIZE; i++) {
+   09CB 05 08              1581 	inc	_i
+   09CD E4                 1582 	clr	a
+   09CE B5 08 CF           1583 	cjne	a,_i,00108$
+   09D1 05 09              1584 	inc	(_i + 1)
+   09D3 80 CB              1585 	sjmp	00108$
+   09D5                    1586 00111$:
+                           1587 ;	main.c:41: for (i = 0; i < SIZE; i++) {
+   09D5 E4                 1588 	clr	a
+   09D6 F5 08              1589 	mov	_i,a
+   09D8 F5 09              1590 	mov	(_i + 1),a
+   09DA                    1591 00112$:
+   09DA C3                 1592 	clr	c
+   09DB E5 08              1593 	mov	a,_i
+   09DD 94 80              1594 	subb	a,#0x80
+   09DF E5 09              1595 	mov	a,(_i + 1)
+   09E1 94 00              1596 	subb	a,#0x00
+   09E3 50 27              1597 	jnc	00115$
+                           1598 ;	main.c:42: shared_m[i] = m[SIZE-1-i];
+   09E5 AA 08              1599 	mov	r2,_i
+   09E7 74 41              1600 	mov	a,#(_shared_m >> 8)
+   09E9 25 09              1601 	add	a,(_i + 1)
+   09EB FB                 1602 	mov	r3,a
+   09EC AC 08              1603 	mov	r4,_i
+   09EE 74 7F              1604 	mov	a,#0x7F
+   09F0 C3                 1605 	clr	c
+   09F1 9C                 1606 	subb	a,r4
+   09F2 24 00              1607 	add	a,#_m
+   09F4 F5 82              1608 	mov	dpl,a
+   09F6 E4                 1609 	clr	a
+   09F7 34 00              1610 	addc	a,#(_m >> 8)
+   09F9 F5 83              1611 	mov	dph,a
+   09FB E0                 1612 	movx	a,@dptr
+   09FC FC                 1613 	mov	r4,a
+   09FD 8A 82              1614 	mov	dpl,r2
+   09FF 8B 83              1615 	mov	dph,r3
+   0A01 F0                 1616 	movx	@dptr,a
+                           1617 ;	main.c:41: for (i = 0; i < SIZE; i++) {
+   0A02 05 08              1618 	inc	_i
+   0A04 E4                 1619 	clr	a
+   0A05 B5 08 D2           1620 	cjne	a,_i,00112$
+   0A08 05 09              1621 	inc	(_i + 1)
+   0A0A 80 CE              1622 	sjmp	00112$
+   0A0C                    1623 00115$:
+                           1624 ;	main.c:45: P0 = ins_write_data;
+   0A0C 75 80 01           1625 	mov	_P0,#0x01
+                           1626 ;	main.c:46: P0 = ins_idle;
+   0A0F 75 80 00           1627 	mov	_P0,#0x00
+                           1628 ;	main.c:48: while (P1 == 0) {}
+   0A12                    1629 00101$:
+   0A12 E5 90              1630 	mov	a,_P1
+   0A14 60 FC              1631 	jz	00101$
+                           1632 ;	main.c:49: P0 = ins_ack;
+   0A16 75 80 04           1633 	mov	_P0,#0x04
+   0A19 22                 1634 	ret
+                           1635 ;------------------------------------------------------------
+                           1636 ;Allocation info for local variables in function 'read_r'
+                           1637 ;------------------------------------------------------------
+                           1638 ;------------------------------------------------------------
+                           1639 ;	main.c:52: void read_r() {
+                           1640 ;	-----------------------------------------
+                           1641 ;	 function read_r
+                           1642 ;	-----------------------------------------
+   0A1A                    1643 _read_r:
+                           1644 ;	main.c:53: P0 = ins_read_r;
+   0A1A 75 80 03           1645 	mov	_P0,#0x03
+                           1646 ;	main.c:54: while (P1 == 0) {}
+   0A1D                    1647 00101$:
+   0A1D E5 90              1648 	mov	a,_P1
+   0A1F 60 FC              1649 	jz	00101$
+                           1650 ;	main.c:55: P0 = ins_ack;
+   0A21 75 80 04           1651 	mov	_P0,#0x04
+                           1652 ;	main.c:57: P0 = ins_idle;
+   0A24 75 80 00           1653 	mov	_P0,#0x00
+   0A27 22                 1654 	ret
+                           1655 ;------------------------------------------------------------
+                           1656 ;Allocation info for local variables in function 'montgomery'
+                           1657 ;------------------------------------------------------------
                            1658 ;------------------------------------------------------------
-                           1659 ;------------------------------------------------------------
-                           1660 ;	main.c:64: void terminate() {
-                           1661 ;	-----------------------------------------
-                           1662 ;	 function terminate
-                           1663 ;	-----------------------------------------
-   0A20                    1664 _terminate:
-                           1665 ;	main.c:65: P3 = 0x55;
-   0A20 75 B0 55           1666 	mov	_P3,#0x55
-   0A23 22                 1667 	ret
-                           1668 ;------------------------------------------------------------
-                           1669 ;Allocation info for local variables in function 'main'
-                           1670 ;------------------------------------------------------------
+                           1659 ;	main.c:60: void montgomery() {
+                           1660 ;	-----------------------------------------
+                           1661 ;	 function montgomery
+                           1662 ;	-----------------------------------------
+   0A28                    1663 _montgomery:
+                           1664 ;	main.c:61: P0 = ins_montgomery;
+   0A28 75 80 02           1665 	mov	_P0,#0x02
+                           1666 ;	main.c:62: P0 = ins_idle;
+   0A2B 75 80 00           1667 	mov	_P0,#0x00
+   0A2E 22                 1668 	ret
+                           1669 ;------------------------------------------------------------
+                           1670 ;Allocation info for local variables in function 'terminate'
                            1671 ;------------------------------------------------------------
-                           1672 ;	main.c:68: int main() {
-                           1673 ;	-----------------------------------------
-                           1674 ;	 function main
-                           1675 ;	-----------------------------------------
-   0A24                    1676 _main:
-                           1677 ;	main.c:69: write_montgomery();
-   0A24 12 09 62           1678 	lcall	_write_montgomery
-                           1679 ;	main.c:71: startBrk=1;
-   0A27 90 FF FE           1680 	mov	dptr,#_startBrk
-   0A2A 74 01              1681 	mov	a,#0x01
-   0A2C F0                 1682 	movx	@dptr,a
-                           1683 ;	main.c:73: montgomery();
-   0A2D 12 0A 19           1684 	lcall	_montgomery
-                           1685 ;	main.c:75: endBrk=1;
-   0A30 90 FF FF           1686 	mov	dptr,#_endBrk
-   0A33 74 01              1687 	mov	a,#0x01
-   0A35 F0                 1688 	movx	@dptr,a
-                           1689 ;	main.c:77: read_r();
-   0A36 12 0A 0B           1690 	lcall	_read_r
-                           1691 ;	main.c:79: P1 = 0;
-                           1692 ;	main.c:81: for (i = 0; i < SIZE; i++) {
-   0A39 E4                 1693 	clr	a
-   0A3A F5 90              1694 	mov	_P1,a
-   0A3C F5 08              1695 	mov	_i,a
-   0A3E F5 09              1696 	mov	(_i + 1),a
-   0A40                    1697 00104$:
-   0A40 C3                 1698 	clr	c
-   0A41 E5 08              1699 	mov	a,_i
-   0A43 94 80              1700 	subb	a,#0x80
-   0A45 E5 09              1701 	mov	a,(_i + 1)
-   0A47 94 00              1702 	subb	a,#0x00
-   0A49 50 21              1703 	jnc	00107$
-                           1704 ;	main.c:82: shared_a[i] = r[i];
-   0A4B AA 08              1705 	mov	r2,_i
-   0A4D 74 40              1706 	mov	a,#(_shared_a >> 8)
-   0A4F 25 09              1707 	add	a,(_i + 1)
-   0A51 FB                 1708 	mov	r3,a
-   0A52 85 08 82           1709 	mov	dpl,_i
-   0A55 74 02              1710 	mov	a,#(_r >> 8)
-   0A57 25 09              1711 	add	a,(_i + 1)
-   0A59 F5 83              1712 	mov	dph,a
-   0A5B E0                 1713 	movx	a,@dptr
-   0A5C FC                 1714 	mov	r4,a
-   0A5D 8A 82              1715 	mov	dpl,r2
-   0A5F 8B 83              1716 	mov	dph,r3
-   0A61 F0                 1717 	movx	@dptr,a
-                           1718 ;	main.c:81: for (i = 0; i < SIZE; i++) {
-   0A62 05 08              1719 	inc	_i
-   0A64 E4                 1720 	clr	a
-   0A65 B5 08 D8           1721 	cjne	a,_i,00104$
-   0A68 05 09              1722 	inc	(_i + 1)
-   0A6A 80 D4              1723 	sjmp	00104$
-   0A6C                    1724 00107$:
-                           1725 ;	main.c:85: P0 = ins_write_data;
-   0A6C 75 80 01           1726 	mov	_P0,#0x01
-                           1727 ;	main.c:86: P0 = ins_idle;
-   0A6F 75 80 00           1728 	mov	_P0,#0x00
-                           1729 ;	main.c:88: while (P1 == 0) {}
-   0A72                    1730 00101$:
-   0A72 E5 90              1731 	mov	a,_P1
-   0A74 60 FC              1732 	jz	00101$
-                           1733 ;	main.c:89: P0 = ins_ack;
-   0A76 75 80 04           1734 	mov	_P0,#0x04
-                           1735 ;	main.c:91: terminate();
-   0A79 12 0A 20           1736 	lcall	_terminate
-                           1737 ;	main.c:92: return 0;
-   0A7C 90 00 00           1738 	mov	dptr,#0x0000
-   0A7F 22                 1739 	ret
-                           1740 	.area CSEG    (CODE)
-                           1741 	.area CONST   (CODE)
-                           1742 	.area XINIT   (CODE)
-                           1743 	.area CABS    (ABS,CODE)
+                           1672 ;------------------------------------------------------------
+                           1673 ;	main.c:65: void terminate() {
+                           1674 ;	-----------------------------------------
+                           1675 ;	 function terminate
+                           1676 ;	-----------------------------------------
+   0A2F                    1677 _terminate:
+                           1678 ;	main.c:66: P3 = 0x55;
+   0A2F 75 B0 55           1679 	mov	_P3,#0x55
+   0A32 22                 1680 	ret
+                           1681 ;------------------------------------------------------------
+                           1682 ;Allocation info for local variables in function 'main'
+                           1683 ;------------------------------------------------------------
+                           1684 ;------------------------------------------------------------
+                           1685 ;	main.c:69: int main() {
+                           1686 ;	-----------------------------------------
+                           1687 ;	 function main
+                           1688 ;	-----------------------------------------
+   0A33                    1689 _main:
+                           1690 ;	main.c:70: write_montgomery();
+   0A33 12 09 62           1691 	lcall	_write_montgomery
+                           1692 ;	main.c:72: startBrk=1;
+   0A36 90 FF FE           1693 	mov	dptr,#_startBrk
+   0A39 74 01              1694 	mov	a,#0x01
+   0A3B F0                 1695 	movx	@dptr,a
+                           1696 ;	main.c:74: montgomery();
+   0A3C 12 0A 28           1697 	lcall	_montgomery
+                           1698 ;	main.c:76: endBrk=1;
+   0A3F 90 FF FF           1699 	mov	dptr,#_endBrk
+   0A42 74 01              1700 	mov	a,#0x01
+   0A44 F0                 1701 	movx	@dptr,a
+                           1702 ;	main.c:78: read_r();
+   0A45 12 0A 1A           1703 	lcall	_read_r
+                           1704 ;	main.c:80: P1 = 0;
+                           1705 ;	main.c:82: for (i = 0; i < SIZE; i++) {
+   0A48 E4                 1706 	clr	a
+   0A49 F5 90              1707 	mov	_P1,a
+   0A4B F5 08              1708 	mov	_i,a
+   0A4D F5 09              1709 	mov	(_i + 1),a
+   0A4F                    1710 00101$:
+   0A4F C3                 1711 	clr	c
+   0A50 E5 08              1712 	mov	a,_i
+   0A52 94 80              1713 	subb	a,#0x80
+   0A54 E5 09              1714 	mov	a,(_i + 1)
+   0A56 94 00              1715 	subb	a,#0x00
+   0A58 50 21              1716 	jnc	00104$
+                           1717 ;	main.c:83: shared_a[i] = r[i];
+   0A5A AA 08              1718 	mov	r2,_i
+   0A5C 74 40              1719 	mov	a,#(_shared_a >> 8)
+   0A5E 25 09              1720 	add	a,(_i + 1)
+   0A60 FB                 1721 	mov	r3,a
+   0A61 85 08 82           1722 	mov	dpl,_i
+   0A64 74 02              1723 	mov	a,#(_r >> 8)
+   0A66 25 09              1724 	add	a,(_i + 1)
+   0A68 F5 83              1725 	mov	dph,a
+   0A6A E0                 1726 	movx	a,@dptr
+   0A6B FC                 1727 	mov	r4,a
+   0A6C 8A 82              1728 	mov	dpl,r2
+   0A6E 8B 83              1729 	mov	dph,r3
+   0A70 F0                 1730 	movx	@dptr,a
+                           1731 ;	main.c:82: for (i = 0; i < SIZE; i++) {
+   0A71 05 08              1732 	inc	_i
+   0A73 E4                 1733 	clr	a
+   0A74 B5 08 D8           1734 	cjne	a,_i,00101$
+   0A77 05 09              1735 	inc	(_i + 1)
+   0A79 80 D4              1736 	sjmp	00101$
+   0A7B                    1737 00104$:
+                           1738 ;	main.c:92: terminate();
+   0A7B 12 0A 2F           1739 	lcall	_terminate
+                           1740 ;	main.c:93: return 0;
+   0A7E 90 00 00           1741 	mov	dptr,#0x0000
+   0A81 22                 1742 	ret
+                           1743 	.area CSEG    (CODE)
+                           1744 	.area CONST   (CODE)
+                           1745 	.area XINIT   (CODE)
+                           1746 	.area CABS    (ABS,CODE)
