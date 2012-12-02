@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 2.9.0 #5416 (Aug  6 2010) (UNIX)
-                              4 ; This file was generated Sat Dec  1 20:11:48 2012
+                              4 ; This file was generated Sun Dec  2 11:31:30 2012
                               5 ;--------------------------------------------------------
                               6 	.module main
                               7 	.optsdcc -mmcs51 --model-small
@@ -319,1160 +319,1160 @@
                             319 	.globl __mcs51_genXINIT
                             320 	.globl __mcs51_genXRAMCLEAR
                             321 	.globl __mcs51_genRAMCLEAR
-                            322 ;	main.c:11: volatile __xdata __at (0x0000) unsigned char m[SIZE] = {0xD3,0x55,0xA4,0x5F,0x57,0xF3,0xF9,0x3E,0xCF,0x84,0x6D,0xFF,0x20,0xC1,0xAE,0x12,0xCF,0xF1,0x00,0x66,0x45,0xE2,0x34,0x61,0x27,0xF2,0x57,0xB3,0x42,0x21,0x80,0x95,0xAB,0x15,0xA2,0x1D,0x53,0xB2,0x27,0xE6,0x56,0x93,0x27,0xAF,0xC2,0xEE,0x2B,0x2F,0x9A,0xAE,0x6A,0x09,0xE5,0x7F,0xAE,0x7D,0x2B,0xDD,0x58,0x2F,0x87,0x70,0x05,0x1F,0xF8,0xBD,0x0B,0xE0,0xFD,0xF1,0x81,0x60,0xBF,0xD2,0xFE,0x8F,0x7B,0xB9,0xA9,0xA4,0x6A,0x0A,0xA3,0xA3,0x70,0x22,0xBF,0x4C,0x1B,0xB0,0x41,0x24,0x4C,0x3A,0x08,0xEC,0xF4,0x91,0xFF,0x93,0x8D,0xFC,0xFA,0x4C,0x26,0x2D,0xD2,0xE9,0xFC,0x76,0xB1,0x67,0x5E,0x24,0x9E,0x31,0x66,0x5D,0x98,0x4C,0x0D,0x79,0x81,0x76,0xAC,0x1D,0xE2,0xCA};
+                            322 ;	main.c:12: volatile __xdata __at (0x0000) unsigned char m[SIZE] = {0x0D,0xD5,0x0F,0x26,0x8F,0x95,0xAD,0x59,0x24,0xA0,0xDA,0x8F,0xAE,0x27,0x9F,0xD4,0x7A,0xE7,0x7E,0xBF,0xDF,0x2D,0x12,0xDA,0x43,0x14,0x0F,0x20,0xFA,0x90,0x46,0xD5,0x39,0xF1,0xAA,0x90,0x02,0xE4,0xDC,0xA3,0x9C,0xA4,0xF2,0xFF,0x30,0xC1,0x14,0x22,0x7E,0x11,0xE3,0x77,0x00,0x1A,0xAD,0x50,0xE1,0x7B,0x91,0x4A,0x92,0x08,0x65,0x20,0x75,0x68,0x74,0xB3,0x65,0xB0,0x0C,0xC6,0x8B,0xC9,0x10,0xEF,0xC4,0x4E,0x45,0xAD,0xFA,0xD2,0x4F,0x06,0xEC,0x29,0x5C,0xF3,0xAA,0x97,0x82,0x70,0xB8,0x44,0x06,0x86,0xE0,0x67,0xFC,0x70,0x79,0xA4,0xF0,0xB3,0x0B,0x48,0xCD,0xF0,0x6C,0x6F,0x0B,0x8B,0x25,0x67,0x46,0x8F,0xEC,0xA4,0xC1,0xE3,0x6A,0x47,0x0D,0xEB,0xA3,0x81,0xB5,0xBA};
    0061 90 00 00            323 	mov	dptr,#_m
-   0064 74 D3               324 	mov	a,#0xD3
+   0064 74 0D               324 	mov	a,#0x0D
    0066 F0                  325 	movx	@dptr,a
    0067 90 00 01            326 	mov	dptr,#(_m + 0x0001)
-   006A 74 55               327 	mov	a,#0x55
+   006A 74 D5               327 	mov	a,#0xD5
    006C F0                  328 	movx	@dptr,a
    006D 90 00 02            329 	mov	dptr,#(_m + 0x0002)
-   0070 74 A4               330 	mov	a,#0xA4
+   0070 74 0F               330 	mov	a,#0x0F
    0072 F0                  331 	movx	@dptr,a
    0073 90 00 03            332 	mov	dptr,#(_m + 0x0003)
-   0076 74 5F               333 	mov	a,#0x5F
+   0076 74 26               333 	mov	a,#0x26
    0078 F0                  334 	movx	@dptr,a
    0079 90 00 04            335 	mov	dptr,#(_m + 0x0004)
-   007C 74 57               336 	mov	a,#0x57
+   007C 74 8F               336 	mov	a,#0x8F
    007E F0                  337 	movx	@dptr,a
    007F 90 00 05            338 	mov	dptr,#(_m + 0x0005)
-   0082 74 F3               339 	mov	a,#0xF3
+   0082 74 95               339 	mov	a,#0x95
    0084 F0                  340 	movx	@dptr,a
    0085 90 00 06            341 	mov	dptr,#(_m + 0x0006)
-   0088 74 F9               342 	mov	a,#0xF9
+   0088 74 AD               342 	mov	a,#0xAD
    008A F0                  343 	movx	@dptr,a
    008B 90 00 07            344 	mov	dptr,#(_m + 0x0007)
-   008E 74 3E               345 	mov	a,#0x3E
+   008E 74 59               345 	mov	a,#0x59
    0090 F0                  346 	movx	@dptr,a
    0091 90 00 08            347 	mov	dptr,#(_m + 0x0008)
-   0094 74 CF               348 	mov	a,#0xCF
+   0094 74 24               348 	mov	a,#0x24
    0096 F0                  349 	movx	@dptr,a
    0097 90 00 09            350 	mov	dptr,#(_m + 0x0009)
-   009A 74 84               351 	mov	a,#0x84
+   009A 74 A0               351 	mov	a,#0xA0
    009C F0                  352 	movx	@dptr,a
    009D 90 00 0A            353 	mov	dptr,#(_m + 0x000a)
-   00A0 74 6D               354 	mov	a,#0x6D
+   00A0 74 DA               354 	mov	a,#0xDA
    00A2 F0                  355 	movx	@dptr,a
    00A3 90 00 0B            356 	mov	dptr,#(_m + 0x000b)
-   00A6 74 FF               357 	mov	a,#0xFF
+   00A6 74 8F               357 	mov	a,#0x8F
    00A8 F0                  358 	movx	@dptr,a
    00A9 90 00 0C            359 	mov	dptr,#(_m + 0x000c)
-   00AC 74 20               360 	mov	a,#0x20
+   00AC 74 AE               360 	mov	a,#0xAE
    00AE F0                  361 	movx	@dptr,a
    00AF 90 00 0D            362 	mov	dptr,#(_m + 0x000d)
-   00B2 74 C1               363 	mov	a,#0xC1
+   00B2 74 27               363 	mov	a,#0x27
    00B4 F0                  364 	movx	@dptr,a
    00B5 90 00 0E            365 	mov	dptr,#(_m + 0x000e)
-   00B8 74 AE               366 	mov	a,#0xAE
+   00B8 74 9F               366 	mov	a,#0x9F
    00BA F0                  367 	movx	@dptr,a
    00BB 90 00 0F            368 	mov	dptr,#(_m + 0x000f)
-   00BE 74 12               369 	mov	a,#0x12
+   00BE 74 D4               369 	mov	a,#0xD4
    00C0 F0                  370 	movx	@dptr,a
    00C1 90 00 10            371 	mov	dptr,#(_m + 0x0010)
-   00C4 74 CF               372 	mov	a,#0xCF
+   00C4 74 7A               372 	mov	a,#0x7A
    00C6 F0                  373 	movx	@dptr,a
    00C7 90 00 11            374 	mov	dptr,#(_m + 0x0011)
-   00CA 74 F1               375 	mov	a,#0xF1
+   00CA 74 E7               375 	mov	a,#0xE7
    00CC F0                  376 	movx	@dptr,a
    00CD 90 00 12            377 	mov	dptr,#(_m + 0x0012)
-   00D0 E4                  378 	clr	a
-   00D1 F0                  379 	movx	@dptr,a
-   00D2 90 00 13            380 	mov	dptr,#(_m + 0x0013)
-   00D5 74 66               381 	mov	a,#0x66
-   00D7 F0                  382 	movx	@dptr,a
-   00D8 90 00 14            383 	mov	dptr,#(_m + 0x0014)
-   00DB 74 45               384 	mov	a,#0x45
-   00DD F0                  385 	movx	@dptr,a
-   00DE 90 00 15            386 	mov	dptr,#(_m + 0x0015)
-   00E1 74 E2               387 	mov	a,#0xE2
-   00E3 F0                  388 	movx	@dptr,a
-   00E4 90 00 16            389 	mov	dptr,#(_m + 0x0016)
-   00E7 74 34               390 	mov	a,#0x34
-   00E9 F0                  391 	movx	@dptr,a
-   00EA 90 00 17            392 	mov	dptr,#(_m + 0x0017)
-   00ED 74 61               393 	mov	a,#0x61
-   00EF F0                  394 	movx	@dptr,a
-   00F0 90 00 18            395 	mov	dptr,#(_m + 0x0018)
-   00F3 74 27               396 	mov	a,#0x27
-   00F5 F0                  397 	movx	@dptr,a
-   00F6 90 00 19            398 	mov	dptr,#(_m + 0x0019)
-   00F9 74 F2               399 	mov	a,#0xF2
-   00FB F0                  400 	movx	@dptr,a
-   00FC 90 00 1A            401 	mov	dptr,#(_m + 0x001a)
-   00FF 74 57               402 	mov	a,#0x57
-   0101 F0                  403 	movx	@dptr,a
-   0102 90 00 1B            404 	mov	dptr,#(_m + 0x001b)
-   0105 74 B3               405 	mov	a,#0xB3
-   0107 F0                  406 	movx	@dptr,a
-   0108 90 00 1C            407 	mov	dptr,#(_m + 0x001c)
-   010B 74 42               408 	mov	a,#0x42
-   010D F0                  409 	movx	@dptr,a
-   010E 90 00 1D            410 	mov	dptr,#(_m + 0x001d)
-   0111 74 21               411 	mov	a,#0x21
-   0113 F0                  412 	movx	@dptr,a
-   0114 90 00 1E            413 	mov	dptr,#(_m + 0x001e)
-   0117 74 80               414 	mov	a,#0x80
-   0119 F0                  415 	movx	@dptr,a
-   011A 90 00 1F            416 	mov	dptr,#(_m + 0x001f)
-   011D 74 95               417 	mov	a,#0x95
-   011F F0                  418 	movx	@dptr,a
-   0120 90 00 20            419 	mov	dptr,#(_m + 0x0020)
-   0123 74 AB               420 	mov	a,#0xAB
-   0125 F0                  421 	movx	@dptr,a
-   0126 90 00 21            422 	mov	dptr,#(_m + 0x0021)
-   0129 74 15               423 	mov	a,#0x15
-   012B F0                  424 	movx	@dptr,a
-   012C 90 00 22            425 	mov	dptr,#(_m + 0x0022)
-   012F 74 A2               426 	mov	a,#0xA2
-   0131 F0                  427 	movx	@dptr,a
-   0132 90 00 23            428 	mov	dptr,#(_m + 0x0023)
-   0135 74 1D               429 	mov	a,#0x1D
-   0137 F0                  430 	movx	@dptr,a
-   0138 90 00 24            431 	mov	dptr,#(_m + 0x0024)
-   013B 74 53               432 	mov	a,#0x53
-   013D F0                  433 	movx	@dptr,a
-   013E 90 00 25            434 	mov	dptr,#(_m + 0x0025)
-   0141 74 B2               435 	mov	a,#0xB2
-   0143 F0                  436 	movx	@dptr,a
-   0144 90 00 26            437 	mov	dptr,#(_m + 0x0026)
-   0147 74 27               438 	mov	a,#0x27
-   0149 F0                  439 	movx	@dptr,a
-   014A 90 00 27            440 	mov	dptr,#(_m + 0x0027)
-   014D 74 E6               441 	mov	a,#0xE6
-   014F F0                  442 	movx	@dptr,a
-   0150 90 00 28            443 	mov	dptr,#(_m + 0x0028)
-   0153 74 56               444 	mov	a,#0x56
-   0155 F0                  445 	movx	@dptr,a
-   0156 90 00 29            446 	mov	dptr,#(_m + 0x0029)
-   0159 74 93               447 	mov	a,#0x93
-   015B F0                  448 	movx	@dptr,a
-   015C 90 00 2A            449 	mov	dptr,#(_m + 0x002a)
-   015F 74 27               450 	mov	a,#0x27
-   0161 F0                  451 	movx	@dptr,a
-   0162 90 00 2B            452 	mov	dptr,#(_m + 0x002b)
-   0165 74 AF               453 	mov	a,#0xAF
-   0167 F0                  454 	movx	@dptr,a
-   0168 90 00 2C            455 	mov	dptr,#(_m + 0x002c)
-   016B 74 C2               456 	mov	a,#0xC2
-   016D F0                  457 	movx	@dptr,a
-   016E 90 00 2D            458 	mov	dptr,#(_m + 0x002d)
-   0171 74 EE               459 	mov	a,#0xEE
-   0173 F0                  460 	movx	@dptr,a
-   0174 90 00 2E            461 	mov	dptr,#(_m + 0x002e)
-   0177 74 2B               462 	mov	a,#0x2B
-   0179 F0                  463 	movx	@dptr,a
-   017A 90 00 2F            464 	mov	dptr,#(_m + 0x002f)
-   017D 74 2F               465 	mov	a,#0x2F
-   017F F0                  466 	movx	@dptr,a
-   0180 90 00 30            467 	mov	dptr,#(_m + 0x0030)
-   0183 74 9A               468 	mov	a,#0x9A
-   0185 F0                  469 	movx	@dptr,a
-   0186 90 00 31            470 	mov	dptr,#(_m + 0x0031)
-   0189 74 AE               471 	mov	a,#0xAE
-   018B F0                  472 	movx	@dptr,a
-   018C 90 00 32            473 	mov	dptr,#(_m + 0x0032)
-   018F 74 6A               474 	mov	a,#0x6A
-   0191 F0                  475 	movx	@dptr,a
-   0192 90 00 33            476 	mov	dptr,#(_m + 0x0033)
-   0195 74 09               477 	mov	a,#0x09
-   0197 F0                  478 	movx	@dptr,a
-   0198 90 00 34            479 	mov	dptr,#(_m + 0x0034)
-   019B 74 E5               480 	mov	a,#0xE5
+   00D0 74 7E               378 	mov	a,#0x7E
+   00D2 F0                  379 	movx	@dptr,a
+   00D3 90 00 13            380 	mov	dptr,#(_m + 0x0013)
+   00D6 74 BF               381 	mov	a,#0xBF
+   00D8 F0                  382 	movx	@dptr,a
+   00D9 90 00 14            383 	mov	dptr,#(_m + 0x0014)
+   00DC 74 DF               384 	mov	a,#0xDF
+   00DE F0                  385 	movx	@dptr,a
+   00DF 90 00 15            386 	mov	dptr,#(_m + 0x0015)
+   00E2 74 2D               387 	mov	a,#0x2D
+   00E4 F0                  388 	movx	@dptr,a
+   00E5 90 00 16            389 	mov	dptr,#(_m + 0x0016)
+   00E8 74 12               390 	mov	a,#0x12
+   00EA F0                  391 	movx	@dptr,a
+   00EB 90 00 17            392 	mov	dptr,#(_m + 0x0017)
+   00EE 74 DA               393 	mov	a,#0xDA
+   00F0 F0                  394 	movx	@dptr,a
+   00F1 90 00 18            395 	mov	dptr,#(_m + 0x0018)
+   00F4 74 43               396 	mov	a,#0x43
+   00F6 F0                  397 	movx	@dptr,a
+   00F7 90 00 19            398 	mov	dptr,#(_m + 0x0019)
+   00FA 74 14               399 	mov	a,#0x14
+   00FC F0                  400 	movx	@dptr,a
+   00FD 90 00 1A            401 	mov	dptr,#(_m + 0x001a)
+   0100 74 0F               402 	mov	a,#0x0F
+   0102 F0                  403 	movx	@dptr,a
+   0103 90 00 1B            404 	mov	dptr,#(_m + 0x001b)
+   0106 74 20               405 	mov	a,#0x20
+   0108 F0                  406 	movx	@dptr,a
+   0109 90 00 1C            407 	mov	dptr,#(_m + 0x001c)
+   010C 74 FA               408 	mov	a,#0xFA
+   010E F0                  409 	movx	@dptr,a
+   010F 90 00 1D            410 	mov	dptr,#(_m + 0x001d)
+   0112 74 90               411 	mov	a,#0x90
+   0114 F0                  412 	movx	@dptr,a
+   0115 90 00 1E            413 	mov	dptr,#(_m + 0x001e)
+   0118 74 46               414 	mov	a,#0x46
+   011A F0                  415 	movx	@dptr,a
+   011B 90 00 1F            416 	mov	dptr,#(_m + 0x001f)
+   011E 74 D5               417 	mov	a,#0xD5
+   0120 F0                  418 	movx	@dptr,a
+   0121 90 00 20            419 	mov	dptr,#(_m + 0x0020)
+   0124 74 39               420 	mov	a,#0x39
+   0126 F0                  421 	movx	@dptr,a
+   0127 90 00 21            422 	mov	dptr,#(_m + 0x0021)
+   012A 74 F1               423 	mov	a,#0xF1
+   012C F0                  424 	movx	@dptr,a
+   012D 90 00 22            425 	mov	dptr,#(_m + 0x0022)
+   0130 74 AA               426 	mov	a,#0xAA
+   0132 F0                  427 	movx	@dptr,a
+   0133 90 00 23            428 	mov	dptr,#(_m + 0x0023)
+   0136 74 90               429 	mov	a,#0x90
+   0138 F0                  430 	movx	@dptr,a
+   0139 90 00 24            431 	mov	dptr,#(_m + 0x0024)
+   013C 74 02               432 	mov	a,#0x02
+   013E F0                  433 	movx	@dptr,a
+   013F 90 00 25            434 	mov	dptr,#(_m + 0x0025)
+   0142 74 E4               435 	mov	a,#0xE4
+   0144 F0                  436 	movx	@dptr,a
+   0145 90 00 26            437 	mov	dptr,#(_m + 0x0026)
+   0148 74 DC               438 	mov	a,#0xDC
+   014A F0                  439 	movx	@dptr,a
+   014B 90 00 27            440 	mov	dptr,#(_m + 0x0027)
+   014E 74 A3               441 	mov	a,#0xA3
+   0150 F0                  442 	movx	@dptr,a
+   0151 90 00 28            443 	mov	dptr,#(_m + 0x0028)
+   0154 74 9C               444 	mov	a,#0x9C
+   0156 F0                  445 	movx	@dptr,a
+   0157 90 00 29            446 	mov	dptr,#(_m + 0x0029)
+   015A 74 A4               447 	mov	a,#0xA4
+   015C F0                  448 	movx	@dptr,a
+   015D 90 00 2A            449 	mov	dptr,#(_m + 0x002a)
+   0160 74 F2               450 	mov	a,#0xF2
+   0162 F0                  451 	movx	@dptr,a
+   0163 90 00 2B            452 	mov	dptr,#(_m + 0x002b)
+   0166 74 FF               453 	mov	a,#0xFF
+   0168 F0                  454 	movx	@dptr,a
+   0169 90 00 2C            455 	mov	dptr,#(_m + 0x002c)
+   016C 74 30               456 	mov	a,#0x30
+   016E F0                  457 	movx	@dptr,a
+   016F 90 00 2D            458 	mov	dptr,#(_m + 0x002d)
+   0172 74 C1               459 	mov	a,#0xC1
+   0174 F0                  460 	movx	@dptr,a
+   0175 90 00 2E            461 	mov	dptr,#(_m + 0x002e)
+   0178 74 14               462 	mov	a,#0x14
+   017A F0                  463 	movx	@dptr,a
+   017B 90 00 2F            464 	mov	dptr,#(_m + 0x002f)
+   017E 74 22               465 	mov	a,#0x22
+   0180 F0                  466 	movx	@dptr,a
+   0181 90 00 30            467 	mov	dptr,#(_m + 0x0030)
+   0184 74 7E               468 	mov	a,#0x7E
+   0186 F0                  469 	movx	@dptr,a
+   0187 90 00 31            470 	mov	dptr,#(_m + 0x0031)
+   018A 74 11               471 	mov	a,#0x11
+   018C F0                  472 	movx	@dptr,a
+   018D 90 00 32            473 	mov	dptr,#(_m + 0x0032)
+   0190 74 E3               474 	mov	a,#0xE3
+   0192 F0                  475 	movx	@dptr,a
+   0193 90 00 33            476 	mov	dptr,#(_m + 0x0033)
+   0196 74 77               477 	mov	a,#0x77
+   0198 F0                  478 	movx	@dptr,a
+   0199 90 00 34            479 	mov	dptr,#(_m + 0x0034)
+   019C E4                  480 	clr	a
    019D F0                  481 	movx	@dptr,a
    019E 90 00 35            482 	mov	dptr,#(_m + 0x0035)
-   01A1 74 7F               483 	mov	a,#0x7F
+   01A1 74 1A               483 	mov	a,#0x1A
    01A3 F0                  484 	movx	@dptr,a
    01A4 90 00 36            485 	mov	dptr,#(_m + 0x0036)
-   01A7 74 AE               486 	mov	a,#0xAE
+   01A7 74 AD               486 	mov	a,#0xAD
    01A9 F0                  487 	movx	@dptr,a
    01AA 90 00 37            488 	mov	dptr,#(_m + 0x0037)
-   01AD 74 7D               489 	mov	a,#0x7D
+   01AD 74 50               489 	mov	a,#0x50
    01AF F0                  490 	movx	@dptr,a
    01B0 90 00 38            491 	mov	dptr,#(_m + 0x0038)
-   01B3 74 2B               492 	mov	a,#0x2B
+   01B3 74 E1               492 	mov	a,#0xE1
    01B5 F0                  493 	movx	@dptr,a
    01B6 90 00 39            494 	mov	dptr,#(_m + 0x0039)
-   01B9 74 DD               495 	mov	a,#0xDD
+   01B9 74 7B               495 	mov	a,#0x7B
    01BB F0                  496 	movx	@dptr,a
    01BC 90 00 3A            497 	mov	dptr,#(_m + 0x003a)
-   01BF 74 58               498 	mov	a,#0x58
+   01BF 74 91               498 	mov	a,#0x91
    01C1 F0                  499 	movx	@dptr,a
    01C2 90 00 3B            500 	mov	dptr,#(_m + 0x003b)
-   01C5 74 2F               501 	mov	a,#0x2F
+   01C5 74 4A               501 	mov	a,#0x4A
    01C7 F0                  502 	movx	@dptr,a
    01C8 90 00 3C            503 	mov	dptr,#(_m + 0x003c)
-   01CB 74 87               504 	mov	a,#0x87
+   01CB 74 92               504 	mov	a,#0x92
    01CD F0                  505 	movx	@dptr,a
    01CE 90 00 3D            506 	mov	dptr,#(_m + 0x003d)
-   01D1 74 70               507 	mov	a,#0x70
+   01D1 74 08               507 	mov	a,#0x08
    01D3 F0                  508 	movx	@dptr,a
    01D4 90 00 3E            509 	mov	dptr,#(_m + 0x003e)
-   01D7 74 05               510 	mov	a,#0x05
+   01D7 74 65               510 	mov	a,#0x65
    01D9 F0                  511 	movx	@dptr,a
    01DA 90 00 3F            512 	mov	dptr,#(_m + 0x003f)
-   01DD 74 1F               513 	mov	a,#0x1F
+   01DD 74 20               513 	mov	a,#0x20
    01DF F0                  514 	movx	@dptr,a
    01E0 90 00 40            515 	mov	dptr,#(_m + 0x0040)
-   01E3 74 F8               516 	mov	a,#0xF8
+   01E3 74 75               516 	mov	a,#0x75
    01E5 F0                  517 	movx	@dptr,a
    01E6 90 00 41            518 	mov	dptr,#(_m + 0x0041)
-   01E9 74 BD               519 	mov	a,#0xBD
+   01E9 74 68               519 	mov	a,#0x68
    01EB F0                  520 	movx	@dptr,a
    01EC 90 00 42            521 	mov	dptr,#(_m + 0x0042)
-   01EF 74 0B               522 	mov	a,#0x0B
+   01EF 74 74               522 	mov	a,#0x74
    01F1 F0                  523 	movx	@dptr,a
    01F2 90 00 43            524 	mov	dptr,#(_m + 0x0043)
-   01F5 74 E0               525 	mov	a,#0xE0
+   01F5 74 B3               525 	mov	a,#0xB3
    01F7 F0                  526 	movx	@dptr,a
    01F8 90 00 44            527 	mov	dptr,#(_m + 0x0044)
-   01FB 74 FD               528 	mov	a,#0xFD
+   01FB 74 65               528 	mov	a,#0x65
    01FD F0                  529 	movx	@dptr,a
    01FE 90 00 45            530 	mov	dptr,#(_m + 0x0045)
-   0201 74 F1               531 	mov	a,#0xF1
+   0201 74 B0               531 	mov	a,#0xB0
    0203 F0                  532 	movx	@dptr,a
    0204 90 00 46            533 	mov	dptr,#(_m + 0x0046)
-   0207 74 81               534 	mov	a,#0x81
+   0207 74 0C               534 	mov	a,#0x0C
    0209 F0                  535 	movx	@dptr,a
    020A 90 00 47            536 	mov	dptr,#(_m + 0x0047)
-   020D 74 60               537 	mov	a,#0x60
+   020D 74 C6               537 	mov	a,#0xC6
    020F F0                  538 	movx	@dptr,a
    0210 90 00 48            539 	mov	dptr,#(_m + 0x0048)
-   0213 74 BF               540 	mov	a,#0xBF
+   0213 74 8B               540 	mov	a,#0x8B
    0215 F0                  541 	movx	@dptr,a
    0216 90 00 49            542 	mov	dptr,#(_m + 0x0049)
-   0219 74 D2               543 	mov	a,#0xD2
+   0219 74 C9               543 	mov	a,#0xC9
    021B F0                  544 	movx	@dptr,a
    021C 90 00 4A            545 	mov	dptr,#(_m + 0x004a)
-   021F 74 FE               546 	mov	a,#0xFE
+   021F 74 10               546 	mov	a,#0x10
    0221 F0                  547 	movx	@dptr,a
    0222 90 00 4B            548 	mov	dptr,#(_m + 0x004b)
-   0225 74 8F               549 	mov	a,#0x8F
+   0225 74 EF               549 	mov	a,#0xEF
    0227 F0                  550 	movx	@dptr,a
    0228 90 00 4C            551 	mov	dptr,#(_m + 0x004c)
-   022B 74 7B               552 	mov	a,#0x7B
+   022B 74 C4               552 	mov	a,#0xC4
    022D F0                  553 	movx	@dptr,a
    022E 90 00 4D            554 	mov	dptr,#(_m + 0x004d)
-   0231 74 B9               555 	mov	a,#0xB9
+   0231 74 4E               555 	mov	a,#0x4E
    0233 F0                  556 	movx	@dptr,a
    0234 90 00 4E            557 	mov	dptr,#(_m + 0x004e)
-   0237 74 A9               558 	mov	a,#0xA9
+   0237 74 45               558 	mov	a,#0x45
    0239 F0                  559 	movx	@dptr,a
    023A 90 00 4F            560 	mov	dptr,#(_m + 0x004f)
-   023D 74 A4               561 	mov	a,#0xA4
+   023D 74 AD               561 	mov	a,#0xAD
    023F F0                  562 	movx	@dptr,a
    0240 90 00 50            563 	mov	dptr,#(_m + 0x0050)
-   0243 74 6A               564 	mov	a,#0x6A
+   0243 74 FA               564 	mov	a,#0xFA
    0245 F0                  565 	movx	@dptr,a
    0246 90 00 51            566 	mov	dptr,#(_m + 0x0051)
-   0249 74 0A               567 	mov	a,#0x0A
+   0249 74 D2               567 	mov	a,#0xD2
    024B F0                  568 	movx	@dptr,a
    024C 90 00 52            569 	mov	dptr,#(_m + 0x0052)
-   024F 74 A3               570 	mov	a,#0xA3
+   024F 74 4F               570 	mov	a,#0x4F
    0251 F0                  571 	movx	@dptr,a
    0252 90 00 53            572 	mov	dptr,#(_m + 0x0053)
-   0255 74 A3               573 	mov	a,#0xA3
+   0255 74 06               573 	mov	a,#0x06
    0257 F0                  574 	movx	@dptr,a
    0258 90 00 54            575 	mov	dptr,#(_m + 0x0054)
-   025B 74 70               576 	mov	a,#0x70
+   025B 74 EC               576 	mov	a,#0xEC
    025D F0                  577 	movx	@dptr,a
    025E 90 00 55            578 	mov	dptr,#(_m + 0x0055)
-   0261 74 22               579 	mov	a,#0x22
+   0261 74 29               579 	mov	a,#0x29
    0263 F0                  580 	movx	@dptr,a
    0264 90 00 56            581 	mov	dptr,#(_m + 0x0056)
-   0267 74 BF               582 	mov	a,#0xBF
+   0267 74 5C               582 	mov	a,#0x5C
    0269 F0                  583 	movx	@dptr,a
    026A 90 00 57            584 	mov	dptr,#(_m + 0x0057)
-   026D 74 4C               585 	mov	a,#0x4C
+   026D 74 F3               585 	mov	a,#0xF3
    026F F0                  586 	movx	@dptr,a
    0270 90 00 58            587 	mov	dptr,#(_m + 0x0058)
-   0273 74 1B               588 	mov	a,#0x1B
+   0273 74 AA               588 	mov	a,#0xAA
    0275 F0                  589 	movx	@dptr,a
    0276 90 00 59            590 	mov	dptr,#(_m + 0x0059)
-   0279 74 B0               591 	mov	a,#0xB0
+   0279 74 97               591 	mov	a,#0x97
    027B F0                  592 	movx	@dptr,a
    027C 90 00 5A            593 	mov	dptr,#(_m + 0x005a)
-   027F 74 41               594 	mov	a,#0x41
+   027F 74 82               594 	mov	a,#0x82
    0281 F0                  595 	movx	@dptr,a
    0282 90 00 5B            596 	mov	dptr,#(_m + 0x005b)
-   0285 74 24               597 	mov	a,#0x24
+   0285 74 70               597 	mov	a,#0x70
    0287 F0                  598 	movx	@dptr,a
    0288 90 00 5C            599 	mov	dptr,#(_m + 0x005c)
-   028B 74 4C               600 	mov	a,#0x4C
+   028B 74 B8               600 	mov	a,#0xB8
    028D F0                  601 	movx	@dptr,a
    028E 90 00 5D            602 	mov	dptr,#(_m + 0x005d)
-   0291 74 3A               603 	mov	a,#0x3A
+   0291 74 44               603 	mov	a,#0x44
    0293 F0                  604 	movx	@dptr,a
    0294 90 00 5E            605 	mov	dptr,#(_m + 0x005e)
-   0297 74 08               606 	mov	a,#0x08
+   0297 74 06               606 	mov	a,#0x06
    0299 F0                  607 	movx	@dptr,a
    029A 90 00 5F            608 	mov	dptr,#(_m + 0x005f)
-   029D 74 EC               609 	mov	a,#0xEC
+   029D 74 86               609 	mov	a,#0x86
    029F F0                  610 	movx	@dptr,a
    02A0 90 00 60            611 	mov	dptr,#(_m + 0x0060)
-   02A3 74 F4               612 	mov	a,#0xF4
+   02A3 74 E0               612 	mov	a,#0xE0
    02A5 F0                  613 	movx	@dptr,a
    02A6 90 00 61            614 	mov	dptr,#(_m + 0x0061)
-   02A9 74 91               615 	mov	a,#0x91
+   02A9 74 67               615 	mov	a,#0x67
    02AB F0                  616 	movx	@dptr,a
    02AC 90 00 62            617 	mov	dptr,#(_m + 0x0062)
-   02AF 74 FF               618 	mov	a,#0xFF
+   02AF 74 FC               618 	mov	a,#0xFC
    02B1 F0                  619 	movx	@dptr,a
    02B2 90 00 63            620 	mov	dptr,#(_m + 0x0063)
-   02B5 74 93               621 	mov	a,#0x93
+   02B5 74 70               621 	mov	a,#0x70
    02B7 F0                  622 	movx	@dptr,a
    02B8 90 00 64            623 	mov	dptr,#(_m + 0x0064)
-   02BB 74 8D               624 	mov	a,#0x8D
+   02BB 74 79               624 	mov	a,#0x79
    02BD F0                  625 	movx	@dptr,a
    02BE 90 00 65            626 	mov	dptr,#(_m + 0x0065)
-   02C1 74 FC               627 	mov	a,#0xFC
+   02C1 74 A4               627 	mov	a,#0xA4
    02C3 F0                  628 	movx	@dptr,a
    02C4 90 00 66            629 	mov	dptr,#(_m + 0x0066)
-   02C7 74 FA               630 	mov	a,#0xFA
+   02C7 74 F0               630 	mov	a,#0xF0
    02C9 F0                  631 	movx	@dptr,a
    02CA 90 00 67            632 	mov	dptr,#(_m + 0x0067)
-   02CD 74 4C               633 	mov	a,#0x4C
+   02CD 74 B3               633 	mov	a,#0xB3
    02CF F0                  634 	movx	@dptr,a
    02D0 90 00 68            635 	mov	dptr,#(_m + 0x0068)
-   02D3 74 26               636 	mov	a,#0x26
+   02D3 74 0B               636 	mov	a,#0x0B
    02D5 F0                  637 	movx	@dptr,a
    02D6 90 00 69            638 	mov	dptr,#(_m + 0x0069)
-   02D9 74 2D               639 	mov	a,#0x2D
+   02D9 74 48               639 	mov	a,#0x48
    02DB F0                  640 	movx	@dptr,a
    02DC 90 00 6A            641 	mov	dptr,#(_m + 0x006a)
-   02DF 74 D2               642 	mov	a,#0xD2
+   02DF 74 CD               642 	mov	a,#0xCD
    02E1 F0                  643 	movx	@dptr,a
    02E2 90 00 6B            644 	mov	dptr,#(_m + 0x006b)
-   02E5 74 E9               645 	mov	a,#0xE9
+   02E5 74 F0               645 	mov	a,#0xF0
    02E7 F0                  646 	movx	@dptr,a
    02E8 90 00 6C            647 	mov	dptr,#(_m + 0x006c)
-   02EB 74 FC               648 	mov	a,#0xFC
+   02EB 74 6C               648 	mov	a,#0x6C
    02ED F0                  649 	movx	@dptr,a
    02EE 90 00 6D            650 	mov	dptr,#(_m + 0x006d)
-   02F1 74 76               651 	mov	a,#0x76
+   02F1 74 6F               651 	mov	a,#0x6F
    02F3 F0                  652 	movx	@dptr,a
    02F4 90 00 6E            653 	mov	dptr,#(_m + 0x006e)
-   02F7 74 B1               654 	mov	a,#0xB1
+   02F7 74 0B               654 	mov	a,#0x0B
    02F9 F0                  655 	movx	@dptr,a
    02FA 90 00 6F            656 	mov	dptr,#(_m + 0x006f)
-   02FD 74 67               657 	mov	a,#0x67
+   02FD 74 8B               657 	mov	a,#0x8B
    02FF F0                  658 	movx	@dptr,a
    0300 90 00 70            659 	mov	dptr,#(_m + 0x0070)
-   0303 74 5E               660 	mov	a,#0x5E
+   0303 74 25               660 	mov	a,#0x25
    0305 F0                  661 	movx	@dptr,a
    0306 90 00 71            662 	mov	dptr,#(_m + 0x0071)
-   0309 74 24               663 	mov	a,#0x24
+   0309 74 67               663 	mov	a,#0x67
    030B F0                  664 	movx	@dptr,a
    030C 90 00 72            665 	mov	dptr,#(_m + 0x0072)
-   030F 74 9E               666 	mov	a,#0x9E
+   030F 74 46               666 	mov	a,#0x46
    0311 F0                  667 	movx	@dptr,a
    0312 90 00 73            668 	mov	dptr,#(_m + 0x0073)
-   0315 74 31               669 	mov	a,#0x31
+   0315 74 8F               669 	mov	a,#0x8F
    0317 F0                  670 	movx	@dptr,a
    0318 90 00 74            671 	mov	dptr,#(_m + 0x0074)
-   031B 74 66               672 	mov	a,#0x66
+   031B 74 EC               672 	mov	a,#0xEC
    031D F0                  673 	movx	@dptr,a
    031E 90 00 75            674 	mov	dptr,#(_m + 0x0075)
-   0321 74 5D               675 	mov	a,#0x5D
+   0321 74 A4               675 	mov	a,#0xA4
    0323 F0                  676 	movx	@dptr,a
    0324 90 00 76            677 	mov	dptr,#(_m + 0x0076)
-   0327 74 98               678 	mov	a,#0x98
+   0327 74 C1               678 	mov	a,#0xC1
    0329 F0                  679 	movx	@dptr,a
    032A 90 00 77            680 	mov	dptr,#(_m + 0x0077)
-   032D 74 4C               681 	mov	a,#0x4C
+   032D 74 E3               681 	mov	a,#0xE3
    032F F0                  682 	movx	@dptr,a
    0330 90 00 78            683 	mov	dptr,#(_m + 0x0078)
-   0333 74 0D               684 	mov	a,#0x0D
+   0333 74 6A               684 	mov	a,#0x6A
    0335 F0                  685 	movx	@dptr,a
    0336 90 00 79            686 	mov	dptr,#(_m + 0x0079)
-   0339 74 79               687 	mov	a,#0x79
+   0339 74 47               687 	mov	a,#0x47
    033B F0                  688 	movx	@dptr,a
    033C 90 00 7A            689 	mov	dptr,#(_m + 0x007a)
-   033F 74 81               690 	mov	a,#0x81
+   033F 74 0D               690 	mov	a,#0x0D
    0341 F0                  691 	movx	@dptr,a
    0342 90 00 7B            692 	mov	dptr,#(_m + 0x007b)
-   0345 74 76               693 	mov	a,#0x76
+   0345 74 EB               693 	mov	a,#0xEB
    0347 F0                  694 	movx	@dptr,a
    0348 90 00 7C            695 	mov	dptr,#(_m + 0x007c)
-   034B 74 AC               696 	mov	a,#0xAC
+   034B 74 A3               696 	mov	a,#0xA3
    034D F0                  697 	movx	@dptr,a
    034E 90 00 7D            698 	mov	dptr,#(_m + 0x007d)
-   0351 74 1D               699 	mov	a,#0x1D
+   0351 74 81               699 	mov	a,#0x81
    0353 F0                  700 	movx	@dptr,a
    0354 90 00 7E            701 	mov	dptr,#(_m + 0x007e)
-   0357 74 E2               702 	mov	a,#0xE2
+   0357 74 B5               702 	mov	a,#0xB5
    0359 F0                  703 	movx	@dptr,a
    035A 90 00 7F            704 	mov	dptr,#(_m + 0x007f)
-   035D 74 CA               705 	mov	a,#0xCA
+   035D 74 BA               705 	mov	a,#0xBA
    035F F0                  706 	movx	@dptr,a
-                            707 ;	main.c:12: volatile __xdata __at (0x0080) unsigned char a[SIZE] = {0xFF,0x7F,0x14,0x64,0x47,0x68,0xC2,0xB6,0x27,0x32,0x63,0x2C,0xB0,0xC3,0x95,0x13,0xC5,0x7E,0x17,0x22,0xF3,0x7C,0x2D,0xE8,0x13,0x47,0x5E,0x15,0x4E,0xEF,0x83,0x81,0xDF,0xC3,0x47,0xD3,0x60,0xBB,0x8B,0x3E,0xB6,0x35,0xB1,0x6E,0xD1,0xD5,0xDA,0x6F,0x28,0x16,0x2C,0x74,0x36,0xF9,0x04,0x79,0xF9,0x76,0xE2,0xCC,0xA4,0x82,0xA7,0xA4,0x68,0x4E,0x24,0xA6,0xC1,0x58,0x68,0x24,0x58,0xDC,0x14,0xF9,0xFF,0x4D,0xA1,0xEF,0x53,0xA3,0xC2,0x84,0x1B,0x81,0x16,0x6C,0xDD,0xE3,0xDB,0xA8,0x03,0x8F,0xF2,0x31,0xFD,0x94,0x5D,0x26,0x13,0xC6,0x68,0xB4,0x0D,0xCD,0xF1,0xB8,0x66,0x0D,0x5D,0x3B,0x2F,0xC4,0x4A,0xD1,0x0B,0x36,0xC6,0x10,0x1A,0x2F,0x72,0xD1,0xBB,0x15,0x29,0xCA};
+                            707 ;	main.c:15: volatile __xdata __at (0x0080) unsigned char a[SIZE] = {0xA3,0x71,0x79,0x01,0xFC,0xF2,0x93,0xC7,0x1C,0x69,0x2D,0x67,0x38,0x2B,0x7C,0x1A,0x40,0x88,0xBA,0x9B,0x10,0x53,0x65,0xED,0xFE,0x39,0xB4,0x77,0x3B,0xC8,0x9B,0xB2,0xE4,0xB1,0xA3,0xC9,0xCD,0xC8,0xF2,0x69,0x01,0x91,0x87,0x67,0xAC,0x6E,0x56,0xF1,0x60,0xBF,0x1E,0x0F,0x53,0xA8,0xAF,0x40,0xDB,0x76,0xB2,0xEA,0x90,0xDD,0xFF,0x40,0x0C,0xD2,0x4D,0xDC,0x5E,0xB3,0xE7,0xFA,0xB4,0x53,0x5E,0x75,0x0B,0x91,0x92,0x14,0x7E,0xD8,0xB8,0xA7,0x05,0x95,0xD0,0x55,0x97,0x30,0x78,0x41,0x81,0xEF,0xC6,0x64,0x9F,0x4A,0x9C,0x4A,0x3A,0x0B,0xCA,0xD8,0x9C,0x1A,0x64,0xA7,0xA9,0x6E,0xC8,0x0A,0xE5,0xCE,0xE2,0x3B,0x73,0x8A,0xEF,0xF0,0xE4,0xA6,0x40,0x26,0xF3,0xD9,0x50,0x1F};
    0360 90 00 80            708 	mov	dptr,#_a
-   0363 74 FF               709 	mov	a,#0xFF
+   0363 74 A3               709 	mov	a,#0xA3
    0365 F0                  710 	movx	@dptr,a
    0366 90 00 81            711 	mov	dptr,#(_a + 0x0001)
-   0369 74 7F               712 	mov	a,#0x7F
+   0369 74 71               712 	mov	a,#0x71
    036B F0                  713 	movx	@dptr,a
    036C 90 00 82            714 	mov	dptr,#(_a + 0x0002)
-   036F 74 14               715 	mov	a,#0x14
+   036F 74 79               715 	mov	a,#0x79
    0371 F0                  716 	movx	@dptr,a
    0372 90 00 83            717 	mov	dptr,#(_a + 0x0003)
-   0375 74 64               718 	mov	a,#0x64
+   0375 74 01               718 	mov	a,#0x01
    0377 F0                  719 	movx	@dptr,a
    0378 90 00 84            720 	mov	dptr,#(_a + 0x0004)
-   037B 74 47               721 	mov	a,#0x47
+   037B 74 FC               721 	mov	a,#0xFC
    037D F0                  722 	movx	@dptr,a
    037E 90 00 85            723 	mov	dptr,#(_a + 0x0005)
-   0381 74 68               724 	mov	a,#0x68
+   0381 74 F2               724 	mov	a,#0xF2
    0383 F0                  725 	movx	@dptr,a
    0384 90 00 86            726 	mov	dptr,#(_a + 0x0006)
-   0387 74 C2               727 	mov	a,#0xC2
+   0387 74 93               727 	mov	a,#0x93
    0389 F0                  728 	movx	@dptr,a
    038A 90 00 87            729 	mov	dptr,#(_a + 0x0007)
-   038D 74 B6               730 	mov	a,#0xB6
+   038D 74 C7               730 	mov	a,#0xC7
    038F F0                  731 	movx	@dptr,a
    0390 90 00 88            732 	mov	dptr,#(_a + 0x0008)
-   0393 74 27               733 	mov	a,#0x27
+   0393 74 1C               733 	mov	a,#0x1C
    0395 F0                  734 	movx	@dptr,a
    0396 90 00 89            735 	mov	dptr,#(_a + 0x0009)
-   0399 74 32               736 	mov	a,#0x32
+   0399 74 69               736 	mov	a,#0x69
    039B F0                  737 	movx	@dptr,a
    039C 90 00 8A            738 	mov	dptr,#(_a + 0x000a)
-   039F 74 63               739 	mov	a,#0x63
+   039F 74 2D               739 	mov	a,#0x2D
    03A1 F0                  740 	movx	@dptr,a
    03A2 90 00 8B            741 	mov	dptr,#(_a + 0x000b)
-   03A5 74 2C               742 	mov	a,#0x2C
+   03A5 74 67               742 	mov	a,#0x67
    03A7 F0                  743 	movx	@dptr,a
    03A8 90 00 8C            744 	mov	dptr,#(_a + 0x000c)
-   03AB 74 B0               745 	mov	a,#0xB0
+   03AB 74 38               745 	mov	a,#0x38
    03AD F0                  746 	movx	@dptr,a
    03AE 90 00 8D            747 	mov	dptr,#(_a + 0x000d)
-   03B1 74 C3               748 	mov	a,#0xC3
+   03B1 74 2B               748 	mov	a,#0x2B
    03B3 F0                  749 	movx	@dptr,a
    03B4 90 00 8E            750 	mov	dptr,#(_a + 0x000e)
-   03B7 74 95               751 	mov	a,#0x95
+   03B7 74 7C               751 	mov	a,#0x7C
    03B9 F0                  752 	movx	@dptr,a
    03BA 90 00 8F            753 	mov	dptr,#(_a + 0x000f)
-   03BD 74 13               754 	mov	a,#0x13
+   03BD 74 1A               754 	mov	a,#0x1A
    03BF F0                  755 	movx	@dptr,a
    03C0 90 00 90            756 	mov	dptr,#(_a + 0x0010)
-   03C3 74 C5               757 	mov	a,#0xC5
+   03C3 74 40               757 	mov	a,#0x40
    03C5 F0                  758 	movx	@dptr,a
    03C6 90 00 91            759 	mov	dptr,#(_a + 0x0011)
-   03C9 74 7E               760 	mov	a,#0x7E
+   03C9 74 88               760 	mov	a,#0x88
    03CB F0                  761 	movx	@dptr,a
    03CC 90 00 92            762 	mov	dptr,#(_a + 0x0012)
-   03CF 74 17               763 	mov	a,#0x17
+   03CF 74 BA               763 	mov	a,#0xBA
    03D1 F0                  764 	movx	@dptr,a
    03D2 90 00 93            765 	mov	dptr,#(_a + 0x0013)
-   03D5 74 22               766 	mov	a,#0x22
+   03D5 74 9B               766 	mov	a,#0x9B
    03D7 F0                  767 	movx	@dptr,a
    03D8 90 00 94            768 	mov	dptr,#(_a + 0x0014)
-   03DB 74 F3               769 	mov	a,#0xF3
+   03DB 74 10               769 	mov	a,#0x10
    03DD F0                  770 	movx	@dptr,a
    03DE 90 00 95            771 	mov	dptr,#(_a + 0x0015)
-   03E1 74 7C               772 	mov	a,#0x7C
+   03E1 74 53               772 	mov	a,#0x53
    03E3 F0                  773 	movx	@dptr,a
    03E4 90 00 96            774 	mov	dptr,#(_a + 0x0016)
-   03E7 74 2D               775 	mov	a,#0x2D
+   03E7 74 65               775 	mov	a,#0x65
    03E9 F0                  776 	movx	@dptr,a
    03EA 90 00 97            777 	mov	dptr,#(_a + 0x0017)
-   03ED 74 E8               778 	mov	a,#0xE8
+   03ED 74 ED               778 	mov	a,#0xED
    03EF F0                  779 	movx	@dptr,a
    03F0 90 00 98            780 	mov	dptr,#(_a + 0x0018)
-   03F3 74 13               781 	mov	a,#0x13
+   03F3 74 FE               781 	mov	a,#0xFE
    03F5 F0                  782 	movx	@dptr,a
    03F6 90 00 99            783 	mov	dptr,#(_a + 0x0019)
-   03F9 74 47               784 	mov	a,#0x47
+   03F9 74 39               784 	mov	a,#0x39
    03FB F0                  785 	movx	@dptr,a
    03FC 90 00 9A            786 	mov	dptr,#(_a + 0x001a)
-   03FF 74 5E               787 	mov	a,#0x5E
+   03FF 74 B4               787 	mov	a,#0xB4
    0401 F0                  788 	movx	@dptr,a
    0402 90 00 9B            789 	mov	dptr,#(_a + 0x001b)
-   0405 74 15               790 	mov	a,#0x15
+   0405 74 77               790 	mov	a,#0x77
    0407 F0                  791 	movx	@dptr,a
    0408 90 00 9C            792 	mov	dptr,#(_a + 0x001c)
-   040B 74 4E               793 	mov	a,#0x4E
+   040B 74 3B               793 	mov	a,#0x3B
    040D F0                  794 	movx	@dptr,a
    040E 90 00 9D            795 	mov	dptr,#(_a + 0x001d)
-   0411 74 EF               796 	mov	a,#0xEF
+   0411 74 C8               796 	mov	a,#0xC8
    0413 F0                  797 	movx	@dptr,a
    0414 90 00 9E            798 	mov	dptr,#(_a + 0x001e)
-   0417 74 83               799 	mov	a,#0x83
+   0417 74 9B               799 	mov	a,#0x9B
    0419 F0                  800 	movx	@dptr,a
    041A 90 00 9F            801 	mov	dptr,#(_a + 0x001f)
-   041D 74 81               802 	mov	a,#0x81
+   041D 74 B2               802 	mov	a,#0xB2
    041F F0                  803 	movx	@dptr,a
    0420 90 00 A0            804 	mov	dptr,#(_a + 0x0020)
-   0423 74 DF               805 	mov	a,#0xDF
+   0423 74 E4               805 	mov	a,#0xE4
    0425 F0                  806 	movx	@dptr,a
    0426 90 00 A1            807 	mov	dptr,#(_a + 0x0021)
-   0429 74 C3               808 	mov	a,#0xC3
+   0429 74 B1               808 	mov	a,#0xB1
    042B F0                  809 	movx	@dptr,a
    042C 90 00 A2            810 	mov	dptr,#(_a + 0x0022)
-   042F 74 47               811 	mov	a,#0x47
+   042F 74 A3               811 	mov	a,#0xA3
    0431 F0                  812 	movx	@dptr,a
    0432 90 00 A3            813 	mov	dptr,#(_a + 0x0023)
-   0435 74 D3               814 	mov	a,#0xD3
+   0435 74 C9               814 	mov	a,#0xC9
    0437 F0                  815 	movx	@dptr,a
    0438 90 00 A4            816 	mov	dptr,#(_a + 0x0024)
-   043B 74 60               817 	mov	a,#0x60
+   043B 74 CD               817 	mov	a,#0xCD
    043D F0                  818 	movx	@dptr,a
    043E 90 00 A5            819 	mov	dptr,#(_a + 0x0025)
-   0441 74 BB               820 	mov	a,#0xBB
+   0441 74 C8               820 	mov	a,#0xC8
    0443 F0                  821 	movx	@dptr,a
    0444 90 00 A6            822 	mov	dptr,#(_a + 0x0026)
-   0447 74 8B               823 	mov	a,#0x8B
+   0447 74 F2               823 	mov	a,#0xF2
    0449 F0                  824 	movx	@dptr,a
    044A 90 00 A7            825 	mov	dptr,#(_a + 0x0027)
-   044D 74 3E               826 	mov	a,#0x3E
+   044D 74 69               826 	mov	a,#0x69
    044F F0                  827 	movx	@dptr,a
    0450 90 00 A8            828 	mov	dptr,#(_a + 0x0028)
-   0453 74 B6               829 	mov	a,#0xB6
+   0453 74 01               829 	mov	a,#0x01
    0455 F0                  830 	movx	@dptr,a
    0456 90 00 A9            831 	mov	dptr,#(_a + 0x0029)
-   0459 74 35               832 	mov	a,#0x35
+   0459 74 91               832 	mov	a,#0x91
    045B F0                  833 	movx	@dptr,a
    045C 90 00 AA            834 	mov	dptr,#(_a + 0x002a)
-   045F 74 B1               835 	mov	a,#0xB1
+   045F 74 87               835 	mov	a,#0x87
    0461 F0                  836 	movx	@dptr,a
    0462 90 00 AB            837 	mov	dptr,#(_a + 0x002b)
-   0465 74 6E               838 	mov	a,#0x6E
+   0465 74 67               838 	mov	a,#0x67
    0467 F0                  839 	movx	@dptr,a
    0468 90 00 AC            840 	mov	dptr,#(_a + 0x002c)
-   046B 74 D1               841 	mov	a,#0xD1
+   046B 74 AC               841 	mov	a,#0xAC
    046D F0                  842 	movx	@dptr,a
    046E 90 00 AD            843 	mov	dptr,#(_a + 0x002d)
-   0471 74 D5               844 	mov	a,#0xD5
+   0471 74 6E               844 	mov	a,#0x6E
    0473 F0                  845 	movx	@dptr,a
    0474 90 00 AE            846 	mov	dptr,#(_a + 0x002e)
-   0477 74 DA               847 	mov	a,#0xDA
+   0477 74 56               847 	mov	a,#0x56
    0479 F0                  848 	movx	@dptr,a
    047A 90 00 AF            849 	mov	dptr,#(_a + 0x002f)
-   047D 74 6F               850 	mov	a,#0x6F
+   047D 74 F1               850 	mov	a,#0xF1
    047F F0                  851 	movx	@dptr,a
    0480 90 00 B0            852 	mov	dptr,#(_a + 0x0030)
-   0483 74 28               853 	mov	a,#0x28
+   0483 74 60               853 	mov	a,#0x60
    0485 F0                  854 	movx	@dptr,a
    0486 90 00 B1            855 	mov	dptr,#(_a + 0x0031)
-   0489 74 16               856 	mov	a,#0x16
+   0489 74 BF               856 	mov	a,#0xBF
    048B F0                  857 	movx	@dptr,a
    048C 90 00 B2            858 	mov	dptr,#(_a + 0x0032)
-   048F 74 2C               859 	mov	a,#0x2C
+   048F 74 1E               859 	mov	a,#0x1E
    0491 F0                  860 	movx	@dptr,a
    0492 90 00 B3            861 	mov	dptr,#(_a + 0x0033)
-   0495 74 74               862 	mov	a,#0x74
+   0495 74 0F               862 	mov	a,#0x0F
    0497 F0                  863 	movx	@dptr,a
    0498 90 00 B4            864 	mov	dptr,#(_a + 0x0034)
-   049B 74 36               865 	mov	a,#0x36
+   049B 74 53               865 	mov	a,#0x53
    049D F0                  866 	movx	@dptr,a
    049E 90 00 B5            867 	mov	dptr,#(_a + 0x0035)
-   04A1 74 F9               868 	mov	a,#0xF9
+   04A1 74 A8               868 	mov	a,#0xA8
    04A3 F0                  869 	movx	@dptr,a
    04A4 90 00 B6            870 	mov	dptr,#(_a + 0x0036)
-   04A7 74 04               871 	mov	a,#0x04
+   04A7 74 AF               871 	mov	a,#0xAF
    04A9 F0                  872 	movx	@dptr,a
    04AA 90 00 B7            873 	mov	dptr,#(_a + 0x0037)
-   04AD 74 79               874 	mov	a,#0x79
+   04AD 74 40               874 	mov	a,#0x40
    04AF F0                  875 	movx	@dptr,a
    04B0 90 00 B8            876 	mov	dptr,#(_a + 0x0038)
-   04B3 74 F9               877 	mov	a,#0xF9
+   04B3 74 DB               877 	mov	a,#0xDB
    04B5 F0                  878 	movx	@dptr,a
    04B6 90 00 B9            879 	mov	dptr,#(_a + 0x0039)
    04B9 74 76               880 	mov	a,#0x76
    04BB F0                  881 	movx	@dptr,a
    04BC 90 00 BA            882 	mov	dptr,#(_a + 0x003a)
-   04BF 74 E2               883 	mov	a,#0xE2
+   04BF 74 B2               883 	mov	a,#0xB2
    04C1 F0                  884 	movx	@dptr,a
    04C2 90 00 BB            885 	mov	dptr,#(_a + 0x003b)
-   04C5 74 CC               886 	mov	a,#0xCC
+   04C5 74 EA               886 	mov	a,#0xEA
    04C7 F0                  887 	movx	@dptr,a
    04C8 90 00 BC            888 	mov	dptr,#(_a + 0x003c)
-   04CB 74 A4               889 	mov	a,#0xA4
+   04CB 74 90               889 	mov	a,#0x90
    04CD F0                  890 	movx	@dptr,a
    04CE 90 00 BD            891 	mov	dptr,#(_a + 0x003d)
-   04D1 74 82               892 	mov	a,#0x82
+   04D1 74 DD               892 	mov	a,#0xDD
    04D3 F0                  893 	movx	@dptr,a
    04D4 90 00 BE            894 	mov	dptr,#(_a + 0x003e)
-   04D7 74 A7               895 	mov	a,#0xA7
+   04D7 74 FF               895 	mov	a,#0xFF
    04D9 F0                  896 	movx	@dptr,a
    04DA 90 00 BF            897 	mov	dptr,#(_a + 0x003f)
-   04DD 74 A4               898 	mov	a,#0xA4
+   04DD 74 40               898 	mov	a,#0x40
    04DF F0                  899 	movx	@dptr,a
    04E0 90 00 C0            900 	mov	dptr,#(_a + 0x0040)
-   04E3 74 68               901 	mov	a,#0x68
+   04E3 74 0C               901 	mov	a,#0x0C
    04E5 F0                  902 	movx	@dptr,a
    04E6 90 00 C1            903 	mov	dptr,#(_a + 0x0041)
-   04E9 74 4E               904 	mov	a,#0x4E
+   04E9 74 D2               904 	mov	a,#0xD2
    04EB F0                  905 	movx	@dptr,a
    04EC 90 00 C2            906 	mov	dptr,#(_a + 0x0042)
-   04EF 74 24               907 	mov	a,#0x24
+   04EF 74 4D               907 	mov	a,#0x4D
    04F1 F0                  908 	movx	@dptr,a
    04F2 90 00 C3            909 	mov	dptr,#(_a + 0x0043)
-   04F5 74 A6               910 	mov	a,#0xA6
+   04F5 74 DC               910 	mov	a,#0xDC
    04F7 F0                  911 	movx	@dptr,a
    04F8 90 00 C4            912 	mov	dptr,#(_a + 0x0044)
-   04FB 74 C1               913 	mov	a,#0xC1
+   04FB 74 5E               913 	mov	a,#0x5E
    04FD F0                  914 	movx	@dptr,a
    04FE 90 00 C5            915 	mov	dptr,#(_a + 0x0045)
-   0501 74 58               916 	mov	a,#0x58
+   0501 74 B3               916 	mov	a,#0xB3
    0503 F0                  917 	movx	@dptr,a
    0504 90 00 C6            918 	mov	dptr,#(_a + 0x0046)
-   0507 74 68               919 	mov	a,#0x68
+   0507 74 E7               919 	mov	a,#0xE7
    0509 F0                  920 	movx	@dptr,a
    050A 90 00 C7            921 	mov	dptr,#(_a + 0x0047)
-   050D 74 24               922 	mov	a,#0x24
+   050D 74 FA               922 	mov	a,#0xFA
    050F F0                  923 	movx	@dptr,a
    0510 90 00 C8            924 	mov	dptr,#(_a + 0x0048)
-   0513 74 58               925 	mov	a,#0x58
+   0513 74 B4               925 	mov	a,#0xB4
    0515 F0                  926 	movx	@dptr,a
    0516 90 00 C9            927 	mov	dptr,#(_a + 0x0049)
-   0519 74 DC               928 	mov	a,#0xDC
+   0519 74 53               928 	mov	a,#0x53
    051B F0                  929 	movx	@dptr,a
    051C 90 00 CA            930 	mov	dptr,#(_a + 0x004a)
-   051F 74 14               931 	mov	a,#0x14
+   051F 74 5E               931 	mov	a,#0x5E
    0521 F0                  932 	movx	@dptr,a
    0522 90 00 CB            933 	mov	dptr,#(_a + 0x004b)
-   0525 74 F9               934 	mov	a,#0xF9
+   0525 74 75               934 	mov	a,#0x75
    0527 F0                  935 	movx	@dptr,a
    0528 90 00 CC            936 	mov	dptr,#(_a + 0x004c)
-   052B 74 FF               937 	mov	a,#0xFF
+   052B 74 0B               937 	mov	a,#0x0B
    052D F0                  938 	movx	@dptr,a
    052E 90 00 CD            939 	mov	dptr,#(_a + 0x004d)
-   0531 74 4D               940 	mov	a,#0x4D
+   0531 74 91               940 	mov	a,#0x91
    0533 F0                  941 	movx	@dptr,a
    0534 90 00 CE            942 	mov	dptr,#(_a + 0x004e)
-   0537 74 A1               943 	mov	a,#0xA1
+   0537 74 92               943 	mov	a,#0x92
    0539 F0                  944 	movx	@dptr,a
    053A 90 00 CF            945 	mov	dptr,#(_a + 0x004f)
-   053D 74 EF               946 	mov	a,#0xEF
+   053D 74 14               946 	mov	a,#0x14
    053F F0                  947 	movx	@dptr,a
    0540 90 00 D0            948 	mov	dptr,#(_a + 0x0050)
-   0543 74 53               949 	mov	a,#0x53
+   0543 74 7E               949 	mov	a,#0x7E
    0545 F0                  950 	movx	@dptr,a
    0546 90 00 D1            951 	mov	dptr,#(_a + 0x0051)
-   0549 74 A3               952 	mov	a,#0xA3
+   0549 74 D8               952 	mov	a,#0xD8
    054B F0                  953 	movx	@dptr,a
    054C 90 00 D2            954 	mov	dptr,#(_a + 0x0052)
-   054F 74 C2               955 	mov	a,#0xC2
+   054F 74 B8               955 	mov	a,#0xB8
    0551 F0                  956 	movx	@dptr,a
    0552 90 00 D3            957 	mov	dptr,#(_a + 0x0053)
-   0555 74 84               958 	mov	a,#0x84
+   0555 74 A7               958 	mov	a,#0xA7
    0557 F0                  959 	movx	@dptr,a
    0558 90 00 D4            960 	mov	dptr,#(_a + 0x0054)
-   055B 74 1B               961 	mov	a,#0x1B
+   055B 74 05               961 	mov	a,#0x05
    055D F0                  962 	movx	@dptr,a
    055E 90 00 D5            963 	mov	dptr,#(_a + 0x0055)
-   0561 74 81               964 	mov	a,#0x81
+   0561 74 95               964 	mov	a,#0x95
    0563 F0                  965 	movx	@dptr,a
    0564 90 00 D6            966 	mov	dptr,#(_a + 0x0056)
-   0567 74 16               967 	mov	a,#0x16
+   0567 74 D0               967 	mov	a,#0xD0
    0569 F0                  968 	movx	@dptr,a
    056A 90 00 D7            969 	mov	dptr,#(_a + 0x0057)
-   056D 74 6C               970 	mov	a,#0x6C
+   056D 74 55               970 	mov	a,#0x55
    056F F0                  971 	movx	@dptr,a
    0570 90 00 D8            972 	mov	dptr,#(_a + 0x0058)
-   0573 74 DD               973 	mov	a,#0xDD
+   0573 74 97               973 	mov	a,#0x97
    0575 F0                  974 	movx	@dptr,a
    0576 90 00 D9            975 	mov	dptr,#(_a + 0x0059)
-   0579 74 E3               976 	mov	a,#0xE3
+   0579 74 30               976 	mov	a,#0x30
    057B F0                  977 	movx	@dptr,a
    057C 90 00 DA            978 	mov	dptr,#(_a + 0x005a)
-   057F 74 DB               979 	mov	a,#0xDB
+   057F 74 78               979 	mov	a,#0x78
    0581 F0                  980 	movx	@dptr,a
    0582 90 00 DB            981 	mov	dptr,#(_a + 0x005b)
-   0585 74 A8               982 	mov	a,#0xA8
+   0585 74 41               982 	mov	a,#0x41
    0587 F0                  983 	movx	@dptr,a
    0588 90 00 DC            984 	mov	dptr,#(_a + 0x005c)
-   058B 74 03               985 	mov	a,#0x03
+   058B 74 81               985 	mov	a,#0x81
    058D F0                  986 	movx	@dptr,a
    058E 90 00 DD            987 	mov	dptr,#(_a + 0x005d)
-   0591 74 8F               988 	mov	a,#0x8F
+   0591 74 EF               988 	mov	a,#0xEF
    0593 F0                  989 	movx	@dptr,a
    0594 90 00 DE            990 	mov	dptr,#(_a + 0x005e)
-   0597 74 F2               991 	mov	a,#0xF2
+   0597 74 C6               991 	mov	a,#0xC6
    0599 F0                  992 	movx	@dptr,a
    059A 90 00 DF            993 	mov	dptr,#(_a + 0x005f)
-   059D 74 31               994 	mov	a,#0x31
+   059D 74 64               994 	mov	a,#0x64
    059F F0                  995 	movx	@dptr,a
    05A0 90 00 E0            996 	mov	dptr,#(_a + 0x0060)
-   05A3 74 FD               997 	mov	a,#0xFD
+   05A3 74 9F               997 	mov	a,#0x9F
    05A5 F0                  998 	movx	@dptr,a
    05A6 90 00 E1            999 	mov	dptr,#(_a + 0x0061)
-   05A9 74 94              1000 	mov	a,#0x94
+   05A9 74 4A              1000 	mov	a,#0x4A
    05AB F0                 1001 	movx	@dptr,a
    05AC 90 00 E2           1002 	mov	dptr,#(_a + 0x0062)
-   05AF 74 5D              1003 	mov	a,#0x5D
+   05AF 74 9C              1003 	mov	a,#0x9C
    05B1 F0                 1004 	movx	@dptr,a
    05B2 90 00 E3           1005 	mov	dptr,#(_a + 0x0063)
-   05B5 74 26              1006 	mov	a,#0x26
+   05B5 74 4A              1006 	mov	a,#0x4A
    05B7 F0                 1007 	movx	@dptr,a
    05B8 90 00 E4           1008 	mov	dptr,#(_a + 0x0064)
-   05BB 74 13              1009 	mov	a,#0x13
+   05BB 74 3A              1009 	mov	a,#0x3A
    05BD F0                 1010 	movx	@dptr,a
    05BE 90 00 E5           1011 	mov	dptr,#(_a + 0x0065)
-   05C1 74 C6              1012 	mov	a,#0xC6
+   05C1 74 0B              1012 	mov	a,#0x0B
    05C3 F0                 1013 	movx	@dptr,a
    05C4 90 00 E6           1014 	mov	dptr,#(_a + 0x0066)
-   05C7 74 68              1015 	mov	a,#0x68
+   05C7 74 CA              1015 	mov	a,#0xCA
    05C9 F0                 1016 	movx	@dptr,a
    05CA 90 00 E7           1017 	mov	dptr,#(_a + 0x0067)
-   05CD 74 B4              1018 	mov	a,#0xB4
+   05CD 74 D8              1018 	mov	a,#0xD8
    05CF F0                 1019 	movx	@dptr,a
    05D0 90 00 E8           1020 	mov	dptr,#(_a + 0x0068)
-   05D3 74 0D              1021 	mov	a,#0x0D
+   05D3 74 9C              1021 	mov	a,#0x9C
    05D5 F0                 1022 	movx	@dptr,a
    05D6 90 00 E9           1023 	mov	dptr,#(_a + 0x0069)
-   05D9 74 CD              1024 	mov	a,#0xCD
+   05D9 74 1A              1024 	mov	a,#0x1A
    05DB F0                 1025 	movx	@dptr,a
    05DC 90 00 EA           1026 	mov	dptr,#(_a + 0x006a)
-   05DF 74 F1              1027 	mov	a,#0xF1
+   05DF 74 64              1027 	mov	a,#0x64
    05E1 F0                 1028 	movx	@dptr,a
    05E2 90 00 EB           1029 	mov	dptr,#(_a + 0x006b)
-   05E5 74 B8              1030 	mov	a,#0xB8
+   05E5 74 A7              1030 	mov	a,#0xA7
    05E7 F0                 1031 	movx	@dptr,a
    05E8 90 00 EC           1032 	mov	dptr,#(_a + 0x006c)
-   05EB 74 66              1033 	mov	a,#0x66
+   05EB 74 A9              1033 	mov	a,#0xA9
    05ED F0                 1034 	movx	@dptr,a
    05EE 90 00 ED           1035 	mov	dptr,#(_a + 0x006d)
-   05F1 74 0D              1036 	mov	a,#0x0D
+   05F1 74 6E              1036 	mov	a,#0x6E
    05F3 F0                 1037 	movx	@dptr,a
    05F4 90 00 EE           1038 	mov	dptr,#(_a + 0x006e)
-   05F7 74 5D              1039 	mov	a,#0x5D
+   05F7 74 C8              1039 	mov	a,#0xC8
    05F9 F0                 1040 	movx	@dptr,a
    05FA 90 00 EF           1041 	mov	dptr,#(_a + 0x006f)
-   05FD 74 3B              1042 	mov	a,#0x3B
+   05FD 74 0A              1042 	mov	a,#0x0A
    05FF F0                 1043 	movx	@dptr,a
    0600 90 00 F0           1044 	mov	dptr,#(_a + 0x0070)
-   0603 74 2F              1045 	mov	a,#0x2F
+   0603 74 E5              1045 	mov	a,#0xE5
    0605 F0                 1046 	movx	@dptr,a
    0606 90 00 F1           1047 	mov	dptr,#(_a + 0x0071)
-   0609 74 C4              1048 	mov	a,#0xC4
+   0609 74 CE              1048 	mov	a,#0xCE
    060B F0                 1049 	movx	@dptr,a
    060C 90 00 F2           1050 	mov	dptr,#(_a + 0x0072)
-   060F 74 4A              1051 	mov	a,#0x4A
+   060F 74 E2              1051 	mov	a,#0xE2
    0611 F0                 1052 	movx	@dptr,a
    0612 90 00 F3           1053 	mov	dptr,#(_a + 0x0073)
-   0615 74 D1              1054 	mov	a,#0xD1
+   0615 74 3B              1054 	mov	a,#0x3B
    0617 F0                 1055 	movx	@dptr,a
    0618 90 00 F4           1056 	mov	dptr,#(_a + 0x0074)
-   061B 74 0B              1057 	mov	a,#0x0B
+   061B 74 73              1057 	mov	a,#0x73
    061D F0                 1058 	movx	@dptr,a
    061E 90 00 F5           1059 	mov	dptr,#(_a + 0x0075)
-   0621 74 36              1060 	mov	a,#0x36
+   0621 74 8A              1060 	mov	a,#0x8A
    0623 F0                 1061 	movx	@dptr,a
    0624 90 00 F6           1062 	mov	dptr,#(_a + 0x0076)
-   0627 74 C6              1063 	mov	a,#0xC6
+   0627 74 EF              1063 	mov	a,#0xEF
    0629 F0                 1064 	movx	@dptr,a
    062A 90 00 F7           1065 	mov	dptr,#(_a + 0x0077)
-   062D 74 10              1066 	mov	a,#0x10
+   062D 74 F0              1066 	mov	a,#0xF0
    062F F0                 1067 	movx	@dptr,a
    0630 90 00 F8           1068 	mov	dptr,#(_a + 0x0078)
-   0633 74 1A              1069 	mov	a,#0x1A
+   0633 74 E4              1069 	mov	a,#0xE4
    0635 F0                 1070 	movx	@dptr,a
    0636 90 00 F9           1071 	mov	dptr,#(_a + 0x0079)
-   0639 74 2F              1072 	mov	a,#0x2F
+   0639 74 A6              1072 	mov	a,#0xA6
    063B F0                 1073 	movx	@dptr,a
    063C 90 00 FA           1074 	mov	dptr,#(_a + 0x007a)
-   063F 74 72              1075 	mov	a,#0x72
+   063F 74 40              1075 	mov	a,#0x40
    0641 F0                 1076 	movx	@dptr,a
    0642 90 00 FB           1077 	mov	dptr,#(_a + 0x007b)
-   0645 74 D1              1078 	mov	a,#0xD1
+   0645 74 26              1078 	mov	a,#0x26
    0647 F0                 1079 	movx	@dptr,a
    0648 90 00 FC           1080 	mov	dptr,#(_a + 0x007c)
-   064B 74 BB              1081 	mov	a,#0xBB
+   064B 74 F3              1081 	mov	a,#0xF3
    064D F0                 1082 	movx	@dptr,a
    064E 90 00 FD           1083 	mov	dptr,#(_a + 0x007d)
-   0651 74 15              1084 	mov	a,#0x15
+   0651 74 D9              1084 	mov	a,#0xD9
    0653 F0                 1085 	movx	@dptr,a
    0654 90 00 FE           1086 	mov	dptr,#(_a + 0x007e)
-   0657 74 29              1087 	mov	a,#0x29
+   0657 74 50              1087 	mov	a,#0x50
    0659 F0                 1088 	movx	@dptr,a
    065A 90 00 FF           1089 	mov	dptr,#(_a + 0x007f)
-   065D 74 CA              1090 	mov	a,#0xCA
+   065D 74 1F              1090 	mov	a,#0x1F
    065F F0                 1091 	movx	@dptr,a
-                           1092 ;	main.c:13: volatile __xdata __at (0x0100) unsigned char b[SIZE] = {0xE1,0x8A,0x03,0xDB,0xE0,0xD9,0xF6,0x55,0xB6,0x27,0x0A,0x28,0xF0,0x5E,0x74,0x7F,0xE6,0x9F,0x4C,0xFB,0x26,0x8C,0x9E,0x87,0x83,0x22,0xF2,0x75,0xD2,0xB3,0x61,0xA2,0x9D,0x50,0x71,0x5E,0xC9,0xDD,0xDD,0x74,0x0A,0x3C,0xC0,0x30,0x3E,0xE5,0x20,0x02,0xB3,0x12,0x4F,0xAB,0x60,0x27,0x07,0x17,0xDD,0x00,0xC2,0xE1,0xBC,0x04,0xAE,0x21,0x38,0xCA,0xAA,0x8F,0x74,0xD5,0x02,0x10,0x15,0x87,0x58,0x08,0xCC,0x9A,0x42,0xBD,0x02,0x97,0xCE,0x2B,0x39,0x38,0x99,0xAC,0x81,0xBB,0xC3,0xFF,0xBC,0xC1,0xB8,0xE1,0x24,0x8D,0xC5,0x20,0x89,0x98,0x0B,0x50,0xB1,0x16,0x9A,0x2D,0x6E,0x5A,0x7B,0x2F,0xD4,0x92,0xA1,0xAA,0xA6,0xE5,0xA6,0xD2,0x0D,0x0B,0xB7,0xB2,0x25,0x23,0x23,0xBE};
+                           1092 ;	main.c:18: volatile __xdata __at (0x0100) unsigned char b[SIZE] = {0x08,0xA2,0x1A,0xDB,0xCB,0x27,0x58,0x66,0x6C,0xC0,0xA2,0x58,0x7E,0x96,0x9D,0x15,0xAD,0x00,0xF5,0xAD,0xBD,0xC6,0x62,0xDE,0xB3,0xC9,0xF9,0x5C,0xB8,0xC8,0x3A,0xD1,0x2A,0xCE,0x1C,0xFA,0x3F,0x88,0x60,0xC6,0xFA,0x04,0xC9,0x08,0x68,0xB5,0x2F,0x01,0x88,0x67,0xDC,0xFA,0xD2,0xF3,0x3E,0xF6,0x80,0x97,0xA0,0x7F,0x9D,0x98,0x4D,0x1B,0x20,0xEA,0xAE,0x9A,0xF8,0x5C,0x53,0x71,0xC4,0x4C,0xBD,0xDA,0xBB,0x4F,0x03,0x14,0x30,0xE4,0x94,0x72,0x49,0xAF,0x02,0xFF,0x68,0x73,0xED,0x8B,0x46,0xCF,0xD0,0x89,0xA7,0xB5,0x64,0x76,0xC2,0xBD,0x68,0xD3,0xAC,0x0F,0xD1,0x80,0xE8,0x3E,0x02,0x27,0x82,0xB3,0xEA,0x8E,0x32,0x7A,0xD0,0xE9,0x9C,0x59,0x68,0x81,0x0F,0x3C,0x9E,0xBA};
    0660 90 01 00           1093 	mov	dptr,#_b
-   0663 74 E1              1094 	mov	a,#0xE1
+   0663 74 08              1094 	mov	a,#0x08
    0665 F0                 1095 	movx	@dptr,a
    0666 90 01 01           1096 	mov	dptr,#(_b + 0x0001)
-   0669 74 8A              1097 	mov	a,#0x8A
+   0669 74 A2              1097 	mov	a,#0xA2
    066B F0                 1098 	movx	@dptr,a
    066C 90 01 02           1099 	mov	dptr,#(_b + 0x0002)
-   066F 74 03              1100 	mov	a,#0x03
+   066F 74 1A              1100 	mov	a,#0x1A
    0671 F0                 1101 	movx	@dptr,a
    0672 90 01 03           1102 	mov	dptr,#(_b + 0x0003)
    0675 74 DB              1103 	mov	a,#0xDB
    0677 F0                 1104 	movx	@dptr,a
    0678 90 01 04           1105 	mov	dptr,#(_b + 0x0004)
-   067B 74 E0              1106 	mov	a,#0xE0
+   067B 74 CB              1106 	mov	a,#0xCB
    067D F0                 1107 	movx	@dptr,a
    067E 90 01 05           1108 	mov	dptr,#(_b + 0x0005)
-   0681 74 D9              1109 	mov	a,#0xD9
+   0681 74 27              1109 	mov	a,#0x27
    0683 F0                 1110 	movx	@dptr,a
    0684 90 01 06           1111 	mov	dptr,#(_b + 0x0006)
-   0687 74 F6              1112 	mov	a,#0xF6
+   0687 74 58              1112 	mov	a,#0x58
    0689 F0                 1113 	movx	@dptr,a
    068A 90 01 07           1114 	mov	dptr,#(_b + 0x0007)
-   068D 74 55              1115 	mov	a,#0x55
+   068D 74 66              1115 	mov	a,#0x66
    068F F0                 1116 	movx	@dptr,a
    0690 90 01 08           1117 	mov	dptr,#(_b + 0x0008)
-   0693 74 B6              1118 	mov	a,#0xB6
+   0693 74 6C              1118 	mov	a,#0x6C
    0695 F0                 1119 	movx	@dptr,a
    0696 90 01 09           1120 	mov	dptr,#(_b + 0x0009)
-   0699 74 27              1121 	mov	a,#0x27
+   0699 74 C0              1121 	mov	a,#0xC0
    069B F0                 1122 	movx	@dptr,a
    069C 90 01 0A           1123 	mov	dptr,#(_b + 0x000a)
-   069F 74 0A              1124 	mov	a,#0x0A
+   069F 74 A2              1124 	mov	a,#0xA2
    06A1 F0                 1125 	movx	@dptr,a
    06A2 90 01 0B           1126 	mov	dptr,#(_b + 0x000b)
-   06A5 74 28              1127 	mov	a,#0x28
+   06A5 74 58              1127 	mov	a,#0x58
    06A7 F0                 1128 	movx	@dptr,a
    06A8 90 01 0C           1129 	mov	dptr,#(_b + 0x000c)
-   06AB 74 F0              1130 	mov	a,#0xF0
+   06AB 74 7E              1130 	mov	a,#0x7E
    06AD F0                 1131 	movx	@dptr,a
    06AE 90 01 0D           1132 	mov	dptr,#(_b + 0x000d)
-   06B1 74 5E              1133 	mov	a,#0x5E
+   06B1 74 96              1133 	mov	a,#0x96
    06B3 F0                 1134 	movx	@dptr,a
    06B4 90 01 0E           1135 	mov	dptr,#(_b + 0x000e)
-   06B7 74 74              1136 	mov	a,#0x74
+   06B7 74 9D              1136 	mov	a,#0x9D
    06B9 F0                 1137 	movx	@dptr,a
    06BA 90 01 0F           1138 	mov	dptr,#(_b + 0x000f)
-   06BD 74 7F              1139 	mov	a,#0x7F
+   06BD 74 15              1139 	mov	a,#0x15
    06BF F0                 1140 	movx	@dptr,a
    06C0 90 01 10           1141 	mov	dptr,#(_b + 0x0010)
-   06C3 74 E6              1142 	mov	a,#0xE6
+   06C3 74 AD              1142 	mov	a,#0xAD
    06C5 F0                 1143 	movx	@dptr,a
    06C6 90 01 11           1144 	mov	dptr,#(_b + 0x0011)
-   06C9 74 9F              1145 	mov	a,#0x9F
-   06CB F0                 1146 	movx	@dptr,a
-   06CC 90 01 12           1147 	mov	dptr,#(_b + 0x0012)
-   06CF 74 4C              1148 	mov	a,#0x4C
-   06D1 F0                 1149 	movx	@dptr,a
-   06D2 90 01 13           1150 	mov	dptr,#(_b + 0x0013)
-   06D5 74 FB              1151 	mov	a,#0xFB
-   06D7 F0                 1152 	movx	@dptr,a
-   06D8 90 01 14           1153 	mov	dptr,#(_b + 0x0014)
-   06DB 74 26              1154 	mov	a,#0x26
-   06DD F0                 1155 	movx	@dptr,a
-   06DE 90 01 15           1156 	mov	dptr,#(_b + 0x0015)
-   06E1 74 8C              1157 	mov	a,#0x8C
-   06E3 F0                 1158 	movx	@dptr,a
-   06E4 90 01 16           1159 	mov	dptr,#(_b + 0x0016)
-   06E7 74 9E              1160 	mov	a,#0x9E
-   06E9 F0                 1161 	movx	@dptr,a
-   06EA 90 01 17           1162 	mov	dptr,#(_b + 0x0017)
-   06ED 74 87              1163 	mov	a,#0x87
-   06EF F0                 1164 	movx	@dptr,a
-   06F0 90 01 18           1165 	mov	dptr,#(_b + 0x0018)
-   06F3 74 83              1166 	mov	a,#0x83
-   06F5 F0                 1167 	movx	@dptr,a
-   06F6 90 01 19           1168 	mov	dptr,#(_b + 0x0019)
-   06F9 74 22              1169 	mov	a,#0x22
-   06FB F0                 1170 	movx	@dptr,a
-   06FC 90 01 1A           1171 	mov	dptr,#(_b + 0x001a)
-   06FF 74 F2              1172 	mov	a,#0xF2
-   0701 F0                 1173 	movx	@dptr,a
-   0702 90 01 1B           1174 	mov	dptr,#(_b + 0x001b)
-   0705 74 75              1175 	mov	a,#0x75
-   0707 F0                 1176 	movx	@dptr,a
-   0708 90 01 1C           1177 	mov	dptr,#(_b + 0x001c)
-   070B 74 D2              1178 	mov	a,#0xD2
-   070D F0                 1179 	movx	@dptr,a
-   070E 90 01 1D           1180 	mov	dptr,#(_b + 0x001d)
-   0711 74 B3              1181 	mov	a,#0xB3
-   0713 F0                 1182 	movx	@dptr,a
-   0714 90 01 1E           1183 	mov	dptr,#(_b + 0x001e)
-   0717 74 61              1184 	mov	a,#0x61
-   0719 F0                 1185 	movx	@dptr,a
-   071A 90 01 1F           1186 	mov	dptr,#(_b + 0x001f)
-   071D 74 A2              1187 	mov	a,#0xA2
-   071F F0                 1188 	movx	@dptr,a
-   0720 90 01 20           1189 	mov	dptr,#(_b + 0x0020)
-   0723 74 9D              1190 	mov	a,#0x9D
-   0725 F0                 1191 	movx	@dptr,a
-   0726 90 01 21           1192 	mov	dptr,#(_b + 0x0021)
-   0729 74 50              1193 	mov	a,#0x50
-   072B F0                 1194 	movx	@dptr,a
-   072C 90 01 22           1195 	mov	dptr,#(_b + 0x0022)
-   072F 74 71              1196 	mov	a,#0x71
-   0731 F0                 1197 	movx	@dptr,a
-   0732 90 01 23           1198 	mov	dptr,#(_b + 0x0023)
-   0735 74 5E              1199 	mov	a,#0x5E
-   0737 F0                 1200 	movx	@dptr,a
-   0738 90 01 24           1201 	mov	dptr,#(_b + 0x0024)
-   073B 74 C9              1202 	mov	a,#0xC9
-   073D F0                 1203 	movx	@dptr,a
-   073E 90 01 25           1204 	mov	dptr,#(_b + 0x0025)
-   0741 74 DD              1205 	mov	a,#0xDD
-   0743 F0                 1206 	movx	@dptr,a
-   0744 90 01 26           1207 	mov	dptr,#(_b + 0x0026)
-   0747 74 DD              1208 	mov	a,#0xDD
-   0749 F0                 1209 	movx	@dptr,a
-   074A 90 01 27           1210 	mov	dptr,#(_b + 0x0027)
-   074D 74 74              1211 	mov	a,#0x74
-   074F F0                 1212 	movx	@dptr,a
-   0750 90 01 28           1213 	mov	dptr,#(_b + 0x0028)
-   0753 74 0A              1214 	mov	a,#0x0A
-   0755 F0                 1215 	movx	@dptr,a
-   0756 90 01 29           1216 	mov	dptr,#(_b + 0x0029)
-   0759 74 3C              1217 	mov	a,#0x3C
-   075B F0                 1218 	movx	@dptr,a
-   075C 90 01 2A           1219 	mov	dptr,#(_b + 0x002a)
-   075F 74 C0              1220 	mov	a,#0xC0
-   0761 F0                 1221 	movx	@dptr,a
-   0762 90 01 2B           1222 	mov	dptr,#(_b + 0x002b)
-   0765 74 30              1223 	mov	a,#0x30
-   0767 F0                 1224 	movx	@dptr,a
-   0768 90 01 2C           1225 	mov	dptr,#(_b + 0x002c)
-   076B 74 3E              1226 	mov	a,#0x3E
-   076D F0                 1227 	movx	@dptr,a
-   076E 90 01 2D           1228 	mov	dptr,#(_b + 0x002d)
-   0771 74 E5              1229 	mov	a,#0xE5
-   0773 F0                 1230 	movx	@dptr,a
-   0774 90 01 2E           1231 	mov	dptr,#(_b + 0x002e)
-   0777 74 20              1232 	mov	a,#0x20
-   0779 F0                 1233 	movx	@dptr,a
-   077A 90 01 2F           1234 	mov	dptr,#(_b + 0x002f)
-   077D 74 02              1235 	mov	a,#0x02
-   077F F0                 1236 	movx	@dptr,a
-   0780 90 01 30           1237 	mov	dptr,#(_b + 0x0030)
-   0783 74 B3              1238 	mov	a,#0xB3
-   0785 F0                 1239 	movx	@dptr,a
-   0786 90 01 31           1240 	mov	dptr,#(_b + 0x0031)
-   0789 74 12              1241 	mov	a,#0x12
-   078B F0                 1242 	movx	@dptr,a
-   078C 90 01 32           1243 	mov	dptr,#(_b + 0x0032)
-   078F 74 4F              1244 	mov	a,#0x4F
-   0791 F0                 1245 	movx	@dptr,a
-   0792 90 01 33           1246 	mov	dptr,#(_b + 0x0033)
-   0795 74 AB              1247 	mov	a,#0xAB
-   0797 F0                 1248 	movx	@dptr,a
-   0798 90 01 34           1249 	mov	dptr,#(_b + 0x0034)
-   079B 74 60              1250 	mov	a,#0x60
-   079D F0                 1251 	movx	@dptr,a
-   079E 90 01 35           1252 	mov	dptr,#(_b + 0x0035)
-   07A1 74 27              1253 	mov	a,#0x27
-   07A3 F0                 1254 	movx	@dptr,a
-   07A4 90 01 36           1255 	mov	dptr,#(_b + 0x0036)
-   07A7 74 07              1256 	mov	a,#0x07
-   07A9 F0                 1257 	movx	@dptr,a
-   07AA 90 01 37           1258 	mov	dptr,#(_b + 0x0037)
-   07AD 74 17              1259 	mov	a,#0x17
-   07AF F0                 1260 	movx	@dptr,a
-   07B0 90 01 38           1261 	mov	dptr,#(_b + 0x0038)
-   07B3 74 DD              1262 	mov	a,#0xDD
-   07B5 F0                 1263 	movx	@dptr,a
-   07B6 90 01 39           1264 	mov	dptr,#(_b + 0x0039)
-   07B9 E4                 1265 	clr	a
+   06C9 E4                 1145 	clr	a
+   06CA F0                 1146 	movx	@dptr,a
+   06CB 90 01 12           1147 	mov	dptr,#(_b + 0x0012)
+   06CE 74 F5              1148 	mov	a,#0xF5
+   06D0 F0                 1149 	movx	@dptr,a
+   06D1 90 01 13           1150 	mov	dptr,#(_b + 0x0013)
+   06D4 74 AD              1151 	mov	a,#0xAD
+   06D6 F0                 1152 	movx	@dptr,a
+   06D7 90 01 14           1153 	mov	dptr,#(_b + 0x0014)
+   06DA 74 BD              1154 	mov	a,#0xBD
+   06DC F0                 1155 	movx	@dptr,a
+   06DD 90 01 15           1156 	mov	dptr,#(_b + 0x0015)
+   06E0 74 C6              1157 	mov	a,#0xC6
+   06E2 F0                 1158 	movx	@dptr,a
+   06E3 90 01 16           1159 	mov	dptr,#(_b + 0x0016)
+   06E6 74 62              1160 	mov	a,#0x62
+   06E8 F0                 1161 	movx	@dptr,a
+   06E9 90 01 17           1162 	mov	dptr,#(_b + 0x0017)
+   06EC 74 DE              1163 	mov	a,#0xDE
+   06EE F0                 1164 	movx	@dptr,a
+   06EF 90 01 18           1165 	mov	dptr,#(_b + 0x0018)
+   06F2 74 B3              1166 	mov	a,#0xB3
+   06F4 F0                 1167 	movx	@dptr,a
+   06F5 90 01 19           1168 	mov	dptr,#(_b + 0x0019)
+   06F8 74 C9              1169 	mov	a,#0xC9
+   06FA F0                 1170 	movx	@dptr,a
+   06FB 90 01 1A           1171 	mov	dptr,#(_b + 0x001a)
+   06FE 74 F9              1172 	mov	a,#0xF9
+   0700 F0                 1173 	movx	@dptr,a
+   0701 90 01 1B           1174 	mov	dptr,#(_b + 0x001b)
+   0704 74 5C              1175 	mov	a,#0x5C
+   0706 F0                 1176 	movx	@dptr,a
+   0707 90 01 1C           1177 	mov	dptr,#(_b + 0x001c)
+   070A 74 B8              1178 	mov	a,#0xB8
+   070C F0                 1179 	movx	@dptr,a
+   070D 90 01 1D           1180 	mov	dptr,#(_b + 0x001d)
+   0710 74 C8              1181 	mov	a,#0xC8
+   0712 F0                 1182 	movx	@dptr,a
+   0713 90 01 1E           1183 	mov	dptr,#(_b + 0x001e)
+   0716 74 3A              1184 	mov	a,#0x3A
+   0718 F0                 1185 	movx	@dptr,a
+   0719 90 01 1F           1186 	mov	dptr,#(_b + 0x001f)
+   071C 74 D1              1187 	mov	a,#0xD1
+   071E F0                 1188 	movx	@dptr,a
+   071F 90 01 20           1189 	mov	dptr,#(_b + 0x0020)
+   0722 74 2A              1190 	mov	a,#0x2A
+   0724 F0                 1191 	movx	@dptr,a
+   0725 90 01 21           1192 	mov	dptr,#(_b + 0x0021)
+   0728 74 CE              1193 	mov	a,#0xCE
+   072A F0                 1194 	movx	@dptr,a
+   072B 90 01 22           1195 	mov	dptr,#(_b + 0x0022)
+   072E 74 1C              1196 	mov	a,#0x1C
+   0730 F0                 1197 	movx	@dptr,a
+   0731 90 01 23           1198 	mov	dptr,#(_b + 0x0023)
+   0734 74 FA              1199 	mov	a,#0xFA
+   0736 F0                 1200 	movx	@dptr,a
+   0737 90 01 24           1201 	mov	dptr,#(_b + 0x0024)
+   073A 74 3F              1202 	mov	a,#0x3F
+   073C F0                 1203 	movx	@dptr,a
+   073D 90 01 25           1204 	mov	dptr,#(_b + 0x0025)
+   0740 74 88              1205 	mov	a,#0x88
+   0742 F0                 1206 	movx	@dptr,a
+   0743 90 01 26           1207 	mov	dptr,#(_b + 0x0026)
+   0746 74 60              1208 	mov	a,#0x60
+   0748 F0                 1209 	movx	@dptr,a
+   0749 90 01 27           1210 	mov	dptr,#(_b + 0x0027)
+   074C 74 C6              1211 	mov	a,#0xC6
+   074E F0                 1212 	movx	@dptr,a
+   074F 90 01 28           1213 	mov	dptr,#(_b + 0x0028)
+   0752 74 FA              1214 	mov	a,#0xFA
+   0754 F0                 1215 	movx	@dptr,a
+   0755 90 01 29           1216 	mov	dptr,#(_b + 0x0029)
+   0758 74 04              1217 	mov	a,#0x04
+   075A F0                 1218 	movx	@dptr,a
+   075B 90 01 2A           1219 	mov	dptr,#(_b + 0x002a)
+   075E 74 C9              1220 	mov	a,#0xC9
+   0760 F0                 1221 	movx	@dptr,a
+   0761 90 01 2B           1222 	mov	dptr,#(_b + 0x002b)
+   0764 74 08              1223 	mov	a,#0x08
+   0766 F0                 1224 	movx	@dptr,a
+   0767 90 01 2C           1225 	mov	dptr,#(_b + 0x002c)
+   076A 74 68              1226 	mov	a,#0x68
+   076C F0                 1227 	movx	@dptr,a
+   076D 90 01 2D           1228 	mov	dptr,#(_b + 0x002d)
+   0770 74 B5              1229 	mov	a,#0xB5
+   0772 F0                 1230 	movx	@dptr,a
+   0773 90 01 2E           1231 	mov	dptr,#(_b + 0x002e)
+   0776 74 2F              1232 	mov	a,#0x2F
+   0778 F0                 1233 	movx	@dptr,a
+   0779 90 01 2F           1234 	mov	dptr,#(_b + 0x002f)
+   077C 74 01              1235 	mov	a,#0x01
+   077E F0                 1236 	movx	@dptr,a
+   077F 90 01 30           1237 	mov	dptr,#(_b + 0x0030)
+   0782 74 88              1238 	mov	a,#0x88
+   0784 F0                 1239 	movx	@dptr,a
+   0785 90 01 31           1240 	mov	dptr,#(_b + 0x0031)
+   0788 74 67              1241 	mov	a,#0x67
+   078A F0                 1242 	movx	@dptr,a
+   078B 90 01 32           1243 	mov	dptr,#(_b + 0x0032)
+   078E 74 DC              1244 	mov	a,#0xDC
+   0790 F0                 1245 	movx	@dptr,a
+   0791 90 01 33           1246 	mov	dptr,#(_b + 0x0033)
+   0794 74 FA              1247 	mov	a,#0xFA
+   0796 F0                 1248 	movx	@dptr,a
+   0797 90 01 34           1249 	mov	dptr,#(_b + 0x0034)
+   079A 74 D2              1250 	mov	a,#0xD2
+   079C F0                 1251 	movx	@dptr,a
+   079D 90 01 35           1252 	mov	dptr,#(_b + 0x0035)
+   07A0 74 F3              1253 	mov	a,#0xF3
+   07A2 F0                 1254 	movx	@dptr,a
+   07A3 90 01 36           1255 	mov	dptr,#(_b + 0x0036)
+   07A6 74 3E              1256 	mov	a,#0x3E
+   07A8 F0                 1257 	movx	@dptr,a
+   07A9 90 01 37           1258 	mov	dptr,#(_b + 0x0037)
+   07AC 74 F6              1259 	mov	a,#0xF6
+   07AE F0                 1260 	movx	@dptr,a
+   07AF 90 01 38           1261 	mov	dptr,#(_b + 0x0038)
+   07B2 74 80              1262 	mov	a,#0x80
+   07B4 F0                 1263 	movx	@dptr,a
+   07B5 90 01 39           1264 	mov	dptr,#(_b + 0x0039)
+   07B8 74 97              1265 	mov	a,#0x97
    07BA F0                 1266 	movx	@dptr,a
    07BB 90 01 3A           1267 	mov	dptr,#(_b + 0x003a)
-   07BE 74 C2              1268 	mov	a,#0xC2
+   07BE 74 A0              1268 	mov	a,#0xA0
    07C0 F0                 1269 	movx	@dptr,a
    07C1 90 01 3B           1270 	mov	dptr,#(_b + 0x003b)
-   07C4 74 E1              1271 	mov	a,#0xE1
+   07C4 74 7F              1271 	mov	a,#0x7F
    07C6 F0                 1272 	movx	@dptr,a
    07C7 90 01 3C           1273 	mov	dptr,#(_b + 0x003c)
-   07CA 74 BC              1274 	mov	a,#0xBC
+   07CA 74 9D              1274 	mov	a,#0x9D
    07CC F0                 1275 	movx	@dptr,a
    07CD 90 01 3D           1276 	mov	dptr,#(_b + 0x003d)
-   07D0 74 04              1277 	mov	a,#0x04
+   07D0 74 98              1277 	mov	a,#0x98
    07D2 F0                 1278 	movx	@dptr,a
    07D3 90 01 3E           1279 	mov	dptr,#(_b + 0x003e)
-   07D6 74 AE              1280 	mov	a,#0xAE
+   07D6 74 4D              1280 	mov	a,#0x4D
    07D8 F0                 1281 	movx	@dptr,a
    07D9 90 01 3F           1282 	mov	dptr,#(_b + 0x003f)
-   07DC 74 21              1283 	mov	a,#0x21
+   07DC 74 1B              1283 	mov	a,#0x1B
    07DE F0                 1284 	movx	@dptr,a
    07DF 90 01 40           1285 	mov	dptr,#(_b + 0x0040)
-   07E2 74 38              1286 	mov	a,#0x38
+   07E2 74 20              1286 	mov	a,#0x20
    07E4 F0                 1287 	movx	@dptr,a
    07E5 90 01 41           1288 	mov	dptr,#(_b + 0x0041)
-   07E8 74 CA              1289 	mov	a,#0xCA
+   07E8 74 EA              1289 	mov	a,#0xEA
    07EA F0                 1290 	movx	@dptr,a
    07EB 90 01 42           1291 	mov	dptr,#(_b + 0x0042)
-   07EE 74 AA              1292 	mov	a,#0xAA
+   07EE 74 AE              1292 	mov	a,#0xAE
    07F0 F0                 1293 	movx	@dptr,a
    07F1 90 01 43           1294 	mov	dptr,#(_b + 0x0043)
-   07F4 74 8F              1295 	mov	a,#0x8F
+   07F4 74 9A              1295 	mov	a,#0x9A
    07F6 F0                 1296 	movx	@dptr,a
    07F7 90 01 44           1297 	mov	dptr,#(_b + 0x0044)
-   07FA 74 74              1298 	mov	a,#0x74
+   07FA 74 F8              1298 	mov	a,#0xF8
    07FC F0                 1299 	movx	@dptr,a
    07FD 90 01 45           1300 	mov	dptr,#(_b + 0x0045)
-   0800 74 D5              1301 	mov	a,#0xD5
+   0800 74 5C              1301 	mov	a,#0x5C
    0802 F0                 1302 	movx	@dptr,a
    0803 90 01 46           1303 	mov	dptr,#(_b + 0x0046)
-   0806 74 02              1304 	mov	a,#0x02
+   0806 74 53              1304 	mov	a,#0x53
    0808 F0                 1305 	movx	@dptr,a
    0809 90 01 47           1306 	mov	dptr,#(_b + 0x0047)
-   080C 74 10              1307 	mov	a,#0x10
+   080C 74 71              1307 	mov	a,#0x71
    080E F0                 1308 	movx	@dptr,a
    080F 90 01 48           1309 	mov	dptr,#(_b + 0x0048)
-   0812 74 15              1310 	mov	a,#0x15
+   0812 74 C4              1310 	mov	a,#0xC4
    0814 F0                 1311 	movx	@dptr,a
    0815 90 01 49           1312 	mov	dptr,#(_b + 0x0049)
-   0818 74 87              1313 	mov	a,#0x87
+   0818 74 4C              1313 	mov	a,#0x4C
    081A F0                 1314 	movx	@dptr,a
    081B 90 01 4A           1315 	mov	dptr,#(_b + 0x004a)
-   081E 74 58              1316 	mov	a,#0x58
+   081E 74 BD              1316 	mov	a,#0xBD
    0820 F0                 1317 	movx	@dptr,a
    0821 90 01 4B           1318 	mov	dptr,#(_b + 0x004b)
-   0824 74 08              1319 	mov	a,#0x08
+   0824 74 DA              1319 	mov	a,#0xDA
    0826 F0                 1320 	movx	@dptr,a
    0827 90 01 4C           1321 	mov	dptr,#(_b + 0x004c)
-   082A 74 CC              1322 	mov	a,#0xCC
+   082A 74 BB              1322 	mov	a,#0xBB
    082C F0                 1323 	movx	@dptr,a
    082D 90 01 4D           1324 	mov	dptr,#(_b + 0x004d)
-   0830 74 9A              1325 	mov	a,#0x9A
+   0830 74 4F              1325 	mov	a,#0x4F
    0832 F0                 1326 	movx	@dptr,a
    0833 90 01 4E           1327 	mov	dptr,#(_b + 0x004e)
-   0836 74 42              1328 	mov	a,#0x42
+   0836 74 03              1328 	mov	a,#0x03
    0838 F0                 1329 	movx	@dptr,a
    0839 90 01 4F           1330 	mov	dptr,#(_b + 0x004f)
-   083C 74 BD              1331 	mov	a,#0xBD
+   083C 74 14              1331 	mov	a,#0x14
    083E F0                 1332 	movx	@dptr,a
    083F 90 01 50           1333 	mov	dptr,#(_b + 0x0050)
-   0842 74 02              1334 	mov	a,#0x02
+   0842 74 30              1334 	mov	a,#0x30
    0844 F0                 1335 	movx	@dptr,a
    0845 90 01 51           1336 	mov	dptr,#(_b + 0x0051)
-   0848 74 97              1337 	mov	a,#0x97
+   0848 74 E4              1337 	mov	a,#0xE4
    084A F0                 1338 	movx	@dptr,a
    084B 90 01 52           1339 	mov	dptr,#(_b + 0x0052)
-   084E 74 CE              1340 	mov	a,#0xCE
+   084E 74 94              1340 	mov	a,#0x94
    0850 F0                 1341 	movx	@dptr,a
    0851 90 01 53           1342 	mov	dptr,#(_b + 0x0053)
-   0854 74 2B              1343 	mov	a,#0x2B
+   0854 74 72              1343 	mov	a,#0x72
    0856 F0                 1344 	movx	@dptr,a
    0857 90 01 54           1345 	mov	dptr,#(_b + 0x0054)
-   085A 74 39              1346 	mov	a,#0x39
+   085A 74 49              1346 	mov	a,#0x49
    085C F0                 1347 	movx	@dptr,a
    085D 90 01 55           1348 	mov	dptr,#(_b + 0x0055)
-   0860 74 38              1349 	mov	a,#0x38
+   0860 74 AF              1349 	mov	a,#0xAF
    0862 F0                 1350 	movx	@dptr,a
    0863 90 01 56           1351 	mov	dptr,#(_b + 0x0056)
-   0866 74 99              1352 	mov	a,#0x99
+   0866 74 02              1352 	mov	a,#0x02
    0868 F0                 1353 	movx	@dptr,a
    0869 90 01 57           1354 	mov	dptr,#(_b + 0x0057)
-   086C 74 AC              1355 	mov	a,#0xAC
+   086C 74 FF              1355 	mov	a,#0xFF
    086E F0                 1356 	movx	@dptr,a
    086F 90 01 58           1357 	mov	dptr,#(_b + 0x0058)
-   0872 74 81              1358 	mov	a,#0x81
+   0872 74 68              1358 	mov	a,#0x68
    0874 F0                 1359 	movx	@dptr,a
    0875 90 01 59           1360 	mov	dptr,#(_b + 0x0059)
-   0878 74 BB              1361 	mov	a,#0xBB
+   0878 74 73              1361 	mov	a,#0x73
    087A F0                 1362 	movx	@dptr,a
    087B 90 01 5A           1363 	mov	dptr,#(_b + 0x005a)
-   087E 74 C3              1364 	mov	a,#0xC3
+   087E 74 ED              1364 	mov	a,#0xED
    0880 F0                 1365 	movx	@dptr,a
    0881 90 01 5B           1366 	mov	dptr,#(_b + 0x005b)
-   0884 74 FF              1367 	mov	a,#0xFF
+   0884 74 8B              1367 	mov	a,#0x8B
    0886 F0                 1368 	movx	@dptr,a
    0887 90 01 5C           1369 	mov	dptr,#(_b + 0x005c)
-   088A 74 BC              1370 	mov	a,#0xBC
+   088A 74 46              1370 	mov	a,#0x46
    088C F0                 1371 	movx	@dptr,a
    088D 90 01 5D           1372 	mov	dptr,#(_b + 0x005d)
-   0890 74 C1              1373 	mov	a,#0xC1
+   0890 74 CF              1373 	mov	a,#0xCF
    0892 F0                 1374 	movx	@dptr,a
    0893 90 01 5E           1375 	mov	dptr,#(_b + 0x005e)
-   0896 74 B8              1376 	mov	a,#0xB8
+   0896 74 D0              1376 	mov	a,#0xD0
    0898 F0                 1377 	movx	@dptr,a
    0899 90 01 5F           1378 	mov	dptr,#(_b + 0x005f)
-   089C 74 E1              1379 	mov	a,#0xE1
+   089C 74 89              1379 	mov	a,#0x89
    089E F0                 1380 	movx	@dptr,a
    089F 90 01 60           1381 	mov	dptr,#(_b + 0x0060)
-   08A2 74 24              1382 	mov	a,#0x24
+   08A2 74 A7              1382 	mov	a,#0xA7
    08A4 F0                 1383 	movx	@dptr,a
    08A5 90 01 61           1384 	mov	dptr,#(_b + 0x0061)
-   08A8 74 8D              1385 	mov	a,#0x8D
+   08A8 74 B5              1385 	mov	a,#0xB5
    08AA F0                 1386 	movx	@dptr,a
    08AB 90 01 62           1387 	mov	dptr,#(_b + 0x0062)
-   08AE 74 C5              1388 	mov	a,#0xC5
+   08AE 74 64              1388 	mov	a,#0x64
    08B0 F0                 1389 	movx	@dptr,a
    08B1 90 01 63           1390 	mov	dptr,#(_b + 0x0063)
-   08B4 74 20              1391 	mov	a,#0x20
+   08B4 74 76              1391 	mov	a,#0x76
    08B6 F0                 1392 	movx	@dptr,a
    08B7 90 01 64           1393 	mov	dptr,#(_b + 0x0064)
-   08BA 74 89              1394 	mov	a,#0x89
+   08BA 74 C2              1394 	mov	a,#0xC2
    08BC F0                 1395 	movx	@dptr,a
    08BD 90 01 65           1396 	mov	dptr,#(_b + 0x0065)
-   08C0 74 98              1397 	mov	a,#0x98
+   08C0 74 BD              1397 	mov	a,#0xBD
    08C2 F0                 1398 	movx	@dptr,a
    08C3 90 01 66           1399 	mov	dptr,#(_b + 0x0066)
-   08C6 74 0B              1400 	mov	a,#0x0B
+   08C6 74 68              1400 	mov	a,#0x68
    08C8 F0                 1401 	movx	@dptr,a
    08C9 90 01 67           1402 	mov	dptr,#(_b + 0x0067)
-   08CC 74 50              1403 	mov	a,#0x50
+   08CC 74 D3              1403 	mov	a,#0xD3
    08CE F0                 1404 	movx	@dptr,a
    08CF 90 01 68           1405 	mov	dptr,#(_b + 0x0068)
-   08D2 74 B1              1406 	mov	a,#0xB1
+   08D2 74 AC              1406 	mov	a,#0xAC
    08D4 F0                 1407 	movx	@dptr,a
    08D5 90 01 69           1408 	mov	dptr,#(_b + 0x0069)
-   08D8 74 16              1409 	mov	a,#0x16
+   08D8 74 0F              1409 	mov	a,#0x0F
    08DA F0                 1410 	movx	@dptr,a
    08DB 90 01 6A           1411 	mov	dptr,#(_b + 0x006a)
-   08DE 74 9A              1412 	mov	a,#0x9A
+   08DE 74 D1              1412 	mov	a,#0xD1
    08E0 F0                 1413 	movx	@dptr,a
    08E1 90 01 6B           1414 	mov	dptr,#(_b + 0x006b)
-   08E4 74 2D              1415 	mov	a,#0x2D
+   08E4 74 80              1415 	mov	a,#0x80
    08E6 F0                 1416 	movx	@dptr,a
    08E7 90 01 6C           1417 	mov	dptr,#(_b + 0x006c)
-   08EA 74 6E              1418 	mov	a,#0x6E
+   08EA 74 E8              1418 	mov	a,#0xE8
    08EC F0                 1419 	movx	@dptr,a
    08ED 90 01 6D           1420 	mov	dptr,#(_b + 0x006d)
-   08F0 74 5A              1421 	mov	a,#0x5A
+   08F0 74 3E              1421 	mov	a,#0x3E
    08F2 F0                 1422 	movx	@dptr,a
    08F3 90 01 6E           1423 	mov	dptr,#(_b + 0x006e)
-   08F6 74 7B              1424 	mov	a,#0x7B
+   08F6 74 02              1424 	mov	a,#0x02
    08F8 F0                 1425 	movx	@dptr,a
    08F9 90 01 6F           1426 	mov	dptr,#(_b + 0x006f)
-   08FC 74 2F              1427 	mov	a,#0x2F
+   08FC 74 27              1427 	mov	a,#0x27
    08FE F0                 1428 	movx	@dptr,a
    08FF 90 01 70           1429 	mov	dptr,#(_b + 0x0070)
-   0902 74 D4              1430 	mov	a,#0xD4
+   0902 74 82              1430 	mov	a,#0x82
    0904 F0                 1431 	movx	@dptr,a
    0905 90 01 71           1432 	mov	dptr,#(_b + 0x0071)
-   0908 74 92              1433 	mov	a,#0x92
+   0908 74 B3              1433 	mov	a,#0xB3
    090A F0                 1434 	movx	@dptr,a
    090B 90 01 72           1435 	mov	dptr,#(_b + 0x0072)
-   090E 74 A1              1436 	mov	a,#0xA1
+   090E 74 EA              1436 	mov	a,#0xEA
    0910 F0                 1437 	movx	@dptr,a
    0911 90 01 73           1438 	mov	dptr,#(_b + 0x0073)
-   0914 74 AA              1439 	mov	a,#0xAA
+   0914 74 8E              1439 	mov	a,#0x8E
    0916 F0                 1440 	movx	@dptr,a
    0917 90 01 74           1441 	mov	dptr,#(_b + 0x0074)
-   091A 74 A6              1442 	mov	a,#0xA6
+   091A 74 32              1442 	mov	a,#0x32
    091C F0                 1443 	movx	@dptr,a
    091D 90 01 75           1444 	mov	dptr,#(_b + 0x0075)
-   0920 74 E5              1445 	mov	a,#0xE5
+   0920 74 7A              1445 	mov	a,#0x7A
    0922 F0                 1446 	movx	@dptr,a
    0923 90 01 76           1447 	mov	dptr,#(_b + 0x0076)
-   0926 74 A6              1448 	mov	a,#0xA6
+   0926 74 D0              1448 	mov	a,#0xD0
    0928 F0                 1449 	movx	@dptr,a
    0929 90 01 77           1450 	mov	dptr,#(_b + 0x0077)
-   092C 74 D2              1451 	mov	a,#0xD2
+   092C 74 E9              1451 	mov	a,#0xE9
    092E F0                 1452 	movx	@dptr,a
    092F 90 01 78           1453 	mov	dptr,#(_b + 0x0078)
-   0932 74 0D              1454 	mov	a,#0x0D
+   0932 74 9C              1454 	mov	a,#0x9C
    0934 F0                 1455 	movx	@dptr,a
    0935 90 01 79           1456 	mov	dptr,#(_b + 0x0079)
-   0938 74 0B              1457 	mov	a,#0x0B
+   0938 74 59              1457 	mov	a,#0x59
    093A F0                 1458 	movx	@dptr,a
    093B 90 01 7A           1459 	mov	dptr,#(_b + 0x007a)
-   093E 74 B7              1460 	mov	a,#0xB7
+   093E 74 68              1460 	mov	a,#0x68
    0940 F0                 1461 	movx	@dptr,a
    0941 90 01 7B           1462 	mov	dptr,#(_b + 0x007b)
-   0944 74 B2              1463 	mov	a,#0xB2
+   0944 74 81              1463 	mov	a,#0x81
    0946 F0                 1464 	movx	@dptr,a
    0947 90 01 7C           1465 	mov	dptr,#(_b + 0x007c)
-   094A 74 25              1466 	mov	a,#0x25
+   094A 74 0F              1466 	mov	a,#0x0F
    094C F0                 1467 	movx	@dptr,a
    094D 90 01 7D           1468 	mov	dptr,#(_b + 0x007d)
-   0950 74 23              1469 	mov	a,#0x23
+   0950 74 3C              1469 	mov	a,#0x3C
    0952 F0                 1470 	movx	@dptr,a
    0953 90 01 7E           1471 	mov	dptr,#(_b + 0x007e)
-   0956 74 23              1472 	mov	a,#0x23
+   0956 74 9E              1472 	mov	a,#0x9E
    0958 F0                 1473 	movx	@dptr,a
    0959 90 01 7F           1474 	mov	dptr,#(_b + 0x007f)
-   095C 74 BE              1475 	mov	a,#0xBE
+   095C 74 BA              1475 	mov	a,#0xBA
    095E F0                 1476 	movx	@dptr,a
                            1477 	.area GSFINAL (CODE)
    095F 02 00 03           1478 	ljmp	__sdcc_program_startup
@@ -1493,7 +1493,7 @@
                            1493 ;Allocation info for local variables in function 'write_montgomery'
                            1494 ;------------------------------------------------------------
                            1495 ;------------------------------------------------------------
-                           1496 ;	main.c:23: void write_montgomery() {
+                           1496 ;	main.c:29: void write_montgomery() {
                            1497 ;	-----------------------------------------
                            1498 ;	 function write_montgomery
                            1499 ;	-----------------------------------------
@@ -1506,8 +1506,8 @@
                     0007   1506 	ar7 = 0x07
                     0000   1507 	ar0 = 0x00
                     0001   1508 	ar1 = 0x01
-                           1509 ;	main.c:24: P1 = 0;
-                           1510 ;	main.c:26: for (i = 0; i < SIZE; i++) {
+                           1509 ;	main.c:30: P1 = 0;
+                           1510 ;	main.c:32: for (i = 0; i < SIZE; i++) {
    0962 E4                 1511 	clr	a
    0963 F5 90              1512 	mov	_P1,a
    0965 F5 08              1513 	mov	_i,a
@@ -1519,7 +1519,7 @@
    096E E5 09              1519 	mov	a,(_i + 1)
    0970 94 00              1520 	subb	a,#0x00
    0972 50 24              1521 	jnc	00107$
-                           1522 ;	main.c:27: shared_a[i] = a[i];
+                           1522 ;	main.c:33: shared_a[i] = a[i];
    0974 AA 08              1523 	mov	r2,_i
    0976 74 40              1524 	mov	a,#(_shared_a >> 8)
    0978 25 09              1525 	add	a,(_i + 1)
@@ -1535,14 +1535,14 @@
    0989 8A 82              1535 	mov	dpl,r2
    098B 8B 83              1536 	mov	dph,r3
    098D F0                 1537 	movx	@dptr,a
-                           1538 ;	main.c:26: for (i = 0; i < SIZE; i++) {
+                           1538 ;	main.c:32: for (i = 0; i < SIZE; i++) {
    098E 05 08              1539 	inc	_i
    0990 E4                 1540 	clr	a
    0991 B5 08 D5           1541 	cjne	a,_i,00104$
    0994 05 09              1542 	inc	(_i + 1)
    0996 80 D1              1543 	sjmp	00104$
    0998                    1544 00107$:
-                           1545 ;	main.c:30: for (i = 0; i < SIZE; i++) {
+                           1545 ;	main.c:36: for (i = 0; i < SIZE; i++) {
    0998 E4                 1546 	clr	a
    0999 F5 08              1547 	mov	_i,a
    099B F5 09              1548 	mov	(_i + 1),a
@@ -1553,7 +1553,7 @@
    09A2 E5 09              1553 	mov	a,(_i + 1)
    09A4 94 00              1554 	subb	a,#0x00
    09A6 50 24              1555 	jnc	00111$
-                           1556 ;	main.c:31: shared_b[i] = b[i];
+                           1556 ;	main.c:37: shared_b[i] = b[i];
    09A8 E5 08              1557 	mov	a,_i
    09AA 24 80              1558 	add	a,#_shared_b
    09AC FA                 1559 	mov	r2,a
@@ -1569,14 +1569,14 @@
    09BD 8A 82              1569 	mov	dpl,r2
    09BF 8B 83              1570 	mov	dph,r3
    09C1 F0                 1571 	movx	@dptr,a
-                           1572 ;	main.c:30: for (i = 0; i < SIZE; i++) {
+                           1572 ;	main.c:36: for (i = 0; i < SIZE; i++) {
    09C2 05 08              1573 	inc	_i
    09C4 E4                 1574 	clr	a
    09C5 B5 08 D5           1575 	cjne	a,_i,00108$
    09C8 05 09              1576 	inc	(_i + 1)
    09CA 80 D1              1577 	sjmp	00108$
    09CC                    1578 00111$:
-                           1579 ;	main.c:34: for (i = 0; i < SIZE; i++) {
+                           1579 ;	main.c:40: for (i = 0; i < SIZE; i++) {
    09CC E4                 1580 	clr	a
    09CD F5 08              1581 	mov	_i,a
    09CF F5 09              1582 	mov	(_i + 1),a
@@ -1587,7 +1587,7 @@
    09D6 E5 09              1587 	mov	a,(_i + 1)
    09D8 94 00              1588 	subb	a,#0x00
    09DA 50 21              1589 	jnc	00115$
-                           1590 ;	main.c:35: shared_m[i] = m[i];
+                           1590 ;	main.c:41: shared_m[i] = m[i];
    09DC AA 08              1591 	mov	r2,_i
    09DE 74 41              1592 	mov	a,#(_shared_m >> 8)
    09E0 25 09              1593 	add	a,(_i + 1)
@@ -1601,95 +1601,95 @@
    09EE 8A 82              1601 	mov	dpl,r2
    09F0 8B 83              1602 	mov	dph,r3
    09F2 F0                 1603 	movx	@dptr,a
-                           1604 ;	main.c:34: for (i = 0; i < SIZE; i++) {
+                           1604 ;	main.c:40: for (i = 0; i < SIZE; i++) {
    09F3 05 08              1605 	inc	_i
    09F5 E4                 1606 	clr	a
    09F6 B5 08 D8           1607 	cjne	a,_i,00112$
    09F9 05 09              1608 	inc	(_i + 1)
    09FB 80 D4              1609 	sjmp	00112$
    09FD                    1610 00115$:
-                           1611 ;	main.c:38: P0 = ins_write_data;
+                           1611 ;	main.c:44: P0 = ins_write_data;
    09FD 75 80 01           1612 	mov	_P0,#0x01
-                           1613 ;	main.c:39: P0 = ins_idle;
+                           1613 ;	main.c:45: P0 = ins_idle;
    0A00 75 80 00           1614 	mov	_P0,#0x00
-                           1615 ;	main.c:41: while (P1 == 0) {}
+                           1615 ;	main.c:47: while (P1 == 0) {}
    0A03                    1616 00101$:
    0A03 E5 90              1617 	mov	a,_P1
    0A05 60 FC              1618 	jz	00101$
-                           1619 ;	main.c:42: P0 = ins_ack;
+                           1619 ;	main.c:48: P0 = ins_ack;
    0A07 75 80 04           1620 	mov	_P0,#0x04
    0A0A 22                 1621 	ret
                            1622 ;------------------------------------------------------------
                            1623 ;Allocation info for local variables in function 'read_r'
                            1624 ;------------------------------------------------------------
                            1625 ;------------------------------------------------------------
-                           1626 ;	main.c:45: void read_r() {
+                           1626 ;	main.c:51: void read_r() {
                            1627 ;	-----------------------------------------
                            1628 ;	 function read_r
                            1629 ;	-----------------------------------------
    0A0B                    1630 _read_r:
-                           1631 ;	main.c:46: P0 = ins_read_r;
+                           1631 ;	main.c:52: P0 = ins_read_r;
    0A0B 75 80 03           1632 	mov	_P0,#0x03
-                           1633 ;	main.c:47: while (P1 == 0) {}
+                           1633 ;	main.c:53: while (P1 == 0) {}
    0A0E                    1634 00101$:
    0A0E E5 90              1635 	mov	a,_P1
    0A10 60 FC              1636 	jz	00101$
-                           1637 ;	main.c:48: P0 = ins_ack;
+                           1637 ;	main.c:54: P0 = ins_ack;
    0A12 75 80 04           1638 	mov	_P0,#0x04
-                           1639 ;	main.c:50: P0 = ins_idle;
+                           1639 ;	main.c:56: P0 = ins_idle;
    0A15 75 80 00           1640 	mov	_P0,#0x00
    0A18 22                 1641 	ret
                            1642 ;------------------------------------------------------------
                            1643 ;Allocation info for local variables in function 'montgomery'
                            1644 ;------------------------------------------------------------
                            1645 ;------------------------------------------------------------
-                           1646 ;	main.c:53: void montgomery() {
+                           1646 ;	main.c:59: void montgomery() {
                            1647 ;	-----------------------------------------
                            1648 ;	 function montgomery
                            1649 ;	-----------------------------------------
    0A19                    1650 _montgomery:
-                           1651 ;	main.c:54: P0 = ins_montgomery;
+                           1651 ;	main.c:60: P0 = ins_montgomery;
    0A19 75 80 02           1652 	mov	_P0,#0x02
-                           1653 ;	main.c:55: P0 = ins_idle;
+                           1653 ;	main.c:61: P0 = ins_idle;
    0A1C 75 80 00           1654 	mov	_P0,#0x00
    0A1F 22                 1655 	ret
                            1656 ;------------------------------------------------------------
                            1657 ;Allocation info for local variables in function 'terminate'
                            1658 ;------------------------------------------------------------
                            1659 ;------------------------------------------------------------
-                           1660 ;	main.c:58: void terminate() {
+                           1660 ;	main.c:64: void terminate() {
                            1661 ;	-----------------------------------------
                            1662 ;	 function terminate
                            1663 ;	-----------------------------------------
    0A20                    1664 _terminate:
-                           1665 ;	main.c:59: P3 = 0x55;
+                           1665 ;	main.c:65: P3 = 0x55;
    0A20 75 B0 55           1666 	mov	_P3,#0x55
    0A23 22                 1667 	ret
                            1668 ;------------------------------------------------------------
                            1669 ;Allocation info for local variables in function 'main'
                            1670 ;------------------------------------------------------------
                            1671 ;------------------------------------------------------------
-                           1672 ;	main.c:62: int main() {
+                           1672 ;	main.c:68: int main() {
                            1673 ;	-----------------------------------------
                            1674 ;	 function main
                            1675 ;	-----------------------------------------
    0A24                    1676 _main:
-                           1677 ;	main.c:63: write_montgomery();
+                           1677 ;	main.c:69: write_montgomery();
    0A24 12 09 62           1678 	lcall	_write_montgomery
-                           1679 ;	main.c:65: startBrk=1;
+                           1679 ;	main.c:71: startBrk=1;
    0A27 90 FF FE           1680 	mov	dptr,#_startBrk
    0A2A 74 01              1681 	mov	a,#0x01
    0A2C F0                 1682 	movx	@dptr,a
-                           1683 ;	main.c:67: montgomery();
+                           1683 ;	main.c:73: montgomery();
    0A2D 12 0A 19           1684 	lcall	_montgomery
-                           1685 ;	main.c:69: endBrk=1;
+                           1685 ;	main.c:75: endBrk=1;
    0A30 90 FF FF           1686 	mov	dptr,#_endBrk
    0A33 74 01              1687 	mov	a,#0x01
    0A35 F0                 1688 	movx	@dptr,a
-                           1689 ;	main.c:71: read_r();
+                           1689 ;	main.c:77: read_r();
    0A36 12 0A 0B           1690 	lcall	_read_r
-                           1691 ;	main.c:73: P1 = 0;
-                           1692 ;	main.c:75: for (i = 0; i < SIZE; i++) {
+                           1691 ;	main.c:79: P1 = 0;
+                           1692 ;	main.c:81: for (i = 0; i < SIZE; i++) {
    0A39 E4                 1693 	clr	a
    0A3A F5 90              1694 	mov	_P1,a
    0A3C F5 08              1695 	mov	_i,a
@@ -1701,7 +1701,7 @@
    0A45 E5 09              1701 	mov	a,(_i + 1)
    0A47 94 00              1702 	subb	a,#0x00
    0A49 50 21              1703 	jnc	00107$
-                           1704 ;	main.c:76: shared_a[i] = r[i];
+                           1704 ;	main.c:82: shared_a[i] = r[i];
    0A4B AA 08              1705 	mov	r2,_i
    0A4D 74 40              1706 	mov	a,#(_shared_a >> 8)
    0A4F 25 09              1707 	add	a,(_i + 1)
@@ -1715,26 +1715,26 @@
    0A5D 8A 82              1715 	mov	dpl,r2
    0A5F 8B 83              1716 	mov	dph,r3
    0A61 F0                 1717 	movx	@dptr,a
-                           1718 ;	main.c:75: for (i = 0; i < SIZE; i++) {
+                           1718 ;	main.c:81: for (i = 0; i < SIZE; i++) {
    0A62 05 08              1719 	inc	_i
    0A64 E4                 1720 	clr	a
    0A65 B5 08 D8           1721 	cjne	a,_i,00104$
    0A68 05 09              1722 	inc	(_i + 1)
    0A6A 80 D4              1723 	sjmp	00104$
    0A6C                    1724 00107$:
-                           1725 ;	main.c:79: P0 = ins_write_data;
+                           1725 ;	main.c:85: P0 = ins_write_data;
    0A6C 75 80 01           1726 	mov	_P0,#0x01
-                           1727 ;	main.c:80: P0 = ins_idle;
+                           1727 ;	main.c:86: P0 = ins_idle;
    0A6F 75 80 00           1728 	mov	_P0,#0x00
-                           1729 ;	main.c:82: while (P1 == 0) {}
+                           1729 ;	main.c:88: while (P1 == 0) {}
    0A72                    1730 00101$:
    0A72 E5 90              1731 	mov	a,_P1
    0A74 60 FC              1732 	jz	00101$
-                           1733 ;	main.c:83: P0 = ins_ack;
+                           1733 ;	main.c:89: P0 = ins_ack;
    0A76 75 80 04           1734 	mov	_P0,#0x04
-                           1735 ;	main.c:85: terminate();
+                           1735 ;	main.c:91: terminate();
    0A79 12 0A 20           1736 	lcall	_terminate
-                           1737 ;	main.c:86: return 0;
+                           1737 ;	main.c:92: return 0;
    0A7C 90 00 00           1738 	mov	dptr,#0x0000
    0A7F 22                 1739 	ret
                            1740 	.area CSEG    (CODE)
