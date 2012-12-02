@@ -275,7 +275,6 @@ Symbol Table
   5 __start__stack                                                 0000 GR
   D _a                                                             0080 GR
   E _b                                                             0100 GR
-    _endBrk                                                     =  FFFF G
   3 _i                                                             0000 GR
   C _m                                                             0000 GR
  19 _main                                                          00D1 GR
@@ -285,7 +284,6 @@ Symbol Table
     _shared_a                                                   =  4000 G
     _shared_b                                                   =  4080 G
     _shared_m                                                   =  4100 G
-    _startBrk                                                   =  FFFE G
  19 _terminate                                                     00CD GR
  19 _write_montgomery                                              0000 GR
     a                                                              00D6 
@@ -494,7 +492,7 @@ Area Table
   16 GSINIT5                                                                            size    0   flags 20
   17 GSINIT                                                                             size  8FE   flags 20
   18 GSFINAL                                                                            size    3   flags 20
-  19 CSEG                                                                               size  120   flags 20
+  19 CSEG                                                                               size  121   flags 20
   1A CONST                                                                              size    0   flags 20
   1B XINIT                                                                              size    0   flags 20
   1C CABS                                                                               size    0   flags 28
