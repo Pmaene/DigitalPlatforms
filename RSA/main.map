@@ -17,7 +17,6 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:0000    l_GSINIT5
   0C:0000    l_IABS
   0C:0000    l_ISEG
-  0C:0000    l_OSEG
   0C:0000    l_PSEG
   0C:0000    l_REG_BANK_1
   0C:0000    l_REG_BANK_2
@@ -40,23 +39,27 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:0000    s_XABS0
   0C:0000    s_XABS1
   0C:0000    s_XABS2
+  0C:0000    s_XABS3
+  0C:0000    s_XABS4
+  0C:0000    s_XABS5
   0C:0000    s_XISEG
   0C:0000    s_XSEG
   0C:0003    l_GSFINAL
   0C:0003    l_GSINIT0
+  0C:0006    l_OSEG
   0C:0008    l_HOME
   0C:0008    l_REG_BANK_0
   0C:0008    s_GSINIT0
   0C:0008    s_REG_BANK_1
   0C:000A    l_GSINIT2
-  0C:000A    s_RSEG
-  0C:000A    s_SSEG
+  0C:000A    s_OSEG
   0C:000B    s_GSINIT1
   0C:000B    s_GSINIT2
   0C:0010    s_REG_BANK_2
+  0C:0010    s_RSEG
+  0C:0010    s_SSEG
   0C:0015    s_GSINIT3
   0C:0018    s_BIT_BANK
-  0C:0018    s_OSEG
   0C:0018    s_REG_BANK_3
   0C:0020    s__CODE
   0C:0022    l_GSINIT3
@@ -68,14 +71,47 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:0080    l_XABS0
   0C:0080    l_XABS1
   0C:0080    l_XABS2
-  0C:00F6    l_SSEG
+  0C:0080    l_XABS3
+  0C:0080    l_XABS4
+  0C:0080    l_XABS5
+  0C:00F0    l_SSEG
   0C:0100    l_IRAM
-  0C:0125    l_CSEG
-  0C:08FE    l_GSINIT
-  0C:095F    s_GSFINAL
-  0C:0962    s_CSEG
-  0C:0A87    s_CONST
-  0C:0A87    s_XINIT
+  0C:018B    l_CSEG
+  0C:0F0B    l_GSINIT
+  0C:0F6C    s_GSFINAL
+  0C:0F6F    s_CSEG
+  0C:10FA    s_CONST
+  0C:10FA    s_XINIT
+
+Hexadecimal
+
+Area                               Addr   Size   Decimal Bytes (Attributes)
+--------------------------------   ----   ----   ------- ----- ------------
+XABS5                              0000   0080 =    128. bytes (ABS,CON,XDATA)
+
+      Value  Global
+   --------  --------------------------------
+  0D:0280    _dec_exp
+
+Hexadecimal
+
+Area                               Addr   Size   Decimal Bytes (Attributes)
+--------------------------------   ----   ----   ------- ----- ------------
+XABS4                              0000   0080 =    128. bytes (ABS,CON,XDATA)
+
+      Value  Global
+   --------  --------------------------------
+  0D:0200    _enc_exp
+
+Hexadecimal
+
+Area                               Addr   Size   Decimal Bytes (Attributes)
+--------------------------------   ----   ----   ------- ----- ------------
+XABS3                              0000   0080 =    128. bytes (ABS,CON,XDATA)
+
+      Value  Global
+   --------  --------------------------------
+  0D:0180    _message
 
 Hexadecimal
 
@@ -85,7 +121,7 @@ XABS2                              0000   0080 =    128. bytes (ABS,CON,XDATA)
 
       Value  Global
    --------  --------------------------------
-  0D:0100    _b
+  0D:0100    _modulus
 
 Hexadecimal
 
@@ -95,7 +131,7 @@ XABS1                              0000   0080 =    128. bytes (ABS,CON,XDATA)
 
       Value  Global
    --------  --------------------------------
-  0D:0080    _a
+  0D:0080    _r2modm
 
 Hexadecimal
 
@@ -105,7 +141,7 @@ XABS0                              0000   0080 =    128. bytes (ABS,CON,XDATA)
 
       Value  Global
    --------  --------------------------------
-  0D:0000    _m
+  0D:0000    _rmodm
 
 
 
@@ -214,10 +250,13 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      00D7    _CY
      00E0    _ACC
      00F0    _B
-     0200    _r
+     00F5    _B_5
+     00F6    _B_6
+     00F7    _B_7
      4000    _shared_a
      4080    _shared_b
      4100    _shared_m
+     5000    _r
 
 
 
@@ -237,17 +276,27 @@ DSEG                               0000   0080 =    128. bytes (REL,CON)
    --------  --------------------------------
      0008    _i
 
+Hexadecimal
+
+Area                               Addr   Size   Decimal Bytes (Attributes)
+--------------------------------   ----   ----   ------- ----- ------------
+OSEG                               000A   0006 =      6. bytes (REL,OVR)
+
+      Value  Global
+   --------  --------------------------------
+     000A    _write_montgomery_PARM_2
+     000D    _write_montgomery_PARM_3
 
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-SSEG                               000A   00F6 =    246. bytes (REL,OVR)
+SSEG                               0010   00F0 =    240. bytes (REL,OVR)
 
       Value  Global
    --------  --------------------------------
-     000A    __start__stack
+     0010    __start__stack
 
 
 
@@ -303,16 +352,18 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CSEG                               0962   0125 =    293. bytes (REL,CON,CODE)
+CSEG                               0F6F   018B =    395. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:0962    _write_montgomery
-  0C:0A1A    _read_r
-  0C:0A28    _montgomery
-  0C:0A2F    _terminate
-  0C:0A33    _main
-  0C:0A83    __sdcc_external_startup
+  0C:0F6F    _write_montgomery
+  0C:1052    _read_r
+  0C:1060    _montgomery
+  0C:1067    _exp
+  0C:106E    _terminate
+  0C:1072    _main
+  0C:10DA    __gptrget
+  0C:10F6    __sdcc_external_startup
 
 
 ASxxxx Linker V01.75 + NoICE + SDCC Feb 1999,  page 1.
@@ -328,6 +379,7 @@ Libraries Linked            [   object  file   ]
 /usr/share/sdcc/lib/small/mcs51.lib    [    crtxclear.rel ]
 /usr/share/sdcc/lib/small/mcs51.lib    [   crtpagesfr.rel ]
 /usr/share/sdcc/lib/small/mcs51.lib    [     crtstart.rel ]
+/usr/share/sdcc/lib/small/libsdcc.lib    [     _gptrget.rel ]
 /usr/share/sdcc/lib/small/libsdcc.lib    [     _startup.rel ]
 
 ASxxxx Linker V01.75 + NoICE + SDCC Feb 1999,  page 2.
