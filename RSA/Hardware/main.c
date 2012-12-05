@@ -14,7 +14,7 @@ volatile __xdata __at (0x4000) unsigned char shared_x[SIZE];
 volatile __xdata __at (0x4080) unsigned char shared_r2modm[SIZE];
 volatile __xdata __at (0x4100) unsigned char shared_a[SIZE];
 volatile __xdata __at (0x4180) unsigned char shared_e[SIZE];
-volatile __xdata __at (0x4280) unsigned char shared_m[SIZE];
+volatile __xdata __at (0x4200) unsigned char shared_m[SIZE];
 
 volatile __xdata __at (0x5000) unsigned char r[SIZE+1];
 

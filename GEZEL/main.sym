@@ -490,7 +490,7 @@ Area Table
   14 GSINIT3                                                                            size    0   flags 20
   15 GSINIT4                                                                            size    0   flags 20
   16 GSINIT5                                                                            size    0   flags 20
-  17 GSINIT                                                                             size  8FE   flags 20
+  17 GSINIT                                                                             size  900   flags 20
   18 GSFINAL                                                                            size    3   flags 20
   19 CSEG                                                                               size  121   flags 20
   1A CONST                                                                              size    0   flags 20

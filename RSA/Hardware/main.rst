@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 2.9.0 #5416 (Aug  6 2010) (UNIX)
-                              4 ; This file was generated Wed Dec  5 16:36:38 2012
+                              4 ; This file was generated Wed Dec  5 17:36:04 2012
                               5 ;--------------------------------------------------------
                               6 	.module main
                               7 	.optsdcc -mmcs51 --model-small
@@ -286,7 +286,7 @@
                     4080    286 _shared_r2modm	=	0x4080
                     4100    287 _shared_a	=	0x4100
                     4180    288 _shared_e	=	0x4180
-                    4280    289 _shared_m	=	0x4280
+                    4200    289 _shared_m	=	0x4200
                     5000    290 _r	=	0x5000
                             291 ;--------------------------------------------------------
                             292 ; absolute external ram data
@@ -343,390 +343,390 @@
                             343 	.globl __mcs51_genXINIT
                             344 	.globl __mcs51_genXRAMCLEAR
                             345 	.globl __mcs51_genRAMCLEAR
-                            346 ;	main.c:6: volatile __xdata __at (0x0000) unsigned char rmodm[SIZE]   = {0x77,0xEA,0xCF,0xBE,0xC1,0x80,0x10,0xEA,0x1B,0xA6,0xCD,0x50,0x4D,0x92,0x9E,0xEA,0x53,0xAC,0x79,0x45,0x34,0x3D,0x31,0xDF,0x24,0xA4,0x19,0x11,0x2A,0xFD,0x73,0x15,0x2A,0x8F,0xF3,0x43,0xAF,0x42,0x3D,0x85,0xF8,0x09,0x44,0xC3,0xFF,0xC7,0xF9,0xDB,0x8F,0x6A,0x1E,0x8D,0xA4,0x23,0x29,0x31,0xD2,0xE9,0x6E,0xBA,0x41,0x51,0xF7,0x83,0x9B,0x27,0x0E,0x5F,0x4D,0x6C,0x7D,0xD2,0x0A,0x1F,0x3A,0x7C,0x4C,0xE4,0x4D,0xFD,0xFC,0xF7,0x61,0xFE,0xE9,0xA4,0xB6,0x56,0xB2,0x7D,0x39,0xD1,0xEA,0x77,0xA3,0x22,0xD0,0xC6,0x4E,0xA4,0x45,0xB3,0xD5,0x63,0x7B,0x1D,0x52,0x4F,0x4C,0x0A,0x28,0xB8,0x3F,0xDB,0x90,0x04,0x5C,0xBE,0x0B,0xAC,0xD2,0x3A,0x71,0x9A,0x76,0x20,0x31,0x46};
+                            346 ;	main.c:6: volatile __xdata __at (0x0000) unsigned char rmodm[SIZE]   = {0xA3,0x10,0x6B,0x83,0x7C,0x40,0xBF,0xB2,0x54,0x28,0x20,0x4D,0xB2,0xD4,0xF8,0xA6,0xE5,0xB7,0x51,0xBA,0xE8,0xD1,0x95,0x9A,0xFE,0xAB,0x0A,0x48,0x23,0xA2,0x70,0xB3,0xCC,0x7B,0x8F,0x44,0xF4,0x5B,0x53,0x78,0x7D,0xE2,0xF2,0xAF,0xD2,0xBA,0x06,0x0F,0xEE,0xA4,0x37,0x06,0xE7,0x04,0x2C,0x90,0x3C,0x8B,0xFD,0x54,0xCD,0xB9,0x94,0xAD,0x64,0x8E,0x26,0xDE,0x8C,0xC5,0x33,0x92,0x24,0xEF,0x76,0x34,0xC4,0xB8,0xEC,0xF1,0x9A,0x79,0x61,0x80,0xC1,0xBC,0x6D,0x03,0x49,0x95,0x94,0xC8,0x6F,0x14,0xB0,0x16,0x14,0x63,0xD0,0x94,0xD9,0x10,0x4B,0x44,0x03,0xC2,0xCC,0x04,0x68,0x98,0x6C,0xD9,0x69,0xC7,0x1A,0x0F,0xC5,0x39,0x5C,0x6A,0x5A,0x67,0x0B,0x47,0xF4,0x77,0x1E,0x2B};
    0061 90 00 00            347 	mov	dptr,#_rmodm
-   0064 74 77               348 	mov	a,#0x77
+   0064 74 A3               348 	mov	a,#0xA3
    0066 F0                  349 	movx	@dptr,a
    0067 90 00 01            350 	mov	dptr,#(_rmodm + 0x0001)
-   006A 74 EA               351 	mov	a,#0xEA
+   006A 74 10               351 	mov	a,#0x10
    006C F0                  352 	movx	@dptr,a
    006D 90 00 02            353 	mov	dptr,#(_rmodm + 0x0002)
-   0070 74 CF               354 	mov	a,#0xCF
+   0070 74 6B               354 	mov	a,#0x6B
    0072 F0                  355 	movx	@dptr,a
    0073 90 00 03            356 	mov	dptr,#(_rmodm + 0x0003)
-   0076 74 BE               357 	mov	a,#0xBE
+   0076 74 83               357 	mov	a,#0x83
    0078 F0                  358 	movx	@dptr,a
    0079 90 00 04            359 	mov	dptr,#(_rmodm + 0x0004)
-   007C 74 C1               360 	mov	a,#0xC1
+   007C 74 7C               360 	mov	a,#0x7C
    007E F0                  361 	movx	@dptr,a
    007F 90 00 05            362 	mov	dptr,#(_rmodm + 0x0005)
-   0082 74 80               363 	mov	a,#0x80
+   0082 74 40               363 	mov	a,#0x40
    0084 F0                  364 	movx	@dptr,a
    0085 90 00 06            365 	mov	dptr,#(_rmodm + 0x0006)
-   0088 74 10               366 	mov	a,#0x10
+   0088 74 BF               366 	mov	a,#0xBF
    008A F0                  367 	movx	@dptr,a
    008B 90 00 07            368 	mov	dptr,#(_rmodm + 0x0007)
-   008E 74 EA               369 	mov	a,#0xEA
+   008E 74 B2               369 	mov	a,#0xB2
    0090 F0                  370 	movx	@dptr,a
    0091 90 00 08            371 	mov	dptr,#(_rmodm + 0x0008)
-   0094 74 1B               372 	mov	a,#0x1B
+   0094 74 54               372 	mov	a,#0x54
    0096 F0                  373 	movx	@dptr,a
    0097 90 00 09            374 	mov	dptr,#(_rmodm + 0x0009)
-   009A 74 A6               375 	mov	a,#0xA6
+   009A 74 28               375 	mov	a,#0x28
    009C F0                  376 	movx	@dptr,a
    009D 90 00 0A            377 	mov	dptr,#(_rmodm + 0x000a)
-   00A0 74 CD               378 	mov	a,#0xCD
+   00A0 74 20               378 	mov	a,#0x20
    00A2 F0                  379 	movx	@dptr,a
    00A3 90 00 0B            380 	mov	dptr,#(_rmodm + 0x000b)
-   00A6 74 50               381 	mov	a,#0x50
+   00A6 74 4D               381 	mov	a,#0x4D
    00A8 F0                  382 	movx	@dptr,a
    00A9 90 00 0C            383 	mov	dptr,#(_rmodm + 0x000c)
-   00AC 74 4D               384 	mov	a,#0x4D
+   00AC 74 B2               384 	mov	a,#0xB2
    00AE F0                  385 	movx	@dptr,a
    00AF 90 00 0D            386 	mov	dptr,#(_rmodm + 0x000d)
-   00B2 74 92               387 	mov	a,#0x92
+   00B2 74 D4               387 	mov	a,#0xD4
    00B4 F0                  388 	movx	@dptr,a
    00B5 90 00 0E            389 	mov	dptr,#(_rmodm + 0x000e)
-   00B8 74 9E               390 	mov	a,#0x9E
+   00B8 74 F8               390 	mov	a,#0xF8
    00BA F0                  391 	movx	@dptr,a
    00BB 90 00 0F            392 	mov	dptr,#(_rmodm + 0x000f)
-   00BE 74 EA               393 	mov	a,#0xEA
+   00BE 74 A6               393 	mov	a,#0xA6
    00C0 F0                  394 	movx	@dptr,a
    00C1 90 00 10            395 	mov	dptr,#(_rmodm + 0x0010)
-   00C4 74 53               396 	mov	a,#0x53
+   00C4 74 E5               396 	mov	a,#0xE5
    00C6 F0                  397 	movx	@dptr,a
    00C7 90 00 11            398 	mov	dptr,#(_rmodm + 0x0011)
-   00CA 74 AC               399 	mov	a,#0xAC
+   00CA 74 B7               399 	mov	a,#0xB7
    00CC F0                  400 	movx	@dptr,a
    00CD 90 00 12            401 	mov	dptr,#(_rmodm + 0x0012)
-   00D0 74 79               402 	mov	a,#0x79
+   00D0 74 51               402 	mov	a,#0x51
    00D2 F0                  403 	movx	@dptr,a
    00D3 90 00 13            404 	mov	dptr,#(_rmodm + 0x0013)
-   00D6 74 45               405 	mov	a,#0x45
+   00D6 74 BA               405 	mov	a,#0xBA
    00D8 F0                  406 	movx	@dptr,a
    00D9 90 00 14            407 	mov	dptr,#(_rmodm + 0x0014)
-   00DC 74 34               408 	mov	a,#0x34
+   00DC 74 E8               408 	mov	a,#0xE8
    00DE F0                  409 	movx	@dptr,a
    00DF 90 00 15            410 	mov	dptr,#(_rmodm + 0x0015)
-   00E2 74 3D               411 	mov	a,#0x3D
+   00E2 74 D1               411 	mov	a,#0xD1
    00E4 F0                  412 	movx	@dptr,a
    00E5 90 00 16            413 	mov	dptr,#(_rmodm + 0x0016)
-   00E8 74 31               414 	mov	a,#0x31
+   00E8 74 95               414 	mov	a,#0x95
    00EA F0                  415 	movx	@dptr,a
    00EB 90 00 17            416 	mov	dptr,#(_rmodm + 0x0017)
-   00EE 74 DF               417 	mov	a,#0xDF
+   00EE 74 9A               417 	mov	a,#0x9A
    00F0 F0                  418 	movx	@dptr,a
    00F1 90 00 18            419 	mov	dptr,#(_rmodm + 0x0018)
-   00F4 74 24               420 	mov	a,#0x24
+   00F4 74 FE               420 	mov	a,#0xFE
    00F6 F0                  421 	movx	@dptr,a
    00F7 90 00 19            422 	mov	dptr,#(_rmodm + 0x0019)
-   00FA 74 A4               423 	mov	a,#0xA4
+   00FA 74 AB               423 	mov	a,#0xAB
    00FC F0                  424 	movx	@dptr,a
    00FD 90 00 1A            425 	mov	dptr,#(_rmodm + 0x001a)
-   0100 74 19               426 	mov	a,#0x19
+   0100 74 0A               426 	mov	a,#0x0A
    0102 F0                  427 	movx	@dptr,a
    0103 90 00 1B            428 	mov	dptr,#(_rmodm + 0x001b)
-   0106 74 11               429 	mov	a,#0x11
+   0106 74 48               429 	mov	a,#0x48
    0108 F0                  430 	movx	@dptr,a
    0109 90 00 1C            431 	mov	dptr,#(_rmodm + 0x001c)
-   010C 74 2A               432 	mov	a,#0x2A
+   010C 74 23               432 	mov	a,#0x23
    010E F0                  433 	movx	@dptr,a
    010F 90 00 1D            434 	mov	dptr,#(_rmodm + 0x001d)
-   0112 74 FD               435 	mov	a,#0xFD
+   0112 74 A2               435 	mov	a,#0xA2
    0114 F0                  436 	movx	@dptr,a
    0115 90 00 1E            437 	mov	dptr,#(_rmodm + 0x001e)
-   0118 74 73               438 	mov	a,#0x73
+   0118 74 70               438 	mov	a,#0x70
    011A F0                  439 	movx	@dptr,a
    011B 90 00 1F            440 	mov	dptr,#(_rmodm + 0x001f)
-   011E 74 15               441 	mov	a,#0x15
+   011E 74 B3               441 	mov	a,#0xB3
    0120 F0                  442 	movx	@dptr,a
    0121 90 00 20            443 	mov	dptr,#(_rmodm + 0x0020)
-   0124 74 2A               444 	mov	a,#0x2A
+   0124 74 CC               444 	mov	a,#0xCC
    0126 F0                  445 	movx	@dptr,a
    0127 90 00 21            446 	mov	dptr,#(_rmodm + 0x0021)
-   012A 74 8F               447 	mov	a,#0x8F
+   012A 74 7B               447 	mov	a,#0x7B
    012C F0                  448 	movx	@dptr,a
    012D 90 00 22            449 	mov	dptr,#(_rmodm + 0x0022)
-   0130 74 F3               450 	mov	a,#0xF3
+   0130 74 8F               450 	mov	a,#0x8F
    0132 F0                  451 	movx	@dptr,a
    0133 90 00 23            452 	mov	dptr,#(_rmodm + 0x0023)
-   0136 74 43               453 	mov	a,#0x43
+   0136 74 44               453 	mov	a,#0x44
    0138 F0                  454 	movx	@dptr,a
    0139 90 00 24            455 	mov	dptr,#(_rmodm + 0x0024)
-   013C 74 AF               456 	mov	a,#0xAF
+   013C 74 F4               456 	mov	a,#0xF4
    013E F0                  457 	movx	@dptr,a
    013F 90 00 25            458 	mov	dptr,#(_rmodm + 0x0025)
-   0142 74 42               459 	mov	a,#0x42
+   0142 74 5B               459 	mov	a,#0x5B
    0144 F0                  460 	movx	@dptr,a
    0145 90 00 26            461 	mov	dptr,#(_rmodm + 0x0026)
-   0148 74 3D               462 	mov	a,#0x3D
+   0148 74 53               462 	mov	a,#0x53
    014A F0                  463 	movx	@dptr,a
    014B 90 00 27            464 	mov	dptr,#(_rmodm + 0x0027)
-   014E 74 85               465 	mov	a,#0x85
+   014E 74 78               465 	mov	a,#0x78
    0150 F0                  466 	movx	@dptr,a
    0151 90 00 28            467 	mov	dptr,#(_rmodm + 0x0028)
-   0154 74 F8               468 	mov	a,#0xF8
+   0154 74 7D               468 	mov	a,#0x7D
    0156 F0                  469 	movx	@dptr,a
    0157 90 00 29            470 	mov	dptr,#(_rmodm + 0x0029)
-   015A 74 09               471 	mov	a,#0x09
+   015A 74 E2               471 	mov	a,#0xE2
    015C F0                  472 	movx	@dptr,a
    015D 90 00 2A            473 	mov	dptr,#(_rmodm + 0x002a)
-   0160 74 44               474 	mov	a,#0x44
+   0160 74 F2               474 	mov	a,#0xF2
    0162 F0                  475 	movx	@dptr,a
    0163 90 00 2B            476 	mov	dptr,#(_rmodm + 0x002b)
-   0166 74 C3               477 	mov	a,#0xC3
+   0166 74 AF               477 	mov	a,#0xAF
    0168 F0                  478 	movx	@dptr,a
    0169 90 00 2C            479 	mov	dptr,#(_rmodm + 0x002c)
-   016C 74 FF               480 	mov	a,#0xFF
+   016C 74 D2               480 	mov	a,#0xD2
    016E F0                  481 	movx	@dptr,a
    016F 90 00 2D            482 	mov	dptr,#(_rmodm + 0x002d)
-   0172 74 C7               483 	mov	a,#0xC7
+   0172 74 BA               483 	mov	a,#0xBA
    0174 F0                  484 	movx	@dptr,a
    0175 90 00 2E            485 	mov	dptr,#(_rmodm + 0x002e)
-   0178 74 F9               486 	mov	a,#0xF9
+   0178 74 06               486 	mov	a,#0x06
    017A F0                  487 	movx	@dptr,a
    017B 90 00 2F            488 	mov	dptr,#(_rmodm + 0x002f)
-   017E 74 DB               489 	mov	a,#0xDB
+   017E 74 0F               489 	mov	a,#0x0F
    0180 F0                  490 	movx	@dptr,a
    0181 90 00 30            491 	mov	dptr,#(_rmodm + 0x0030)
-   0184 74 8F               492 	mov	a,#0x8F
+   0184 74 EE               492 	mov	a,#0xEE
    0186 F0                  493 	movx	@dptr,a
    0187 90 00 31            494 	mov	dptr,#(_rmodm + 0x0031)
-   018A 74 6A               495 	mov	a,#0x6A
+   018A 74 A4               495 	mov	a,#0xA4
    018C F0                  496 	movx	@dptr,a
    018D 90 00 32            497 	mov	dptr,#(_rmodm + 0x0032)
-   0190 74 1E               498 	mov	a,#0x1E
+   0190 74 37               498 	mov	a,#0x37
    0192 F0                  499 	movx	@dptr,a
    0193 90 00 33            500 	mov	dptr,#(_rmodm + 0x0033)
-   0196 74 8D               501 	mov	a,#0x8D
+   0196 74 06               501 	mov	a,#0x06
    0198 F0                  502 	movx	@dptr,a
    0199 90 00 34            503 	mov	dptr,#(_rmodm + 0x0034)
-   019C 74 A4               504 	mov	a,#0xA4
+   019C 74 E7               504 	mov	a,#0xE7
    019E F0                  505 	movx	@dptr,a
    019F 90 00 35            506 	mov	dptr,#(_rmodm + 0x0035)
-   01A2 74 23               507 	mov	a,#0x23
+   01A2 74 04               507 	mov	a,#0x04
    01A4 F0                  508 	movx	@dptr,a
    01A5 90 00 36            509 	mov	dptr,#(_rmodm + 0x0036)
-   01A8 74 29               510 	mov	a,#0x29
+   01A8 74 2C               510 	mov	a,#0x2C
    01AA F0                  511 	movx	@dptr,a
    01AB 90 00 37            512 	mov	dptr,#(_rmodm + 0x0037)
-   01AE 74 31               513 	mov	a,#0x31
+   01AE 74 90               513 	mov	a,#0x90
    01B0 F0                  514 	movx	@dptr,a
    01B1 90 00 38            515 	mov	dptr,#(_rmodm + 0x0038)
-   01B4 74 D2               516 	mov	a,#0xD2
+   01B4 74 3C               516 	mov	a,#0x3C
    01B6 F0                  517 	movx	@dptr,a
    01B7 90 00 39            518 	mov	dptr,#(_rmodm + 0x0039)
-   01BA 74 E9               519 	mov	a,#0xE9
+   01BA 74 8B               519 	mov	a,#0x8B
    01BC F0                  520 	movx	@dptr,a
    01BD 90 00 3A            521 	mov	dptr,#(_rmodm + 0x003a)
-   01C0 74 6E               522 	mov	a,#0x6E
+   01C0 74 FD               522 	mov	a,#0xFD
    01C2 F0                  523 	movx	@dptr,a
    01C3 90 00 3B            524 	mov	dptr,#(_rmodm + 0x003b)
-   01C6 74 BA               525 	mov	a,#0xBA
+   01C6 74 54               525 	mov	a,#0x54
    01C8 F0                  526 	movx	@dptr,a
    01C9 90 00 3C            527 	mov	dptr,#(_rmodm + 0x003c)
-   01CC 74 41               528 	mov	a,#0x41
+   01CC 74 CD               528 	mov	a,#0xCD
    01CE F0                  529 	movx	@dptr,a
    01CF 90 00 3D            530 	mov	dptr,#(_rmodm + 0x003d)
-   01D2 74 51               531 	mov	a,#0x51
+   01D2 74 B9               531 	mov	a,#0xB9
    01D4 F0                  532 	movx	@dptr,a
    01D5 90 00 3E            533 	mov	dptr,#(_rmodm + 0x003e)
-   01D8 74 F7               534 	mov	a,#0xF7
+   01D8 74 94               534 	mov	a,#0x94
    01DA F0                  535 	movx	@dptr,a
    01DB 90 00 3F            536 	mov	dptr,#(_rmodm + 0x003f)
-   01DE 74 83               537 	mov	a,#0x83
+   01DE 74 AD               537 	mov	a,#0xAD
    01E0 F0                  538 	movx	@dptr,a
    01E1 90 00 40            539 	mov	dptr,#(_rmodm + 0x0040)
-   01E4 74 9B               540 	mov	a,#0x9B
+   01E4 74 64               540 	mov	a,#0x64
    01E6 F0                  541 	movx	@dptr,a
    01E7 90 00 41            542 	mov	dptr,#(_rmodm + 0x0041)
-   01EA 74 27               543 	mov	a,#0x27
+   01EA 74 8E               543 	mov	a,#0x8E
    01EC F0                  544 	movx	@dptr,a
    01ED 90 00 42            545 	mov	dptr,#(_rmodm + 0x0042)
-   01F0 74 0E               546 	mov	a,#0x0E
+   01F0 74 26               546 	mov	a,#0x26
    01F2 F0                  547 	movx	@dptr,a
    01F3 90 00 43            548 	mov	dptr,#(_rmodm + 0x0043)
-   01F6 74 5F               549 	mov	a,#0x5F
+   01F6 74 DE               549 	mov	a,#0xDE
    01F8 F0                  550 	movx	@dptr,a
    01F9 90 00 44            551 	mov	dptr,#(_rmodm + 0x0044)
-   01FC 74 4D               552 	mov	a,#0x4D
+   01FC 74 8C               552 	mov	a,#0x8C
    01FE F0                  553 	movx	@dptr,a
    01FF 90 00 45            554 	mov	dptr,#(_rmodm + 0x0045)
-   0202 74 6C               555 	mov	a,#0x6C
+   0202 74 C5               555 	mov	a,#0xC5
    0204 F0                  556 	movx	@dptr,a
    0205 90 00 46            557 	mov	dptr,#(_rmodm + 0x0046)
-   0208 74 7D               558 	mov	a,#0x7D
+   0208 74 33               558 	mov	a,#0x33
    020A F0                  559 	movx	@dptr,a
    020B 90 00 47            560 	mov	dptr,#(_rmodm + 0x0047)
-   020E 74 D2               561 	mov	a,#0xD2
+   020E 74 92               561 	mov	a,#0x92
    0210 F0                  562 	movx	@dptr,a
    0211 90 00 48            563 	mov	dptr,#(_rmodm + 0x0048)
-   0214 74 0A               564 	mov	a,#0x0A
+   0214 74 24               564 	mov	a,#0x24
    0216 F0                  565 	movx	@dptr,a
    0217 90 00 49            566 	mov	dptr,#(_rmodm + 0x0049)
-   021A 74 1F               567 	mov	a,#0x1F
+   021A 74 EF               567 	mov	a,#0xEF
    021C F0                  568 	movx	@dptr,a
    021D 90 00 4A            569 	mov	dptr,#(_rmodm + 0x004a)
-   0220 74 3A               570 	mov	a,#0x3A
+   0220 74 76               570 	mov	a,#0x76
    0222 F0                  571 	movx	@dptr,a
    0223 90 00 4B            572 	mov	dptr,#(_rmodm + 0x004b)
-   0226 74 7C               573 	mov	a,#0x7C
+   0226 74 34               573 	mov	a,#0x34
    0228 F0                  574 	movx	@dptr,a
    0229 90 00 4C            575 	mov	dptr,#(_rmodm + 0x004c)
-   022C 74 4C               576 	mov	a,#0x4C
+   022C 74 C4               576 	mov	a,#0xC4
    022E F0                  577 	movx	@dptr,a
    022F 90 00 4D            578 	mov	dptr,#(_rmodm + 0x004d)
-   0232 74 E4               579 	mov	a,#0xE4
+   0232 74 B8               579 	mov	a,#0xB8
    0234 F0                  580 	movx	@dptr,a
    0235 90 00 4E            581 	mov	dptr,#(_rmodm + 0x004e)
-   0238 74 4D               582 	mov	a,#0x4D
+   0238 74 EC               582 	mov	a,#0xEC
    023A F0                  583 	movx	@dptr,a
    023B 90 00 4F            584 	mov	dptr,#(_rmodm + 0x004f)
-   023E 74 FD               585 	mov	a,#0xFD
+   023E 74 F1               585 	mov	a,#0xF1
    0240 F0                  586 	movx	@dptr,a
    0241 90 00 50            587 	mov	dptr,#(_rmodm + 0x0050)
-   0244 74 FC               588 	mov	a,#0xFC
+   0244 74 9A               588 	mov	a,#0x9A
    0246 F0                  589 	movx	@dptr,a
    0247 90 00 51            590 	mov	dptr,#(_rmodm + 0x0051)
-   024A 74 F7               591 	mov	a,#0xF7
+   024A 74 79               591 	mov	a,#0x79
    024C F0                  592 	movx	@dptr,a
    024D 90 00 52            593 	mov	dptr,#(_rmodm + 0x0052)
    0250 74 61               594 	mov	a,#0x61
    0252 F0                  595 	movx	@dptr,a
    0253 90 00 53            596 	mov	dptr,#(_rmodm + 0x0053)
-   0256 74 FE               597 	mov	a,#0xFE
+   0256 74 80               597 	mov	a,#0x80
    0258 F0                  598 	movx	@dptr,a
    0259 90 00 54            599 	mov	dptr,#(_rmodm + 0x0054)
-   025C 74 E9               600 	mov	a,#0xE9
+   025C 74 C1               600 	mov	a,#0xC1
    025E F0                  601 	movx	@dptr,a
    025F 90 00 55            602 	mov	dptr,#(_rmodm + 0x0055)
-   0262 74 A4               603 	mov	a,#0xA4
+   0262 74 BC               603 	mov	a,#0xBC
    0264 F0                  604 	movx	@dptr,a
    0265 90 00 56            605 	mov	dptr,#(_rmodm + 0x0056)
-   0268 74 B6               606 	mov	a,#0xB6
+   0268 74 6D               606 	mov	a,#0x6D
    026A F0                  607 	movx	@dptr,a
    026B 90 00 57            608 	mov	dptr,#(_rmodm + 0x0057)
-   026E 74 56               609 	mov	a,#0x56
+   026E 74 03               609 	mov	a,#0x03
    0270 F0                  610 	movx	@dptr,a
    0271 90 00 58            611 	mov	dptr,#(_rmodm + 0x0058)
-   0274 74 B2               612 	mov	a,#0xB2
+   0274 74 49               612 	mov	a,#0x49
    0276 F0                  613 	movx	@dptr,a
    0277 90 00 59            614 	mov	dptr,#(_rmodm + 0x0059)
-   027A 74 7D               615 	mov	a,#0x7D
+   027A 74 95               615 	mov	a,#0x95
    027C F0                  616 	movx	@dptr,a
    027D 90 00 5A            617 	mov	dptr,#(_rmodm + 0x005a)
-   0280 74 39               618 	mov	a,#0x39
+   0280 74 94               618 	mov	a,#0x94
    0282 F0                  619 	movx	@dptr,a
    0283 90 00 5B            620 	mov	dptr,#(_rmodm + 0x005b)
-   0286 74 D1               621 	mov	a,#0xD1
+   0286 74 C8               621 	mov	a,#0xC8
    0288 F0                  622 	movx	@dptr,a
    0289 90 00 5C            623 	mov	dptr,#(_rmodm + 0x005c)
-   028C 74 EA               624 	mov	a,#0xEA
+   028C 74 6F               624 	mov	a,#0x6F
    028E F0                  625 	movx	@dptr,a
    028F 90 00 5D            626 	mov	dptr,#(_rmodm + 0x005d)
-   0292 74 77               627 	mov	a,#0x77
+   0292 74 14               627 	mov	a,#0x14
    0294 F0                  628 	movx	@dptr,a
    0295 90 00 5E            629 	mov	dptr,#(_rmodm + 0x005e)
-   0298 74 A3               630 	mov	a,#0xA3
+   0298 74 B0               630 	mov	a,#0xB0
    029A F0                  631 	movx	@dptr,a
    029B 90 00 5F            632 	mov	dptr,#(_rmodm + 0x005f)
-   029E 74 22               633 	mov	a,#0x22
+   029E 74 16               633 	mov	a,#0x16
    02A0 F0                  634 	movx	@dptr,a
    02A1 90 00 60            635 	mov	dptr,#(_rmodm + 0x0060)
-   02A4 74 D0               636 	mov	a,#0xD0
+   02A4 74 14               636 	mov	a,#0x14
    02A6 F0                  637 	movx	@dptr,a
    02A7 90 00 61            638 	mov	dptr,#(_rmodm + 0x0061)
-   02AA 74 C6               639 	mov	a,#0xC6
+   02AA 74 63               639 	mov	a,#0x63
    02AC F0                  640 	movx	@dptr,a
    02AD 90 00 62            641 	mov	dptr,#(_rmodm + 0x0062)
-   02B0 74 4E               642 	mov	a,#0x4E
+   02B0 74 D0               642 	mov	a,#0xD0
    02B2 F0                  643 	movx	@dptr,a
    02B3 90 00 63            644 	mov	dptr,#(_rmodm + 0x0063)
-   02B6 74 A4               645 	mov	a,#0xA4
+   02B6 74 94               645 	mov	a,#0x94
    02B8 F0                  646 	movx	@dptr,a
    02B9 90 00 64            647 	mov	dptr,#(_rmodm + 0x0064)
-   02BC 74 45               648 	mov	a,#0x45
+   02BC 74 D9               648 	mov	a,#0xD9
    02BE F0                  649 	movx	@dptr,a
    02BF 90 00 65            650 	mov	dptr,#(_rmodm + 0x0065)
-   02C2 74 B3               651 	mov	a,#0xB3
+   02C2 74 10               651 	mov	a,#0x10
    02C4 F0                  652 	movx	@dptr,a
    02C5 90 00 66            653 	mov	dptr,#(_rmodm + 0x0066)
-   02C8 74 D5               654 	mov	a,#0xD5
+   02C8 74 4B               654 	mov	a,#0x4B
    02CA F0                  655 	movx	@dptr,a
    02CB 90 00 67            656 	mov	dptr,#(_rmodm + 0x0067)
-   02CE 74 63               657 	mov	a,#0x63
+   02CE 74 44               657 	mov	a,#0x44
    02D0 F0                  658 	movx	@dptr,a
    02D1 90 00 68            659 	mov	dptr,#(_rmodm + 0x0068)
-   02D4 74 7B               660 	mov	a,#0x7B
+   02D4 74 03               660 	mov	a,#0x03
    02D6 F0                  661 	movx	@dptr,a
    02D7 90 00 69            662 	mov	dptr,#(_rmodm + 0x0069)
-   02DA 74 1D               663 	mov	a,#0x1D
+   02DA 74 C2               663 	mov	a,#0xC2
    02DC F0                  664 	movx	@dptr,a
    02DD 90 00 6A            665 	mov	dptr,#(_rmodm + 0x006a)
-   02E0 74 52               666 	mov	a,#0x52
+   02E0 74 CC               666 	mov	a,#0xCC
    02E2 F0                  667 	movx	@dptr,a
    02E3 90 00 6B            668 	mov	dptr,#(_rmodm + 0x006b)
-   02E6 74 4F               669 	mov	a,#0x4F
+   02E6 74 04               669 	mov	a,#0x04
    02E8 F0                  670 	movx	@dptr,a
    02E9 90 00 6C            671 	mov	dptr,#(_rmodm + 0x006c)
-   02EC 74 4C               672 	mov	a,#0x4C
+   02EC 74 68               672 	mov	a,#0x68
    02EE F0                  673 	movx	@dptr,a
    02EF 90 00 6D            674 	mov	dptr,#(_rmodm + 0x006d)
-   02F2 74 0A               675 	mov	a,#0x0A
+   02F2 74 98               675 	mov	a,#0x98
    02F4 F0                  676 	movx	@dptr,a
    02F5 90 00 6E            677 	mov	dptr,#(_rmodm + 0x006e)
-   02F8 74 28               678 	mov	a,#0x28
+   02F8 74 6C               678 	mov	a,#0x6C
    02FA F0                  679 	movx	@dptr,a
    02FB 90 00 6F            680 	mov	dptr,#(_rmodm + 0x006f)
-   02FE 74 B8               681 	mov	a,#0xB8
+   02FE 74 D9               681 	mov	a,#0xD9
    0300 F0                  682 	movx	@dptr,a
    0301 90 00 70            683 	mov	dptr,#(_rmodm + 0x0070)
-   0304 74 3F               684 	mov	a,#0x3F
+   0304 74 69               684 	mov	a,#0x69
    0306 F0                  685 	movx	@dptr,a
    0307 90 00 71            686 	mov	dptr,#(_rmodm + 0x0071)
-   030A 74 DB               687 	mov	a,#0xDB
+   030A 74 C7               687 	mov	a,#0xC7
    030C F0                  688 	movx	@dptr,a
    030D 90 00 72            689 	mov	dptr,#(_rmodm + 0x0072)
-   0310 74 90               690 	mov	a,#0x90
+   0310 74 1A               690 	mov	a,#0x1A
    0312 F0                  691 	movx	@dptr,a
    0313 90 00 73            692 	mov	dptr,#(_rmodm + 0x0073)
-   0316 74 04               693 	mov	a,#0x04
+   0316 74 0F               693 	mov	a,#0x0F
    0318 F0                  694 	movx	@dptr,a
    0319 90 00 74            695 	mov	dptr,#(_rmodm + 0x0074)
-   031C 74 5C               696 	mov	a,#0x5C
+   031C 74 C5               696 	mov	a,#0xC5
    031E F0                  697 	movx	@dptr,a
    031F 90 00 75            698 	mov	dptr,#(_rmodm + 0x0075)
-   0322 74 BE               699 	mov	a,#0xBE
+   0322 74 39               699 	mov	a,#0x39
    0324 F0                  700 	movx	@dptr,a
    0325 90 00 76            701 	mov	dptr,#(_rmodm + 0x0076)
-   0328 74 0B               702 	mov	a,#0x0B
+   0328 74 5C               702 	mov	a,#0x5C
    032A F0                  703 	movx	@dptr,a
    032B 90 00 77            704 	mov	dptr,#(_rmodm + 0x0077)
-   032E 74 AC               705 	mov	a,#0xAC
+   032E 74 6A               705 	mov	a,#0x6A
    0330 F0                  706 	movx	@dptr,a
    0331 90 00 78            707 	mov	dptr,#(_rmodm + 0x0078)
-   0334 74 D2               708 	mov	a,#0xD2
+   0334 74 5A               708 	mov	a,#0x5A
    0336 F0                  709 	movx	@dptr,a
    0337 90 00 79            710 	mov	dptr,#(_rmodm + 0x0079)
-   033A 74 3A               711 	mov	a,#0x3A
+   033A 74 67               711 	mov	a,#0x67
    033C F0                  712 	movx	@dptr,a
    033D 90 00 7A            713 	mov	dptr,#(_rmodm + 0x007a)
-   0340 74 71               714 	mov	a,#0x71
+   0340 74 0B               714 	mov	a,#0x0B
    0342 F0                  715 	movx	@dptr,a
    0343 90 00 7B            716 	mov	dptr,#(_rmodm + 0x007b)
-   0346 74 9A               717 	mov	a,#0x9A
+   0346 74 47               717 	mov	a,#0x47
    0348 F0                  718 	movx	@dptr,a
    0349 90 00 7C            719 	mov	dptr,#(_rmodm + 0x007c)
-   034C 74 76               720 	mov	a,#0x76
+   034C 74 F4               720 	mov	a,#0xF4
    034E F0                  721 	movx	@dptr,a
    034F 90 00 7D            722 	mov	dptr,#(_rmodm + 0x007d)
-   0352 74 20               723 	mov	a,#0x20
+   0352 74 77               723 	mov	a,#0x77
    0354 F0                  724 	movx	@dptr,a
    0355 90 00 7E            725 	mov	dptr,#(_rmodm + 0x007e)
-   0358 74 31               726 	mov	a,#0x31
+   0358 74 1E               726 	mov	a,#0x1E
    035A F0                  727 	movx	@dptr,a
    035B 90 00 7F            728 	mov	dptr,#(_rmodm + 0x007f)
-   035E 74 46               729 	mov	a,#0x46
+   035E 74 2B               729 	mov	a,#0x2B
    0360 F0                  730 	movx	@dptr,a
                             731 ;	main.c:7: volatile __xdata __at (0x0080) unsigned char r2modm[SIZE]  = {0x77,0xEA,0xCF,0xBE,0xC1,0x80,0x10,0xEA,0x1B,0xA6,0xCD,0x50,0x4D,0x92,0x9E,0xEA,0x53,0xAC,0x79,0x45,0x34,0x3D,0x31,0xDF,0x24,0xA4,0x19,0x11,0x2A,0xFD,0x73,0x15,0x2A,0x8F,0xF3,0x43,0xAF,0x42,0x3D,0x85,0xF8,0x09,0x44,0xC3,0xFF,0xC7,0xF9,0xDB,0x8F,0x6A,0x1E,0x8D,0xA4,0x23,0x29,0x31,0xD2,0xE9,0x6E,0xBA,0x41,0x51,0xF7,0x83,0x9B,0x27,0x0E,0x5F,0x4D,0x6C,0x7D,0xD2,0x0A,0x1F,0x3A,0x7C,0x4C,0xE4,0x4D,0xFD,0xFC,0xF7,0x61,0xFE,0xE9,0xA4,0xB6,0x56,0xB2,0x7D,0x39,0xD1,0xEA,0x77,0xA3,0x22,0xD0,0xC6,0x4E,0xA4,0x45,0xB3,0xD5,0x63,0x7B,0x1D,0x52,0x4F,0x4C,0x0A,0x28,0xB8,0x3F,0xDB,0x90,0x04,0x5C,0xBE,0x0B,0xAC,0xD2,0x3A,0x71,0x9A,0x76,0x20,0x31,0x46};
    0361 90 00 80            732 	mov	dptr,#_r2modm
@@ -2283,7 +2283,7 @@
                            2283 	.area HOME    (CODE)
                            2284 	.area HOME    (CODE)
    0003                    2285 __sdcc_program_startup:
-   0003 12 10 F9           2286 	lcall	_main
+   0003 12 10 F6           2286 	lcall	_main
                            2287 ;	return from main will lock up
    0006 80 FE              2288 	sjmp .
                            2289 ;--------------------------------------------------------
@@ -2350,7 +2350,7 @@
    0FA0 8F 82              2350 	mov	dpl,r7
    0FA2 88 83              2351 	mov	dph,r0
    0FA4 89 F0              2352 	mov	b,r1
-   0FA6 12 11 73           2353 	lcall	__gptrget
+   0FA6 12 11 70           2353 	lcall	__gptrget
    0FA9 FF                 2354 	mov	r7,a
    0FAA 8D 82              2355 	mov	dpl,r5
    0FAC 8E 83              2356 	mov	dph,r6
@@ -2397,7 +2397,7 @@
    0FE7 8C 82              2397 	mov	dpl,r4
    0FE9 8D 83              2398 	mov	dph,r5
    0FEB 8E F0              2399 	mov	b,r6
-   0FED 12 11 73           2400 	lcall	__gptrget
+   0FED 12 11 70           2400 	lcall	__gptrget
    0FF0 FC                 2401 	mov	r4,a
    0FF1 8A 82              2402 	mov	dpl,r2
    0FF3 8B 83              2403 	mov	dph,r3
@@ -2442,7 +2442,7 @@
    102B 8C 82              2442 	mov	dpl,r4
    102D 8D 83              2443 	mov	dph,r5
    102F 8E F0              2444 	mov	b,r6
-   1031 12 11 73           2445 	lcall	__gptrget
+   1031 12 11 70           2445 	lcall	__gptrget
    1034 FC                 2446 	mov	r4,a
    1035 8A 82              2447 	mov	dpl,r2
    1037 8B 83              2448 	mov	dph,r3
@@ -2489,7 +2489,7 @@
    1072 8C 82              2489 	mov	dpl,r4
    1074 8D 83              2490 	mov	dph,r5
    1076 8E F0              2491 	mov	b,r6
-   1078 12 11 73           2492 	lcall	__gptrget
+   1078 12 11 70           2492 	lcall	__gptrget
    107B FC                 2493 	mov	r4,a
    107C 8A 82              2494 	mov	dpl,r2
    107E 8B 83              2495 	mov	dph,r3
@@ -2511,179 +2511,177 @@
    1093 94 80              2511 	subb	a,#0x80
    1095 E5 09              2512 	mov	a,(_i + 1)
    1097 94 00              2513 	subb	a,#0x00
-   1099 50 37              2514 	jnc	00123$
+   1099 50 34              2514 	jnc	00123$
                            2515 ;	main.c:43: shared_m[i] = m[SIZE-1-i];
-   109B E5 08              2516 	mov	a,_i
-   109D 24 80              2517 	add	a,#_shared_m
-   109F FA                 2518 	mov	r2,a
-   10A0 E5 09              2519 	mov	a,(_i + 1)
-   10A2 34 42              2520 	addc	a,#(_shared_m >> 8)
-   10A4 FB                 2521 	mov	r3,a
-   10A5 74 7F              2522 	mov	a,#0x7F
-   10A7 C3                 2523 	clr	c
-   10A8 95 08              2524 	subb	a,_i
-   10AA FC                 2525 	mov	r4,a
-   10AB E4                 2526 	clr	a
-   10AC 95 09              2527 	subb	a,(_i + 1)
-   10AE FD                 2528 	mov	r5,a
-   10AF EC                 2529 	mov	a,r4
-   10B0 25 13              2530 	add	a,_write_data_PARM_5
-   10B2 FC                 2531 	mov	r4,a
-   10B3 ED                 2532 	mov	a,r5
-   10B4 35 14              2533 	addc	a,(_write_data_PARM_5 + 1)
-   10B6 FD                 2534 	mov	r5,a
-   10B7 AE 15              2535 	mov	r6,(_write_data_PARM_5 + 2)
-   10B9 8C 82              2536 	mov	dpl,r4
-   10BB 8D 83              2537 	mov	dph,r5
-   10BD 8E F0              2538 	mov	b,r6
-   10BF 12 11 73           2539 	lcall	__gptrget
-   10C2 FC                 2540 	mov	r4,a
-   10C3 8A 82              2541 	mov	dpl,r2
-   10C5 8B 83              2542 	mov	dph,r3
-   10C7 F0                 2543 	movx	@dptr,a
-                           2544 ;	main.c:42: for (i = 0; i < SIZE; i++) {
-   10C8 05 08              2545 	inc	_i
-   10CA E4                 2546 	clr	a
-   10CB B5 08 C2           2547 	cjne	a,_i,00120$
-   10CE 05 09              2548 	inc	(_i + 1)
-   10D0 80 BE              2549 	sjmp	00120$
-   10D2                    2550 00123$:
-                           2551 ;	main.c:46: P0 = ins_write_data;
-   10D2 75 80 01           2552 	mov	_P0,#0x01
-                           2553 ;	main.c:47: P0 = ins_idle;
-   10D5 75 80 00           2554 	mov	_P0,#0x00
-                           2555 ;	main.c:49: while (P1 == 0) {}
-   10D8                    2556 00101$:
-   10D8 E5 90              2557 	mov	a,_P1
-   10DA 60 FC              2558 	jz	00101$
-                           2559 ;	main.c:50: P0 = ins_ack;
-   10DC 75 80 04           2560 	mov	_P0,#0x04
-   10DF 22                 2561 	ret
+   109B AA 08              2516 	mov	r2,_i
+   109D 74 42              2517 	mov	a,#(_shared_m >> 8)
+   109F 25 09              2518 	add	a,(_i + 1)
+   10A1 FB                 2519 	mov	r3,a
+   10A2 74 7F              2520 	mov	a,#0x7F
+   10A4 C3                 2521 	clr	c
+   10A5 95 08              2522 	subb	a,_i
+   10A7 FC                 2523 	mov	r4,a
+   10A8 E4                 2524 	clr	a
+   10A9 95 09              2525 	subb	a,(_i + 1)
+   10AB FD                 2526 	mov	r5,a
+   10AC EC                 2527 	mov	a,r4
+   10AD 25 13              2528 	add	a,_write_data_PARM_5
+   10AF FC                 2529 	mov	r4,a
+   10B0 ED                 2530 	mov	a,r5
+   10B1 35 14              2531 	addc	a,(_write_data_PARM_5 + 1)
+   10B3 FD                 2532 	mov	r5,a
+   10B4 AE 15              2533 	mov	r6,(_write_data_PARM_5 + 2)
+   10B6 8C 82              2534 	mov	dpl,r4
+   10B8 8D 83              2535 	mov	dph,r5
+   10BA 8E F0              2536 	mov	b,r6
+   10BC 12 11 70           2537 	lcall	__gptrget
+   10BF FC                 2538 	mov	r4,a
+   10C0 8A 82              2539 	mov	dpl,r2
+   10C2 8B 83              2540 	mov	dph,r3
+   10C4 F0                 2541 	movx	@dptr,a
+                           2542 ;	main.c:42: for (i = 0; i < SIZE; i++) {
+   10C5 05 08              2543 	inc	_i
+   10C7 E4                 2544 	clr	a
+   10C8 B5 08 C5           2545 	cjne	a,_i,00120$
+   10CB 05 09              2546 	inc	(_i + 1)
+   10CD 80 C1              2547 	sjmp	00120$
+   10CF                    2548 00123$:
+                           2549 ;	main.c:46: P0 = ins_write_data;
+   10CF 75 80 01           2550 	mov	_P0,#0x01
+                           2551 ;	main.c:47: P0 = ins_idle;
+   10D2 75 80 00           2552 	mov	_P0,#0x00
+                           2553 ;	main.c:49: while (P1 == 0) {}
+   10D5                    2554 00101$:
+   10D5 E5 90              2555 	mov	a,_P1
+   10D7 60 FC              2556 	jz	00101$
+                           2557 ;	main.c:50: P0 = ins_ack;
+   10D9 75 80 04           2558 	mov	_P0,#0x04
+   10DC 22                 2559 	ret
+                           2560 ;------------------------------------------------------------
+                           2561 ;Allocation info for local variables in function 'read_r'
                            2562 ;------------------------------------------------------------
-                           2563 ;Allocation info for local variables in function 'read_r'
-                           2564 ;------------------------------------------------------------
-                           2565 ;------------------------------------------------------------
-                           2566 ;	main.c:53: void read_r() {
+                           2563 ;------------------------------------------------------------
+                           2564 ;	main.c:53: void read_r() {
+                           2565 ;	-----------------------------------------
+                           2566 ;	 function read_r
                            2567 ;	-----------------------------------------
-                           2568 ;	 function read_r
-                           2569 ;	-----------------------------------------
-   10E0                    2570 _read_r:
-                           2571 ;	main.c:54: P0 = ins_read_r;
-   10E0 75 80 03           2572 	mov	_P0,#0x03
-                           2573 ;	main.c:55: while (P1 == 0) {}
-   10E3                    2574 00101$:
-   10E3 E5 90              2575 	mov	a,_P1
-   10E5 60 FC              2576 	jz	00101$
-                           2577 ;	main.c:56: P0 = ins_ack;
-   10E7 75 80 04           2578 	mov	_P0,#0x04
-                           2579 ;	main.c:58: P0 = ins_idle;
-   10EA 75 80 00           2580 	mov	_P0,#0x00
-   10ED 22                 2581 	ret
+   10DD                    2568 _read_r:
+                           2569 ;	main.c:54: P0 = ins_read_r;
+   10DD 75 80 03           2570 	mov	_P0,#0x03
+                           2571 ;	main.c:55: while (P1 == 0) {}
+   10E0                    2572 00101$:
+   10E0 E5 90              2573 	mov	a,_P1
+   10E2 60 FC              2574 	jz	00101$
+                           2575 ;	main.c:56: P0 = ins_ack;
+   10E4 75 80 04           2576 	mov	_P0,#0x04
+                           2577 ;	main.c:58: P0 = ins_idle;
+   10E7 75 80 00           2578 	mov	_P0,#0x00
+   10EA 22                 2579 	ret
+                           2580 ;------------------------------------------------------------
+                           2581 ;Allocation info for local variables in function 'montgomery_exp'
                            2582 ;------------------------------------------------------------
-                           2583 ;Allocation info for local variables in function 'montgomery_exp'
-                           2584 ;------------------------------------------------------------
-                           2585 ;------------------------------------------------------------
-                           2586 ;	main.c:61: void montgomery_exp() {
+                           2583 ;------------------------------------------------------------
+                           2584 ;	main.c:61: void montgomery_exp() {
+                           2585 ;	-----------------------------------------
+                           2586 ;	 function montgomery_exp
                            2587 ;	-----------------------------------------
-                           2588 ;	 function montgomery_exp
-                           2589 ;	-----------------------------------------
-   10EE                    2590 _montgomery_exp:
-                           2591 ;	main.c:62: P0 = ins_montgomery_exp;
-   10EE 75 80 02           2592 	mov	_P0,#0x02
-                           2593 ;	main.c:63: P0 = ins_idle;
-   10F1 75 80 00           2594 	mov	_P0,#0x00
-   10F4 22                 2595 	ret
+   10EB                    2588 _montgomery_exp:
+                           2589 ;	main.c:62: P0 = ins_montgomery_exp;
+   10EB 75 80 02           2590 	mov	_P0,#0x02
+                           2591 ;	main.c:63: P0 = ins_idle;
+   10EE 75 80 00           2592 	mov	_P0,#0x00
+   10F1 22                 2593 	ret
+                           2594 ;------------------------------------------------------------
+                           2595 ;Allocation info for local variables in function 'terminate'
                            2596 ;------------------------------------------------------------
-                           2597 ;Allocation info for local variables in function 'terminate'
-                           2598 ;------------------------------------------------------------
-                           2599 ;------------------------------------------------------------
-                           2600 ;	main.c:66: void terminate() {
+                           2597 ;------------------------------------------------------------
+                           2598 ;	main.c:66: void terminate() {
+                           2599 ;	-----------------------------------------
+                           2600 ;	 function terminate
                            2601 ;	-----------------------------------------
-                           2602 ;	 function terminate
-                           2603 ;	-----------------------------------------
-   10F5                    2604 _terminate:
-                           2605 ;	main.c:67: P3 = 0x55;
-   10F5 75 B0 55           2606 	mov	_P3,#0x55
-   10F8 22                 2607 	ret
+   10F2                    2602 _terminate:
+                           2603 ;	main.c:67: P3 = 0x55;
+   10F2 75 B0 55           2604 	mov	_P3,#0x55
+   10F5 22                 2605 	ret
+                           2606 ;------------------------------------------------------------
+                           2607 ;Allocation info for local variables in function 'main'
                            2608 ;------------------------------------------------------------
-                           2609 ;Allocation info for local variables in function 'main'
-                           2610 ;------------------------------------------------------------
-                           2611 ;------------------------------------------------------------
-                           2612 ;	main.c:70: int main() {
+                           2609 ;------------------------------------------------------------
+                           2610 ;	main.c:70: int main() {
+                           2611 ;	-----------------------------------------
+                           2612 ;	 function main
                            2613 ;	-----------------------------------------
-                           2614 ;	 function main
-                           2615 ;	-----------------------------------------
-   10F9                    2616 _main:
-                           2617 ;	main.c:71: write_data(message, r2modm, rmodm, enc_exp, modulus);
-   10F9 75 0A 80           2618 	mov	_write_data_PARM_2,#_r2modm
-   10FC 75 0B 00           2619 	mov	(_write_data_PARM_2 + 1),#(_r2modm >> 8)
-   10FF 75 0C 00           2620 	mov	(_write_data_PARM_2 + 2),#0x00
-   1102 75 0D 00           2621 	mov	_write_data_PARM_3,#_rmodm
-   1105 75 0E 00           2622 	mov	(_write_data_PARM_3 + 1),#(_rmodm >> 8)
-   1108 75 0F 00           2623 	mov	(_write_data_PARM_3 + 2),#0x00
-   110B 75 10 00           2624 	mov	_write_data_PARM_4,#_enc_exp
-   110E 75 11 02           2625 	mov	(_write_data_PARM_4 + 1),#(_enc_exp >> 8)
-   1111 75 12 00           2626 	mov	(_write_data_PARM_4 + 2),#0x00
-   1114 75 13 00           2627 	mov	_write_data_PARM_5,#_modulus
-   1117 75 14 01           2628 	mov	(_write_data_PARM_5 + 1),#(_modulus >> 8)
-   111A 75 15 00           2629 	mov	(_write_data_PARM_5 + 2),#0x00
-   111D 90 01 80           2630 	mov	dptr,#_message
-   1120 75 F0 00           2631 	mov	b,#0x00
-   1123 12 0F 6F           2632 	lcall	_write_data
-                           2633 ;	main.c:72: montgomery_exp();
-   1126 12 10 EE           2634 	lcall	_montgomery_exp
-                           2635 ;	main.c:73: read_r();
-   1129 12 10 E0           2636 	lcall	_read_r
-                           2637 ;	main.c:75: P1 = 0;
-                           2638 ;	main.c:77: for (i = 0; i < SIZE; i++) {
-   112C E4                 2639 	clr	a
-   112D F5 90              2640 	mov	_P1,a
-   112F F5 08              2641 	mov	_i,a
-   1131 F5 09              2642 	mov	(_i + 1),a
-   1133                    2643 00104$:
-   1133 C3                 2644 	clr	c
-   1134 E5 08              2645 	mov	a,_i
-   1136 94 80              2646 	subb	a,#0x80
-   1138 E5 09              2647 	mov	a,(_i + 1)
-   113A 94 00              2648 	subb	a,#0x00
-   113C 50 21              2649 	jnc	00107$
-                           2650 ;	main.c:78: shared_a[i] = r[i];
-   113E AA 08              2651 	mov	r2,_i
-   1140 74 41              2652 	mov	a,#(_shared_a >> 8)
-   1142 25 09              2653 	add	a,(_i + 1)
-   1144 FB                 2654 	mov	r3,a
-   1145 85 08 82           2655 	mov	dpl,_i
-   1148 74 50              2656 	mov	a,#(_r >> 8)
-   114A 25 09              2657 	add	a,(_i + 1)
-   114C F5 83              2658 	mov	dph,a
-   114E E0                 2659 	movx	a,@dptr
-   114F FC                 2660 	mov	r4,a
-   1150 8A 82              2661 	mov	dpl,r2
-   1152 8B 83              2662 	mov	dph,r3
-   1154 F0                 2663 	movx	@dptr,a
-                           2664 ;	main.c:77: for (i = 0; i < SIZE; i++) {
-   1155 05 08              2665 	inc	_i
-   1157 E4                 2666 	clr	a
-   1158 B5 08 D8           2667 	cjne	a,_i,00104$
-   115B 05 09              2668 	inc	(_i + 1)
-   115D 80 D4              2669 	sjmp	00104$
-   115F                    2670 00107$:
-                           2671 ;	main.c:81: P0 = ins_write_data;
-   115F 75 80 01           2672 	mov	_P0,#0x01
-                           2673 ;	main.c:82: P0 = ins_idle;
-   1162 75 80 00           2674 	mov	_P0,#0x00
-                           2675 ;	main.c:84: while (P1 == 0) {}
-   1165                    2676 00101$:
-   1165 E5 90              2677 	mov	a,_P1
-   1167 60 FC              2678 	jz	00101$
-                           2679 ;	main.c:85: P0 = ins_ack;
-   1169 75 80 04           2680 	mov	_P0,#0x04
-                           2681 ;	main.c:87: terminate();
-   116C 12 10 F5           2682 	lcall	_terminate
-                           2683 ;	main.c:88: return 0;
-   116F 90 00 00           2684 	mov	dptr,#0x0000
-   1172 22                 2685 	ret
-                           2686 	.area CSEG    (CODE)
-                           2687 	.area CONST   (CODE)
-                           2688 	.area XINIT   (CODE)
-                           2689 	.area CABS    (ABS,CODE)
+   10F6                    2614 _main:
+                           2615 ;	main.c:71: write_data(message, r2modm, rmodm, enc_exp, modulus);
+   10F6 75 0A 80           2616 	mov	_write_data_PARM_2,#_r2modm
+   10F9 75 0B 00           2617 	mov	(_write_data_PARM_2 + 1),#(_r2modm >> 8)
+   10FC 75 0C 00           2618 	mov	(_write_data_PARM_2 + 2),#0x00
+   10FF 75 0D 00           2619 	mov	_write_data_PARM_3,#_rmodm
+   1102 75 0E 00           2620 	mov	(_write_data_PARM_3 + 1),#(_rmodm >> 8)
+   1105 75 0F 00           2621 	mov	(_write_data_PARM_3 + 2),#0x00
+   1108 75 10 00           2622 	mov	_write_data_PARM_4,#_enc_exp
+   110B 75 11 02           2623 	mov	(_write_data_PARM_4 + 1),#(_enc_exp >> 8)
+   110E 75 12 00           2624 	mov	(_write_data_PARM_4 + 2),#0x00
+   1111 75 13 00           2625 	mov	_write_data_PARM_5,#_modulus
+   1114 75 14 01           2626 	mov	(_write_data_PARM_5 + 1),#(_modulus >> 8)
+   1117 75 15 00           2627 	mov	(_write_data_PARM_5 + 2),#0x00
+   111A 90 01 80           2628 	mov	dptr,#_message
+   111D 75 F0 00           2629 	mov	b,#0x00
+   1120 12 0F 6F           2630 	lcall	_write_data
+                           2631 ;	main.c:72: montgomery_exp();
+   1123 12 10 EB           2632 	lcall	_montgomery_exp
+                           2633 ;	main.c:73: read_r();
+   1126 12 10 DD           2634 	lcall	_read_r
+                           2635 ;	main.c:75: P1 = 0;
+                           2636 ;	main.c:77: for (i = 0; i < SIZE; i++) {
+   1129 E4                 2637 	clr	a
+   112A F5 90              2638 	mov	_P1,a
+   112C F5 08              2639 	mov	_i,a
+   112E F5 09              2640 	mov	(_i + 1),a
+   1130                    2641 00104$:
+   1130 C3                 2642 	clr	c
+   1131 E5 08              2643 	mov	a,_i
+   1133 94 80              2644 	subb	a,#0x80
+   1135 E5 09              2645 	mov	a,(_i + 1)
+   1137 94 00              2646 	subb	a,#0x00
+   1139 50 21              2647 	jnc	00107$
+                           2648 ;	main.c:78: shared_a[i] = r[i];
+   113B AA 08              2649 	mov	r2,_i
+   113D 74 41              2650 	mov	a,#(_shared_a >> 8)
+   113F 25 09              2651 	add	a,(_i + 1)
+   1141 FB                 2652 	mov	r3,a
+   1142 85 08 82           2653 	mov	dpl,_i
+   1145 74 50              2654 	mov	a,#(_r >> 8)
+   1147 25 09              2655 	add	a,(_i + 1)
+   1149 F5 83              2656 	mov	dph,a
+   114B E0                 2657 	movx	a,@dptr
+   114C FC                 2658 	mov	r4,a
+   114D 8A 82              2659 	mov	dpl,r2
+   114F 8B 83              2660 	mov	dph,r3
+   1151 F0                 2661 	movx	@dptr,a
+                           2662 ;	main.c:77: for (i = 0; i < SIZE; i++) {
+   1152 05 08              2663 	inc	_i
+   1154 E4                 2664 	clr	a
+   1155 B5 08 D8           2665 	cjne	a,_i,00104$
+   1158 05 09              2666 	inc	(_i + 1)
+   115A 80 D4              2667 	sjmp	00104$
+   115C                    2668 00107$:
+                           2669 ;	main.c:81: P0 = ins_write_data;
+   115C 75 80 01           2670 	mov	_P0,#0x01
+                           2671 ;	main.c:82: P0 = ins_idle;
+   115F 75 80 00           2672 	mov	_P0,#0x00
+                           2673 ;	main.c:84: while (P1 == 0) {}
+   1162                    2674 00101$:
+   1162 E5 90              2675 	mov	a,_P1
+   1164 60 FC              2676 	jz	00101$
+                           2677 ;	main.c:85: P0 = ins_ack;
+   1166 75 80 04           2678 	mov	_P0,#0x04
+                           2679 ;	main.c:87: terminate();
+   1169 12 10 F2           2680 	lcall	_terminate
+                           2681 ;	main.c:88: return 0;
+   116C 90 00 00           2682 	mov	dptr,#0x0000
+   116F 22                 2683 	ret
+                           2684 	.area CSEG    (CODE)
+                           2685 	.area CONST   (CODE)
+                           2686 	.area XINIT   (CODE)
+                           2687 	.area CABS    (ABS,CODE)
