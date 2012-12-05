@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 2.9.0 #5416 (Aug  6 2010) (UNIX)
-; This file was generated Wed Dec  5 15:30:17 2012
+; This file was generated Wed Dec  5 16:36:38 2012
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mmcs51 --model-small
@@ -9,14 +9,15 @@
 ;--------------------------------------------------------
 ; Public variables in this module
 ;--------------------------------------------------------
-	.globl _write_montgomery_PARM_3
-	.globl _write_montgomery_PARM_2
+	.globl _write_data_PARM_5
+	.globl _write_data_PARM_4
+	.globl _write_data_PARM_3
+	.globl _write_data_PARM_2
 	.globl _main
 	.globl _terminate
-	.globl _exp
-	.globl _montgomery
+	.globl _montgomery_exp
 	.globl _read_r
-	.globl _write_montgomery
+	.globl _write_data
 	.globl _CY
 	.globl _AC
 	.globl _F0
@@ -121,8 +122,10 @@
 	.globl _rmodm
 	.globl _r
 	.globl _shared_m
-	.globl _shared_b
+	.globl _shared_e
 	.globl _shared_a
+	.globl _shared_r2modm
+	.globl _shared_x
 	.globl _i
 ;--------------------------------------------------------
 ; special function registers
@@ -243,9 +246,13 @@ _i::
 ; overlayable items in internal ram 
 ;--------------------------------------------------------
 	.area	OSEG    (OVR,DATA)
-_write_montgomery_PARM_2::
+_write_data_PARM_2::
 	.ds 3
-_write_montgomery_PARM_3::
+_write_data_PARM_3::
+	.ds 3
+_write_data_PARM_4::
+	.ds 3
+_write_data_PARM_5::
 	.ds 3
 ;--------------------------------------------------------
 ; Stack segment in internal ram 
@@ -275,9 +282,11 @@ __start__stack:
 ; external ram data
 ;--------------------------------------------------------
 	.area XSEG    (XDATA)
-_shared_a	=	0x4000
-_shared_b	=	0x4080
-_shared_m	=	0x4100
+_shared_x	=	0x4000
+_shared_r2modm	=	0x4080
+_shared_a	=	0x4100
+_shared_e	=	0x4180
+_shared_m	=	0x4280
 _r	=	0x5000
 ;--------------------------------------------------------
 ; absolute external ram data
@@ -1874,12 +1883,12 @@ __interrupt_vect:
 	mov	dptr,#(_message + 0x007f)
 	mov	a,#0xB9
 	movx	@dptr,a
-;	main.c:10: volatile __xdata __at (0x0200) unsigned char enc_exp[SIZE] = {0x1,0x10};
+;	main.c:10: volatile __xdata __at (0x0200) unsigned char enc_exp[SIZE] = {0x1,0x01};
 	mov	dptr,#_enc_exp
 	mov	a,#0x01
 	movx	@dptr,a
 	mov	dptr,#(_enc_exp + 0x0001)
-	mov	a,#0x10
+	mov	a,#0x01
 	movx	@dptr,a
 ;	main.c:11: volatile __xdata __at (0x0280) unsigned char dec_exp[SIZE] = {0xA1,0x80,0x48,0x28,0xC3,0xFE,0x04,0xB3,0xF2,0xEF,0xAF,0x3E,0x55,0x46,0x4E,0xC8,0x47,0x7A,0x1C,0x83,0x74,0xD7,0x11,0xD1,0xFB,0x16,0x44,0x72,0x8C,0x4B,0xD5,0xFD,0xB9,0xFA,0x04,0xE1,0x3E,0x3A,0x16,0x04,0x55,0x41,0xD0,0x8A,0x92,0x38,0xF4,0xD4,0xAE,0x7A,0x60,0xE2,0x69,0xAA,0xA6,0x63,0xA1,0xEB,0x05,0x71,0x99,0x71,0xE3,0x67,0x2A,0x57,0xF7,0x6B,0x82,0xB3,0xF0,0x82,0x58,0x54,0xAF,0xC3,0xD1,0xEF,0x68,0x7E,0x88,0xBD,0x39,0x2B,0x2A,0x7C,0x14,0xF8,0xC7,0xD0,0xF9,0x64,0x9A,0xBA,0x6F,0x45,0x28,0x5D,0xD7,0xE2,0xC4,0x8E,0x9F,0x6F,0xA8,0x88,0xAD,0xFD,0x28,0x92,0x4F,0x63,0x41,0x70,0x22,0xAD,0xAB,0x4E,0x1D,0x63,0x89,0xCC,0x09,0x42,0xFE,0xBC,0xCF,0x3A};
 	mov	dptr,#_dec_exp
@@ -2282,17 +2291,19 @@ __sdcc_program_startup:
 ;--------------------------------------------------------
 	.area CSEG    (CODE)
 ;------------------------------------------------------------
-;Allocation info for local variables in function 'write_montgomery'
+;Allocation info for local variables in function 'write_data'
 ;------------------------------------------------------------
-;b                         Allocated with name '_write_montgomery_PARM_2'
-;m                         Allocated with name '_write_montgomery_PARM_3'
-;a                         Allocated to registers r2 r3 r4 
+;r2modm                    Allocated with name '_write_data_PARM_2'
+;a                         Allocated with name '_write_data_PARM_3'
+;e                         Allocated with name '_write_data_PARM_4'
+;m                         Allocated with name '_write_data_PARM_5'
+;x                         Allocated to registers r2 r3 r4 
 ;------------------------------------------------------------
-;	main.c:21: void write_montgomery(unsigned char *a, unsigned char *b, unsigned char *m) {
+;	main.c:23: void write_data(unsigned char *x, unsigned char *r2modm, unsigned char *a, unsigned char *e, unsigned char *m) {
 ;	-----------------------------------------
-;	 function write_montgomery
+;	 function write_data
 ;	-----------------------------------------
-_write_montgomery:
+_write_data:
 	ar2 = 0x02
 	ar3 = 0x03
 	ar4 = 0x04
@@ -2304,8 +2315,8 @@ _write_montgomery:
 	mov	r2,dpl
 	mov	r3,dph
 	mov	r4,b
-;	main.c:22: P1 = 0;
-;	main.c:24: for (i = 0; i < SIZE; i++) {
+;	main.c:24: P1 = 0;
+;	main.c:26: for (i = 0; i < SIZE; i++) {
 	clr	a
 	mov	_P1,a
 	mov	_i,a
@@ -2317,9 +2328,9 @@ _write_montgomery:
 	mov	a,(_i + 1)
 	subb	a,#0x00
 	jnc	00107$
-;	main.c:25: shared_a[i] = a[SIZE-1-i];
+;	main.c:27: shared_x[i] = x[SIZE-1-i];
 	mov	r5,_i
-	mov	a,#(_shared_a >> 8)
+	mov	a,#(_shared_x >> 8)
 	add	a,(_i + 1)
 	mov	r6,a
 	mov	a,#0x7F
@@ -2344,14 +2355,14 @@ _write_montgomery:
 	mov	dpl,r5
 	mov	dph,r6
 	movx	@dptr,a
-;	main.c:24: for (i = 0; i < SIZE; i++) {
+;	main.c:26: for (i = 0; i < SIZE; i++) {
 	inc	_i
 	clr	a
 	cjne	a,_i,00104$
 	inc	(_i + 1)
 	sjmp	00104$
 00107$:
-;	main.c:28: for (i = 0; i < SIZE; i++) {
+;	main.c:30: for (i = 0; i < SIZE; i++) {
 	clr	a
 	mov	_i,a
 	mov	(_i + 1),a
@@ -2362,12 +2373,12 @@ _write_montgomery:
 	mov	a,(_i + 1)
 	subb	a,#0x00
 	jnc	00111$
-;	main.c:29: shared_b[i] = b[SIZE-1-i];
+;	main.c:31: shared_r2modm[i] = r2modm[SIZE-1-i];
 	mov	a,_i
-	add	a,#_shared_b
+	add	a,#_shared_r2modm
 	mov	r2,a
 	mov	a,(_i + 1)
-	addc	a,#(_shared_b >> 8)
+	addc	a,#(_shared_r2modm >> 8)
 	mov	r3,a
 	mov	a,#0x7F
 	clr	c
@@ -2377,12 +2388,12 @@ _write_montgomery:
 	subb	a,(_i + 1)
 	mov	r5,a
 	mov	a,r4
-	add	a,_write_montgomery_PARM_2
+	add	a,_write_data_PARM_2
 	mov	r4,a
 	mov	a,r5
-	addc	a,(_write_montgomery_PARM_2 + 1)
+	addc	a,(_write_data_PARM_2 + 1)
 	mov	r5,a
-	mov	r6,(_write_montgomery_PARM_2 + 2)
+	mov	r6,(_write_data_PARM_2 + 2)
 	mov	dpl,r4
 	mov	dph,r5
 	mov	b,r6
@@ -2391,14 +2402,14 @@ _write_montgomery:
 	mov	dpl,r2
 	mov	dph,r3
 	movx	@dptr,a
-;	main.c:28: for (i = 0; i < SIZE; i++) {
+;	main.c:30: for (i = 0; i < SIZE; i++) {
 	inc	_i
 	clr	a
 	cjne	a,_i,00108$
 	inc	(_i + 1)
 	sjmp	00108$
 00111$:
-;	main.c:32: for (i = 0; i < SIZE; i++) {
+;	main.c:34: for (i = 0; i < SIZE; i++) {
 	clr	a
 	mov	_i,a
 	mov	(_i + 1),a
@@ -2409,9 +2420,9 @@ _write_montgomery:
 	mov	a,(_i + 1)
 	subb	a,#0x00
 	jnc	00115$
-;	main.c:33: shared_m[i] = m[SIZE-1-i];
+;	main.c:35: shared_a[i] = a[SIZE-1-i];
 	mov	r2,_i
-	mov	a,#(_shared_m >> 8)
+	mov	a,#(_shared_a >> 8)
 	add	a,(_i + 1)
 	mov	r3,a
 	mov	a,#0x7F
@@ -2422,12 +2433,12 @@ _write_montgomery:
 	subb	a,(_i + 1)
 	mov	r5,a
 	mov	a,r4
-	add	a,_write_montgomery_PARM_3
+	add	a,_write_data_PARM_3
 	mov	r4,a
 	mov	a,r5
-	addc	a,(_write_montgomery_PARM_3 + 1)
+	addc	a,(_write_data_PARM_3 + 1)
 	mov	r5,a
-	mov	r6,(_write_montgomery_PARM_3 + 2)
+	mov	r6,(_write_data_PARM_3 + 2)
 	mov	dpl,r4
 	mov	dph,r5
 	mov	b,r6
@@ -2436,109 +2447,195 @@ _write_montgomery:
 	mov	dpl,r2
 	mov	dph,r3
 	movx	@dptr,a
-;	main.c:32: for (i = 0; i < SIZE; i++) {
+;	main.c:34: for (i = 0; i < SIZE; i++) {
 	inc	_i
 	clr	a
 	cjne	a,_i,00112$
 	inc	(_i + 1)
 	sjmp	00112$
 00115$:
-;	main.c:36: P0 = ins_write_data;
+;	main.c:38: for (i = 0; i < SIZE; i++) {
+	clr	a
+	mov	_i,a
+	mov	(_i + 1),a
+00116$:
+	clr	c
+	mov	a,_i
+	subb	a,#0x80
+	mov	a,(_i + 1)
+	subb	a,#0x00
+	jnc	00119$
+;	main.c:39: shared_e[i] = e[SIZE-1-i];
+	mov	a,_i
+	add	a,#_shared_e
+	mov	r2,a
+	mov	a,(_i + 1)
+	addc	a,#(_shared_e >> 8)
+	mov	r3,a
+	mov	a,#0x7F
+	clr	c
+	subb	a,_i
+	mov	r4,a
+	clr	a
+	subb	a,(_i + 1)
+	mov	r5,a
+	mov	a,r4
+	add	a,_write_data_PARM_4
+	mov	r4,a
+	mov	a,r5
+	addc	a,(_write_data_PARM_4 + 1)
+	mov	r5,a
+	mov	r6,(_write_data_PARM_4 + 2)
+	mov	dpl,r4
+	mov	dph,r5
+	mov	b,r6
+	lcall	__gptrget
+	mov	r4,a
+	mov	dpl,r2
+	mov	dph,r3
+	movx	@dptr,a
+;	main.c:38: for (i = 0; i < SIZE; i++) {
+	inc	_i
+	clr	a
+	cjne	a,_i,00116$
+	inc	(_i + 1)
+	sjmp	00116$
+00119$:
+;	main.c:42: for (i = 0; i < SIZE; i++) {
+	clr	a
+	mov	_i,a
+	mov	(_i + 1),a
+00120$:
+	clr	c
+	mov	a,_i
+	subb	a,#0x80
+	mov	a,(_i + 1)
+	subb	a,#0x00
+	jnc	00123$
+;	main.c:43: shared_m[i] = m[SIZE-1-i];
+	mov	a,_i
+	add	a,#_shared_m
+	mov	r2,a
+	mov	a,(_i + 1)
+	addc	a,#(_shared_m >> 8)
+	mov	r3,a
+	mov	a,#0x7F
+	clr	c
+	subb	a,_i
+	mov	r4,a
+	clr	a
+	subb	a,(_i + 1)
+	mov	r5,a
+	mov	a,r4
+	add	a,_write_data_PARM_5
+	mov	r4,a
+	mov	a,r5
+	addc	a,(_write_data_PARM_5 + 1)
+	mov	r5,a
+	mov	r6,(_write_data_PARM_5 + 2)
+	mov	dpl,r4
+	mov	dph,r5
+	mov	b,r6
+	lcall	__gptrget
+	mov	r4,a
+	mov	dpl,r2
+	mov	dph,r3
+	movx	@dptr,a
+;	main.c:42: for (i = 0; i < SIZE; i++) {
+	inc	_i
+	clr	a
+	cjne	a,_i,00120$
+	inc	(_i + 1)
+	sjmp	00120$
+00123$:
+;	main.c:46: P0 = ins_write_data;
 	mov	_P0,#0x01
-;	main.c:37: P0 = ins_idle;
+;	main.c:47: P0 = ins_idle;
 	mov	_P0,#0x00
-;	main.c:39: while (P1 == 0) {}
+;	main.c:49: while (P1 == 0) {}
 00101$:
 	mov	a,_P1
 	jz	00101$
-;	main.c:40: P0 = ins_ack;
+;	main.c:50: P0 = ins_ack;
 	mov	_P0,#0x04
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'read_r'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:43: void read_r() {
+;	main.c:53: void read_r() {
 ;	-----------------------------------------
 ;	 function read_r
 ;	-----------------------------------------
 _read_r:
-;	main.c:44: P0 = ins_read_r;
+;	main.c:54: P0 = ins_read_r;
 	mov	_P0,#0x03
-;	main.c:45: while (P1 == 0) {}
+;	main.c:55: while (P1 == 0) {}
 00101$:
 	mov	a,_P1
 	jz	00101$
-;	main.c:46: P0 = ins_ack;
+;	main.c:56: P0 = ins_ack;
 	mov	_P0,#0x04
-;	main.c:48: P0 = ins_idle;
-	mov	_P0,#0x00
-	ret
-;------------------------------------------------------------
-;Allocation info for local variables in function 'montgomery'
-;------------------------------------------------------------
-;------------------------------------------------------------
-;	main.c:51: void montgomery() {
-;	-----------------------------------------
-;	 function montgomery
-;	-----------------------------------------
-_montgomery:
-;	main.c:52: P0 = ins_montgomery;
-	mov	_P0,#0x02
-;	main.c:53: P0 = ins_idle;
-	mov	_P0,#0x00
-	ret
-;------------------------------------------------------------
-;Allocation info for local variables in function 'exp'
-;------------------------------------------------------------
-;------------------------------------------------------------
-;	main.c:56: void exp() {
-;	-----------------------------------------
-;	 function exp
-;	-----------------------------------------
-_exp:
-;	main.c:57: P0 = ins_exp;
-	mov	_P0,#0x05
 ;	main.c:58: P0 = ins_idle;
+	mov	_P0,#0x00
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'montgomery_exp'
+;------------------------------------------------------------
+;------------------------------------------------------------
+;	main.c:61: void montgomery_exp() {
+;	-----------------------------------------
+;	 function montgomery_exp
+;	-----------------------------------------
+_montgomery_exp:
+;	main.c:62: P0 = ins_montgomery_exp;
+	mov	_P0,#0x02
+;	main.c:63: P0 = ins_idle;
 	mov	_P0,#0x00
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'terminate'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:61: void terminate() {
+;	main.c:66: void terminate() {
 ;	-----------------------------------------
 ;	 function terminate
 ;	-----------------------------------------
 _terminate:
-;	main.c:62: P3 = 0x55;
+;	main.c:67: P3 = 0x55;
 	mov	_P3,#0x55
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'main'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:65: int main() {
+;	main.c:70: int main() {
 ;	-----------------------------------------
 ;	 function main
 ;	-----------------------------------------
 _main:
-;	main.c:66: write_montgomery(message, r2modm, modulus);
-	mov	_write_montgomery_PARM_2,#_r2modm
-	mov	(_write_montgomery_PARM_2 + 1),#(_r2modm >> 8)
-	mov	(_write_montgomery_PARM_2 + 2),#0x00
-	mov	_write_montgomery_PARM_3,#_modulus
-	mov	(_write_montgomery_PARM_3 + 1),#(_modulus >> 8)
-	mov	(_write_montgomery_PARM_3 + 2),#0x00
+;	main.c:71: write_data(message, r2modm, rmodm, enc_exp, modulus);
+	mov	_write_data_PARM_2,#_r2modm
+	mov	(_write_data_PARM_2 + 1),#(_r2modm >> 8)
+	mov	(_write_data_PARM_2 + 2),#0x00
+	mov	_write_data_PARM_3,#_rmodm
+	mov	(_write_data_PARM_3 + 1),#(_rmodm >> 8)
+	mov	(_write_data_PARM_3 + 2),#0x00
+	mov	_write_data_PARM_4,#_enc_exp
+	mov	(_write_data_PARM_4 + 1),#(_enc_exp >> 8)
+	mov	(_write_data_PARM_4 + 2),#0x00
+	mov	_write_data_PARM_5,#_modulus
+	mov	(_write_data_PARM_5 + 1),#(_modulus >> 8)
+	mov	(_write_data_PARM_5 + 2),#0x00
 	mov	dptr,#_message
 	mov	b,#0x00
-	lcall	_write_montgomery
-;	main.c:67: montgomery();
-	lcall	_montgomery
-;	main.c:68: read_r();
+	lcall	_write_data
+;	main.c:72: montgomery_exp();
+	lcall	_montgomery_exp
+;	main.c:73: read_r();
 	lcall	_read_r
-;	main.c:70: P1 = 0;
-;	main.c:72: for (i = 0; i < SIZE; i++) {
+;	main.c:75: P1 = 0;
+;	main.c:77: for (i = 0; i < SIZE; i++) {
 	clr	a
 	mov	_P1,a
 	mov	_i,a
@@ -2550,7 +2647,7 @@ _main:
 	mov	a,(_i + 1)
 	subb	a,#0x00
 	jnc	00107$
-;	main.c:73: shared_a[i] = r[i];
+;	main.c:78: shared_a[i] = r[i];
 	mov	r2,_i
 	mov	a,#(_shared_a >> 8)
 	add	a,(_i + 1)
@@ -2564,26 +2661,26 @@ _main:
 	mov	dpl,r2
 	mov	dph,r3
 	movx	@dptr,a
-;	main.c:72: for (i = 0; i < SIZE; i++) {
+;	main.c:77: for (i = 0; i < SIZE; i++) {
 	inc	_i
 	clr	a
 	cjne	a,_i,00104$
 	inc	(_i + 1)
 	sjmp	00104$
 00107$:
-;	main.c:76: P0 = ins_write_data;
+;	main.c:81: P0 = ins_write_data;
 	mov	_P0,#0x01
-;	main.c:77: P0 = ins_idle;
+;	main.c:82: P0 = ins_idle;
 	mov	_P0,#0x00
-;	main.c:79: while (P1 == 0) {}
+;	main.c:84: while (P1 == 0) {}
 00101$:
 	mov	a,_P1
 	jz	00101$
-;	main.c:80: P0 = ins_ack;
+;	main.c:85: P0 = ins_ack;
 	mov	_P0,#0x04
-;	main.c:82: terminate();
+;	main.c:87: terminate();
 	lcall	_terminate
-;	main.c:83: return 0;
+;	main.c:88: return 0;
 	mov	dptr,#0x0000
 	ret
 	.area CSEG    (CODE)
