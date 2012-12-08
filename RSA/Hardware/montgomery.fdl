@@ -176,7 +176,7 @@ dp exp_dp (in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
 
     sfg count_inc {
         e_reg = e_reg >> 1;
-        //$display("loop", r_reg);
+        $display("loop", r_reg);
     }
 
     sfg do_mont {
@@ -260,7 +260,7 @@ fsm exp (exp_dp)
                         (no_mont, reset_r) -> write_result;
                     else
                         (last_mont, reset_r) -> last_mont;
-    @write_result   (write_result) -> wait_input;
+    @write_result   (write_result, no_mont) -> wait_input;
 }
 
 dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(8); out address: ns(10); out data_wr, result_wr : ns(1)) {
