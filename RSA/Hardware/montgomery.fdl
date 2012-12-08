@@ -95,7 +95,8 @@ dp montgomery_dp (in a, b, m : ns(1024); out r : ns(1027))
         x = 0;
         y = 0;
         r = r_reg;
-        //$display("a: ", a, "                 b: ", b, "                 m: ", m, "                 r: ", r_reg);
+        $display("a: ", a, "                 b: ", b, "                 m: ", m, "                 r: ", r_reg);
+	$finish;
     }
 
     sfg reset_r {
@@ -168,11 +169,14 @@ dp exp_dp (in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
         b_sig = r2modm;
         m_sig = m;
         r_reg = r_sig;
+	//$display("x: ", x);
+	//$display("r2modm: ", r2modm);
+	//$display("mod: ", m);
     }
 
     sfg start_loop {
         x_reg = r_reg;
-        //$display("writedddd: ", r_reg);
+        $display("xtilde: ", r_reg);
     }
 
     sfg count_inc {
@@ -227,10 +231,6 @@ dp exp_dp (in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
     sfg reset_r {
         r = 0;
     }
-
-    sfg start_calc_x {
-        $display("start calc x");
-    }
 }
 
 fsm exp (exp_dp)
@@ -242,7 +242,7 @@ fsm exp (exp_dp)
     @wait_input     if (m == 0) then
                         (init, reset_r) -> wait_input;
                     else
-                        (init, reset_r, start_calc_x) -> calc_x;
+                        (init, reset_r) -> calc_x;
     @calc_x         if (r_reg > 0) then
                         (start_loop, no_mont, reset_r) -> loop;
                     else
@@ -261,7 +261,7 @@ fsm exp (exp_dp)
                         (no_mont, reset_r) -> loop;
                     else 
                         (do_extra_mont, reset_r) -> do_extra_mont;
-    @last_mont      if (r_reg > 0) then
+    @last_mont      if (r_reg  > 0) then
                         (no_mont, reset_r) -> write_result;
                     else
                         (last_mont, reset_r) -> last_mont;
@@ -407,7 +407,7 @@ fsm decoder(decoder_dp) {
                         (no_exp, no_write, no_address, no_sync, decode) -> do;
                     else
                         (no_exp, no_write, no_address, read_done, decode) -> read_done;
-    @do_exp         if (r_reg > 0) then
+    @do_exp         if (r_sig > 0) then
                         (no_exp, no_sync, no_write, no_address, decode) -> do;
                     else
                         (exp, no_sync, no_write, no_address, decode) -> do_exp;
