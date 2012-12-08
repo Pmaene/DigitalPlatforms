@@ -95,8 +95,7 @@ dp montgomery_dp (in a, b, m : ns(1024); out r : ns(1027))
         x = 0;
         y = 0;
         r = r_reg;
-        $display("a: ", a, "                 b: ", b, "                 m: ", m, "                 r: ", r_reg);
-	$finish;
+        //$display("a: ", a, "                 b: ", b, "                 m: ", m, "                 r: ", r_reg);
     }
 
     sfg reset_r {
@@ -110,7 +109,7 @@ fsm montgomery (montgomery_dp)
     state loop, stop, if_else, wait;
 
     @init       (init) -> wait;
-    @wait       if (m == 0) then
+    @wait       if (a == 0 | b == 0 | m == 0) then
                     (init) -> wait;
                 else
                     (init) -> loop;
@@ -169,14 +168,10 @@ dp exp_dp (in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
         b_sig = r2modm;
         m_sig = m;
         r_reg = r_sig;
-	//$display("x: ", x);
-	//$display("r2modm: ", r2modm);
-	//$display("mod: ", m);
     }
 
     sfg start_loop {
         x_reg = r_reg;
-        $display("xtilde: ", r_reg);
     }
 
     sfg count_inc {
