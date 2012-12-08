@@ -96,10 +96,15 @@ dp montgomery_dp (in a, b, m : ns(1024); out r : ns(1027))
         y = 0;
         r = r_reg;
         //$display("a: ", a, "                 b: ", b, "                 m: ", m, "                 r: ", r_reg);
+	//$display(" ");
     }
 
     sfg reset_r {
         r = 0;
+    }
+
+    sfg start_mont {
+//    	$display("a: ", a, "                 b: ", b, "                 m: ", m, "                 r: ", r_reg);
     }
 }
 
@@ -112,7 +117,7 @@ fsm montgomery (montgomery_dp)
     @wait       if (a == 0 | b == 0 | m == 0) then
                     (init) -> wait;
                 else
-                    (init) -> loop;
+                    (init, start_mont) -> loop;
     @loop       if (counter >= 1024) then
                     (count_rst, overflow_check, reset_r) -> stop;
                 else if (r_reg[0] == 0 & a_reg[0] == 0) then
@@ -135,6 +140,8 @@ fsm montgomery (montgomery_dp)
 dp exp_dp (in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
 {
     reg e_reg : ns(1024);
+
+    reg ei    : ns(1);
     
     reg r_reg : ns(1027);
     reg x_reg : ns(1027);
@@ -175,8 +182,8 @@ dp exp_dp (in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
     }
 
     sfg count_inc {
+    	ei = e_reg[0];
         e_reg = e_reg >> 1;
-        $display("loop", r_reg);
     }
 
     sfg do_mont {
@@ -187,8 +194,6 @@ dp exp_dp (in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
     }
 
     sfg start_extra_mont {
-        a_reg = r_reg;
-
         a_sig = r_reg;
         b_sig = x_reg;
         m_sig = m;
@@ -218,6 +223,10 @@ dp exp_dp (in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
         r_reg = r_sig;
     }
 
+    sfg save_a {
+    	a_reg = r_reg;
+    }
+
     sfg write_result {
         r = r_reg;
         $display("Result Exp: ", r_reg);
@@ -245,11 +254,11 @@ fsm exp (exp_dp)
     @loop           if (e_reg == 0) then
                         (start_last_mont, reset_r) -> last_mont;
                     else
-                        (do_mont, count_inc, reset_r) -> do_mont;
-    @do_mont        if (r_reg > 0 & e_reg[0] == 0) then
-                        (no_mont, reset_r) -> loop;
+                        (count_inc, do_mont, reset_r) -> do_mont;
+    @do_mont        if (r_reg > 0 & ei == 0) then
+                        (save_a, no_mont, reset_r) -> loop;
                     else if (r_reg > 0) then
-                        (start_extra_mont, reset_r) -> do_extra_mont;
+                        (save_a, start_extra_mont, reset_r) -> do_extra_mont;
                     else 
                         (do_mont, reset_r) -> do_mont;
     @do_extra_mont  if (r_reg > 0) then
