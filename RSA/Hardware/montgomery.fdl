@@ -136,17 +136,17 @@ dp exp_dp (in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
     reg e_reg : ns(1024);
 
     reg ei    : ns(1);
-    
+
     reg r_reg : ns(1027);
     reg x_reg : ns(1027);
     reg a_reg : ns(1027);
-	reg b_reg : ns(1027);
+    reg b_reg : ns(1027);
 
     sig a_sig : ns(1024);
     sig b_sig : ns(1024);
     sig m_sig : ns(1024);
     sig r_sig : ns(1027);
-	sig start_sig : ns(1);
+    sig start_sig : ns(1);
 
     use montgomery_dp(a_sig, b_sig, m_sig, start_sig, r_sig);
 
@@ -158,7 +158,7 @@ dp exp_dp (in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
         m_sig = 0;
 
         a_reg = a;
-		b_reg = a;
+        b_reg = a;
     }
 
     sfg no_mont {
@@ -179,7 +179,7 @@ dp exp_dp (in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
     }
 
     sfg count_inc {
-    	ei = e_reg[0];
+        ei = e_reg[0];
         e_reg = e_reg >> 1;
     }
 
@@ -226,13 +226,12 @@ dp exp_dp (in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
     }
 
     sfg save_a {
-    	a_reg = r_reg;
-	b_reg = r_reg;
+        a_reg = r_reg;
+        b_reg = r_reg;
     }
 
     sfg write_result {
         r = r_reg;
-        //$display("Result Exp: ", r_reg);
     }
 
     sfg reset_r {
@@ -240,11 +239,11 @@ dp exp_dp (in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
     }
 
     sfg start_mont{
-	start_sig = 1;
+        start_sig = 1;
     }
 
     sfg stop_mont{
-	start_sig = 0;
+        start_sig = 0;
     }
 }
 
@@ -271,11 +270,11 @@ fsm exp (exp_dp)
                         (save_a, no_mont, reset_r, stop_mont) -> loop;
                     else if (r_reg > 0) then
                         (save_a, start_extra_mont, reset_r, stop_mont) -> do_extra_mont;
-                    else 
+                    else
                         (do_mont, reset_r, start_mont) -> do_mont;
     @do_extra_mont  if (r_reg > 0) then
                         (save_a, no_mont, reset_r, stop_mont) -> loop;
-                    else 
+                    else
                         (do_extra_mont, reset_r, start_mont) -> do_extra_mont;
     @last_mont      if (r_reg  > 0) then
                         (no_mont, reset_r, stop_mont) -> write_result;
@@ -316,7 +315,7 @@ dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(8);
 
     sfg no_write {
         data_wr = 0;
-        result_wr = 0;        
+        result_wr = 0;
 
         dout = 0;
     }
@@ -367,7 +366,7 @@ dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(8);
         m_sig = m_reg;
         r_reg = r_sig;
 
-        $display($cycle, "Montgomery Exp: ", r_reg);
+        //$display($cycle, "Montgomery Exp: ", r_reg);
     }
 
     sfg write_result {
@@ -378,11 +377,11 @@ dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(8);
         data_wr = 0;
         result_wr = 1;
 
-        //$display($cycle, "Writing: ", dout);
+        $display($cycle, "Writing: ", r_reg);
     }
 
     sfg write_done {
-        sync = 1;    
+        sync = 1;
     }
 
     sfg reset_counter {
@@ -500,4 +499,3 @@ system S
 {
     montgomery_sys;
 }
-
