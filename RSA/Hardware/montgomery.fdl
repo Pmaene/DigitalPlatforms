@@ -140,7 +140,6 @@ dp exp_dp (in start : ns(1);in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
     reg r_reg : ns(1027);
     reg x_reg : ns(1027);
     reg a_reg : ns(1027);
-    reg b_reg : ns(1027);
 
     sig a_sig : ns(1024);
     sig b_sig : ns(1024);
@@ -158,7 +157,6 @@ dp exp_dp (in start : ns(1);in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
         m_sig = 0;
 
         a_reg = a;
-        b_reg = a;
     }
 
     sfg no_mont {
@@ -185,7 +183,7 @@ dp exp_dp (in start : ns(1);in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
 
     sfg do_mont {
         a_sig = a_reg;
-        b_sig = b_reg;
+        b_sig = a_reg;
         m_sig = m;
         r_reg = r_sig;
     }
@@ -220,7 +218,6 @@ dp exp_dp (in start : ns(1);in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
 
     sfg save_a {
         a_reg = r_reg;
-        b_reg = r_reg;
     }
 
     sfg write_result {
@@ -360,6 +357,7 @@ dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(8);
         a_sig = a_reg;
         m_sig = m_reg;
         r_reg = r_sig;
+	$display(r_reg);
     }
 
     sfg write_result {
