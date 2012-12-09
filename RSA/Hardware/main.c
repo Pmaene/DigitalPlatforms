@@ -74,15 +74,15 @@ int main() {
 
     P1 = 0;
 
-    for (i = 0; i < SIZE; i++) {
-        shared_a[i] = r[i];
-    }
+    //for (i = 0; i < SIZE; i++) {
+    //    shared_a[i] = r[i];
+    //}
 
-    P0 = ins_write_data;
-    P0 = ins_idle;
+    //P0 = ins_write_data;
+    //P0 = ins_idle;
 
-    while (P1 == 0) {}
-    P0 = ins_ack;
+    //while (P1 == 0) {}
+    //P0 = ins_ack;
 
     terminate();
     return 0;

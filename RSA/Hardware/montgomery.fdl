@@ -131,7 +131,7 @@ fsm montgomery (montgomery_dp)
     @stop       (stop) -> wait;
 }
 
-dp exp_dp (in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
+dp exp_dp (in start : ns(1);in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
 {
     reg e_reg : ns(1024);
 
@@ -238,11 +238,11 @@ dp exp_dp (in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
         r = 0;
     }
 
-    sfg start_mont{
+    sfg start_mont {
         start_sig = 1;
     }
 
-    sfg stop_mont{
+    sfg stop_mont {
         start_sig = 0;
     }
 }
@@ -253,7 +253,7 @@ fsm exp (exp_dp)
     state loop, wait_input, start_calc_x, calc_x, do_mont, do_extra_mont, last_mont, write_result;
 
     @init           (init, reset_r, stop_mont) -> wait_input;
-    @wait_input     if (m == 0) then
+    @wait_input     if (start == 0) then
                         (init, reset_r, stop_mont) -> wait_input;
                     else
                         (init, reset_r, stop_mont) -> start_calc_x;
@@ -280,7 +280,7 @@ fsm exp (exp_dp)
                         (no_mont, reset_r, stop_mont) -> write_result;
                     else
                         (last_mont, reset_r, start_mont) -> last_mont;
-    @write_result   (write_result, no_mont, stop_mont) -> wait_input;
+    @write_result   (write_result, no_mont, stop_mont) -> init;
 }
 
 dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(8); out address: ns(10); out data_wr, result_wr : ns(1)) {
@@ -293,8 +293,9 @@ dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(8);
 
     sig x_sig, r2modm_sig, a_sig, e_sig, m_sig : ns(1024);
     sig r_sig : ns(1027);
+    sig start_sig : ns(1);
 
-    use exp_dp(x_sig, r2modm_sig, a_sig, e_sig, m_sig, r_sig);
+    use exp_dp(start_sig, x_sig, r2modm_sig, a_sig, e_sig, m_sig, r_sig);
 
     sfg decode {
         ins_reg = ins;
@@ -307,6 +308,7 @@ dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(8);
         e_sig = 0;
         a_sig = 0;
         m_sig = 0;
+	start_sig = 0;
     }
 
     sfg no_sync {
@@ -383,6 +385,14 @@ dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(8);
     sfg reset_counter {
         i = 0;
     }
+
+    sfg start_exp {
+    	start_sig = 1;
+    }
+
+    sfg stop_exp {
+    	start_sig = 0;
+    }
 }
 
 fsm decoder(decoder_dp) {
@@ -393,7 +403,7 @@ fsm decoder(decoder_dp) {
     @do             if (ins_reg == 1) then
                         (no_exp, no_sync, no_write, no_address, reset_counter, decode) -> get_data;
                     else if (ins_reg == 2) then
-                        (exp, no_sync, no_write, no_address, decode) -> do_exp;
+                        (stop_exp, exp, no_sync, no_write, no_address, decode) -> do_exp;
                     else if (ins_reg == 3) then
                         (no_exp, no_sync, no_write, no_address, reset_counter, decode) -> write_result;
                     else
@@ -421,7 +431,7 @@ fsm decoder(decoder_dp) {
     @do_exp         if (r_reg > 0) then
                         (no_exp, no_sync, no_write, no_address, decode) -> do;
                     else
-                        (exp, no_sync, no_write, no_address, decode) -> do_exp;
+                        (start_exp, exp, no_sync, no_write, no_address, decode) -> do_exp;
     @write_result   if (i < 0x81) then
                         (no_exp, no_sync, write_result, decode) -> write_result;
                     else

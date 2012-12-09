@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 2.9.0 #5416 (Aug  6 2010) (UNIX)
-                              4 ; This file was generated Sun Dec  9 14:29:02 2012
+                              4 ; This file was generated Sun Dec  9 14:58:21 2012
                               5 ;--------------------------------------------------------
                               6 	.module main
                               7 	.optsdcc -mmcs51 --model-small
@@ -2350,7 +2350,7 @@
    0FA0 8F 82              2350 	mov	dpl,r7
    0FA2 88 83              2351 	mov	dph,r0
    0FA4 89 F0              2352 	mov	b,r1
-   0FA6 12 11 70           2353 	lcall	__gptrget
+   0FA6 12 11 33           2353 	lcall	__gptrget
    0FA9 FF                 2354 	mov	r7,a
    0FAA 8D 82              2355 	mov	dpl,r5
    0FAC 8E 83              2356 	mov	dph,r6
@@ -2397,7 +2397,7 @@
    0FE7 8C 82              2397 	mov	dpl,r4
    0FE9 8D 83              2398 	mov	dph,r5
    0FEB 8E F0              2399 	mov	b,r6
-   0FED 12 11 70           2400 	lcall	__gptrget
+   0FED 12 11 33           2400 	lcall	__gptrget
    0FF0 FC                 2401 	mov	r4,a
    0FF1 8A 82              2402 	mov	dpl,r2
    0FF3 8B 83              2403 	mov	dph,r3
@@ -2442,7 +2442,7 @@
    102B 8C 82              2442 	mov	dpl,r4
    102D 8D 83              2443 	mov	dph,r5
    102F 8E F0              2444 	mov	b,r6
-   1031 12 11 70           2445 	lcall	__gptrget
+   1031 12 11 33           2445 	lcall	__gptrget
    1034 FC                 2446 	mov	r4,a
    1035 8A 82              2447 	mov	dpl,r2
    1037 8B 83              2448 	mov	dph,r3
@@ -2489,7 +2489,7 @@
    1072 8C 82              2489 	mov	dpl,r4
    1074 8D 83              2490 	mov	dph,r5
    1076 8E F0              2491 	mov	b,r6
-   1078 12 11 70           2492 	lcall	__gptrget
+   1078 12 11 33           2492 	lcall	__gptrget
    107B FC                 2493 	mov	r4,a
    107C 8A 82              2494 	mov	dpl,r2
    107E 8B 83              2495 	mov	dph,r3
@@ -2534,7 +2534,7 @@
    10B6 8C 82              2534 	mov	dpl,r4
    10B8 8D 83              2535 	mov	dph,r5
    10BA 8E F0              2536 	mov	b,r6
-   10BC 12 11 70           2537 	lcall	__gptrget
+   10BC 12 11 33           2537 	lcall	__gptrget
    10BF FC                 2538 	mov	r4,a
    10C0 8A 82              2539 	mov	dpl,r2
    10C2 8B 83              2540 	mov	dph,r3
@@ -2633,55 +2633,13 @@
                            2633 ;	main.c:73: read_r();
    1126 12 10 DD           2634 	lcall	_read_r
                            2635 ;	main.c:75: P1 = 0;
-                           2636 ;	main.c:77: for (i = 0; i < SIZE; i++) {
-   1129 E4                 2637 	clr	a
-   112A F5 90              2638 	mov	_P1,a
-   112C F5 08              2639 	mov	_i,a
-   112E F5 09              2640 	mov	(_i + 1),a
-   1130                    2641 00104$:
-   1130 C3                 2642 	clr	c
-   1131 E5 08              2643 	mov	a,_i
-   1133 94 80              2644 	subb	a,#0x80
-   1135 E5 09              2645 	mov	a,(_i + 1)
-   1137 94 00              2646 	subb	a,#0x00
-   1139 50 21              2647 	jnc	00107$
-                           2648 ;	main.c:78: shared_a[i] = r[i];
-   113B AA 08              2649 	mov	r2,_i
-   113D 74 41              2650 	mov	a,#(_shared_a >> 8)
-   113F 25 09              2651 	add	a,(_i + 1)
-   1141 FB                 2652 	mov	r3,a
-   1142 85 08 82           2653 	mov	dpl,_i
-   1145 74 50              2654 	mov	a,#(_r >> 8)
-   1147 25 09              2655 	add	a,(_i + 1)
-   1149 F5 83              2656 	mov	dph,a
-   114B E0                 2657 	movx	a,@dptr
-   114C FC                 2658 	mov	r4,a
-   114D 8A 82              2659 	mov	dpl,r2
-   114F 8B 83              2660 	mov	dph,r3
-   1151 F0                 2661 	movx	@dptr,a
-                           2662 ;	main.c:77: for (i = 0; i < SIZE; i++) {
-   1152 05 08              2663 	inc	_i
-   1154 E4                 2664 	clr	a
-   1155 B5 08 D8           2665 	cjne	a,_i,00104$
-   1158 05 09              2666 	inc	(_i + 1)
-   115A 80 D4              2667 	sjmp	00104$
-   115C                    2668 00107$:
-                           2669 ;	main.c:81: P0 = ins_write_data;
-   115C 75 80 01           2670 	mov	_P0,#0x01
-                           2671 ;	main.c:82: P0 = ins_idle;
-   115F 75 80 00           2672 	mov	_P0,#0x00
-                           2673 ;	main.c:84: while (P1 == 0) {}
-   1162                    2674 00101$:
-   1162 E5 90              2675 	mov	a,_P1
-   1164 60 FC              2676 	jz	00101$
-                           2677 ;	main.c:85: P0 = ins_ack;
-   1166 75 80 04           2678 	mov	_P0,#0x04
-                           2679 ;	main.c:87: terminate();
-   1169 12 10 F2           2680 	lcall	_terminate
-                           2681 ;	main.c:88: return 0;
-   116C 90 00 00           2682 	mov	dptr,#0x0000
-   116F 22                 2683 	ret
-                           2684 	.area CSEG    (CODE)
-                           2685 	.area CONST   (CODE)
-                           2686 	.area XINIT   (CODE)
-                           2687 	.area CABS    (ABS,CODE)
+   1129 75 90 00           2636 	mov	_P1,#0x00
+                           2637 ;	main.c:87: terminate();
+   112C 12 10 F2           2638 	lcall	_terminate
+                           2639 ;	main.c:88: return 0;
+   112F 90 00 00           2640 	mov	dptr,#0x0000
+   1132 22                 2641 	ret
+                           2642 	.area CSEG    (CODE)
+                           2643 	.area CONST   (CODE)
+                           2644 	.area XINIT   (CODE)
+                           2645 	.area CABS    (ABS,CODE)
