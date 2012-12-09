@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 2.9.0 #5416 (Aug  6 2010) (UNIX)
-; This file was generated Sun Dec  9 14:06:20 2012
+; This file was generated Sun Dec  9 14:29:02 2012
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mmcs51 --model-small
@@ -2632,6 +2632,50 @@ _main:
 	lcall	_montgomery_exp
 ;	main.c:73: read_r();
 	lcall	_read_r
+;	main.c:75: P1 = 0;
+;	main.c:77: for (i = 0; i < SIZE; i++) {
+	clr	a
+	mov	_P1,a
+	mov	_i,a
+	mov	(_i + 1),a
+00104$:
+	clr	c
+	mov	a,_i
+	subb	a,#0x80
+	mov	a,(_i + 1)
+	subb	a,#0x00
+	jnc	00107$
+;	main.c:78: shared_a[i] = r[i];
+	mov	r2,_i
+	mov	a,#(_shared_a >> 8)
+	add	a,(_i + 1)
+	mov	r3,a
+	mov	dpl,_i
+	mov	a,#(_r >> 8)
+	add	a,(_i + 1)
+	mov	dph,a
+	movx	a,@dptr
+	mov	r4,a
+	mov	dpl,r2
+	mov	dph,r3
+	movx	@dptr,a
+;	main.c:77: for (i = 0; i < SIZE; i++) {
+	inc	_i
+	clr	a
+	cjne	a,_i,00104$
+	inc	(_i + 1)
+	sjmp	00104$
+00107$:
+;	main.c:81: P0 = ins_write_data;
+	mov	_P0,#0x01
+;	main.c:82: P0 = ins_idle;
+	mov	_P0,#0x00
+;	main.c:84: while (P1 == 0) {}
+00101$:
+	mov	a,_P1
+	jz	00101$
+;	main.c:85: P0 = ins_ack;
+	mov	_P0,#0x04
 ;	main.c:87: terminate();
 	lcall	_terminate
 ;	main.c:88: return 0;

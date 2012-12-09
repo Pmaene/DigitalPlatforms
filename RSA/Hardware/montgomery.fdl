@@ -365,19 +365,15 @@ dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(8);
         a_sig = a_reg;
         m_sig = m_reg;
         r_reg = r_sig;
-
-        //$display($cycle, "Montgomery Exp: ", r_reg);
     }
 
     sfg write_result {
-        address = 0x80-i;
+        address = 0x80-i-1;
         i = i+1;
         dout = r_reg;
         r_reg = r_reg >> 8;
         data_wr = 0;
         result_wr = 1;
-
-        $display($cycle, "Writing: ", r_reg);
     }
 
     sfg write_done {
