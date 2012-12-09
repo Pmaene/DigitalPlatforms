@@ -95,16 +95,10 @@ dp montgomery_dp (in a, b, m : ns(1024); in start : ns(1); out r : ns(1027))
         x = 0;
         y = 0;
         r = r_reg;
-        //$display("a: ", a, "                 b: ", b, "                 m: ", m, "                 r: ", r_reg);
-	//$display(" ");
     }
 
     sfg reset_r {
         r = 0;
-    }
-
-    sfg start_mont {
-    	//$display("a: ", a, "                 b: ", b, "                 m: ", m, "                 r: ", r_reg);
     }
 }
 
@@ -117,7 +111,7 @@ fsm montgomery (montgomery_dp)
     @wait       if (start == 0) then
                     (init) -> wait;
                 else
-                    (init, start_mont) -> loop;
+                    (init) -> loop;
     @loop       if (counter >= 1024) then
                     (count_rst, overflow_check, reset_r) -> stop;
                 else if (r_reg[0] == 0 & a_reg[0] == 0) then
@@ -182,14 +176,11 @@ dp exp_dp (in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
 
     sfg start_loop {
         x_reg = r_reg;
-		//$display("Xtilde :", x_reg);
-		//$display("A :", a_reg);
     }
 
     sfg count_inc {
     	ei = e_reg[0];
         e_reg = e_reg >> 1;
-		//$display("Count inc: ", e_reg);
     }
 
     sfg do_mont {
@@ -197,15 +188,13 @@ dp exp_dp (in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
         b_sig = b_reg;
         m_sig = m;
         r_reg = r_sig;
-		//$display("Do Mont: ", r_reg, "a*b/R mod m met a ", a_sig, "                  b ", b_sig, "                            m ", m_sig);
     }
 
-	sfg do_mont_new {
+    sfg do_mont_new {
         a_sig = a_reg;
         b_sig = b_reg;
         m_sig = m;
         r_reg = r_sig;
-		//$display("Do Mont: ", r_reg, "a*b/R mod m met a ", a_sig, "                  b ", b_sig, "                            m ", m_sig);
     }
 
     sfg start_extra_mont {
@@ -223,13 +212,10 @@ dp exp_dp (in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
     }
 
     sfg start_last_mont {
-        //a_reg = r_reg;
-
         a_sig = a_reg;
         b_sig = 1;
         m_sig = m;
         r_reg = r_sig;
-		//$display("Start last mont met a ", a_sig, "                  b ", b_sig, "                       m ", m_sig);
     }
 
     sfg last_mont {
@@ -241,7 +227,7 @@ dp exp_dp (in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
 
     sfg save_a {
     	a_reg = r_reg;
-		b_reg = r_reg;
+	b_reg = r_reg;
     }
 
     sfg write_result {
@@ -253,14 +239,13 @@ dp exp_dp (in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
         r = 0;
     }
 
-	sfg start_mont{
-		start_sig = 1;
-		//$display("Do Mont: ", r_reg, "a*b/R mod m met a ", a_sig, "                  b ", b_sig, "                            m ", m_sig);
-	}
+    sfg start_mont{
+	start_sig = 1;
+    }
 
-	sfg stop_mont{
-		start_sig = 0;
-	}
+    sfg stop_mont{
+	start_sig = 0;
+    }
 }
 
 fsm exp (exp_dp)
@@ -273,7 +258,7 @@ fsm exp (exp_dp)
                         (init, reset_r, stop_mont) -> wait_input;
                     else
                         (init, reset_r, stop_mont) -> start_calc_x;
-	@start_calc_x	(calc_x, stop_mont, reset_r) -> calc_x;
+    @start_calc_x   (calc_x, stop_mont, reset_r) -> calc_x;
     @calc_x         if (r_reg > 0) then
                         (start_loop, no_mont, reset_r, stop_mont) -> loop;
                     else
