@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 2.9.0 #5416 (Aug  6 2010) (UNIX)
-                              4 ; This file was generated Fri Dec  7 10:10:26 2012
+                              4 ; This file was generated Sun Dec  9 14:00:39 2012
                               5 ;--------------------------------------------------------
                               6 	.module main
                               7 	.optsdcc -mmcs51 --model-small
@@ -343,7 +343,7 @@
                             343 	.globl __mcs51_genXINIT
                             344 	.globl __mcs51_genXRAMCLEAR
                             345 	.globl __mcs51_genRAMCLEAR
-                            346 ;	main.c:6: volatile __xdata __at (0x0000) unsigned char rmodm[SIZE]   = {0xA3,0x10,0x6B,0x83,0x7C,0x40,0xBF,0xB2,0x54,0x28,0x20,0x4D,0xB2,0xD4,0xF8,0xA6,0xE5,0xB7,0x51,0xBA,0xE8,0xD1,0x95,0x9A,0xFE,0xAB,0x0A,0x48,0x23,0xA2,0x70,0xB3,0xCC,0x7B,0x8F,0x44,0xF4,0x5B,0x53,0x78,0x7D,0xE2,0xF2,0xAF,0xD2,0xBA,0x06,0x0F,0xEE,0xA4,0x37,0x06,0xE7,0x04,0x2C,0x90,0x3C,0x8B,0xFD,0x54,0xCD,0xB9,0x94,0xAD,0x64,0x8E,0x26,0xDE,0x8C,0xC5,0x33,0x92,0x24,0xEF,0x76,0x34,0xC4,0xB8,0xEC,0xF1,0x9A,0x79,0x61,0x80,0xC1,0xBC,0x6D,0x03,0x49,0x95,0x94,0xC8,0x6F,0x14,0xB0,0x16,0x14,0x63,0xD0,0x94,0xD9,0x10,0x4B,0x44,0x03,0xC2,0xCC,0x04,0x68,0x98,0x6C,0xD9,0x69,0xC7,0x1A,0x0F,0xC5,0x39,0x5C,0x6A,0x5A,0x67,0x0B,0x47,0xF4,0x77,0x1E,0x2B};
+                            346 ;	main.c:6: volatile __xdata __at (0x0000) unsigned char rmodm[SIZE] = {0xA3,0x10,0x6B,0x83,0x7C,0x40,0xBF,0xB2,0x54,0x28,0x20,0x4D,0xB2,0xD4,0xF8,0xA6,0xE5,0xB7,0x51,0xBA,0xE8,0xD1,0x95,0x9A,0xFE,0xAB,0x0A,0x48,0x23,0xA2,0x70,0xB3,0xCC,0x7B,0x8F,0x44,0xF4,0x5B,0x53,0x78,0x7D,0xE2,0xF2,0xAF,0xD2,0xBA,0x06,0x0F,0xEE,0xA4,0x37,0x06,0xE7,0x04,0x2C,0x90,0x3C,0x8B,0xFD,0x54,0xCD,0xB9,0x94,0xAD,0x64,0x8E,0x26,0xDE,0x8C,0xC5,0x33,0x92,0x24,0xEF,0x76,0x34,0xC4,0xB8,0xEC,0xF1,0x9A,0x79,0x61,0x80,0xC1,0xBC,0x6D,0x03,0x49,0x95,0x94,0xC8,0x6F,0x14,0xB0,0x16,0x14,0x63,0xD0,0x94,0xD9,0x10,0x4B,0x44,0x03,0xC2,0xCC,0x04,0x68,0x98,0x6C,0xD9,0x69,0xC7,0x1A,0x0F,0xC5,0x39,0x5C,0x6A,0x5A,0x67,0x0B,0x47,0xF4,0x77,0x1E,0x2B};
    0061 90 00 00            347 	mov	dptr,#_rmodm
    0064 74 A3               348 	mov	a,#0xA3
    0066 F0                  349 	movx	@dptr,a
@@ -728,7 +728,7 @@
    035B 90 00 7F            728 	mov	dptr,#(_rmodm + 0x007f)
    035E 74 2B               729 	mov	a,#0x2B
    0360 F0                  730 	movx	@dptr,a
-                            731 ;	main.c:7: volatile __xdata __at (0x0080) unsigned char r2modm[SIZE]  = {0x4B,0x61,0xD1,0xA8,0x05,0x36,0xB5,0xE7,0xC6,0x6A,0x09,0x48,0xE1,0x09,0x9A,0x62,0x6C,0xCC,0xB9,0x82,0x01,0x88,0xED,0x37,0xC7,0xDD,0xEB,0x8C,0xC1,0xF2,0x96,0x83,0x19,0x5E,0xD1,0x3F,0xF6,0x80,0x15,0xBB,0xAC,0x60,0x27,0x80,0x83,0x3C,0x25,0x9B,0xF1,0x89,0xE3,0x78,0x10,0x3D,0x53,0x21,0x16,0x4A,0xA3,0x0C,0xAD,0x64,0xD2,0x50,0xC2,0x10,0x48,0x87,0xDA,0xC2,0xEB,0xF1,0xFC,0x8F,0xFF,0xE5,0xCA,0x4D,0xA9,0x68,0xCD,0x3A,0x7B,0x41,0x83,0x53,0x5E,0xBB,0x44,0x8D,0x9A,0x34,0x86,0xB3,0x62,0x7F,0x9D,0x96,0xB0,0xAC,0xB1,0x30,0xCD,0x25,0x60,0xB0,0x42,0xC3,0xE7,0xB0,0xED,0xDA,0xB9,0x11,0x7D,0x2C,0x27,0xF6,0x8C,0xD8,0xAA,0x3B,0xE7,0x4F,0x86,0x1F,0x96,0x2E};
+                            731 ;	main.c:7: volatile __xdata __at (0x0080) unsigned char r2modm[SIZE] = {0x4B,0x61,0xD1,0xA8,0x05,0x36,0xB5,0xE7,0xC6,0x6A,0x09,0x48,0xE1,0x09,0x9A,0x62,0x6C,0xCC,0xB9,0x82,0x01,0x88,0xED,0x37,0xC7,0xDD,0xEB,0x8C,0xC1,0xF2,0x96,0x83,0x19,0x5E,0xD1,0x3F,0xF6,0x80,0x15,0xBB,0xAC,0x60,0x27,0x80,0x83,0x3C,0x25,0x9B,0xF1,0x89,0xE3,0x78,0x10,0x3D,0x53,0x21,0x16,0x4A,0xA3,0x0C,0xAD,0x64,0xD2,0x50,0xC2,0x10,0x48,0x87,0xDA,0xC2,0xEB,0xF1,0xFC,0x8F,0xFF,0xE5,0xCA,0x4D,0xA9,0x68,0xCD,0x3A,0x7B,0x41,0x83,0x53,0x5E,0xBB,0x44,0x8D,0x9A,0x34,0x86,0xB3,0x62,0x7F,0x9D,0x96,0xB0,0xAC,0xB1,0x30,0xCD,0x25,0x60,0xB0,0x42,0xC3,0xE7,0xB0,0xED,0xDA,0xB9,0x11,0x7D,0x2C,0x27,0xF6,0x8C,0xD8,0xAA,0x3B,0xE7,0x4F,0x86,0x1F,0x96,0x2E};
    0361 90 00 80            732 	mov	dptr,#_r2modm
    0364 74 4B               733 	mov	a,#0x4B
    0366 F0                  734 	movx	@dptr,a
@@ -1113,7 +1113,7 @@
    065B 90 00 FF           1113 	mov	dptr,#(_r2modm + 0x007f)
    065E 74 2E              1114 	mov	a,#0x2E
    0660 F0                 1115 	movx	@dptr,a
-                           1116 ;	main.c:9: volatile __xdata __at (0x0100) unsigned char modulus[SIZE] = {0x5D,0xEF,0x94,0x7C,0x83,0xBF,0x40,0x4D,0xAB,0xD7,0xDF,0xB2,0x4D,0x2B,0x07,0x59,0x1A,0x48,0xAE,0x45,0x17,0x2E,0x6A,0x65,0x01,0x54,0xF5,0xB7,0xDC,0x5D,0x8F,0x4C,0x33,0x84,0x70,0xBB,0x0B,0xA4,0xAC,0x87,0x82,0x1D,0x0D,0x50,0x2D,0x45,0xF9,0xF0,0x11,0x5B,0xC8,0xF9,0x18,0xFB,0xD3,0x6F,0xC3,0x74,0x02,0xAB,0x32,0x46,0x6B,0x52,0x9B,0x71,0xD9,0x21,0x73,0x3A,0xCC,0x6D,0xDB,0x10,0x89,0xCB,0x3B,0x47,0x13,0x0E,0x65,0x86,0x9E,0x7F,0x3E,0x43,0x92,0xFC,0xB6,0x6A,0x6B,0x37,0x90,0xEB,0x4F,0xE9,0xEB,0x9C,0x2F,0x6B,0x26,0xEF,0xB4,0xBB,0xFC,0x3D,0x33,0xFB,0x97,0x67,0x93,0x26,0x96,0x38,0xE5,0xF0,0x3A,0xC6,0xA3,0x95,0xA5,0x98,0xF4,0xB8,0x0B,0x88,0xE1,0xD4};
+                           1116 ;	main.c:8: volatile __xdata __at (0x0100) unsigned char modulus[SIZE] = {0x5D,0xEF,0x94,0x7C,0x83,0xBF,0x40,0x4D,0xAB,0xD7,0xDF,0xB2,0x4D,0x2B,0x07,0x59,0x1A,0x48,0xAE,0x45,0x17,0x2E,0x6A,0x65,0x01,0x54,0xF5,0xB7,0xDC,0x5D,0x8F,0x4C,0x33,0x84,0x70,0xBB,0x0B,0xA4,0xAC,0x87,0x82,0x1D,0x0D,0x50,0x2D,0x45,0xF9,0xF0,0x11,0x5B,0xC8,0xF9,0x18,0xFB,0xD3,0x6F,0xC3,0x74,0x02,0xAB,0x32,0x46,0x6B,0x52,0x9B,0x71,0xD9,0x21,0x73,0x3A,0xCC,0x6D,0xDB,0x10,0x89,0xCB,0x3B,0x47,0x13,0x0E,0x65,0x86,0x9E,0x7F,0x3E,0x43,0x92,0xFC,0xB6,0x6A,0x6B,0x37,0x90,0xEB,0x4F,0xE9,0xEB,0x9C,0x2F,0x6B,0x26,0xEF,0xB4,0xBB,0xFC,0x3D,0x33,0xFB,0x97,0x67,0x93,0x26,0x96,0x38,0xE5,0xF0,0x3A,0xC6,0xA3,0x95,0xA5,0x98,0xF4,0xB8,0x0B,0x88,0xE1,0xD4};
    0661 90 01 00           1117 	mov	dptr,#_modulus
    0664 74 5D              1118 	mov	a,#0x5D
    0666 F0                 1119 	movx	@dptr,a
@@ -1498,7 +1498,7 @@
    095B 90 01 7F           1498 	mov	dptr,#(_modulus + 0x007f)
    095E 74 D4              1499 	mov	a,#0xD4
    0960 F0                 1500 	movx	@dptr,a
-                           1501 ;	main.c:10: volatile __xdata __at (0x0180) unsigned char message[SIZE] = {0x89,0x15,0x30,0x41,0x3E,0x7F,0xEF,0x15,0xE4,0x59,0x32,0xAF,0xB2,0x6D,0x61,0x15,0xAC,0x53,0x86,0xBA,0xCB,0xC2,0xCE,0x20,0xDB,0x5B,0xE6,0xEE,0xD5,0x02,0x8C,0xEA,0xD5,0x70,0x0C,0xBC,0x50,0xBD,0xC2,0x7A,0x07,0xF6,0xBB,0x3C,0x00,0x38,0x06,0x24,0x70,0x95,0xE1,0x72,0x5B,0xDC,0xD6,0xCE,0x2D,0x16,0x91,0x45,0xBE,0xAE,0x08,0x7C,0x64,0xD8,0xF1,0xA0,0xB2,0x93,0x82,0x2D,0xF5,0xE0,0xC5,0x83,0xB3,0x1B,0xB2,0x02,0x03,0x08,0x9E,0x01,0x16,0x5B,0x49,0xA9,0x4D,0x82,0xC6,0x2E,0x15,0x88,0x5C,0xDD,0x2F,0x39,0xB1,0x5B,0xBA,0x4C,0x2A,0x9C,0x84,0xE2,0xAD,0xB0,0xB3,0xF5,0xD7,0x47,0xC0,0x24,0x6F,0xFB,0xA3,0x41,0xF4,0x53,0x2D,0xC5,0x8E,0x65,0x89,0xDF,0xCE,0xB9};
+                           1501 ;	main.c:9: volatile __xdata __at (0x0180) unsigned char message[SIZE] = {0x89,0x15,0x30,0x41,0x3E,0x7F,0xEF,0x15,0xE4,0x59,0x32,0xAF,0xB2,0x6D,0x61,0x15,0xAC,0x53,0x86,0xBA,0xCB,0xC2,0xCE,0x20,0xDB,0x5B,0xE6,0xEE,0xD5,0x02,0x8C,0xEA,0xD5,0x70,0x0C,0xBC,0x50,0xBD,0xC2,0x7A,0x07,0xF6,0xBB,0x3C,0x00,0x38,0x06,0x24,0x70,0x95,0xE1,0x72,0x5B,0xDC,0xD6,0xCE,0x2D,0x16,0x91,0x45,0xBE,0xAE,0x08,0x7C,0x64,0xD8,0xF1,0xA0,0xB2,0x93,0x82,0x2D,0xF5,0xE0,0xC5,0x83,0xB3,0x1B,0xB2,0x02,0x03,0x08,0x9E,0x01,0x16,0x5B,0x49,0xA9,0x4D,0x82,0xC6,0x2E,0x15,0x88,0x5C,0xDD,0x2F,0x39,0xB1,0x5B,0xBA,0x4C,0x2A,0x9C,0x84,0xE2,0xAD,0xB0,0xB3,0xF5,0xD7,0x47,0xC0,0x24,0x6F,0xFB,0xA3,0x41,0xF4,0x53,0x2D,0xC5,0x8E,0x65,0x89,0xDF,0xCE,0xB9};
    0961 90 01 80           1502 	mov	dptr,#_message
    0964 74 89              1503 	mov	a,#0x89
    0966 F0                 1504 	movx	@dptr,a
@@ -1883,14 +1883,14 @@
    0C5A 90 01 FF           1883 	mov	dptr,#(_message + 0x007f)
    0C5D 74 B9              1884 	mov	a,#0xB9
    0C5F F0                 1885 	movx	@dptr,a
-                           1886 ;	main.c:11: volatile __xdata __at (0x0200) unsigned char enc_exp[SIZE] = {0x1,0x01};
+                           1886 ;	main.c:10: volatile __xdata __at (0x0200) unsigned char enc_exp[SIZE] = {0x01,0x01};
    0C60 90 02 00           1887 	mov	dptr,#_enc_exp
    0C63 74 01              1888 	mov	a,#0x01
    0C65 F0                 1889 	movx	@dptr,a
    0C66 90 02 01           1890 	mov	dptr,#(_enc_exp + 0x0001)
    0C69 74 01              1891 	mov	a,#0x01
    0C6B F0                 1892 	movx	@dptr,a
-                           1893 ;	main.c:12: volatile __xdata __at (0x0280) unsigned char dec_exp[SIZE] = {0xA1,0x80,0x48,0x28,0xC3,0xFE,0x04,0xB3,0xF2,0xEF,0xAF,0x3E,0x55,0x46,0x4E,0xC8,0x47,0x7A,0x1C,0x83,0x74,0xD7,0x11,0xD1,0xFB,0x16,0x44,0x72,0x8C,0x4B,0xD5,0xFD,0xB9,0xFA,0x04,0xE1,0x3E,0x3A,0x16,0x04,0x55,0x41,0xD0,0x8A,0x92,0x38,0xF4,0xD4,0xAE,0x7A,0x60,0xE2,0x69,0xAA,0xA6,0x63,0xA1,0xEB,0x05,0x71,0x99,0x71,0xE3,0x67,0x2A,0x57,0xF7,0x6B,0x82,0xB3,0xF0,0x82,0x58,0x54,0xAF,0xC3,0xD1,0xEF,0x68,0x7E,0x88,0xBD,0x39,0x2B,0x2A,0x7C,0x14,0xF8,0xC7,0xD0,0xF9,0x64,0x9A,0xBA,0x6F,0x45,0x28,0x5D,0xD7,0xE2,0xC4,0x8E,0x9F,0x6F,0xA8,0x88,0xAD,0xFD,0x28,0x92,0x4F,0x63,0x41,0x70,0x22,0xAD,0xAB,0x4E,0x1D,0x63,0x89,0xCC,0x09,0x42,0xFE,0xBC,0xCF,0x3A};
+                           1893 ;	main.c:11: volatile __xdata __at (0x0280) unsigned char dec_exp[SIZE] = {0xA1,0x80,0x48,0x28,0xC3,0xFE,0x04,0xB3,0xF2,0xEF,0xAF,0x3E,0x55,0x46,0x4E,0xC8,0x47,0x7A,0x1C,0x83,0x74,0xD7,0x11,0xD1,0xFB,0x16,0x44,0x72,0x8C,0x4B,0xD5,0xFD,0xB9,0xFA,0x04,0xE1,0x3E,0x3A,0x16,0x04,0x55,0x41,0xD0,0x8A,0x92,0x38,0xF4,0xD4,0xAE,0x7A,0x60,0xE2,0x69,0xAA,0xA6,0x63,0xA1,0xEB,0x05,0x71,0x99,0x71,0xE3,0x67,0x2A,0x57,0xF7,0x6B,0x82,0xB3,0xF0,0x82,0x58,0x54,0xAF,0xC3,0xD1,0xEF,0x68,0x7E,0x88,0xBD,0x39,0x2B,0x2A,0x7C,0x14,0xF8,0xC7,0xD0,0xF9,0x64,0x9A,0xBA,0x6F,0x45,0x28,0x5D,0xD7,0xE2,0xC4,0x8E,0x9F,0x6F,0xA8,0x88,0xAD,0xFD,0x28,0x92,0x4F,0x63,0x41,0x70,0x22,0xAD,0xAB,0x4E,0x1D,0x63,0x89,0xCC,0x09,0x42,0xFE,0xBC,0xCF,0x3A};
    0C6C 90 02 80           1894 	mov	dptr,#_dec_exp
    0C6F 74 A1              1895 	mov	a,#0xA1
    0C71 F0                 1896 	movx	@dptr,a
@@ -2299,7 +2299,7 @@
                            2299 ;m                         Allocated with name '_write_data_PARM_5'
                            2300 ;x                         Allocated to registers r2 r3 r4 
                            2301 ;------------------------------------------------------------
-                           2302 ;	main.c:24: void write_data(unsigned char *x, unsigned char *r2modm, unsigned char *a, unsigned char *e, unsigned char *m) {
+                           2302 ;	main.c:23: void write_data(unsigned char *x, unsigned char *r2modm, unsigned char *a, unsigned char *e, unsigned char *m) {
                            2303 ;	-----------------------------------------
                            2304 ;	 function write_data
                            2305 ;	-----------------------------------------
@@ -2315,8 +2315,8 @@
    0F6F AA 82              2315 	mov	r2,dpl
    0F71 AB 83              2316 	mov	r3,dph
    0F73 AC F0              2317 	mov	r4,b
-                           2318 ;	main.c:25: P1 = 0;
-                           2319 ;	main.c:27: for (i = 0; i < SIZE; i++) {
+                           2318 ;	main.c:24: P1 = 0;
+                           2319 ;	main.c:26: for (i = 0; i < SIZE; i++) {
    0F75 E4                 2320 	clr	a
    0F76 F5 90              2321 	mov	_P1,a
    0F78 F5 08              2322 	mov	_i,a
@@ -2328,7 +2328,7 @@
    0F81 E5 09              2328 	mov	a,(_i + 1)
    0F83 94 00              2329 	subb	a,#0x00
    0F85 50 32              2330 	jnc	00107$
-                           2331 ;	main.c:28: shared_x[i] = x[SIZE-1-i];
+                           2331 ;	main.c:27: shared_x[i] = x[SIZE-1-i];
    0F87 AD 08              2332 	mov	r5,_i
    0F89 74 40              2333 	mov	a,#(_shared_x >> 8)
    0F8B 25 09              2334 	add	a,(_i + 1)
@@ -2350,19 +2350,19 @@
    0FA0 8F 82              2350 	mov	dpl,r7
    0FA2 88 83              2351 	mov	dph,r0
    0FA4 89 F0              2352 	mov	b,r1
-   0FA6 12 11 70           2353 	lcall	__gptrget
+   0FA6 12 11 30           2353 	lcall	__gptrget
    0FA9 FF                 2354 	mov	r7,a
    0FAA 8D 82              2355 	mov	dpl,r5
    0FAC 8E 83              2356 	mov	dph,r6
    0FAE F0                 2357 	movx	@dptr,a
-                           2358 ;	main.c:27: for (i = 0; i < SIZE; i++) {
+                           2358 ;	main.c:26: for (i = 0; i < SIZE; i++) {
    0FAF 05 08              2359 	inc	_i
    0FB1 E4                 2360 	clr	a
    0FB2 B5 08 C7           2361 	cjne	a,_i,00104$
    0FB5 05 09              2362 	inc	(_i + 1)
    0FB7 80 C3              2363 	sjmp	00104$
    0FB9                    2364 00107$:
-                           2365 ;	main.c:31: for (i = 0; i < SIZE; i++) {
+                           2365 ;	main.c:30: for (i = 0; i < SIZE; i++) {
    0FB9 E4                 2366 	clr	a
    0FBA F5 08              2367 	mov	_i,a
    0FBC F5 09              2368 	mov	(_i + 1),a
@@ -2373,7 +2373,7 @@
    0FC3 E5 09              2373 	mov	a,(_i + 1)
    0FC5 94 00              2374 	subb	a,#0x00
    0FC7 50 37              2375 	jnc	00111$
-                           2376 ;	main.c:32: shared_r2modm[i] = r2modm[SIZE-1-i];
+                           2376 ;	main.c:31: shared_r2modm[i] = r2modm[SIZE-1-i];
    0FC9 E5 08              2377 	mov	a,_i
    0FCB 24 80              2378 	add	a,#_shared_r2modm
    0FCD FA                 2379 	mov	r2,a
@@ -2397,19 +2397,19 @@
    0FE7 8C 82              2397 	mov	dpl,r4
    0FE9 8D 83              2398 	mov	dph,r5
    0FEB 8E F0              2399 	mov	b,r6
-   0FED 12 11 70           2400 	lcall	__gptrget
+   0FED 12 11 30           2400 	lcall	__gptrget
    0FF0 FC                 2401 	mov	r4,a
    0FF1 8A 82              2402 	mov	dpl,r2
    0FF3 8B 83              2403 	mov	dph,r3
    0FF5 F0                 2404 	movx	@dptr,a
-                           2405 ;	main.c:31: for (i = 0; i < SIZE; i++) {
+                           2405 ;	main.c:30: for (i = 0; i < SIZE; i++) {
    0FF6 05 08              2406 	inc	_i
    0FF8 E4                 2407 	clr	a
    0FF9 B5 08 C2           2408 	cjne	a,_i,00108$
    0FFC 05 09              2409 	inc	(_i + 1)
    0FFE 80 BE              2410 	sjmp	00108$
    1000                    2411 00111$:
-                           2412 ;	main.c:35: for (i = 0; i < SIZE; i++) {
+                           2412 ;	main.c:34: for (i = 0; i < SIZE; i++) {
    1000 E4                 2413 	clr	a
    1001 F5 08              2414 	mov	_i,a
    1003 F5 09              2415 	mov	(_i + 1),a
@@ -2420,7 +2420,7 @@
    100A E5 09              2420 	mov	a,(_i + 1)
    100C 94 00              2421 	subb	a,#0x00
    100E 50 34              2422 	jnc	00115$
-                           2423 ;	main.c:36: shared_a[i] = a[SIZE-1-i];
+                           2423 ;	main.c:35: shared_a[i] = a[SIZE-1-i];
    1010 AA 08              2424 	mov	r2,_i
    1012 74 41              2425 	mov	a,#(_shared_a >> 8)
    1014 25 09              2426 	add	a,(_i + 1)
@@ -2442,19 +2442,19 @@
    102B 8C 82              2442 	mov	dpl,r4
    102D 8D 83              2443 	mov	dph,r5
    102F 8E F0              2444 	mov	b,r6
-   1031 12 11 70           2445 	lcall	__gptrget
+   1031 12 11 30           2445 	lcall	__gptrget
    1034 FC                 2446 	mov	r4,a
    1035 8A 82              2447 	mov	dpl,r2
    1037 8B 83              2448 	mov	dph,r3
    1039 F0                 2449 	movx	@dptr,a
-                           2450 ;	main.c:35: for (i = 0; i < SIZE; i++) {
+                           2450 ;	main.c:34: for (i = 0; i < SIZE; i++) {
    103A 05 08              2451 	inc	_i
    103C E4                 2452 	clr	a
    103D B5 08 C5           2453 	cjne	a,_i,00112$
    1040 05 09              2454 	inc	(_i + 1)
    1042 80 C1              2455 	sjmp	00112$
    1044                    2456 00115$:
-                           2457 ;	main.c:39: for (i = 0; i < SIZE; i++) {
+                           2457 ;	main.c:38: for (i = 0; i < SIZE; i++) {
    1044 E4                 2458 	clr	a
    1045 F5 08              2459 	mov	_i,a
    1047 F5 09              2460 	mov	(_i + 1),a
@@ -2465,7 +2465,7 @@
    104E E5 09              2465 	mov	a,(_i + 1)
    1050 94 00              2466 	subb	a,#0x00
    1052 50 37              2467 	jnc	00119$
-                           2468 ;	main.c:40: shared_e[i] = e[SIZE-1-i];
+                           2468 ;	main.c:39: shared_e[i] = e[SIZE-1-i];
    1054 E5 08              2469 	mov	a,_i
    1056 24 80              2470 	add	a,#_shared_e
    1058 FA                 2471 	mov	r2,a
@@ -2489,19 +2489,19 @@
    1072 8C 82              2489 	mov	dpl,r4
    1074 8D 83              2490 	mov	dph,r5
    1076 8E F0              2491 	mov	b,r6
-   1078 12 11 70           2492 	lcall	__gptrget
+   1078 12 11 30           2492 	lcall	__gptrget
    107B FC                 2493 	mov	r4,a
    107C 8A 82              2494 	mov	dpl,r2
    107E 8B 83              2495 	mov	dph,r3
    1080 F0                 2496 	movx	@dptr,a
-                           2497 ;	main.c:39: for (i = 0; i < SIZE; i++) {
+                           2497 ;	main.c:38: for (i = 0; i < SIZE; i++) {
    1081 05 08              2498 	inc	_i
    1083 E4                 2499 	clr	a
    1084 B5 08 C2           2500 	cjne	a,_i,00116$
    1087 05 09              2501 	inc	(_i + 1)
    1089 80 BE              2502 	sjmp	00116$
    108B                    2503 00119$:
-                           2504 ;	main.c:43: for (i = 0; i < SIZE; i++) {
+                           2504 ;	main.c:42: for (i = 0; i < SIZE; i++) {
    108B E4                 2505 	clr	a
    108C F5 08              2506 	mov	_i,a
    108E F5 09              2507 	mov	(_i + 1),a
@@ -2512,7 +2512,7 @@
    1095 E5 09              2512 	mov	a,(_i + 1)
    1097 94 00              2513 	subb	a,#0x00
    1099 50 34              2514 	jnc	00123$
-                           2515 ;	main.c:44: shared_m[i] = m[SIZE-1-i];
+                           2515 ;	main.c:43: shared_m[i] = m[SIZE-1-i];
    109B AA 08              2516 	mov	r2,_i
    109D 74 42              2517 	mov	a,#(_shared_m >> 8)
    109F 25 09              2518 	add	a,(_i + 1)
@@ -2534,85 +2534,85 @@
    10B6 8C 82              2534 	mov	dpl,r4
    10B8 8D 83              2535 	mov	dph,r5
    10BA 8E F0              2536 	mov	b,r6
-   10BC 12 11 70           2537 	lcall	__gptrget
+   10BC 12 11 30           2537 	lcall	__gptrget
    10BF FC                 2538 	mov	r4,a
    10C0 8A 82              2539 	mov	dpl,r2
    10C2 8B 83              2540 	mov	dph,r3
    10C4 F0                 2541 	movx	@dptr,a
-                           2542 ;	main.c:43: for (i = 0; i < SIZE; i++) {
+                           2542 ;	main.c:42: for (i = 0; i < SIZE; i++) {
    10C5 05 08              2543 	inc	_i
    10C7 E4                 2544 	clr	a
    10C8 B5 08 C5           2545 	cjne	a,_i,00120$
    10CB 05 09              2546 	inc	(_i + 1)
    10CD 80 C1              2547 	sjmp	00120$
    10CF                    2548 00123$:
-                           2549 ;	main.c:47: P0 = ins_write_data;
+                           2549 ;	main.c:46: P0 = ins_write_data;
    10CF 75 80 01           2550 	mov	_P0,#0x01
-                           2551 ;	main.c:48: P0 = ins_idle;
+                           2551 ;	main.c:47: P0 = ins_idle;
    10D2 75 80 00           2552 	mov	_P0,#0x00
-                           2553 ;	main.c:50: while (P1 == 0) {}
+                           2553 ;	main.c:49: while (P1 == 0) {}
    10D5                    2554 00101$:
    10D5 E5 90              2555 	mov	a,_P1
    10D7 60 FC              2556 	jz	00101$
-                           2557 ;	main.c:51: P0 = ins_ack;
+                           2557 ;	main.c:50: P0 = ins_ack;
    10D9 75 80 04           2558 	mov	_P0,#0x04
    10DC 22                 2559 	ret
                            2560 ;------------------------------------------------------------
                            2561 ;Allocation info for local variables in function 'read_r'
                            2562 ;------------------------------------------------------------
                            2563 ;------------------------------------------------------------
-                           2564 ;	main.c:54: void read_r() {
+                           2564 ;	main.c:53: void read_r() {
                            2565 ;	-----------------------------------------
                            2566 ;	 function read_r
                            2567 ;	-----------------------------------------
    10DD                    2568 _read_r:
-                           2569 ;	main.c:55: P0 = ins_read_r;
+                           2569 ;	main.c:54: P0 = ins_read_r;
    10DD 75 80 03           2570 	mov	_P0,#0x03
-                           2571 ;	main.c:56: while (P1 == 0) {}
+                           2571 ;	main.c:55: while (P1 == 0) {}
    10E0                    2572 00101$:
    10E0 E5 90              2573 	mov	a,_P1
    10E2 60 FC              2574 	jz	00101$
-                           2575 ;	main.c:57: P0 = ins_ack;
+                           2575 ;	main.c:56: P0 = ins_ack;
    10E4 75 80 04           2576 	mov	_P0,#0x04
-                           2577 ;	main.c:59: P0 = ins_idle;
+                           2577 ;	main.c:58: P0 = ins_idle;
    10E7 75 80 00           2578 	mov	_P0,#0x00
    10EA 22                 2579 	ret
                            2580 ;------------------------------------------------------------
                            2581 ;Allocation info for local variables in function 'montgomery_exp'
                            2582 ;------------------------------------------------------------
                            2583 ;------------------------------------------------------------
-                           2584 ;	main.c:62: void montgomery_exp() {
+                           2584 ;	main.c:61: void montgomery_exp() {
                            2585 ;	-----------------------------------------
                            2586 ;	 function montgomery_exp
                            2587 ;	-----------------------------------------
    10EB                    2588 _montgomery_exp:
-                           2589 ;	main.c:63: P0 = ins_montgomery_exp;
+                           2589 ;	main.c:62: P0 = ins_montgomery_exp;
    10EB 75 80 02           2590 	mov	_P0,#0x02
-                           2591 ;	main.c:64: P0 = ins_idle;
+                           2591 ;	main.c:63: P0 = ins_idle;
    10EE 75 80 00           2592 	mov	_P0,#0x00
    10F1 22                 2593 	ret
                            2594 ;------------------------------------------------------------
                            2595 ;Allocation info for local variables in function 'terminate'
                            2596 ;------------------------------------------------------------
                            2597 ;------------------------------------------------------------
-                           2598 ;	main.c:67: void terminate() {
+                           2598 ;	main.c:66: void terminate() {
                            2599 ;	-----------------------------------------
                            2600 ;	 function terminate
                            2601 ;	-----------------------------------------
    10F2                    2602 _terminate:
-                           2603 ;	main.c:68: P3 = 0x55;
+                           2603 ;	main.c:67: P3 = 0x55;
    10F2 75 B0 55           2604 	mov	_P3,#0x55
    10F5 22                 2605 	ret
                            2606 ;------------------------------------------------------------
                            2607 ;Allocation info for local variables in function 'main'
                            2608 ;------------------------------------------------------------
                            2609 ;------------------------------------------------------------
-                           2610 ;	main.c:71: int main() {
+                           2610 ;	main.c:70: int main() {
                            2611 ;	-----------------------------------------
                            2612 ;	 function main
                            2613 ;	-----------------------------------------
    10F6                    2614 _main:
-                           2615 ;	main.c:72: write_data(message, r2modm, rmodm, enc_exp, modulus);
+                           2615 ;	main.c:71: write_data(message, r2modm, rmodm, enc_exp, modulus);
    10F6 75 0A 80           2616 	mov	_write_data_PARM_2,#_r2modm
    10F9 75 0B 00           2617 	mov	(_write_data_PARM_2 + 1),#(_r2modm >> 8)
    10FC 75 0C 00           2618 	mov	(_write_data_PARM_2 + 2),#0x00
@@ -2628,60 +2628,16 @@
    111A 90 01 80           2628 	mov	dptr,#_message
    111D 75 F0 00           2629 	mov	b,#0x00
    1120 12 0F 6F           2630 	lcall	_write_data
-                           2631 ;	main.c:73: montgomery_exp();
+                           2631 ;	main.c:72: montgomery_exp();
    1123 12 10 EB           2632 	lcall	_montgomery_exp
-                           2633 ;	main.c:74: read_r();
+                           2633 ;	main.c:73: read_r();
    1126 12 10 DD           2634 	lcall	_read_r
-                           2635 ;	main.c:76: P1 = 0;
-                           2636 ;	main.c:78: for (i = 0; i < SIZE; i++) {
-   1129 E4                 2637 	clr	a
-   112A F5 90              2638 	mov	_P1,a
-   112C F5 08              2639 	mov	_i,a
-   112E F5 09              2640 	mov	(_i + 1),a
-   1130                    2641 00104$:
-   1130 C3                 2642 	clr	c
-   1131 E5 08              2643 	mov	a,_i
-   1133 94 80              2644 	subb	a,#0x80
-   1135 E5 09              2645 	mov	a,(_i + 1)
-   1137 94 00              2646 	subb	a,#0x00
-   1139 50 21              2647 	jnc	00107$
-                           2648 ;	main.c:79: shared_a[i] = r[i];
-   113B AA 08              2649 	mov	r2,_i
-   113D 74 41              2650 	mov	a,#(_shared_a >> 8)
-   113F 25 09              2651 	add	a,(_i + 1)
-   1141 FB                 2652 	mov	r3,a
-   1142 85 08 82           2653 	mov	dpl,_i
-   1145 74 50              2654 	mov	a,#(_r >> 8)
-   1147 25 09              2655 	add	a,(_i + 1)
-   1149 F5 83              2656 	mov	dph,a
-   114B E0                 2657 	movx	a,@dptr
-   114C FC                 2658 	mov	r4,a
-   114D 8A 82              2659 	mov	dpl,r2
-   114F 8B 83              2660 	mov	dph,r3
-   1151 F0                 2661 	movx	@dptr,a
-                           2662 ;	main.c:78: for (i = 0; i < SIZE; i++) {
-   1152 05 08              2663 	inc	_i
-   1154 E4                 2664 	clr	a
-   1155 B5 08 D8           2665 	cjne	a,_i,00104$
-   1158 05 09              2666 	inc	(_i + 1)
-   115A 80 D4              2667 	sjmp	00104$
-   115C                    2668 00107$:
-                           2669 ;	main.c:82: P0 = ins_write_data;
-   115C 75 80 01           2670 	mov	_P0,#0x01
-                           2671 ;	main.c:83: P0 = ins_idle;
-   115F 75 80 00           2672 	mov	_P0,#0x00
-                           2673 ;	main.c:85: while (P1 == 0) {}
-   1162                    2674 00101$:
-   1162 E5 90              2675 	mov	a,_P1
-   1164 60 FC              2676 	jz	00101$
-                           2677 ;	main.c:86: P0 = ins_ack;
-   1166 75 80 04           2678 	mov	_P0,#0x04
-                           2679 ;	main.c:88: terminate();
-   1169 12 10 F2           2680 	lcall	_terminate
-                           2681 ;	main.c:89: return 0;
-   116C 90 00 00           2682 	mov	dptr,#0x0000
-   116F 22                 2683 	ret
-                           2684 	.area CSEG    (CODE)
-                           2685 	.area CONST   (CODE)
-                           2686 	.area XINIT   (CODE)
-                           2687 	.area CABS    (ABS,CODE)
+                           2635 ;	main.c:87: terminate();
+   1129 12 10 F2           2636 	lcall	_terminate
+                           2637 ;	main.c:88: return 0;
+   112C 90 00 00           2638 	mov	dptr,#0x0000
+   112F 22                 2639 	ret
+                           2640 	.area CSEG    (CODE)
+                           2641 	.area CONST   (CODE)
+                           2642 	.area XINIT   (CODE)
+                           2643 	.area CABS    (ABS,CODE)
