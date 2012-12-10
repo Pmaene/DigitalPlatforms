@@ -266,7 +266,6 @@ Symbol Table
     _TR1                                                        =  008E G
     _TXD                                                        =  00B1 G
     _WR                                                         =  00B6 G
-    __gptrget                                                      **** GX
  13 __interrupt_vect                                               0000 R
     __mcs51_genRAMCLEAR                                            **** GX
     __mcs51_genXINIT                                               **** GX
@@ -275,27 +274,18 @@ Symbol Table
  13 __sdcc_program_startup                                         0003 GR
   5 __start__stack                                                 0000 GR
  11 _dec_exp                                                       0280 GR
- 10 _enc_exp                                                       0200 GR
+ 10 _enc_exp                                                       4180 GR
   3 _i                                                             0000 GR
- 1C _main                                                          0187 GR
-  F _message                                                       0180 GR
-  E _modulus                                                       0100 GR
- 1C _montgomery_exp                                                017C GR
+ 1C _main                                                          002A GR
+  F _message                                                       4000 GR
+  E _modulus                                                       4200 GR
+ 1C _montgomery_exp                                                001F GR
     _r                                                          =  5000 G
-  D _r2modm                                                        0080 GR
- 1C _read_r                                                        016E GR
-  C _rmodm                                                         0000 GR
-    _shared_a                                                   =  4100 G
-    _shared_e                                                   =  4180 G
-    _shared_m                                                   =  4200 G
-    _shared_r2modm                                              =  4080 G
-    _shared_x                                                   =  4000 G
- 1C _terminate                                                     0183 GR
+  D _r2modm                                                        4080 GR
+ 1C _read_r                                                        0011 GR
+  C _rmodm                                                         4100 GR
+ 1C _terminate                                                     0026 GR
  1C _write_data                                                    0000 GR
-  4 _write_data_PARM_2                                             0000 GR
-  4 _write_data_PARM_3                                             0003 GR
-  4 _write_data_PARM_4                                             0006 GR
-  4 _write_data_PARM_5                                             0009 GR
     a                                                              00D6 
     ac                                                             00D6 
     acc                                                            00E0 
@@ -481,7 +471,7 @@ Area Table
    1 RSEG                                                                               size    0   flags 0
    2 REG_BANK_0                                                                         size    8   flags 4
    3 DSEG                                                                               size    2   flags 0
-   4 OSEG                                                                               size    C   flags 4
+   4 OSEG                                                                               size    0   flags 4
    5 SSEG                                                                               size    1   flags 0
    6 ISEG                                                                               size    0   flags 0
    7 IABS                                                                               size    0   flags 8
@@ -505,7 +495,7 @@ Area Table
   19 GSINIT5                                                                            size    0   flags 20
   1A GSINIT                                                                             size  F0B   flags 20
   1B GSFINAL                                                                            size    3   flags 20
-  1C CSEG                                                                               size  1C4   flags 20
+  1C CSEG                                                                               size   3D   flags 20
   1D CONST                                                                              size    0   flags 20
   1E XINIT                                                                              size    0   flags 20
   1F CABS                                                                               size    0   flags 28

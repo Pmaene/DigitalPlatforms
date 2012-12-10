@@ -317,31 +317,31 @@ dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(8);
     }
 
     sfg read_x {
-        address = i;
+        address = 0x80 - i - 1;
         i = i+1;
         x_reg = x_reg << 8 | din;
     }
 
     sfg read_r2modm {
-        address = i;
+        address = 0x180 - i - 1;
         i = i+1;
         r2modm_reg = r2modm_reg << 8 | din;
     }
 
     sfg read_e {
-        address = i;
+        address = 0x380 - i - 1;
         i = i+1;
         e_reg = e_reg << 8 | din;
     }
 
     sfg read_a {
-        address = i;
+        address = 0x280 - i - 1;
         i = i+1;
         a_reg = a_reg << 8 | din;
     }
 
     sfg read_m {
-        address = i;
+        address = 0x480 - i - 1;
         i = i+1;
         m_reg = m_reg << 8 | din;
     }
@@ -361,7 +361,7 @@ dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(8);
     }
 
     sfg write_result {
-        address = 0x80-i-1;
+        address = 0x80 - i - 1;
         i = i+1;
         dout = r_reg;
         r_reg = r_reg >> 8;
