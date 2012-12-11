@@ -317,31 +317,31 @@ dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(8);
     }
 
     sfg read_x {
-        address = 0x80 - i - 1;
+        address = 0x81 - i - 1;
         i = i+1;
         x_reg = x_reg << 8 | din;
     }
 
     sfg read_r2modm {
-        address = 0x180 - i - 1;
+        address = 0x182 - i - 1;
         i = i+1;
         r2modm_reg = r2modm_reg << 8 | din;
     }
 
     sfg read_e {
-        address = 0x380 - i - 1;
+        address = 0x382 - i - 1;
         i = i+1;
         e_reg = e_reg << 8 | din;
     }
 
     sfg read_a {
-        address = 0x280 - i - 1;
+        address = 0x282 - i - 1;
         i = i+1;
         a_reg = a_reg << 8 | din;
     }
 
     sfg read_m {
-        address = 0x480 - i - 1;
+        address = 0x482 - i - 1;
         i = i+1;
         m_reg = m_reg << 8 | din;
     }
@@ -403,15 +403,15 @@ fsm decoder(decoder_dp) {
                         (no_exp, no_sync, no_write, no_address, decode) -> do;
                     else
                         (no_exp, no_sync, no_write, no_address, decode) -> done;
-    @get_data       if (i < 0x80) then
+    @get_data       if (i < 0x81) then
                         (no_exp, no_sync, no_write, read_x, decode)    -> get_data;
-                    else if (i >= 0x80 & i < 0x100) then
+                    else if (i >= 0x81 & i < 0x101) then
                         (no_exp, no_sync, no_write, read_r2modm, decode)    -> get_data;
-                    else if (i >= 0x100 & i < 0x180) then
+                    else if (i >= 0x101 & i < 0x181) then
                         (no_exp, no_sync, no_write, read_a, decode)    -> get_data;
-                    else if (i >= 0x180 & i < 0x200) then
+                    else if (i >= 0x181 & i < 0x201) then
                         (no_exp, no_sync, no_write, read_e, decode)    -> get_data;
-                    else if (i >= 0x200 & i < 0x280) then
+                    else if (i >= 0x201 & i < 0x281) then
                         (no_exp, no_sync, no_write, read_m, decode)    -> get_data;
                     else
                         (no_exp, no_write, no_address, read_done, decode) -> read_done;
@@ -455,7 +455,7 @@ ipblock my_data(in idata : ns(8); out odata : ns(8); in address : ns(10); in wr 
     iptype "i8051buffer";
     ipparm "core=my8051";
     ipparm "xbus=0x4000";
-    ipparm "xrange=0x280";
+    ipparm "xrange=0x281";
 }
 
 ipblock my_result(in idata : ns(8); out odata : ns(8); in address : ns(10); in wr : ns(1)) {

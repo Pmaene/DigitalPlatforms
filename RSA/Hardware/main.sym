@@ -274,16 +274,16 @@ Symbol Table
  13 __sdcc_program_startup                                         0003 GR
   5 __start__stack                                                 0000 GR
  11 _dec_exp                                                       0280 GR
- 10 _enc_exp                                                       4180 GR
+ 10 _enc_exp                                                       4181 GR
   3 _i                                                             0000 GR
  1C _main                                                          002A GR
   F _message                                                       4000 GR
-  E _modulus                                                       4200 GR
+  E _modulus                                                       4201 GR
  1C _montgomery_exp                                                001F GR
     _r                                                          =  5000 G
-  D _r2modm                                                        4080 GR
+  D _r2modm                                                        4081 GR
  1C _read_r                                                        0011 GR
-  C _rmodm                                                         4100 GR
+  C _rmodm                                                         4101 GR
  1C _terminate                                                     0026 GR
  1C _write_data                                                    0000 GR
     a                                                              00D6 
@@ -482,7 +482,7 @@ Area Table
    C XABS0                                                                              size   80   flags 48
    D XABS1                                                                              size   80   flags 48
    E XABS2                                                                              size   80   flags 48
-   F XABS3                                                                              size   80   flags 48
+   F XABS3                                                                              size   81   flags 48
   10 XABS4                                                                              size   80   flags 48
   11 XABS5                                                                              size   80   flags 48
   12 XISEG                                                                              size    0   flags 40

@@ -72,9 +72,9 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:0080    l_XABS0
   0C:0080    l_XABS1
   0C:0080    l_XABS2
-  0C:0080    l_XABS3
   0C:0080    l_XABS4
   0C:0080    l_XABS5
+  0C:0081    l_XABS3
   0C:00F6    l_SSEG
   0C:0100    l_IRAM
   0C:0F0B    l_GSINIT
@@ -101,13 +101,13 @@ XABS4                              0000   0080 =    128. bytes (ABS,CON,XDATA)
 
       Value  Global
    --------  --------------------------------
-  0D:4180    _enc_exp
+  0D:4181    _enc_exp
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XABS3                              0000   0080 =    128. bytes (ABS,CON,XDATA)
+XABS3                              0000   0081 =    129. bytes (ABS,CON,XDATA)
 
       Value  Global
    --------  --------------------------------
@@ -121,7 +121,7 @@ XABS2                              0000   0080 =    128. bytes (ABS,CON,XDATA)
 
       Value  Global
    --------  --------------------------------
-  0D:4200    _modulus
+  0D:4201    _modulus
 
 Hexadecimal
 
@@ -131,7 +131,7 @@ XABS1                              0000   0080 =    128. bytes (ABS,CON,XDATA)
 
       Value  Global
    --------  --------------------------------
-  0D:4080    _r2modm
+  0D:4081    _r2modm
 
 Hexadecimal
 
@@ -141,7 +141,7 @@ XABS0                              0000   0080 =    128. bytes (ABS,CON,XDATA)
 
       Value  Global
    --------  --------------------------------
-  0D:4100    _rmodm
+  0D:4101    _rmodm
 
 
 
