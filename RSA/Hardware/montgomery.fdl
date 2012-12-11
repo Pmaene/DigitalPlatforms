@@ -134,7 +134,7 @@ fsm montgomery (montgomery_dp)
 dp exp_dp (in start : ns(1);in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
 {
     reg e_reg : ns(1024);
-	reg i	  : ns(10);
+	reg i	  : ns(11);
 	reg e_init: ns(1024);
 
     reg r_reg : ns(1027);
@@ -159,7 +159,7 @@ dp exp_dp (in start : ns(1);in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
         m_sig = 0;
 
         a_reg = a;
-		i = 1023;
+		i = 1024;
     }
 
     sfg no_mont {
@@ -269,11 +269,11 @@ fsm exp (exp_dp)
 	@find_counter	if(e_reg[1023] == 0) then
 						(no_mont, reset_r, stop_mont, count_dec) -> find_counter;
 					else
-						(no_mont, reset_r, reset_e, stop_mont) -> loop;
-    @loop           if (e_reg == 0) then
+						(no_mont, reset_r, stop_mont) -> loop;
+    @loop           if (i == 0) then
                         (start_last_mont, reset_r, stop_mont) -> last_mont;
                     else
-                        (shift_ereg, do_mont, reset_r, stop_mont) -> do_mont;
+                        (do_mont, reset_r, stop_mont) -> do_mont;
     @do_mont        if (r_reg > 0 & e_reg[1023] == 0) then
                         (save_a, no_mont, reset_r, stop_mont, shift_ereg) -> loop;
                     else if (r_reg > 0) then
@@ -376,7 +376,7 @@ dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(8);
         m_sig = m_reg;
         r_reg = r_sig;
 	    
-        $display(r_reg);
+        $display("Result: ", r_reg);
     }
 
     sfg write_result {
@@ -515,3 +515,4 @@ system S
 {
     montgomery_sys;
 }
+

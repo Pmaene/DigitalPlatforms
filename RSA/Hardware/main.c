@@ -21,13 +21,13 @@ void write_data() {
     P0 = ins_idle;
 
     while (P1 == 0) {}
-	P0 = ins_ack;
+P0 = ins_ack;
 }
 
 void read_r() {
     P0 = ins_read_r;
     while (P1 == 0) {}
-	P0 = ins_ack;
+P0 = ins_ack;
 
     P0 = ins_idle;
 }
@@ -49,7 +49,7 @@ int main() {
     P1 = 0;
 
     //for (i = 0; i < SIZE; i++) {
-    //    shared_a[i] = r[i];
+    // shared_a[i] = r[i];
     //}
 
     //P0 = ins_write_data;
