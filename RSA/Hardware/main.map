@@ -65,7 +65,6 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:0022    l_GSINIT3
   0C:002A    l_GSINIT4
   0C:0037    s_GSINIT4
-  0C:0041    l_CSEG
   0C:0061    s_GSINIT
   0C:0061    s_GSINIT5
   0C:0080    l_DSEG
@@ -75,13 +74,14 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:0080    l_XABS4
   0C:0080    l_XABS5
   0C:0081    l_XABS3
+  0C:00B5    l_CSEG
   0C:00F6    l_SSEG
   0C:0100    l_IRAM
   0C:0F0B    l_GSINIT
   0C:0F6C    s_GSFINAL
   0C:0F6F    s_CSEG
-  0C:0FB0    s_CONST
-  0C:0FB0    s_XINIT
+  0C:1024    s_CONST
+  0C:1024    s_XINIT
 
 Hexadecimal
 
@@ -336,7 +336,7 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CSEG                               0F6F   0041 =     65. bytes (REL,CON,CODE)
+CSEG                               0F6F   00B5 =    181. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
@@ -345,7 +345,7 @@ CSEG                               0F6F   0041 =     65. bytes (REL,CON,CODE)
   0C:0F8E    _montgomery_exp
   0C:0F95    _terminate
   0C:0F99    _main
-  0C:0FAC    __sdcc_external_startup
+  0C:1020    __sdcc_external_startup
 
 
 ASxxxx Linker V01.75 + NoICE + SDCC Feb 1999,  page 1.
