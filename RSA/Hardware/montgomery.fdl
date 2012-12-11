@@ -177,11 +177,6 @@ dp exp_dp (in start : ns(1);in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
         x_reg = r_reg;
     }
 
-    sfg count_dec {
-        i = i-1;
-        e_reg = e_reg << 1;
-    }
-
 	sfg shift_ereg {
         i = i-1;
 		e_reg = e_reg << 1;
@@ -259,7 +254,7 @@ fsm exp (exp_dp)
                     else
                         (calc_x, reset_r, start_mont) -> calc_x;
 	@find_counter	if(e_reg[1023] == 0) then
-						(no_mont, reset_r, stop_mont, count_dec) -> find_counter;
+						(no_mont, reset_r, stop_mont, shift_ereg) -> find_counter;
 					else
 						(no_mont, reset_r, stop_mont) -> loop;
     @loop           if (i == 0) then
