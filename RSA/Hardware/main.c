@@ -21,13 +21,13 @@ void write_data() {
     P0 = ins_idle;
 
     while (P1 == 0) {}
-	P0 = ins_ack;
+    P0 = ins_ack;
 }
 
 void read_r() {
     P0 = ins_read_r;
     while (P1 == 0) {}
-	P0 = ins_ack;
+    P0 = ins_ack;
 
     P0 = ins_idle;
 }
@@ -48,13 +48,13 @@ int main() {
 
     for (i = 0; i < SIZE; i++) {
         message[i] = r[SIZE-1-i];
-	enc_exp[i] = dec_exp[i];
+        enc_exp[i] = dec_exp[i];
     }
     message[SIZE] = r[-1];
 
     write_data();
-	montgomery_exp();
-	read_r();	
+    montgomery_exp();
+    read_r();
 
     terminate();
     return 0;

@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 2.9.0 #5416 (Aug  6 2010) (UNIX)
-                              4 ; This file was generated Wed Dec 12 14:41:39 2012
+                              4 ; This file was generated Wed Dec 12 14:44:52 2012
                               5 ;--------------------------------------------------------
                               6 	.module main
                               7 	.optsdcc -mmcs51 --model-small
@@ -2418,15 +2418,15 @@
    0FF8 E0                 2418 	movx	a,@dptr
    0FF9 90 40 80           2419 	mov	dptr,#(_message + 0x0080)
    0FFC F0                 2420 	movx	@dptr,a
-                           2421 ;	main.c:59: write_data();
+                           2421 ;	main.c:55: write_data();
    0FFD 12 0F 6F           2422 	lcall	_write_data
-                           2423 ;	main.c:60: montgomery_exp();
+                           2423 ;	main.c:56: montgomery_exp();
    1000 12 0F 8E           2424 	lcall	_montgomery_exp
-                           2425 ;	main.c:61: read_r();	
+                           2425 ;	main.c:57: read_r();
    1003 12 0F 80           2426 	lcall	_read_r
-                           2427 ;	main.c:63: terminate();
+                           2427 ;	main.c:59: terminate();
    1006 12 0F 95           2428 	lcall	_terminate
-                           2429 ;	main.c:64: return 0;
+                           2429 ;	main.c:60: return 0;
    1009 90 00 00           2430 	mov	dptr,#0x0000
    100C 22                 2431 	ret
                            2432 	.area CSEG    (CODE)

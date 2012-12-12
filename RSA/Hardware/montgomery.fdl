@@ -134,7 +134,7 @@ fsm montgomery (montgomery_dp)
 dp exp_dp (in start : ns(1);in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
 {
     reg e_reg : ns(1024);
-	reg i	  : ns(11);
+    reg i     : ns(11);
 
     reg r_reg : ns(1027);
     reg x_reg : ns(1027);
@@ -147,7 +147,6 @@ dp exp_dp (in start : ns(1);in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
 
     sig start_sig : ns(1);
 
-
     use montgomery_dp(a_sig, b_sig, m_sig, start_sig, r_sig);
 
     sfg init {
@@ -157,7 +156,7 @@ dp exp_dp (in start : ns(1);in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
         m_sig = 0;
 
         a_reg = a;
-		i = 1024;
+        i = 1024;
     }
 
     sfg no_mont {
@@ -177,10 +176,10 @@ dp exp_dp (in start : ns(1);in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
         x_reg = r_reg;
     }
 
-	sfg shift_ereg {
+    sfg shift_ereg {
         i = i-1;
-		e_reg = e_reg << 1;
-	}
+        e_reg = e_reg << 1;
+    }
 
     sfg do_mont {
         a_sig = a_reg;
@@ -253,10 +252,10 @@ fsm exp (exp_dp)
                         (start_loop, no_mont, reset_r, stop_mont) -> find_counter;
                     else
                         (calc_x, reset_r, start_mont) -> calc_x;
-	@find_counter	if(e_reg[1023] == 0) then
-						(no_mont, reset_r, stop_mont, shift_ereg) -> find_counter;
-					else
-						(no_mont, reset_r, stop_mont) -> loop;
+    @find_counter   if(e_reg[1023] == 0) then
+                        (no_mont, reset_r, stop_mont, shift_ereg) -> find_counter;
+                    else
+                        (no_mont, reset_r, stop_mont) -> loop;
     @loop           if (i == 0) then
                         (start_last_mont, reset_r, stop_mont) -> last_mont;
                     else
@@ -324,8 +323,8 @@ dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(8);
     sfg read_x {
         address = 0x81 - i - 1;
         i = i+1;
-        x_reg = x_reg << 8 | din;		
-	}
+        x_reg = x_reg << 8 | din;
+    }
 
     sfg read_r2modm {
         address = 0x182 - i - 1;
@@ -362,7 +361,7 @@ dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(8);
         a_sig = a_reg;
         m_sig = m_reg;
         r_reg = r_sig;
-	    
+
         $display("Result: ", r_reg);
     }
 
