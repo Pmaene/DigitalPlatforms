@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 2.9.0 #5416 (Aug  6 2010) (UNIX)
-; This file was generated Wed Dec 12 00:18:19 2012
+; This file was generated Wed Dec 12 14:41:39 2012
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mmcs51 --model-small
@@ -2359,14 +2359,14 @@ _main:
 	lcall	_montgomery_exp
 ;	main.c:47: read_r();
 	lcall	_read_r
-;	main.c:49: for (i = 0; i < SIZE+1; i++) {
+;	main.c:49: for (i = 0; i < SIZE; i++) {
 	clr	a
 	mov	_i,a
 	mov	(_i + 1),a
 00101$:
 	clr	c
 	mov	a,_i
-	subb	a,#0x81
+	subb	a,#0x80
 	mov	a,(_i + 1)
 	subb	a,#0x00
 	jnc	00104$
@@ -2385,29 +2385,10 @@ _main:
 	addc	a,#(_r >> 8)
 	mov	dph,a
 	movx	a,@dptr
-	mov	r4,a
 	mov	dpl,r2
 	mov	dph,r3
 	movx	@dptr,a
-;	main.c:49: for (i = 0; i < SIZE+1; i++) {
-	inc	_i
-	clr	a
-	cjne	a,_i,00101$
-	inc	(_i + 1)
-	sjmp	00101$
-00104$:
-;	main.c:53: for (i = 0; i < SIZE; i++) {
-	clr	a
-	mov	_i,a
-	mov	(_i + 1),a
-00105$:
-	clr	c
-	mov	a,_i
-	subb	a,#0x80
-	mov	a,(_i + 1)
-	subb	a,#0x00
-	jnc	00108$
-;	main.c:54: enc_exp[i] = dec_exp[i];
+;	main.c:51: enc_exp[i] = dec_exp[i];
 	mov	a,_i
 	add	a,#_enc_exp
 	mov	r2,a
@@ -2425,22 +2406,27 @@ _main:
 	mov	dpl,r2
 	mov	dph,r3
 	movx	@dptr,a
-;	main.c:53: for (i = 0; i < SIZE; i++) {
+;	main.c:49: for (i = 0; i < SIZE; i++) {
 	inc	_i
 	clr	a
-	cjne	a,_i,00105$
+	cjne	a,_i,00101$
 	inc	(_i + 1)
-	sjmp	00105$
-00108$:
-;	main.c:57: write_data();
+	sjmp	00101$
+00104$:
+;	main.c:53: message[SIZE] = r[-1];
+	mov	dptr,#(_r - 0x0001)
+	movx	a,@dptr
+	mov	dptr,#(_message + 0x0080)
+	movx	@dptr,a
+;	main.c:59: write_data();
 	lcall	_write_data
-;	main.c:58: montgomery_exp();
+;	main.c:60: montgomery_exp();
 	lcall	_montgomery_exp
-;	main.c:59: read_r();	
+;	main.c:61: read_r();	
 	lcall	_read_r
-;	main.c:61: terminate();
+;	main.c:63: terminate();
 	lcall	_terminate
-;	main.c:62: return 0;
+;	main.c:64: return 0;
 	mov	dptr,#0x0000
 	ret
 	.area CSEG    (CODE)

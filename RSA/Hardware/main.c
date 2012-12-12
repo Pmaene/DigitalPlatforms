@@ -46,13 +46,11 @@ int main() {
     montgomery_exp();
     read_r();
 
-    for (i = 0; i < SIZE+1; i++) {
-     message[i] = r[SIZE-1-i];
-    }
-
     for (i = 0; i < SIZE; i++) {
-     enc_exp[i] = dec_exp[i];
+        message[i] = r[SIZE-1-i];
+	enc_exp[i] = dec_exp[i];
     }
+    message[SIZE] = r[-1];
 
     write_data();
 	montgomery_exp();

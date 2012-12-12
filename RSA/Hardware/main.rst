@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 2.9.0 #5416 (Aug  6 2010) (UNIX)
-                              4 ; This file was generated Wed Dec 12 00:18:19 2012
+                              4 ; This file was generated Wed Dec 12 14:41:39 2012
                               5 ;--------------------------------------------------------
                               6 	.module main
                               7 	.optsdcc -mmcs51 --model-small
@@ -2359,17 +2359,17 @@
    0F9C 12 0F 8E           2359 	lcall	_montgomery_exp
                            2360 ;	main.c:47: read_r();
    0F9F 12 0F 80           2361 	lcall	_read_r
-                           2362 ;	main.c:49: for (i = 0; i < SIZE+1; i++) {
+                           2362 ;	main.c:49: for (i = 0; i < SIZE; i++) {
    0FA2 E4                 2363 	clr	a
    0FA3 F5 08              2364 	mov	_i,a
    0FA5 F5 09              2365 	mov	(_i + 1),a
    0FA7                    2366 00101$:
    0FA7 C3                 2367 	clr	c
    0FA8 E5 08              2368 	mov	a,_i
-   0FAA 94 81              2369 	subb	a,#0x81
+   0FAA 94 80              2369 	subb	a,#0x80
    0FAC E5 09              2370 	mov	a,(_i + 1)
    0FAE 94 00              2371 	subb	a,#0x00
-   0FB0 50 27              2372 	jnc	00104$
+   0FB0 50 43              2372 	jnc	00104$
                            2373 ;	main.c:50: message[i] = r[SIZE-1-i];
    0FB2 AA 08              2374 	mov	r2,_i
    0FB4 74 40              2375 	mov	a,#(_message >> 8)
@@ -2385,65 +2385,51 @@
    0FC4 34 50              2385 	addc	a,#(_r >> 8)
    0FC6 F5 83              2386 	mov	dph,a
    0FC8 E0                 2387 	movx	a,@dptr
-   0FC9 FC                 2388 	mov	r4,a
-   0FCA 8A 82              2389 	mov	dpl,r2
-   0FCC 8B 83              2390 	mov	dph,r3
-   0FCE F0                 2391 	movx	@dptr,a
-                           2392 ;	main.c:49: for (i = 0; i < SIZE+1; i++) {
-   0FCF 05 08              2393 	inc	_i
-   0FD1 E4                 2394 	clr	a
-   0FD2 B5 08 D2           2395 	cjne	a,_i,00101$
-   0FD5 05 09              2396 	inc	(_i + 1)
-   0FD7 80 CE              2397 	sjmp	00101$
-   0FD9                    2398 00104$:
-                           2399 ;	main.c:53: for (i = 0; i < SIZE; i++) {
-   0FD9 E4                 2400 	clr	a
-   0FDA F5 08              2401 	mov	_i,a
-   0FDC F5 09              2402 	mov	(_i + 1),a
-   0FDE                    2403 00105$:
-   0FDE C3                 2404 	clr	c
-   0FDF E5 08              2405 	mov	a,_i
-   0FE1 94 80              2406 	subb	a,#0x80
-   0FE3 E5 09              2407 	mov	a,(_i + 1)
-   0FE5 94 00              2408 	subb	a,#0x00
-   0FE7 50 27              2409 	jnc	00108$
-                           2410 ;	main.c:54: enc_exp[i] = dec_exp[i];
-   0FE9 E5 08              2411 	mov	a,_i
-   0FEB 24 81              2412 	add	a,#_enc_exp
-   0FED FA                 2413 	mov	r2,a
-   0FEE E5 09              2414 	mov	a,(_i + 1)
-   0FF0 34 41              2415 	addc	a,#(_enc_exp >> 8)
-   0FF2 FB                 2416 	mov	r3,a
-   0FF3 E5 08              2417 	mov	a,_i
-   0FF5 24 80              2418 	add	a,#_dec_exp
-   0FF7 F5 82              2419 	mov	dpl,a
-   0FF9 E5 09              2420 	mov	a,(_i + 1)
-   0FFB 34 02              2421 	addc	a,#(_dec_exp >> 8)
-   0FFD F5 83              2422 	mov	dph,a
-   0FFF E0                 2423 	movx	a,@dptr
-   1000 FC                 2424 	mov	r4,a
-   1001 8A 82              2425 	mov	dpl,r2
-   1003 8B 83              2426 	mov	dph,r3
-   1005 F0                 2427 	movx	@dptr,a
-                           2428 ;	main.c:53: for (i = 0; i < SIZE; i++) {
-   1006 05 08              2429 	inc	_i
-   1008 E4                 2430 	clr	a
-   1009 B5 08 D2           2431 	cjne	a,_i,00105$
-   100C 05 09              2432 	inc	(_i + 1)
-   100E 80 CE              2433 	sjmp	00105$
-   1010                    2434 00108$:
-                           2435 ;	main.c:57: write_data();
-   1010 12 0F 6F           2436 	lcall	_write_data
-                           2437 ;	main.c:58: montgomery_exp();
-   1013 12 0F 8E           2438 	lcall	_montgomery_exp
-                           2439 ;	main.c:59: read_r();	
-   1016 12 0F 80           2440 	lcall	_read_r
-                           2441 ;	main.c:61: terminate();
-   1019 12 0F 95           2442 	lcall	_terminate
-                           2443 ;	main.c:62: return 0;
-   101C 90 00 00           2444 	mov	dptr,#0x0000
-   101F 22                 2445 	ret
-                           2446 	.area CSEG    (CODE)
-                           2447 	.area CONST   (CODE)
-                           2448 	.area XINIT   (CODE)
-                           2449 	.area CABS    (ABS,CODE)
+   0FC9 8A 82              2388 	mov	dpl,r2
+   0FCB 8B 83              2389 	mov	dph,r3
+   0FCD F0                 2390 	movx	@dptr,a
+                           2391 ;	main.c:51: enc_exp[i] = dec_exp[i];
+   0FCE E5 08              2392 	mov	a,_i
+   0FD0 24 81              2393 	add	a,#_enc_exp
+   0FD2 FA                 2394 	mov	r2,a
+   0FD3 E5 09              2395 	mov	a,(_i + 1)
+   0FD5 34 41              2396 	addc	a,#(_enc_exp >> 8)
+   0FD7 FB                 2397 	mov	r3,a
+   0FD8 E5 08              2398 	mov	a,_i
+   0FDA 24 80              2399 	add	a,#_dec_exp
+   0FDC F5 82              2400 	mov	dpl,a
+   0FDE E5 09              2401 	mov	a,(_i + 1)
+   0FE0 34 02              2402 	addc	a,#(_dec_exp >> 8)
+   0FE2 F5 83              2403 	mov	dph,a
+   0FE4 E0                 2404 	movx	a,@dptr
+   0FE5 FC                 2405 	mov	r4,a
+   0FE6 8A 82              2406 	mov	dpl,r2
+   0FE8 8B 83              2407 	mov	dph,r3
+   0FEA F0                 2408 	movx	@dptr,a
+                           2409 ;	main.c:49: for (i = 0; i < SIZE; i++) {
+   0FEB 05 08              2410 	inc	_i
+   0FED E4                 2411 	clr	a
+   0FEE B5 08 B6           2412 	cjne	a,_i,00101$
+   0FF1 05 09              2413 	inc	(_i + 1)
+   0FF3 80 B2              2414 	sjmp	00101$
+   0FF5                    2415 00104$:
+                           2416 ;	main.c:53: message[SIZE] = r[-1];
+   0FF5 90 4F FF           2417 	mov	dptr,#(_r - 0x0001)
+   0FF8 E0                 2418 	movx	a,@dptr
+   0FF9 90 40 80           2419 	mov	dptr,#(_message + 0x0080)
+   0FFC F0                 2420 	movx	@dptr,a
+                           2421 ;	main.c:59: write_data();
+   0FFD 12 0F 6F           2422 	lcall	_write_data
+                           2423 ;	main.c:60: montgomery_exp();
+   1000 12 0F 8E           2424 	lcall	_montgomery_exp
+                           2425 ;	main.c:61: read_r();	
+   1003 12 0F 80           2426 	lcall	_read_r
+                           2427 ;	main.c:63: terminate();
+   1006 12 0F 95           2428 	lcall	_terminate
+                           2429 ;	main.c:64: return 0;
+   1009 90 00 00           2430 	mov	dptr,#0x0000
+   100C 22                 2431 	ret
+                           2432 	.area CSEG    (CODE)
+                           2433 	.area CONST   (CODE)
+                           2434 	.area XINIT   (CODE)
+                           2435 	.area CABS    (ABS,CODE)

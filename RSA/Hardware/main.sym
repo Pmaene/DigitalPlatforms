@@ -495,7 +495,7 @@ Area Table
   19 GSINIT5                                                                            size    0   flags 20
   1A GSINIT                                                                             size  F0B   flags 20
   1B GSFINAL                                                                            size    3   flags 20
-  1C CSEG                                                                               size   B1   flags 20
+  1C CSEG                                                                               size   9E   flags 20
   1D CONST                                                                              size    0   flags 20
   1E XINIT                                                                              size    0   flags 20
   1F CABS                                                                               size    0   flags 28
