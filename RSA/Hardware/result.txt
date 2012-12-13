@@ -1,0 +1,2 @@
+Encryption: 69456 cycles
+Decryption: 3073095 cycles

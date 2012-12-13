@@ -1,0 +1,504 @@
+dp adder_dp (in sel : ns(1); in a, b : ns(1026); out s: ns(1027)) {
+    sig b_eff : ns(1026);
+
+    always {
+        b_eff = sel == 1 ? (~b + 1) : b;
+        s = a + b_eff;
+    }
+}
+
+dp montgomery_dp (in a, b, m : ns(1024); in start : ns(1); out r : ns(1027))
+{
+    reg counter : ns(11);
+    reg r_reg   : ns(1027);
+    reg a_reg   : ns(1024);
+
+    sig r_tmp   : ns(1027);
+    sig sel     : ns(1);
+    sig x       : ns(1026);
+    sig y       : ns(1026);
+
+    use adder_dp(sel, x, y, r_tmp);
+
+    sfg init {
+        counter = 0;
+        r = 0;
+        r_reg = 0;
+
+        x = 0;
+        y = 0;
+        sel = 0;
+
+        a_reg = a;
+    }
+
+    sfg count_inc {
+        counter = counter + 1;
+        a_reg = a_reg >> 1;
+    }
+
+    sfg count_rst {
+        counter = 0;
+    }
+
+    sfg sum {
+        x = r_reg;
+        y = a_reg[0] == 0 ? 0 : b;
+        sel = 0;
+        r_reg = r_tmp;
+    }
+
+    sfg just_divide {
+        sel = 0;
+        x = 0;
+        y = 0;
+        r_reg = r_reg >> 1;
+    }
+
+    sfg sum_and_divide {
+        x = r_reg;
+        y = b;
+        sel = 0;
+        r_reg = r_tmp >> 1;
+    }
+
+    sfg sum_m_and_divide {
+        x = r_reg;
+        y = m;
+        sel = 0;
+        r_reg = r_tmp >> 1;
+    }
+
+    sfg equal_to_zero {
+        sel = 0;
+        x = 0;
+        y = 0;
+        r_reg = r_reg >> 1;
+    }
+
+    sfg not_equal_to_zero {
+        sel = 0;
+        x = r_reg;
+        y = m;
+        r_reg = r_tmp >> 1;
+    }
+
+    sfg overflow_check {
+        sel = 1;
+        x = r_reg;
+        y = r_reg >= m ? m : 0;
+        r_reg = r_tmp;
+    }
+
+    sfg stop {
+        sel = 0;
+        x = 0;
+        y = 0;
+        r = r_reg;
+    }
+
+    sfg reset_r {
+        r = 0;
+    }
+}
+
+fsm montgomery (montgomery_dp)
+{
+    initial init;
+    state do_mont, stop, if_else, wait_mont;
+
+    @init       (init) -> wait_mont;
+    @wait_mont  if (start == 0) then
+                    (init) -> wait_mont;
+                else
+                    (init) -> do_mont;
+    @do_mont    if (counter >= 1024) then
+                    (count_rst, overflow_check, reset_r) -> stop;
+                else if (r_reg[0] == 0 & a_reg[0] == 0) then
+                    (just_divide, count_inc, reset_r) -> do_mont;
+                else if (r_reg[0] == 0 & a_reg[0] == 1 & b[0] == 0) then
+                    (sum_and_divide, count_inc, reset_r) -> do_mont;
+                else if (r_reg[0] == 1 & a_reg[0] == 1 & b[0] == 1) then
+                    (sum_and_divide, count_inc, reset_r) -> do_mont;
+                else if (r_reg[0] == 1 & a_reg[0] == 0) then
+                    (sum_m_and_divide, count_inc, reset_r) -> do_mont;
+                else
+                    (sum, reset_r) -> if_else;
+    @if_else    if (r_reg[0] == 0) then
+                    (equal_to_zero, count_inc, reset_r) -> do_mont;
+                else
+                    (not_equal_to_zero, count_inc, reset_r) -> do_mont;
+    @stop       (stop) -> wait_mont;
+}
+
+dp exp_dp (in start : ns(1);in x, r2modm, a, e, m : ns(1024); out r : ns(1027))
+{
+    reg e_reg : ns(1024);
+    reg i     : ns(11);
+
+    reg r_reg : ns(1027);
+    reg x_reg : ns(1027);
+    reg a_reg : ns(1027);
+
+    sig a_sig : ns(1024);
+    sig b_sig : ns(1024);
+    sig m_sig : ns(1024);
+    sig r_sig : ns(1027);
+
+    sig start_sig : ns(1);
+
+    use montgomery_dp(a_sig, b_sig, m_sig, start_sig, r_sig);
+
+    sfg init {
+        e_reg = e;
+        a_sig = 0;
+        b_sig = 0;
+        m_sig = 0;
+
+        a_reg = a;
+        i = 1024;
+    }
+
+    sfg no_mont {
+        a_sig = 0;
+        b_sig = 0;
+        m_sig = 0;
+    }
+
+    sfg calc_x {
+        a_sig = x;
+        b_sig = r2modm;
+        m_sig = m;
+        r_reg = r_sig;
+    }
+
+    sfg start_loop {
+        x_reg = r_reg;
+    }
+
+    sfg shift_ereg {
+        i = i-1;
+        e_reg = e_reg << 1;
+    }
+
+    sfg do_mont {
+        a_sig = a_reg;
+        b_sig = a_reg;
+        m_sig = m;
+        r_reg = r_sig;
+    }
+
+    sfg start_extra_mont {
+        a_sig = r_reg;
+        b_sig = x_reg;
+        m_sig = m;
+        r_reg = r_sig;
+    }
+
+    sfg do_extra_mont {
+        a_sig = a_reg;
+        b_sig = x_reg;
+        m_sig = m;
+        r_reg = r_sig;
+    }
+
+    sfg start_last_mont {
+        a_sig = a_reg;
+        b_sig = 1;
+        m_sig = m;
+        r_reg = r_sig;
+    }
+
+    sfg last_mont {
+        a_sig = a_reg;
+        b_sig = 1;
+        m_sig = m;
+        r_reg = r_sig;
+    }
+
+    sfg save_a {
+        a_reg = r_reg;
+    }
+
+    sfg write_result {
+        r = r_reg;
+    }
+
+    sfg reset_r {
+        r = 0;
+    }
+
+    sfg start_mont {
+        start_sig = 1;
+    }
+
+    sfg stop_mont {
+        start_sig = 0;
+    }
+}
+
+fsm exp (exp_dp)
+{
+    initial init;
+    state loop_exp, wait_input, start_calc_x, calc_x, do_mont, do_extra_mont, last_mont, write_result, find_counter;
+
+    @init           (init, reset_r, stop_mont) -> wait_input;
+    @wait_input     if (start == 0) then
+                        (init, reset_r, stop_mont) -> wait_input;
+                    else
+                        (init, reset_r, stop_mont) -> start_calc_x;
+    @start_calc_x   (calc_x, stop_mont, reset_r) -> calc_x;
+    @calc_x         if (r_reg > 0) then
+                        (start_loop, no_mont, reset_r, stop_mont) -> find_counter;
+                    else
+                        (calc_x, reset_r, start_mont) -> calc_x;
+    @find_counter   if(e_reg[1023] == 0) then
+                        (no_mont, reset_r, stop_mont, shift_ereg) -> find_counter;
+                    else
+                        (no_mont, reset_r, stop_mont) -> loop_exp;
+    @loop_exp       if (i == 0) then
+                        (start_last_mont, reset_r, stop_mont) -> last_mont;
+                    else
+                        (do_mont, reset_r, stop_mont) -> do_mont;
+    @do_mont        if (r_reg > 0 & e_reg[1023] == 0) then
+                        (save_a, no_mont, reset_r, stop_mont, shift_ereg) -> loop_exp;
+                    else if (r_reg > 0) then
+                        (save_a, start_extra_mont, reset_r, stop_mont, shift_ereg) -> do_extra_mont;
+                    else
+                        (do_mont, reset_r, start_mont) -> do_mont;
+    @do_extra_mont  if (r_reg > 0) then
+                        (save_a, no_mont, reset_r, stop_mont) -> loop_exp;
+                    else
+                        (do_extra_mont, reset_r, start_mont) -> do_extra_mont;
+    @last_mont      if (r_reg  > 0) then
+                        (no_mont, reset_r, stop_mont) -> write_result;
+                    else
+                        (last_mont, reset_r, start_mont) -> last_mont;
+    @write_result   (write_result, no_mont, stop_mont) -> init;
+}
+
+dp decoder_dp(in ins : ns(8); in din : ns(8); out sync : ns(8); out dout: ns(8); out address: ns(10); out data_wr, result_wr : ns(1)) {
+    reg i       : ns(10);
+    reg ins_reg : ns(8);
+    reg din_reg : ns(8);
+
+    reg x_reg, r2modm_reg, a_reg, e_reg, m_reg : ns(1024);
+    reg r_reg : ns(1027);
+
+    sig x_sig, r2modm_sig, a_sig, e_sig, m_sig : ns(1024);
+    sig r_sig : ns(1027);
+    sig start_sig : ns(1);
+
+    use exp_dp(start_sig, x_sig, r2modm_sig, a_sig, e_sig, m_sig, r_sig);
+
+    sfg decode {
+        ins_reg = ins;
+        din_reg = din;
+    }
+
+    sfg no_exp {
+        x_sig = 0;
+        r2modm_sig = 0;
+        e_sig = 0;
+        a_sig = 0;
+        m_sig = 0;
+        start_sig = 0;
+    }
+
+    sfg no_sync {
+        sync = 0;
+    }
+
+    sfg no_write {
+        data_wr = 0;
+        result_wr = 0;
+
+        dout = 0;
+    }
+
+    sfg no_address {
+        address = 0;
+    }
+
+    sfg read_x {
+        address = 0x81 - i - 1;
+        i = i+1;
+        x_reg = x_reg << 8 | din;
+    }
+
+    sfg read_r2modm {
+        address = 0x182 - i - 1;
+        i = i+1;
+        r2modm_reg = r2modm_reg << 8 | din;
+    }
+
+    sfg read_e {
+        address = 0x382 - i - 1;
+        i = i+1;
+        e_reg = e_reg << 8 | din;
+    }
+
+    sfg read_a {
+        address = 0x282 - i - 1;
+        i = i+1;
+        a_reg = a_reg << 8 | din;
+    }
+
+    sfg read_m {
+        address = 0x482 - i - 1;
+        i = i+1;
+        m_reg = m_reg << 8 | din;
+    }
+
+    sfg read_done {
+        sync = 1;
+    }
+
+    sfg exp {
+        x_sig = x_reg;
+        r2modm_sig = r2modm_reg;
+        e_sig = e_reg;
+        a_sig = a_reg;
+        m_sig = m_reg;
+        r_reg = r_sig;
+
+        $display("Result: ", r_reg);
+    }
+
+    sfg write_result {
+        address = 0x80 - i - 1;
+        i = i+1;
+        dout = r_reg;
+        r_reg = r_reg >> 8;
+        data_wr = 0;
+        result_wr = 1;
+    }
+
+    sfg write_done {
+        sync = 1;
+    }
+
+    sfg reset_counter {
+        i = 0;
+    }
+
+    sfg start_exp {
+        start_sig = 1;
+    }
+
+    sfg stop_exp {
+        start_sig = 0;
+    }
+}
+
+fsm decoder(decoder_dp) {
+    initial init;
+    state do, done, get_data, do_exp, write_result, read_done, write_done;
+
+    @init           (no_exp, no_sync, no_write, no_address, decode) -> do;
+    @do             if (ins_reg == 1) then
+                        (no_exp, no_sync, no_write, no_address, reset_counter, decode) -> get_data;
+                    else if (ins_reg == 2) then
+                        (stop_exp, exp, no_sync, no_write, no_address, decode) -> do_exp;
+                    else if (ins_reg == 3) then
+                        (no_exp, no_sync, no_write, no_address, reset_counter, decode) -> write_result;
+                    else
+                        (no_exp, no_sync, no_write, no_address, decode) -> do;
+    @done           if (ins_reg == 0) then
+                        (no_exp, no_sync, no_write, no_address, decode) -> do;
+                    else
+                        (no_exp, no_sync, no_write, no_address, decode) -> done;
+    @get_data       if (i < 0x81) then
+                        (no_exp, no_sync, no_write, read_x, decode)    -> get_data;
+                    else if (i >= 0x81 & i < 0x101) then
+                        (no_exp, no_sync, no_write, read_r2modm, decode)    -> get_data;
+                    else if (i >= 0x101 & i < 0x181) then
+                        (no_exp, no_sync, no_write, read_a, decode)    -> get_data;
+                    else if (i >= 0x181 & i < 0x201) then
+                        (no_exp, no_sync, no_write, read_e, decode)    -> get_data;
+                    else if (i >= 0x201 & i < 0x281) then
+                        (no_exp, no_sync, no_write, read_m, decode)    -> get_data;
+                    else
+                        (no_exp, no_write, no_address, read_done, decode) -> read_done;
+    @read_done      if (ins_reg == 4) then
+                        (no_exp, no_write, no_address, no_sync, decode) -> do;
+                    else
+                        (no_exp, no_write, no_address, read_done, decode) -> read_done;
+    @do_exp         if (r_reg > 0) then
+                        (no_exp, no_sync, no_write, no_address, decode) -> do;
+                    else
+                        (start_exp, exp, no_sync, no_write, no_address, decode) -> do_exp;
+    @write_result   if (i < 0x81) then
+                        (no_exp, no_sync, write_result, decode) -> write_result;
+                    else
+                        (no_exp, no_write, no_address, write_done, decode) -> write_done;
+    @write_done     if (ins_reg == 4) then
+                        (no_exp, no_write, no_address, no_sync, decode) -> do;
+                    else
+                        (no_exp, no_write, no_address, write_done, decode) -> write_done;
+}
+
+ipblock my8051 {
+    iptype "i8051system";
+    ipparm "exec=encryption.ihx";
+    ipparm "verbose=1";
+}
+
+ipblock my8051_instruction(out data : ns(8)) {
+    iptype "i8051systemsource";
+    ipparm "core=my8051";
+    ipparm "port=P0";
+}
+
+ipblock my8051_sync(in data : ns(8)) {
+    iptype "i8051systemsink";
+    ipparm "core=my8051";
+    ipparm "port=P1";
+}
+
+ipblock my_data(in idata : ns(8); out odata : ns(8); in address : ns(10); in wr : ns(1)) {
+    iptype "i8051buffer";
+    ipparm "core=my8051";
+    ipparm "xbus=0x4000";
+    ipparm "xrange=0x281";
+}
+
+ipblock my_result(in idata : ns(8); out odata : ns(8); in address : ns(10); in wr : ns(1)) {
+    iptype "i8051buffer";
+    ipparm "core=my8051";
+    ipparm "xbus=0x5000";
+    ipparm "xrange=0x81";
+}
+
+dp defaults (out data_in : ns(8))
+{
+    sfg do_always
+    {
+        data_in = 0;
+    }
+}
+
+hardwired defaults_hw (defaults) { do_always; }
+
+dp montgomery_sys
+{
+    sig instruction, sync, data_in, data_out, result_in, result_out : ns(8);
+    sig address : ns(10);
+    sig data_wr, result_wr : ns(1);
+
+    use defaults(data_in);
+
+    use my8051;
+    use my8051_instruction(instruction);
+    use my8051_sync(sync);
+    use my_data(data_in, data_out, address, data_wr);
+    use my_result(result_in, result_out, address, result_wr);
+
+    use decoder_dp(instruction, data_out, sync, result_in, address, data_wr, result_wr);
+}
+
+system S
+{
+    montgomery_sys;
+}
+

@@ -1,0 +1,1 @@
+xst -intstyle ise -ifn "U:/Documents/Design of Digital Platforms/DigitalPlatforms/RSA/Hardware/Xilinx/RSA/montgomery_sys.xst" -ofn "U:/Documents/Design of Digital Platforms/DigitalPlatforms/RSA/Hardware/Xilinx/RSA/montgomery_sys.syr" 
