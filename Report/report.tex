@@ -1,6 +1,5 @@
 \documentclass[a4paper]{article}
 
-\usepackage[dutch]{babel}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{graphicx}
@@ -22,6 +21,14 @@
 \maketitle
 
 \section{Overall Architecture}
+
+After having written a software implementation of the Montgomery algorithm in \textit{C}, the conclusion was that this was too slow for a real implementation. Therefore, in the second part of this course, we had to build a hardware coprocessor that should significantly increase speed. The final goal of this project was to build RSA encryption and decryption.\\
+
+\begin{figure}[h]
+	\center{\includegraphics[width=0.8\linewidth]{situation.png}}
+	\caption{Situation}
+	\label{fig:situation}
+\end{figure}
 
 \section{HW/SW Boundaries}
 
