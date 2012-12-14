@@ -36,7 +36,7 @@ The RSA algorithm is a basic and very often used algorithm for encryption and de
 
 From the previous section we know that a Montgomery multiplication implemented in \textit{C} takes about 1 second and a Montgomery exponentiation uses a lot of multiplications. So the multiplication must be done in hardware. Our hardware implementation of the multiplication takes about 1300 cycles. Assuming a clock frequency of about 5 \mega \hertz, this means a multiplication in hardware takes about 0,26 \micro \second.\\
 
-So the only choice that was left, was to do the exponentiation in \textit{C} and call every time the Montgomery multiplication in the hardware or write the exponentiation in \textit{Gezel}. Doing the exponentiation in \textit{C} would cause a lot of overhead to transfer the data from the software to the hardware en back. So the benefits to write the exponentiation in \textit{Gezel} were quite obvious.
+So the only choice that was left, was to do the exponentiation in \textit{C} and call every time the Montgomery multiplication in the hardware or write the exponentiation in \textit{Gezel}. Doing the exponentiation in \textit{C} would cause a lot of overhead to transfer the data from the software to the hardware and back. So the benefits to write the exponentiation in \textit{Gezel} were quite obvious.
 
 \section{HW/SW Interface}
 
@@ -46,7 +46,23 @@ To pass the data from the software to the hardware, all the values are located a
 
 \section{Performance Metrics}
 
+
 \section{Synthesis Results}
+
+After completing the design of the RSA algorithm in the hardware-software co-design, you might want to put it on a FPGA. Before actually putting the program on it, it is usefull to know apriori how many slices, flipflops and other hardware components you will need. The outcome of the analysation of the code for a specific \textit{Xilinx} FPGA (Virtex4) is shown in table 2. As can be seen, this design can be implemented on the specified FPGA because there are no conflicts in the amount of hardware needed.
+
+\begin{center}
+	\begin{tabular}{ll}
+		${\# Slices} & ${16153 (63\%)} \\\\
+		${\# Slice Flip Flops} & ${12370 (24\%)} \\\\
+		${\# 4 input LUTs} & ${30723 (60\%)} \\\\
+		${\# bonded IOBs} & ${2 (0.5\%)} \\\\
+		${\# GCLKs} & ${1 (3\%)} \\\\
+		${Maximum Frequency} & ${11.679 \mega \hertz} \\\\
+	\end{tabular}
+	\caption{Synthesis results}
+	\label{tab:synthesis results}
+\end{center}. 
 
 \section{Test Strategy}
 
