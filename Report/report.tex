@@ -30,6 +30,10 @@ After having written a software implementation of the Montgomery algorithm in \t
 	\label{fig:situation}
 \end{figure}
 
+As you can see in Figure~\ref{fig:situation}, we decided to optimize our implementation towards time usage. Due to inherent design tradeoffs, this meant we had to sacrifice both flexibility and area. We made this choice because the only operation required by the RSA algorithm is an exponentation. So, we opted to build a coprocessor that was specifically designed to do a fast exponentiation.\\
+
+This hardware component could then be used in the software to implement the RSA encryption and decryption. This resulted in a two-way communication channel between the hardware and the software using the available I/O pins. To pass data back and forth, a memory-mapped implementation was chosen.
+
 \section{HW/SW Boundaries}
 
 The RSA algorithm is a basic and very often used algorithm for encryption and decryption of data. So it is important that the encryption and decryption is as fast as possible. The algorithm is standardized and will not change in the future. The only part of it that will change is the size of the inputs. Because of these facts a full hardware implementation was chosen.\\
@@ -51,18 +55,20 @@ To pass the data from the software to the hardware, all the values are located a
 
 After completing the design of the RSA algorithm in the hardware-software co-design, you might want to put it on a FPGA. Before actually putting the program on it, it is usefull to know apriori how many slices, flipflops and other hardware components you will need. The outcome of the analysation of the code for a specific \textit{Xilinx} FPGA (Virtex4) is shown in table 2. As can be seen, this design can be implemented on the specified FPGA because there are no conflicts in the amount of hardware needed.
 
-\begin{center}
-	\begin{tabular}{ll}
-		${\# Slices} & ${16153 (63\%)} \\\\
-		${\# Slice Flip Flops} & ${12370 (24\%)} \\\\
-		${\# 4 input LUTs} & ${30723 (60\%)} \\\\
-		${\# bonded IOBs} & ${2 (0.5\%)} \\\\
-		${\# GCLKs} & ${1 (3\%)} \\\\
-		${Maximum Frequency} & ${11.679 \mega \hertz} \\\\
-	\end{tabular}
-	\caption{Synthesis results}
+\begin{table}[ht]
+	\begin{center}	
+		\begin{tabular}{c|c}
+			Slices & 16153 (63\%)\\
+			Slice Flip Flops & 12370 (24\%)\\
+			4 Input LUTs & 30723 (60\%)\\
+			Bonded IOBs & 2 (0.5\%)\\
+			GCLKs & 1 (3\%)\\
+			Maximum Frequency & 11.679 \mega \hertz
+		\end{tabular}
+	\end{center}
+	\caption{Synthesis Results}
 	\label{tab:synthesis results}
-\end{center}. 
+\end{table} 
 
 \section{Test Strategy}
 
