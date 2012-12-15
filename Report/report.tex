@@ -22,7 +22,7 @@
 
 \section{Overall Architecture}
 
-After having written a software implementation of the Montgomery algorithm in \textit{C}, the conclusion was that this was too slow for a real implementation. Therefore, in the second part of this course, we had to build a hardware coprocessor that should significantly increase speed. The final goal of this project was to build RSA encryption and decryption.\\
+After having written a software implementation of the Montgomery algorithm in \textit{C}, the conclusion was that this was too slow for a real implementation. Therefore, in the second part of this course, we made a hardware coprocessor that should significantly increase the speed. The final goal of this project was to build RSA encryption and decryption, a regularly used algorithm.\\
 
 \begin{figure}[h]
 	\center{\includegraphics[width=0.8\linewidth]{situation.png}}
@@ -30,13 +30,13 @@ After having written a software implementation of the Montgomery algorithm in \t
 	\label{fig:situation}
 \end{figure}
 
-As you can see in Figure~\ref{fig:situation}, we decided to optimize our implementation towards time usage. Due to inherent design tradeoffs, this meant we had to sacrifice both flexibility and area. We made this choice because the only operation required by the RSA algorithm is an exponentation. So, we opted to build a coprocessor that was specifically designed to do a fast exponentiation.\\
+As you can see in Figure~\ref{fig:situation}, we decided to optimize our implementation towards time usage. Due to inherent design tradeoffs, this meant we had to sacrifice both flexibility and area. We made this choice because the only operation required by the RSA algorithm is an exponentation. So, we opted to build a coprocessor that was specifically designed to do a fast exponentiation. By implementing the exponentiation in hardware, there are some operations like shifting that make the algorithm a lot easier, which results in a faster implementation. However, there is still a datapath available that only computes one Montgomery multiplication. So a normal Montgomery multiplication can always be executed quite easily.\\
 
-This hardware component could then be used in the software to implement the RSA encryption and decryption. This resulted in a two-way communication channel between the hardware and the software using the available I/O pins. To pass data back and forth, a memory-mapped implementation was chosen.
+This hardware component could then be used in the software to implement the RSA encryption and decryption. This resulted in a two-way communication channel between the hardware and the software using the available I/O pins. To pass data back and forth, a memory-mapped implementation with a 2-way-handshake was chosen.
 
 \section{HW/SW Boundaries}
 
-The RSA algorithm is a basic and very often used algorithm for encryption and decryption of data. So it is important that the encryption and decryption is as fast as possible. The algorithm is standardized and will not change in the future. The only part of it that will change is the size of the inputs. Because of these facts a full hardware implementation was chosen.\\
+The RSA algorithm is a basic and very often used algorithm for encryption and decryption of data. So it is important that the encryption and decryption is as fast as possible. The algorithm is standardized and will not change in the future. The only part of it that will change is the size of the inputs, as the encryption with larger numbers is more difficult to crack. Because of these facts a full hardware implementation was chosen.\\
 
 From the previous section we know that a Montgomery multiplication implemented in \textit{C} takes about 1 second and a Montgomery exponentiation uses a lot of multiplications. So the multiplication must be done in hardware. Our hardware implementation of the multiplication takes about 1300 cycles. Assuming a clock frequency of about 5 \mega \hertz, this means a multiplication in hardware takes about 0,26 \micro \second.\\
 
@@ -46,24 +46,37 @@ So the only choice that was left, was to do the exponentiation in \textit{C} and
 
 For the communication between the hardware and the software a 2-way-handshake method is used. For passing the data from the software to the hardware the following procedure is followed. The software takes care of saving the data on the right places in the memory. If that is done, $P0$ is set to $ins\_write\_data$ to notify the hardware the data is available. The hardware immediately set $P1$ to one. After that the software loops (with an empty while loop), until the hardware sets $P1$ back to zero. If the software detects that the hardware has returned to an idle state, it notifies the detection to the hardware with an $ins\_ack$ on $P0$.\\
 
-To pass the data from the software to the hardware, all the values are located after each other. So all the values form one block. In the hardware it was set how long each value is and so all the values are again separated.
+To pass the data from the software to the hardware, all the values are located after each other. So all the values form one block. In the hardware it was set how long each value is and so all the values are again separated. When the length of the inputs varies, this is where the changes have to be made.
 
 \section{Performance Metrics}
 
+The two measurable performance statistics are the number of registers used and the amount of clock cycles used for one computation of either the encryption or decryption. As the datapaths for encryption and decryption are equal, the amount of registers is the same in both as can be seen in Table~\ref{tab:performance metrics}. For the number of clock cycles there is clearly a difference between the encryption and the decryption. The decryption takes a lot more time because the decryption exponent is many times larger than the encryption exponent, so the amount of Montgomery multiplications increases with a big amount. This timing contains the reading of the input from the software (in the hardware), the Montgomery exponentiation itself and the writing back of the result from the hardware to the software.
+
+\begin{table}[ht]
+	\begin{center}	
+		\begin{tabular}{c|c|c}
+			 & \textbf{Encryption} & \textbf{Decryption}\\
+			\textbf{Registers} & 12351 bit & 12351 bit\\
+		 	\textbf{Clock cycles} & 69456 & 3073095\\
+		\end{tabular}
+	\end{center}
+	\caption{Performance Metrics}
+	\label{tab:performance metrics}
+\end{table} 
 
 \section{Synthesis Results}
 
-After completing the design of the RSA algorithm in the hardware-software co-design, you might want to put it on a FPGA. Before actually putting the program on it, it is usefull to know apriori how many slices, flipflops and other hardware components you will need. The outcome of the analysation of the code for a specific \textit{Xilinx} FPGA (Virtex4) is shown in table 2. As can be seen, this design can be implemented on the specified FPGA because there are no conflicts in the amount of hardware needed.
+After completing the design of the RSA algorithm in the hardware-software co-design, you might want to put it on a FPGA. Before actually putting the program on it, it is usefull to know apriori how many slices, flipflops and other hardware components you will need. The outcome of the analysation of the code for a specific \textit{Xilinx} FPGA (Virtex4) is shown in Table~\ref{tab:synthesis results}. As can be seen, this design can be implemented on the specified FPGA because there are no conflicts in the amount of hardware needed.
 
 \begin{table}[ht]
 	\begin{center}	
 		\begin{tabular}{c|c}
-			Slices & 16153 (63\%)\\
-			Slice Flip Flops & 12370 (24\%)\\
-			4 Input LUTs & 30723 (60\%)\\
-			Bonded IOBs & 2 (0.5\%)\\
-			GCLKs & 1 (3\%)\\
-			Maximum Frequency & 11.679 \mega \hertz
+			\textbf{Slices} & 16153 (63\%)\\
+			\textbf{Slice Flip Flops} & 12370 (24\%)\\
+			\textbf{4 Input LUTs} & 30723 (60\%)\\
+			\textbf{Bonded IOBs} & 2 (0.5\%)\\
+			\textbf{GCLKs} & 1 (3\%)\\
+			\textbf{Maximum Frequency} & 11.679 \mega \hertz
 		\end{tabular}
 	\end{center}
 	\caption{Synthesis Results}
@@ -82,7 +95,7 @@ To check if the result of the encryption or decryption is well transferred to th
 
 \section{Further Optimizations}
 
-The hardware and the software of this project can still be optimized. About 12000 bits register are used now, but this number can be reduced. Also the speed of our software can be optimized to write some \textit{assembly}.\\
+The hardware and the software of this project can still be optimized. About 12000 bits registers are used now, but this number can be reduced. Also the speed of our software can be optimized by writing some \textit{assembly}.\\
 
 To reduce the number of registers, the Montgomery datapath must be changed. Now the multiplication is calculated and saves in a register and during one cycle the value is set on an output signal. Then the exponentiation saves the result in a register and passes it immediately to another Montgomery multiplication. This way there are 'duplicate' registers in the hardware. This can be optimized by rewriting the Montgomery multiplication so it keeps the output longer on the output so the exponentiation doesn't need registers to save the result of the multiplication.\\
 
