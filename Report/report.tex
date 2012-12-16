@@ -97,10 +97,10 @@ To check if the result of the encryption or decryption is well transferred to th
 
 The hardware and the software of this project can still be optimized. About 12000 bits registers are used now, but this number can be reduced. Also the speed of our software can be optimized by writing some \textit{assembly}.\\
 
-To reduce the number of registers, the Montgomery datapath must be changed. Now the multiplication is calculated and saves in a register and during one cycle the value is set on an output signal. Then the exponentiation saves the result in a register and passes it immediately to another Montgomery multiplication. This way there are 'duplicate' registers in the hardware. This can be optimized by rewriting the Montgomery multiplication so it keeps the output longer on the output so the exponentiation doesn't need registers to save the result of the multiplication.\\
+To reduce the number of registers, the Montgomery datapath must be changed. Now the multiplication is calculated and the result is saved in a register. During one cycle the value is set on an output signal. Then the exponentiation saves the result in a register and passes it immediately to another Montgomery multiplication. This way there are 'duplicate' registers in the hardware. This can be optimized by rewriting the Montgomery multiplication so it keeps the output longer on the output so the exponentiation doesn't need registers to save the result of the multiplication.\\
 
 Another optimization for the register count is to calculate the exponentiation inside the decoder datapath. Doing so, the results can overwrite the start values of our exponentiation. But the code will be harder the debug and read.\\
 
-In the \textit{C} code some instructions take multiple cycles to execute, and this can be reduced by replacing the instructions with more efficient \textit{assembly}.
+In the \textit{C} code some instructions take multiple cycles to execute, and this can be reduced by replacing the instructions with more efficient \textit{assembly}.\\
 
 \end{document}
