@@ -1,18 +1,9 @@
-# Do not version MCU8051IDE project files
-*.mcu8051ide
+# Do not version SublimeText's configuration and workspace
+*.sublime-project
+*.sublime-workspace
 
-# We do not want temporary editor files
-*~
-
-# OS X is not nice
+# Exclude the custom folder attributes file
 .DS_Store
 
-# Do not version temporary LaTeX files
-.texpadtmp/
-
-*.aux
-*.bbl
-*.blg
-*.log
-*.out
-*.pdf
+# Do not version compiled files and make folders
+main
