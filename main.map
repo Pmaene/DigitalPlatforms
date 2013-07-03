@@ -51,20 +51,20 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:0008    s_GSINIT0
   0C:0008    s_REG_BANK_1
   0C:000A    l_GSINIT2
+  0C:000B    l_OSEG
   0C:000B    s_GSINIT1
   0C:000B    s_GSINIT2
   0C:0010    s_REG_BANK_2
   0C:0015    s_GSINIT3
-  0C:0016    s_OSEG
   0C:0018    s_BIT_BANK
   0C:0018    s_REG_BANK_3
-  0C:0020    l_OSEG
   0C:0020    s__CODE
   0C:0022    l_GSINIT3
   0C:002A    l_GSINIT4
-  0C:0036    s_RSEG
-  0C:0036    s_SSEG
+  0C:0036    s_OSEG
   0C:0037    s_GSINIT4
+  0C:0041    s_RSEG
+  0C:0041    s_SSEG
   0C:0061    s_GSINIT
   0C:0061    s_GSINIT5
   0C:0080    l_DSEG
@@ -74,14 +74,14 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:0080    l_XABS3
   0C:0080    l_XABS4
   0C:0080    l_XABS5
-  0C:00CA    l_SSEG
+  0C:00BF    l_SSEG
   0C:0100    l_IRAM
-  0C:0610    l_CSEG
+  0C:0C91    l_CSEG
   0C:0F0A    l_GSINIT
   0C:0F6B    s_GSFINAL
   0C:0F6E    s_CSEG
-  0C:157E    s_CONST
-  0C:157E    s_XINIT
+  0C:1BFF    s_CONST
+  0C:1BFF    s_XINIT
 
 Hexadecimal
 
@@ -254,7 +254,8 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      00F6    _B_6
      00F7    _B_7
      5000    _encryptedMessage
-     FFFE    _startBrk
+     FFFD    _startBrk
+     FFFE    _innerBrk
      FFFF    _endBrk
 
 
@@ -273,49 +274,41 @@ DSEG                               0000   0080 =    128. bytes (REL,CON)
 
       Value  Global
    --------  --------------------------------
-     0008    _montModExp_PARM_2
-     000B    _montModExp_PARM_3
-     000E    _montModExp_PARM_4
-     0011    _montModExp_PARM_5
+     0008    _montMultiply_PARM_2
+     000B    _montMultiply_PARM_3
+     000E    _montMultiply_PARM_4
+     0011    _montMultiply_PARM_5
+     0028    _montModExp_PARM_2
+     002B    _montModExp_PARM_3
+     002E    _montModExp_PARM_4
+     0031    _montModExp_PARM_5
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-OSEG                               0016   0020 =     32. bytes (REL,OVR)
+OSEG                               0036   000B =     11. bytes (REL,OVR)
 
       Value  Global
    --------  --------------------------------
-     0016    __findFirstOne_e_1_1
-     0016    __gptrput_PARM_2
-     0016    _montMultiply_PARM_2
-     0019    __findFirstOne_i_1_1
-     0019    _montMultiply_PARM_3
-     001C    _montMultiply_PARM_4
-     001F    _montMultiply_PARM_5
-     0020    _montMultiply_m_1_1
-     0023    _montMultiply_tmp_1_1
-     0025    _montMultiply_i_1_1
-     0027    _montMultiply_j_1_1
-     0029    _montMultiply_t_1_1
-     002B    _montMultiply_c_1_1
-     002C    _montMultiply_n0_1_1
-     002D    _montMultiply_b0_1_1
-     002E    _montMultiply_sloc0_1_0
-     0031    _montMultiply_sloc1_1_0
-     0033    _montMultiply_sloc2_1_0
-     0034    _montMultiply_sloc3_1_0
+     0036    __findFirstOne_e_1_1
+     0036    __gptrput_PARM_2
+     0036    _memcpy_PARM_2
+     0039    __findFirstOne_i_1_1
+     0039    _memcpy_PARM_3
+     003B    _memcpy_ret_1_1
+     003E    _memcpy_s_1_1
 
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-SSEG                               0036   00CA =    202. bytes (REL,OVR)
+SSEG                               0041   00BF =    191. bytes (REL,OVR)
 
       Value  Global
    --------  --------------------------------
-     0036    __start__stack
+     0041    __start__stack
 
 
 
@@ -371,17 +364,18 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CSEG                               0F6E   0610 =   1552. bytes (REL,CON,CODE)
+CSEG                               0F6E   0C91 =   3217. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
   0C:0F6E    _main
-  0C:0FA5    _montMultiply
-  0C:132B    _montModExp
-  0C:1496    __findFirstOne
-  0C:1545    __gptrput
-  0C:155E    __gptrget
-  0C:157A    __sdcc_external_startup
+  0C:15A3    _montMultiply
+  0C:1915    _montModExp
+  0C:1ABF    __findFirstOne
+  0C:1B6E    _memcpy
+  0C:1BC6    __gptrput
+  0C:1BDF    __gptrget
+  0C:1BFB    __sdcc_external_startup
 
 
 ASxxxx Linker V01.75 + NoICE + SDCC Feb 1999,  page 1.
@@ -393,6 +387,7 @@ main.rel
 Libraries Linked            [   object  file   ]
 
 /usr/share/sdcc/lib/small/mcs51.lib    [     crtclear.rel ]
+/usr/share/sdcc/lib/small/libsdcc.lib    [      _memcpy.rel ]
 /usr/share/sdcc/lib/small/mcs51.lib    [     crtxinit.rel ]
 /usr/share/sdcc/lib/small/libsdcc.lib    [     _gptrput.rel ]
 /usr/share/sdcc/lib/small/mcs51.lib    [    crtxclear.rel ]
