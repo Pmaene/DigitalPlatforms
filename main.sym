@@ -266,48 +266,47 @@ Symbol Table
     _TR1                                                        =  008E G
     _TXD                                                        =  00B1 G
     _WR                                                         =  00B6 G
- 1C __findFirstOne                                                 02A7 GR
+ 1C __displayCycles                                                03E2 GR
+ 1C __findFirstOne                                                 0333 GR
   4 __findFirstOne_e_1_1                                           0000 GR
   4 __findFirstOne_i_1_1                                           0003 GR
     __gptrget                                                      **** GX
+    __gptrput                                                      **** GX
  13 __interrupt_vect                                               0000 R
     __mcs51_genRAMCLEAR                                            **** GX
     __mcs51_genXINIT                                               **** GX
     __mcs51_genXRAMCLEAR                                           **** GX
- 1C __mul1_montgomery                                              03A1 GR
- 1C __mul1_readResult                                              037F GR
- 1C __mul1_writeAll                                                0356 GR
- 1C __mul1_writeOne                                                0367 GR
- 1C __mul1_writeReg                                                0378 GR
- 1C __mul1_writeResult                                             0390 GR
+ 1C __mul1_montgomery                                              0434 GR
+ 1C __mul1_readResult                                              0412 GR
+ 1C __mul1_writeAll                                                03E9 GR
+ 1C __mul1_writeOne                                                03FA GR
+ 1C __mul1_writeReg                                                040B GR
+ 1C __mul1_writeResult                                             0423 GR
     __sdcc_gsinit_startup                                          **** GX
  13 __sdcc_program_startup                                         0003 GR
   5 __start__stack                                                 0000 GR
- 1C __terminate                                                    03A8 GR
+ 1C __terminate                                                    043B GR
     _decryptedMessage                                           =  5100 G
     _encryptedMessage                                           =  5000 G
  1C _main                                                          0000 GR
-    _memcpy                                                        **** GX
-    _memcpy_PARM_2                                                 **** GX
-    _memcpy_PARM_3                                                 **** GX
   F _message                                                       4300 GR
   E _modulus                                                       4200 GR
- 1C _montModExp                                                    0166 GR
-  3 _montModExp_PARM_2                                             0009 GR
-  3 _montModExp_PARM_3                                             000C GR
+ 1C _montModExp                                                    01E5 GR
+  3 _montModExp_PARM_2                                             000F GR
     _montModExp_one_1_1                                         =  1100 
-  3 _montModExp_r_1_1                                              000F R
   3 _montModExp_t_1_1                                              0012 R
     _montModExp_xTilde_1_1                                      =  1200 
- 1C _montMultiply                                                  0055 GR
- 1C _montMultiply_One                                              00C8 GR
-  3 _montMultiply_One_PARM_2                                       0006 GR
+ 1C _montMultiply                                                  0080 GR
+ 1C _montMultiply_One                                              011B GR
+  3 _montMultiply_One_PARM_2                                       0009 GR
   8 _montMultiply_One_PARM_3                                       0001 GR
+  3 _montMultiply_One_r_1_1                                        000C R
   3 _montMultiply_PARM_2                                           0000 GR
   3 _montMultiply_PARM_3                                           0003 GR
   8 _montMultiply_PARM_4                                           0000 GR
- 1C _montMultiply_Result                                           0123 GR
+ 1C _montMultiply_Result                                           018B GR
   8 _montMultiply_Result_PARM_2                                    0002 GR
+  3 _montMultiply_r_1_1                                            0006 R
  11 _privateKey                                                    4500 GR
  10 _publicKey                                                     4400 GR
   D _r2modm                                                        4100 GR
@@ -525,7 +524,7 @@ Area Table
   19 GSINIT5                                                                            size    0   flags 20
   1A GSINIT                                                                             size  F0A   flags 20
   1B GSFINAL                                                                            size    3   flags 20
-  1C CSEG                                                                               size  3AC   flags 20
+  1C CSEG                                                                               size  43F   flags 20
   1D CONST                                                                              size    0   flags 20
   1E XINIT                                                                              size    0   flags 20
   1F CABS                                                                               size    0   flags 28

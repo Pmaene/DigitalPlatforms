@@ -1,13 +1,12 @@
 #include <8051.h>
-
 #include <stdbool.h>
-#include <string.h>
 
 #define SIZE 128
 
 // Instructions
 #define INS_IDLE              0x00
-#define INS_ACK               0x01
+#define INS_DISPLAY_CYCLES    0x01
+#define INS_ACK               0x0F
 
 #define INS_MUL1_WRITE_ALL    0x10
 #define INS_MUL1_WRITE_ONE    0x11
@@ -46,10 +45,12 @@ volatile __xdata __at (0x5100) unsigned char decryptedMessage[SIZE];
 void montMultiply(unsigned char *r, unsigned char *a, unsigned char *b, bool readResult);
 void montMultiply_One(unsigned char *r, unsigned char *a, bool readResult);
 void montMultiply_Result(unsigned char *r, bool readResult);
-void montModExp(unsigned char *r, unsigned char *x, unsigned char *e);
+void montModExp(unsigned char *x, unsigned char *e);
 
 // Private Function API
 unsigned short _findFirstOne(unsigned char *e);
+
+void _displayCycles();
 
 void _mul1_writeAll();
 void _mul1_writeOne();
@@ -62,51 +63,75 @@ void _terminate();
 
 // Public Functions
 int main() {
-    // We only need to copy the modulus once
-    memcpy(sM, modulus, SIZE);
+    unsigned char i;
 
-    montModExp(encryptedMessage, message, publicKey);
-    montModExp(decryptedMessage, encryptedMessage, privateKey);
+    // Copying the modulus into the multiplier
+    for (i = 0; i < SIZE; i++)
+        sM[i] = modulus[i];
+    _mul1_writeAll();
+
+    montModExp(message, publicKey);
+    for (i = 0; i < SIZE; i++)
+        encryptedMessage[i] = sR[i];
+    montModExp(encryptedMessage, privateKey);
+    for (i = 0; i < SIZE; i++)
+        decryptedMessage[i] = sR[i];
+
     _terminate();
     return 0;
 }
 
 void montMultiply(unsigned char *r, unsigned char *a, unsigned char *b, bool readResult) {
-    memcpy(sA, a, SIZE);
-    memcpy(sB, b, SIZE);
+    unsigned char i;
+
+    for (i = 0; i < SIZE; i++)
+        sA[i] = a[i];
+    for (i = 0; i < SIZE; i++)
+        sB[i] = b[i];
 
     _mul1_writeAll();
     _mul1_montgomery();
 
     if (readResult) {
         _mul1_readResult();
-        memcpy(r, sR, SIZE);
+        if (r != sR)
+            for (i = 0; i < SIZE; i++)
+                r[i] = sR[i];
     }
 }
 
 void montMultiply_One(unsigned char *r, unsigned char *a, bool readResult) {
-    memcpy(sA, a, SIZE);
+    unsigned char i;
+
+    for (i = 0; i < SIZE; i++)
+        sA[i] = a[i];
 
     _mul1_writeOne();
     _mul1_montgomery();
 
     if (readResult) {
         _mul1_readResult();
-        memcpy(r, sR, SIZE);
+        if (r != sR)
+            for (i = 0; i < SIZE; i++)
+                r[i] = sR[i];
     }
 }
 
 void montMultiply_Result(unsigned char *r, bool readResult) {
+    unsigned char i;
+
     _mul1_writeReg();
     _mul1_montgomery();
 
     if (readResult) {
         _mul1_readResult();
-        memcpy(r, sR, SIZE);
+        if (r != sR)
+            for (i = 0; i < SIZE; i++)
+                r[i] = sR[i];
     }
 }
 
-void montModExp(unsigned char *r, unsigned char *x, unsigned char *e) {
+void montModExp(unsigned char *x, unsigned char *e) {
     __xdata __at (0x1100) unsigned char one[SIZE];
     __xdata __at (0x1200) unsigned char xTilde[SIZE];
 
@@ -119,17 +144,18 @@ void montModExp(unsigned char *r, unsigned char *x, unsigned char *e) {
 
     montMultiply(xTilde, x, r2modm, true);
 
-    memcpy(sR, rmodm, SIZE);
+    for (i = 0; i < SIZE; i++)
+        sR[i] = rmodm[i];
     _mul1_writeResult();
 
     for (i = 0; i <= t; i++) {
         if (i != 0)
-            montMultiply_Result(r, ((e[(t-i)/8] >> (t-i)%8)) & 1);
+            montMultiply_Result(sR, ((e[(t-i)/8] >> (t-i)%8)) & 1);
         if (((e[(t-i)/8] >> (t-i)%8)) & 1)
-            montMultiply_One(r, xTilde, false);
+            montMultiply_One(sR, xTilde, false);
     }
 
-    montMultiply_One(r, one, true);
+    montMultiply_One(sR, one, true);
 }
 
 // Private Functions
@@ -147,6 +173,11 @@ unsigned short _findFirstOne(unsigned char *e) {
     }
 
     return 0;
+}
+
+void _displayCycles() {
+    P0 = INS_DISPLAY_CYCLES;
+    P0 = INS_IDLE;
 }
 
 void _mul1_writeAll() {

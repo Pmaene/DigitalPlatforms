@@ -239,6 +239,10 @@ dp decoder_dp(in instruction, data_in, result_in : ns(8); out sync, result_out, 
     sfg stop_montgomery {
         start_sig = 0;
     }
+
+    sfg display_cycles {
+        $display("Cycles: ", $cycle);
+    }
 }
 
 fsm decoder(decoder_dp) {
@@ -248,6 +252,8 @@ fsm decoder(decoder_dp) {
     @init           (no_montgomery, no_sync, no_write, no_address, decode) -> do;
     @do             if (instruction_reg == 0x00) then
                         (no_montgomery, no_sync, no_write, no_address, decode) -> do;
+                    else if (instruction_reg == 0x01) then
+                        (display_cycles, no_montgomery, no_sync, no_write, no_address, decode) -> do;
                     else if (instruction_reg == 0x10) then
                         (reset_counter, no_montgomery, no_sync, no_write, no_address, decode) -> read_all;
                     else if (instruction_reg == 0x11) then
@@ -278,7 +284,7 @@ fsm decoder(decoder_dp) {
                         (read_result, no_montgomery, no_sync, no_write, decode) -> read_result;
                     else
                         (read_done, no_montgomery, no_write, no_address, decode) -> read_done;
-    @read_done      if (instruction_reg == 0x01) then
+    @read_done      if (instruction_reg == 0x0F) then
                         (no_montgomery, no_sync, no_write, no_address, decode) -> do;
                     else
                         (read_done, no_montgomery, no_write, no_address, decode) -> read_done;
@@ -290,7 +296,7 @@ fsm decoder(decoder_dp) {
                         (no_montgomery, no_sync, write_result, decode) -> write_result;
                     else
                         (no_montgomery, no_write, no_address, write_done, decode) -> write_done;
-    @write_done     if (instruction_reg == 0x01) then
+    @write_done     if (instruction_reg == 0x0F) then
                         (no_montgomery, no_write, no_address, no_sync, decode) -> do;
                     else
                         (no_montgomery, no_write, no_address, write_done, decode) -> write_done;
