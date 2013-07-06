@@ -6,14 +6,22 @@
 #define SIZE 128
 
 // Instructions
-#define INS_IDLE             0x00
-#define INS_ACK              0x01
+#define INS_IDLE              0x00
+#define INS_ACK               0x01
 
-#define INS_MUL1_WRITE_ALL   0x10
-#define INS_MUL1_WRITE_ONE   0x11
-#define INS_MUL1_WRITE_REG   0x12
-#define INS_MUL1_READ_RESULT 0x13
-#define INS_MUL1_MONTGOMERY  0x14
+#define INS_MUL1_WRITE_ALL    0x10
+#define INS_MUL1_WRITE_ONE    0x11
+#define INS_MUL1_WRITE_REG    0x12
+#define INS_MUL1_READ_RESULT  0x13
+#define INS_MUL1_WRITE_RESULT 0x14
+#define INS_MUL1_MONTGOMERY   0x15
+
+#define INS_MUL2_WRITE_ALL    0x20
+#define INS_MUL2_WRITE_ONE    0x21
+#define INS_MUL2_WRITE_REG    0x22
+#define INS_MUL2_READ_RESULT  0x23
+#define INS_MUL2_WRITE_RESULT 0x24
+#define INS_MUL2_MONTGOMERY   0x25
 
 // Hardware Address Map
 volatile __xdata __at (0x2000) unsigned char sA[SIZE];
@@ -34,23 +42,25 @@ volatile __xdata __at (0x4500) unsigned char privateKey[SIZE] = {0x01, 0x23, 0xC
 volatile __xdata __at (0x5000) unsigned char encryptedMessage[SIZE];
 volatile __xdata __at (0x5100) unsigned char decryptedMessage[SIZE];
 
-// Public Functions
+// Public Function API
 void montMultiply(unsigned char *r, unsigned char *a, unsigned char *b, bool readResult);
 void montMultiply_One(unsigned char *r, unsigned char *a, bool readResult);
 void montMultiply_Result(unsigned char *r, bool readResult);
 void montModExp(unsigned char *r, unsigned char *x, unsigned char *e);
 
-// Private Functions
+// Private Function API
 unsigned short _findFirstOne(unsigned char *e);
 
 void _mul1_writeAll();
 void _mul1_writeOne();
 void _mul1_writeReg();
-void _mul1_montgomery();
 void _mul1_readResult();
+void _mul1_writeResult();
+void _mul1_montgomery();
 
 void _terminate();
 
+// Public Functions
 int main() {
     // We only need to copy the modulus once
     memcpy(sM, modulus, SIZE);
@@ -108,7 +118,9 @@ void montModExp(unsigned char *r, unsigned char *x, unsigned char *e) {
     t = _findFirstOne(e);
 
     montMultiply(xTilde, x, r2modm, true);
-    montMultiply(r, rmodm, rmodm, false);
+
+    memcpy(sR, rmodm, SIZE);
+    _mul1_writeResult();
 
     for (i = 0; i <= t; i++) {
         montMultiply_Result(r, i == t || ((e[(t-i)/8] >> (t-i)%8)) & 1);
@@ -161,11 +173,6 @@ void _mul1_writeReg() {
     P0 = INS_IDLE;
 }
 
-void _mul1_montgomery() {
-    P0 = INS_MUL1_MONTGOMERY;
-    P0 = INS_IDLE;
-}
-
 void _mul1_readResult() {
     P1 = 0;
 
@@ -173,6 +180,21 @@ void _mul1_readResult() {
     while (P1 == 0) {}
     P0 = INS_ACK;
 
+    P0 = INS_IDLE;
+}
+
+void _mul1_writeResult() {
+    P1 = 0;
+
+    P0 = INS_MUL1_WRITE_RESULT;
+    P0 = INS_IDLE;
+
+    while (P1 == 0) {}
+    P0 = INS_ACK;
+}
+
+void _mul1_montgomery() {
+    P0 = INS_MUL1_MONTGOMERY;
     P0 = INS_IDLE;
 }
 

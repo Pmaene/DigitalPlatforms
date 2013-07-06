@@ -266,7 +266,7 @@ Symbol Table
     _TR1                                                        =  008E G
     _TXD                                                        =  00B1 G
     _WR                                                         =  00B6 G
- 1C __findFirstOne                                                 02BE GR
+ 1C __findFirstOne                                                 02B9 GR
   4 __findFirstOne_e_1_1                                           0000 GR
   4 __findFirstOne_i_1_1                                           0003 GR
     __gptrget                                                      **** GX
@@ -274,15 +274,16 @@ Symbol Table
     __mcs51_genRAMCLEAR                                            **** GX
     __mcs51_genXINIT                                               **** GX
     __mcs51_genXRAMCLEAR                                           **** GX
- 1C __mul1_montgomery                                              0396 GR
- 1C __mul1_readResult                                              039D GR
- 1C __mul1_writeAll                                                036D GR
- 1C __mul1_writeOne                                                037E GR
- 1C __mul1_writeReg                                                038F GR
+ 1C __mul1_montgomery                                              03B3 GR
+ 1C __mul1_readResult                                              0391 GR
+ 1C __mul1_writeAll                                                0368 GR
+ 1C __mul1_writeOne                                                0379 GR
+ 1C __mul1_writeReg                                                038A GR
+ 1C __mul1_writeResult                                             03A2 GR
     __sdcc_gsinit_startup                                          **** GX
  13 __sdcc_program_startup                                         0003 GR
   5 __start__stack                                                 0000 GR
- 1C __terminate                                                    03AE GR
+ 1C __terminate                                                    03BA GR
     _decryptedMessage                                           =  5100 G
     _encryptedMessage                                           =  5000 G
  1C _main                                                          0000 GR
@@ -525,7 +526,7 @@ Area Table
   19 GSINIT5                                                                            size    0   flags 20
   1A GSINIT                                                                             size  F0A   flags 20
   1B GSFINAL                                                                            size    3   flags 20
-  1C CSEG                                                                               size  3B2   flags 20
+  1C CSEG                                                                               size  3BE   flags 20
   1D CONST                                                                              size    0   flags 20
   1E XINIT                                                                              size    0   flags 20
   1F CABS                                                                               size    0   flags 28

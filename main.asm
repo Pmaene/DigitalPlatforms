@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 2.9.0 #5416 (Feb  3 2010) (UNIX)
-; This file was generated Sat Jul  6 09:10:27 2013
+; This file was generated Sat Jul  6 09:31:43 2013
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mmcs51 --model-small
@@ -134,8 +134,9 @@
 	.globl __mul1_writeAll
 	.globl __mul1_writeOne
 	.globl __mul1_writeReg
-	.globl __mul1_montgomery
 	.globl __mul1_readResult
+	.globl __mul1_writeResult
+	.globl __mul1_montgomery
 	.globl __terminate
 ;--------------------------------------------------------
 ; special function registers
@@ -371,7 +372,7 @@ __interrupt_vect:
 	.globl __mcs51_genXINIT
 	.globl __mcs51_genXRAMCLEAR
 	.globl __mcs51_genRAMCLEAR
-;	main.c:26: volatile __xdata __at (0x4000) unsigned char rmodm[SIZE] = {0x95, 0x0C, 0x9E, 0x79, 0xEC, 0xD3, 0x0A, 0xE4, 0x35, 0x6B, 0x60, 0xED, 0x25, 0x25, 0x33, 0xD9, 0x26, 0x8C, 0xD1, 0x99, 0xEE, 0x9C, 0x11, 0x8D, 0xBC, 0xBF, 0x68, 0xAA, 0xB3, 0xF9, 0xDF, 0xDC, 0x80, 0xB8, 0x28, 0x60, 0x2B, 0x21, 0x03, 0x89, 0xEF, 0x2C, 0xE6, 0x93, 0x6F, 0xBB, 0xA7, 0x56, 0x28, 0xB5, 0x99, 0xD7, 0x69, 0xDB, 0x6B, 0x09, 0xF7, 0x0B, 0x84, 0xE5, 0xB2, 0xF8, 0x79, 0xC4, 0xD5, 0x7B, 0x06, 0x45, 0xB5, 0x22, 0xC2, 0x28, 0xF8, 0x7A, 0x39, 0x98, 0xE7, 0xA4, 0x54, 0x45, 0xA2, 0x0D, 0xCA, 0xB1, 0x3B, 0x9E, 0x59, 0xF9, 0xFB, 0xAA, 0x30, 0x97, 0x6D, 0x9B, 0x24, 0x6F, 0x74, 0x30, 0xA7, 0xAF, 0xFF, 0x84, 0x2C, 0x49, 0x1B, 0x30, 0x9F, 0xB5, 0x96, 0x3D, 0x8F, 0xC2, 0xF0, 0x3B, 0xFC, 0xD4, 0xB2, 0x78, 0x05, 0xD3, 0xCB, 0x80, 0x88, 0x85, 0x95, 0x7A, 0xB7, 0x64};
+;	main.c:34: volatile __xdata __at (0x4000) unsigned char rmodm[SIZE] = {0x95, 0x0C, 0x9E, 0x79, 0xEC, 0xD3, 0x0A, 0xE4, 0x35, 0x6B, 0x60, 0xED, 0x25, 0x25, 0x33, 0xD9, 0x26, 0x8C, 0xD1, 0x99, 0xEE, 0x9C, 0x11, 0x8D, 0xBC, 0xBF, 0x68, 0xAA, 0xB3, 0xF9, 0xDF, 0xDC, 0x80, 0xB8, 0x28, 0x60, 0x2B, 0x21, 0x03, 0x89, 0xEF, 0x2C, 0xE6, 0x93, 0x6F, 0xBB, 0xA7, 0x56, 0x28, 0xB5, 0x99, 0xD7, 0x69, 0xDB, 0x6B, 0x09, 0xF7, 0x0B, 0x84, 0xE5, 0xB2, 0xF8, 0x79, 0xC4, 0xD5, 0x7B, 0x06, 0x45, 0xB5, 0x22, 0xC2, 0x28, 0xF8, 0x7A, 0x39, 0x98, 0xE7, 0xA4, 0x54, 0x45, 0xA2, 0x0D, 0xCA, 0xB1, 0x3B, 0x9E, 0x59, 0xF9, 0xFB, 0xAA, 0x30, 0x97, 0x6D, 0x9B, 0x24, 0x6F, 0x74, 0x30, 0xA7, 0xAF, 0xFF, 0x84, 0x2C, 0x49, 0x1B, 0x30, 0x9F, 0xB5, 0x96, 0x3D, 0x8F, 0xC2, 0xF0, 0x3B, 0xFC, 0xD4, 0xB2, 0x78, 0x05, 0xD3, 0xCB, 0x80, 0x88, 0x85, 0x95, 0x7A, 0xB7, 0x64};
 	mov	dptr,#_rmodm
 	mov	a,#0x95
 	movx	@dptr,a
@@ -756,7 +757,7 @@ __interrupt_vect:
 	mov	dptr,#(_rmodm + 0x007f)
 	mov	a,#0x64
 	movx	@dptr,a
-;	main.c:27: volatile __xdata __at (0x4100) unsigned char r2modm[SIZE] = {0xE4, 0xC4, 0x31, 0x31, 0x08, 0x64, 0x1B, 0xC5, 0x40, 0x21, 0xD5, 0x3F, 0x82, 0x98, 0xB5, 0x8B, 0x0C, 0xDA, 0xDE, 0x0A, 0x73, 0xD6, 0x75, 0x80, 0x81, 0x7B, 0xAF, 0x90, 0x51, 0xA2, 0x22, 0xDF, 0x60, 0xAD, 0x1A, 0x5A, 0x69, 0x4E, 0x87, 0xF5, 0x82, 0x19, 0xC7, 0xDD, 0xAF, 0xEB, 0x7A, 0x3E, 0xF3, 0xDA, 0xB1, 0xE1, 0xED, 0xD2, 0x2E, 0x26, 0x7D, 0xD5, 0xB7, 0xC3, 0x13, 0x09, 0xD5, 0x11, 0xDE, 0x9E, 0x12, 0x6A, 0x51, 0xF5, 0x83, 0x1B, 0xDE, 0xAB, 0x6D, 0xD7, 0xAD, 0x32, 0x07, 0x6C, 0x95, 0x2A, 0x56, 0xFF, 0xD7, 0xE7, 0x00, 0x85, 0xBE, 0xB4, 0x3E, 0xEF, 0x73, 0x88, 0x75, 0xD9, 0x5C, 0x6A, 0xB1, 0x58, 0x4A, 0xBC, 0x80, 0x53, 0x63, 0x48, 0xFD, 0xA0, 0xFC, 0xAD, 0xD9, 0x34, 0xFB, 0xD3, 0xA9, 0xE8, 0x18, 0x32, 0x33, 0x78, 0xB0, 0x08, 0xE4, 0x7B, 0x59, 0xF2, 0x45, 0x8A};
+;	main.c:35: volatile __xdata __at (0x4100) unsigned char r2modm[SIZE] = {0xE4, 0xC4, 0x31, 0x31, 0x08, 0x64, 0x1B, 0xC5, 0x40, 0x21, 0xD5, 0x3F, 0x82, 0x98, 0xB5, 0x8B, 0x0C, 0xDA, 0xDE, 0x0A, 0x73, 0xD6, 0x75, 0x80, 0x81, 0x7B, 0xAF, 0x90, 0x51, 0xA2, 0x22, 0xDF, 0x60, 0xAD, 0x1A, 0x5A, 0x69, 0x4E, 0x87, 0xF5, 0x82, 0x19, 0xC7, 0xDD, 0xAF, 0xEB, 0x7A, 0x3E, 0xF3, 0xDA, 0xB1, 0xE1, 0xED, 0xD2, 0x2E, 0x26, 0x7D, 0xD5, 0xB7, 0xC3, 0x13, 0x09, 0xD5, 0x11, 0xDE, 0x9E, 0x12, 0x6A, 0x51, 0xF5, 0x83, 0x1B, 0xDE, 0xAB, 0x6D, 0xD7, 0xAD, 0x32, 0x07, 0x6C, 0x95, 0x2A, 0x56, 0xFF, 0xD7, 0xE7, 0x00, 0x85, 0xBE, 0xB4, 0x3E, 0xEF, 0x73, 0x88, 0x75, 0xD9, 0x5C, 0x6A, 0xB1, 0x58, 0x4A, 0xBC, 0x80, 0x53, 0x63, 0x48, 0xFD, 0xA0, 0xFC, 0xAD, 0xD9, 0x34, 0xFB, 0xD3, 0xA9, 0xE8, 0x18, 0x32, 0x33, 0x78, 0xB0, 0x08, 0xE4, 0x7B, 0x59, 0xF2, 0x45, 0x8A};
 	mov	dptr,#_r2modm
 	mov	a,#0xE4
 	movx	@dptr,a
@@ -1141,7 +1142,7 @@ __interrupt_vect:
 	mov	dptr,#(_r2modm + 0x007f)
 	mov	a,#0x8A
 	movx	@dptr,a
-;	main.c:29: volatile __xdata __at (0x4200) unsigned char modulus[SIZE] = {0x6B, 0xF3, 0x61, 0x86, 0x13, 0x2C, 0xF5, 0x1B, 0xCA, 0x94, 0x9F, 0x12, 0xDA, 0xDA, 0xCC, 0x26, 0xD9, 0x73, 0x2E, 0x66, 0x11, 0x63, 0xEE, 0x72, 0x43, 0x40, 0x97, 0x55, 0x4C, 0x06, 0x20, 0x23, 0x7F, 0x47, 0xD7, 0x9F, 0xD4, 0xDE, 0xFC, 0x76, 0x10, 0xD3, 0x19, 0x6C, 0x90, 0x44, 0x58, 0xA9, 0xD7, 0x4A, 0x66, 0x28, 0x96, 0x24, 0x94, 0xF6, 0x08, 0xF4, 0x7B, 0x1A, 0x4D, 0x07, 0x86, 0x3B, 0x2A, 0x84, 0xF9, 0xBA, 0x4A, 0xDD, 0x3D, 0xD7, 0x07, 0x85, 0xC6, 0x67, 0x18, 0x5B, 0xAB, 0xBA, 0x5D, 0xF2, 0x35, 0x4E, 0xC4, 0x61, 0xA6, 0x06, 0x04, 0x55, 0xCF, 0x68, 0x92, 0x64, 0xDB, 0x90, 0x8B, 0xCF, 0x58, 0x50, 0x00, 0x7B, 0xD3, 0xB6, 0xE4, 0xCF, 0x60, 0x4A, 0x69, 0xC2, 0x70, 0x3D, 0x0F, 0xC4, 0x03, 0x2B, 0x4D, 0x87, 0xFA, 0x2C, 0x34, 0x7F, 0x77, 0x7A, 0x6A, 0x85, 0x48, 0x9B};
+;	main.c:37: volatile __xdata __at (0x4200) unsigned char modulus[SIZE] = {0x6B, 0xF3, 0x61, 0x86, 0x13, 0x2C, 0xF5, 0x1B, 0xCA, 0x94, 0x9F, 0x12, 0xDA, 0xDA, 0xCC, 0x26, 0xD9, 0x73, 0x2E, 0x66, 0x11, 0x63, 0xEE, 0x72, 0x43, 0x40, 0x97, 0x55, 0x4C, 0x06, 0x20, 0x23, 0x7F, 0x47, 0xD7, 0x9F, 0xD4, 0xDE, 0xFC, 0x76, 0x10, 0xD3, 0x19, 0x6C, 0x90, 0x44, 0x58, 0xA9, 0xD7, 0x4A, 0x66, 0x28, 0x96, 0x24, 0x94, 0xF6, 0x08, 0xF4, 0x7B, 0x1A, 0x4D, 0x07, 0x86, 0x3B, 0x2A, 0x84, 0xF9, 0xBA, 0x4A, 0xDD, 0x3D, 0xD7, 0x07, 0x85, 0xC6, 0x67, 0x18, 0x5B, 0xAB, 0xBA, 0x5D, 0xF2, 0x35, 0x4E, 0xC4, 0x61, 0xA6, 0x06, 0x04, 0x55, 0xCF, 0x68, 0x92, 0x64, 0xDB, 0x90, 0x8B, 0xCF, 0x58, 0x50, 0x00, 0x7B, 0xD3, 0xB6, 0xE4, 0xCF, 0x60, 0x4A, 0x69, 0xC2, 0x70, 0x3D, 0x0F, 0xC4, 0x03, 0x2B, 0x4D, 0x87, 0xFA, 0x2C, 0x34, 0x7F, 0x77, 0x7A, 0x6A, 0x85, 0x48, 0x9B};
 	mov	dptr,#_modulus
 	mov	a,#0x6B
 	movx	@dptr,a
@@ -1526,7 +1527,7 @@ __interrupt_vect:
 	mov	dptr,#(_modulus + 0x007f)
 	mov	a,#0x9B
 	movx	@dptr,a
-;	main.c:30: volatile __xdata __at (0x4300) unsigned char message[SIZE] = {0xE0, 0xFA, 0x7D, 0xF4, 0x9E, 0xFF, 0x31, 0x8A, 0x4A, 0x17, 0x7A, 0xE9, 0x37, 0x86, 0x15, 0x27, 0x2B, 0x29, 0x06, 0x53, 0xE1, 0x08, 0xD2, 0x11, 0xC6, 0xEF, 0x43, 0xB6, 0xC8, 0x93, 0x4F, 0x27, 0xD1, 0x62, 0xCF, 0x12, 0xC3, 0xE6, 0xA4, 0x32, 0x85, 0xA6, 0x4F, 0x26, 0x12, 0x66, 0x87, 0x5A, 0x8F, 0xAE, 0x57, 0xE2, 0x7C, 0x8E, 0xFB, 0xA6, 0xE3, 0x6A, 0x84, 0xF7, 0x92, 0x5D, 0x66, 0x09, 0x17, 0xFC, 0x4A, 0x98, 0x1E, 0xDA, 0xB7, 0xA1, 0x94, 0xE8, 0x59, 0xAE, 0x3A, 0xA3, 0x80, 0x13, 0x13, 0x81, 0x0A, 0x1C, 0x6F, 0x0C, 0x16, 0x67, 0x48, 0x2A, 0x1F, 0x40, 0x8F, 0x97, 0xBB, 0x55, 0x52, 0x35, 0x88, 0x65, 0xD8, 0x01, 0x8F, 0x77, 0x86, 0xA5, 0x55, 0x66, 0x53, 0x02, 0xF3, 0x41, 0xF4, 0x26, 0xCC, 0xD7, 0x0A, 0xEA, 0xE4, 0x3C, 0xA1, 0x65, 0xBA, 0x8D, 0x71, 0x08, 0xEE, 0x98};
+;	main.c:38: volatile __xdata __at (0x4300) unsigned char message[SIZE] = {0xE0, 0xFA, 0x7D, 0xF4, 0x9E, 0xFF, 0x31, 0x8A, 0x4A, 0x17, 0x7A, 0xE9, 0x37, 0x86, 0x15, 0x27, 0x2B, 0x29, 0x06, 0x53, 0xE1, 0x08, 0xD2, 0x11, 0xC6, 0xEF, 0x43, 0xB6, 0xC8, 0x93, 0x4F, 0x27, 0xD1, 0x62, 0xCF, 0x12, 0xC3, 0xE6, 0xA4, 0x32, 0x85, 0xA6, 0x4F, 0x26, 0x12, 0x66, 0x87, 0x5A, 0x8F, 0xAE, 0x57, 0xE2, 0x7C, 0x8E, 0xFB, 0xA6, 0xE3, 0x6A, 0x84, 0xF7, 0x92, 0x5D, 0x66, 0x09, 0x17, 0xFC, 0x4A, 0x98, 0x1E, 0xDA, 0xB7, 0xA1, 0x94, 0xE8, 0x59, 0xAE, 0x3A, 0xA3, 0x80, 0x13, 0x13, 0x81, 0x0A, 0x1C, 0x6F, 0x0C, 0x16, 0x67, 0x48, 0x2A, 0x1F, 0x40, 0x8F, 0x97, 0xBB, 0x55, 0x52, 0x35, 0x88, 0x65, 0xD8, 0x01, 0x8F, 0x77, 0x86, 0xA5, 0x55, 0x66, 0x53, 0x02, 0xF3, 0x41, 0xF4, 0x26, 0xCC, 0xD7, 0x0A, 0xEA, 0xE4, 0x3C, 0xA1, 0x65, 0xBA, 0x8D, 0x71, 0x08, 0xEE, 0x98};
 	mov	dptr,#_message
 	mov	a,#0xE0
 	movx	@dptr,a
@@ -1911,14 +1912,14 @@ __interrupt_vect:
 	mov	dptr,#(_message + 0x007f)
 	mov	a,#0x98
 	movx	@dptr,a
-;	main.c:31: volatile __xdata __at (0x4400) unsigned char publicKey[SIZE] = {0x01, 0x01};
+;	main.c:39: volatile __xdata __at (0x4400) unsigned char publicKey[SIZE] = {0x01, 0x01};
 	mov	dptr,#_publicKey
 	mov	a,#0x01
 	movx	@dptr,a
 	mov	dptr,#(_publicKey + 0x0001)
 	mov	a,#0x01
 	movx	@dptr,a
-;	main.c:32: volatile __xdata __at (0x4500) unsigned char privateKey[SIZE] = {0x01, 0x23, 0xC5, 0xD2, 0x6A, 0xE6, 0x8B, 0x2B, 0xE7, 0x41, 0x5A, 0x8E, 0xBA, 0x08, 0x1A, 0x66, 0x97, 0xC4, 0xB7, 0x6E, 0x54, 0x5D, 0xC4, 0x99, 0x40, 0x63, 0x65, 0xED, 0x77, 0xCA, 0xCF, 0xEB, 0x75, 0xCF, 0x29, 0x3C, 0xE5, 0x27, 0x0B, 0x54, 0xD0, 0x11, 0x7E, 0xB2, 0x0B, 0x12, 0x9F, 0xBD, 0xBF, 0x2F, 0x51, 0x4C, 0x51, 0x6D, 0x2F, 0xF8, 0x2D, 0x62, 0xB4, 0x1E, 0xA5, 0xEC, 0xE9, 0xDE, 0x0B, 0xE9, 0x7A, 0x72, 0xAE, 0xA4, 0x56, 0xAF, 0xE3, 0xAF, 0x72, 0x54, 0x05, 0xBE, 0x14, 0xA1, 0x01, 0x4D, 0x0D, 0x8D, 0x02, 0x7F, 0xCA, 0xEF, 0xEC, 0x83, 0xE2, 0xA0, 0x75, 0x0A, 0xEF, 0x0C, 0x2C, 0x61, 0xC2, 0x5C, 0xDC, 0x95, 0xC3, 0x36, 0x63, 0x69, 0x6A, 0x76, 0x64, 0xD2, 0x57, 0x56, 0x7F, 0xE3, 0xC9, 0xCA, 0x11, 0x1F, 0xFD, 0xFC, 0x1A, 0x54, 0xA0, 0x70, 0x42, 0x97, 0xF7, 0x6D};
+;	main.c:40: volatile __xdata __at (0x4500) unsigned char privateKey[SIZE] = {0x01, 0x23, 0xC5, 0xD2, 0x6A, 0xE6, 0x8B, 0x2B, 0xE7, 0x41, 0x5A, 0x8E, 0xBA, 0x08, 0x1A, 0x66, 0x97, 0xC4, 0xB7, 0x6E, 0x54, 0x5D, 0xC4, 0x99, 0x40, 0x63, 0x65, 0xED, 0x77, 0xCA, 0xCF, 0xEB, 0x75, 0xCF, 0x29, 0x3C, 0xE5, 0x27, 0x0B, 0x54, 0xD0, 0x11, 0x7E, 0xB2, 0x0B, 0x12, 0x9F, 0xBD, 0xBF, 0x2F, 0x51, 0x4C, 0x51, 0x6D, 0x2F, 0xF8, 0x2D, 0x62, 0xB4, 0x1E, 0xA5, 0xEC, 0xE9, 0xDE, 0x0B, 0xE9, 0x7A, 0x72, 0xAE, 0xA4, 0x56, 0xAF, 0xE3, 0xAF, 0x72, 0x54, 0x05, 0xBE, 0x14, 0xA1, 0x01, 0x4D, 0x0D, 0x8D, 0x02, 0x7F, 0xCA, 0xEF, 0xEC, 0x83, 0xE2, 0xA0, 0x75, 0x0A, 0xEF, 0x0C, 0x2C, 0x61, 0xC2, 0x5C, 0xDC, 0x95, 0xC3, 0x36, 0x63, 0x69, 0x6A, 0x76, 0x64, 0xD2, 0x57, 0x56, 0x7F, 0xE3, 0xC9, 0xCA, 0x11, 0x1F, 0xFD, 0xFC, 0x1A, 0x54, 0xA0, 0x70, 0x42, 0x97, 0xF7, 0x6D};
 	mov	dptr,#_privateKey
 	mov	a,#0x01
 	movx	@dptr,a
@@ -2322,7 +2323,7 @@ __sdcc_program_startup:
 ;Allocation info for local variables in function 'main'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:54: int main() {
+;	main.c:64: int main() {
 ;	-----------------------------------------
 ;	 function main
 ;	-----------------------------------------
@@ -2335,7 +2336,7 @@ _main:
 	ar7 = 0x07
 	ar0 = 0x00
 	ar1 = 0x01
-;	main.c:56: memcpy(sM, modulus, SIZE);
+;	main.c:66: memcpy(sM, modulus, SIZE);
 	mov	_memcpy_PARM_2,#_modulus
 	mov	(_memcpy_PARM_2 + 1),#(_modulus >> 8)
 	mov	(_memcpy_PARM_2 + 2),#0x00
@@ -2345,7 +2346,7 @@ _main:
 	mov	dptr,#_sM
 	mov	b,#0x00
 	lcall	_memcpy
-;	main.c:58: montModExp(encryptedMessage, message, publicKey);
+;	main.c:68: montModExp(encryptedMessage, message, publicKey);
 	mov	_montModExp_PARM_2,#_message
 	mov	(_montModExp_PARM_2 + 1),#(_message >> 8)
 	mov	(_montModExp_PARM_2 + 2),#0x00
@@ -2355,7 +2356,7 @@ _main:
 	mov	dptr,#_encryptedMessage
 	mov	b,#0x00
 	lcall	_montModExp
-;	main.c:59: montModExp(decryptedMessage, encryptedMessage, privateKey);
+;	main.c:69: montModExp(decryptedMessage, encryptedMessage, privateKey);
 	mov	_montModExp_PARM_2,#_encryptedMessage
 	mov	(_montModExp_PARM_2 + 1),#(_encryptedMessage >> 8)
 	mov	(_montModExp_PARM_2 + 2),#0x00
@@ -2365,9 +2366,9 @@ _main:
 	mov	dptr,#_decryptedMessage
 	mov	b,#0x00
 	lcall	_montModExp
-;	main.c:60: _terminate();
+;	main.c:70: _terminate();
 	lcall	__terminate
-;	main.c:61: return 0;
+;	main.c:71: return 0;
 	mov	dptr,#0x0000
 	ret
 ;------------------------------------------------------------
@@ -2377,7 +2378,7 @@ _main:
 ;b                         Allocated with name '_montMultiply_PARM_3'
 ;r                         Allocated to registers r2 r3 r4 
 ;------------------------------------------------------------
-;	main.c:64: void montMultiply(unsigned char *r, unsigned char *a, unsigned char *b, bool readResult) {
+;	main.c:74: void montMultiply(unsigned char *r, unsigned char *a, unsigned char *b, bool readResult) {
 ;	-----------------------------------------
 ;	 function montMultiply
 ;	-----------------------------------------
@@ -2385,7 +2386,7 @@ _montMultiply:
 	mov	r2,dpl
 	mov	r3,dph
 	mov	r4,b
-;	main.c:65: memcpy(sA, a, SIZE);
+;	main.c:75: memcpy(sA, a, SIZE);
 	mov	_memcpy_PARM_2,_montMultiply_PARM_2
 	mov	(_memcpy_PARM_2 + 1),(_montMultiply_PARM_2 + 1)
 	mov	(_memcpy_PARM_2 + 2),(_montMultiply_PARM_2 + 2)
@@ -2398,7 +2399,7 @@ _montMultiply:
 	push	ar3
 	push	ar4
 	lcall	_memcpy
-;	main.c:66: memcpy(sB, b, SIZE);
+;	main.c:76: memcpy(sB, b, SIZE);
 	mov	_memcpy_PARM_2,_montMultiply_PARM_3
 	mov	(_memcpy_PARM_2 + 1),(_montMultiply_PARM_3 + 1)
 	mov	(_memcpy_PARM_2 + 2),(_montMultiply_PARM_3 + 2)
@@ -2408,16 +2409,16 @@ _montMultiply:
 	mov	dptr,#_sB
 	mov	b,#0x00
 	lcall	_memcpy
-;	main.c:68: _mul1_writeAll();
+;	main.c:78: _mul1_writeAll();
 	lcall	__mul1_writeAll
-;	main.c:69: _mul1_montgomery();
+;	main.c:79: _mul1_montgomery();
 	lcall	__mul1_montgomery
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	main.c:71: if (readResult) {
+;	main.c:81: if (readResult) {
 	jnb	_montMultiply_PARM_4,00103$
-;	main.c:72: _mul1_readResult();
+;	main.c:82: _mul1_readResult();
 	push	ar2
 	push	ar3
 	push	ar4
@@ -2425,7 +2426,7 @@ _montMultiply:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	main.c:73: memcpy(r, sR, SIZE);
+;	main.c:83: memcpy(r, sR, SIZE);
 	mov	_memcpy_PARM_2,#_sR
 	mov	(_memcpy_PARM_2 + 1),#(_sR >> 8)
 	mov	(_memcpy_PARM_2 + 2),#0x00
@@ -2444,7 +2445,7 @@ _montMultiply:
 ;a                         Allocated with name '_montMultiply_One_PARM_2'
 ;r                         Allocated to registers r2 r3 r4 
 ;------------------------------------------------------------
-;	main.c:77: void montMultiply_One(unsigned char *r, unsigned char *a, bool readResult) {
+;	main.c:87: void montMultiply_One(unsigned char *r, unsigned char *a, bool readResult) {
 ;	-----------------------------------------
 ;	 function montMultiply_One
 ;	-----------------------------------------
@@ -2452,7 +2453,7 @@ _montMultiply_One:
 	mov	r2,dpl
 	mov	r3,dph
 	mov	r4,b
-;	main.c:78: memcpy(sA, a, SIZE);
+;	main.c:88: memcpy(sA, a, SIZE);
 	mov	_memcpy_PARM_2,_montMultiply_One_PARM_2
 	mov	(_memcpy_PARM_2 + 1),(_montMultiply_One_PARM_2 + 1)
 	mov	(_memcpy_PARM_2 + 2),(_montMultiply_One_PARM_2 + 2)
@@ -2465,16 +2466,16 @@ _montMultiply_One:
 	push	ar3
 	push	ar4
 	lcall	_memcpy
-;	main.c:80: _mul1_writeOne();
+;	main.c:90: _mul1_writeOne();
 	lcall	__mul1_writeOne
-;	main.c:81: _mul1_montgomery();
+;	main.c:91: _mul1_montgomery();
 	lcall	__mul1_montgomery
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	main.c:83: if (readResult) {
+;	main.c:93: if (readResult) {
 	jnb	_montMultiply_One_PARM_3,00103$
-;	main.c:84: _mul1_readResult();
+;	main.c:94: _mul1_readResult();
 	push	ar2
 	push	ar3
 	push	ar4
@@ -2482,7 +2483,7 @@ _montMultiply_One:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	main.c:85: memcpy(r, sR, SIZE);
+;	main.c:95: memcpy(r, sR, SIZE);
 	mov	_memcpy_PARM_2,#_sR
 	mov	(_memcpy_PARM_2 + 1),#(_sR >> 8)
 	mov	(_memcpy_PARM_2 + 2),#0x00
@@ -2500,7 +2501,7 @@ _montMultiply_One:
 ;------------------------------------------------------------
 ;r                         Allocated to registers r2 r3 r4 
 ;------------------------------------------------------------
-;	main.c:89: void montMultiply_Result(unsigned char *r, bool readResult) {
+;	main.c:99: void montMultiply_Result(unsigned char *r, bool readResult) {
 ;	-----------------------------------------
 ;	 function montMultiply_Result
 ;	-----------------------------------------
@@ -2508,19 +2509,19 @@ _montMultiply_Result:
 	mov	r2,dpl
 	mov	r3,dph
 	mov	r4,b
-;	main.c:90: _mul1_writeReg();
+;	main.c:100: _mul1_writeReg();
 	push	ar2
 	push	ar3
 	push	ar4
 	lcall	__mul1_writeReg
-;	main.c:91: _mul1_montgomery();
+;	main.c:101: _mul1_montgomery();
 	lcall	__mul1_montgomery
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	main.c:93: if (readResult) {
+;	main.c:103: if (readResult) {
 	jnb	_montMultiply_Result_PARM_2,00103$
-;	main.c:94: _mul1_readResult();
+;	main.c:104: _mul1_readResult();
 	push	ar2
 	push	ar3
 	push	ar4
@@ -2528,7 +2529,7 @@ _montMultiply_Result:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	main.c:95: memcpy(r, sR, SIZE);
+;	main.c:105: memcpy(r, sR, SIZE);
 	mov	_memcpy_PARM_2,#_sR
 	mov	(_memcpy_PARM_2 + 1),#(_sR >> 8)
 	mov	(_memcpy_PARM_2 + 2),#0x00
@@ -2552,7 +2553,7 @@ _montMultiply_Result:
 ;one                       Allocated with name '_montModExp_one_1_1'
 ;xTilde                    Allocated with name '_montModExp_xTilde_1_1'
 ;------------------------------------------------------------
-;	main.c:99: void montModExp(unsigned char *r, unsigned char *x, unsigned char *e) {
+;	main.c:109: void montModExp(unsigned char *r, unsigned char *x, unsigned char *e) {
 ;	-----------------------------------------
 ;	 function montModExp
 ;	-----------------------------------------
@@ -2560,18 +2561,18 @@ _montModExp:
 	mov	_montModExp_r_1_1,dpl
 	mov	(_montModExp_r_1_1 + 1),dph
 	mov	(_montModExp_r_1_1 + 2),b
-;	main.c:106: *one = 0x01;
+;	main.c:116: *one = 0x01;
 	mov	dptr,#_montModExp_one_1_1
 	mov	a,#0x01
 	movx	@dptr,a
-;	main.c:108: t = _findFirstOne(e);
+;	main.c:118: t = _findFirstOne(e);
 	mov	dpl,_montModExp_PARM_3
 	mov	dph,(_montModExp_PARM_3 + 1)
 	mov	b,(_montModExp_PARM_3 + 2)
 	lcall	__findFirstOne
 	mov	_montModExp_t_1_1,dpl
 	mov	(_montModExp_t_1_1 + 1),dph
-;	main.c:110: montMultiply(xTilde, x, r2modm, true);
+;	main.c:120: montMultiply(xTilde, x, r2modm, true);
 	mov	_montMultiply_PARM_3,#_r2modm
 	mov	(_montMultiply_PARM_3 + 1),#(_r2modm >> 8)
 	mov	(_montMultiply_PARM_3 + 2),#0x00
@@ -2582,19 +2583,19 @@ _montModExp:
 	mov	dptr,#_montModExp_xTilde_1_1
 	mov	b,#0x00
 	lcall	_montMultiply
-;	main.c:111: montMultiply(r, rmodm, rmodm, false);
-	mov	_montMultiply_PARM_2,#_rmodm
-	mov	(_montMultiply_PARM_2 + 1),#(_rmodm >> 8)
-	mov	(_montMultiply_PARM_2 + 2),#0x00
-	mov	_montMultiply_PARM_3,#_rmodm
-	mov	(_montMultiply_PARM_3 + 1),#(_rmodm >> 8)
-	mov	(_montMultiply_PARM_3 + 2),#0x00
-	clr	_montMultiply_PARM_4
-	mov	dpl,_montModExp_r_1_1
-	mov	dph,(_montModExp_r_1_1 + 1)
-	mov	b,(_montModExp_r_1_1 + 2)
-	lcall	_montMultiply
-;	main.c:113: for (i = 0; i <= t; i++) {
+;	main.c:122: memcpy(sR, rmodm, SIZE);
+	mov	_memcpy_PARM_2,#_rmodm
+	mov	(_memcpy_PARM_2 + 1),#(_rmodm >> 8)
+	mov	(_memcpy_PARM_2 + 2),#0x00
+	mov	_memcpy_PARM_3,#0x80
+	clr	a
+	mov	(_memcpy_PARM_3 + 1),a
+	mov	dptr,#_sR
+	mov	b,#0x00
+	lcall	_memcpy
+;	main.c:123: _mul1_writeResult();
+	lcall	__mul1_writeResult
+;	main.c:125: for (i = 0; i <= t; i++) {
 	mov	r7,#0x00
 	mov	r0,#0x00
 00103$:
@@ -2606,7 +2607,7 @@ _montModExp:
 	jnc	00118$
 	ljmp	00106$
 00118$:
-;	main.c:114: montMultiply_Result(r, i == t || ((e[(t-i)/8] >> (t-i)%8)) & 1);
+;	main.c:126: montMultiply_Result(r, i == t || ((e[(t-i)/8] >> (t-i)%8)) & 1);
 	mov	a,r7
 	cjne	a,_montModExp_t_1_1,00119$
 	mov	a,r0
@@ -2674,7 +2675,7 @@ _montModExp:
 	lcall	_montMultiply_Result
 	pop	ar0
 	pop	ar7
-;	main.c:115: if (((e[(t-i)/8] >> (t-i)%8)) & 1)
+;	main.c:127: if (((e[(t-i)/8] >> (t-i)%8)) & 1)
 	mov	a,_montModExp_t_1_1
 	clr	c
 	subb	a,r7
@@ -2719,7 +2720,7 @@ _montModExp:
 00124$:
 	djnz	b,00123$
 	jnb	acc.0,00105$
-;	main.c:116: montMultiply_One(r, xTilde, false);
+;	main.c:128: montMultiply_One(r, xTilde, false);
 	mov	_montMultiply_One_PARM_2,#_montModExp_xTilde_1_1
 	mov	(_montMultiply_One_PARM_2 + 1),#(_montModExp_xTilde_1_1 >> 8)
 	mov	(_montMultiply_One_PARM_2 + 2),#0x00
@@ -2733,14 +2734,14 @@ _montModExp:
 	pop	ar0
 	pop	ar7
 00105$:
-;	main.c:113: for (i = 0; i <= t; i++) {
+;	main.c:125: for (i = 0; i <= t; i++) {
 	inc	r7
 	cjne	r7,#0x00,00126$
 	inc	r0
 00126$:
 	ljmp	00103$
 00106$:
-;	main.c:119: montMultiply_One(r, one, true);
+;	main.c:131: montMultiply_One(r, one, true);
 	mov	_montMultiply_One_PARM_2,#_montModExp_one_1_1
 	mov	(_montMultiply_One_PARM_2 + 1),#(_montModExp_one_1_1 >> 8)
 	mov	(_montMultiply_One_PARM_2 + 2),#0x00
@@ -2756,7 +2757,7 @@ _montModExp:
 ;i                         Allocated with name '__findFirstOne_i_1_1'
 ;j                         Allocated to registers r6 
 ;------------------------------------------------------------
-;	main.c:123: unsigned short _findFirstOne(unsigned char *e) {
+;	main.c:135: unsigned short _findFirstOne(unsigned char *e) {
 ;	-----------------------------------------
 ;	 function _findFirstOne
 ;	-----------------------------------------
@@ -2764,7 +2765,7 @@ __findFirstOne:
 	mov	__findFirstOne_e_1_1,dpl
 	mov	(__findFirstOne_e_1_1 + 1),dph
 	mov	(__findFirstOne_e_1_1 + 2),b
-;	main.c:127: for (i = 0; i < SIZE; i++) {
+;	main.c:139: for (i = 0; i < SIZE; i++) {
 	mov	__findFirstOne_i_1_1,#0x00
 00109$:
 	mov	a,#0x100 - 0x80
@@ -2772,7 +2773,7 @@ __findFirstOne:
 	jnc	00121$
 	ljmp	00112$
 00121$:
-;	main.c:128: if (e[(SIZE-1)-i] != 0) {
+;	main.c:140: if (e[(SIZE-1)-i] != 0) {
 	mov	r6,__findFirstOne_i_1_1
 	mov	r7,#0x00
 	mov	a,#0x7F
@@ -2796,13 +2797,13 @@ __findFirstOne:
 	jnz	00122$
 	ljmp	00111$
 00122$:
-;	main.c:129: for (j = 0; j < 8; j++) {
+;	main.c:141: for (j = 0; j < 8; j++) {
 	mov	r6,#0x00
 00105$:
 	cjne	r6,#0x08,00123$
 00123$:
 	jnc	00111$
-;	main.c:130: if (e[(SIZE-1)-i] >> (7-j) & 1)
+;	main.c:142: if (e[(SIZE-1)-i] >> (7-j) & 1)
 	mov	r7,__findFirstOne_i_1_1
 	mov	r0,#0x00
 	mov	a,#0x7F
@@ -2843,7 +2844,7 @@ __findFirstOne:
 00126$:
 	djnz	b,00125$
 	jnb	acc.0,00107$
-;	main.c:131: return 8*((SIZE-1)-i) + (7-j);
+;	main.c:143: return 8*((SIZE-1)-i) + (7-j);
 	mov	a,#0x7F
 	clr	c
 	subb	a,r7
@@ -2878,121 +2879,143 @@ __findFirstOne:
 	mov	dph,a
 	ret
 00107$:
-;	main.c:129: for (j = 0; j < 8; j++) {
+;	main.c:141: for (j = 0; j < 8; j++) {
 	inc	r6
 	ljmp	00105$
 00111$:
-;	main.c:127: for (i = 0; i < SIZE; i++) {
+;	main.c:139: for (i = 0; i < SIZE; i++) {
 	inc	__findFirstOne_i_1_1
 	ljmp	00109$
 00112$:
-;	main.c:136: return 0;
+;	main.c:148: return 0;
 	mov	dptr,#0x0000
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function '_mul1_writeAll'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:139: void _mul1_writeAll() {
+;	main.c:151: void _mul1_writeAll() {
 ;	-----------------------------------------
 ;	 function _mul1_writeAll
 ;	-----------------------------------------
 __mul1_writeAll:
-;	main.c:140: P1 = 0;
+;	main.c:152: P1 = 0;
 	mov	_P1,#0x00
-;	main.c:142: P0 = INS_MUL1_WRITE_ALL;
+;	main.c:154: P0 = INS_MUL1_WRITE_ALL;
 	mov	_P0,#0x10
-;	main.c:143: P0 = INS_IDLE;
+;	main.c:155: P0 = INS_IDLE;
 	mov	_P0,#0x00
-;	main.c:145: while (P1 == 0) {}
+;	main.c:157: while (P1 == 0) {}
 00101$:
 	mov	a,_P1
 	jz	00101$
-;	main.c:146: P0 = INS_ACK;
+;	main.c:158: P0 = INS_ACK;
 	mov	_P0,#0x01
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function '_mul1_writeOne'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:149: void _mul1_writeOne() {
+;	main.c:161: void _mul1_writeOne() {
 ;	-----------------------------------------
 ;	 function _mul1_writeOne
 ;	-----------------------------------------
 __mul1_writeOne:
-;	main.c:150: P1 = 0;
+;	main.c:162: P1 = 0;
 	mov	_P1,#0x00
-;	main.c:152: P0 = INS_MUL1_WRITE_ONE;
+;	main.c:164: P0 = INS_MUL1_WRITE_ONE;
 	mov	_P0,#0x11
-;	main.c:153: P0 = INS_IDLE;
+;	main.c:165: P0 = INS_IDLE;
 	mov	_P0,#0x00
-;	main.c:155: while (P1 == 0) {}
+;	main.c:167: while (P1 == 0) {}
 00101$:
 	mov	a,_P1
 	jz	00101$
-;	main.c:156: P0 = INS_ACK;
+;	main.c:168: P0 = INS_ACK;
 	mov	_P0,#0x01
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function '_mul1_writeReg'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:159: void _mul1_writeReg() {
+;	main.c:171: void _mul1_writeReg() {
 ;	-----------------------------------------
 ;	 function _mul1_writeReg
 ;	-----------------------------------------
 __mul1_writeReg:
-;	main.c:160: P0 = INS_MUL1_WRITE_REG;
+;	main.c:172: P0 = INS_MUL1_WRITE_REG;
 	mov	_P0,#0x12
-;	main.c:161: P0 = INS_IDLE;
-	mov	_P0,#0x00
-	ret
-;------------------------------------------------------------
-;Allocation info for local variables in function '_mul1_montgomery'
-;------------------------------------------------------------
-;------------------------------------------------------------
-;	main.c:164: void _mul1_montgomery() {
-;	-----------------------------------------
-;	 function _mul1_montgomery
-;	-----------------------------------------
-__mul1_montgomery:
-;	main.c:165: P0 = INS_MUL1_MONTGOMERY;
-	mov	_P0,#0x14
-;	main.c:166: P0 = INS_IDLE;
+;	main.c:173: P0 = INS_IDLE;
 	mov	_P0,#0x00
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function '_mul1_readResult'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:169: void _mul1_readResult() {
+;	main.c:176: void _mul1_readResult() {
 ;	-----------------------------------------
 ;	 function _mul1_readResult
 ;	-----------------------------------------
 __mul1_readResult:
-;	main.c:170: P1 = 0;
+;	main.c:177: P1 = 0;
 	mov	_P1,#0x00
-;	main.c:172: P0 = INS_MUL1_READ_RESULT;
+;	main.c:179: P0 = INS_MUL1_READ_RESULT;
 	mov	_P0,#0x13
-;	main.c:173: while (P1 == 0) {}
+;	main.c:180: while (P1 == 0) {}
 00101$:
 	mov	a,_P1
 	jz	00101$
-;	main.c:174: P0 = INS_ACK;
+;	main.c:181: P0 = INS_ACK;
 	mov	_P0,#0x01
-;	main.c:176: P0 = INS_IDLE;
+;	main.c:183: P0 = INS_IDLE;
+	mov	_P0,#0x00
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function '_mul1_writeResult'
+;------------------------------------------------------------
+;------------------------------------------------------------
+;	main.c:186: void _mul1_writeResult() {
+;	-----------------------------------------
+;	 function _mul1_writeResult
+;	-----------------------------------------
+__mul1_writeResult:
+;	main.c:187: P1 = 0;
+	mov	_P1,#0x00
+;	main.c:189: P0 = INS_MUL1_WRITE_RESULT;
+	mov	_P0,#0x14
+;	main.c:190: P0 = INS_IDLE;
+	mov	_P0,#0x00
+;	main.c:192: while (P1 == 0) {}
+00101$:
+	mov	a,_P1
+	jz	00101$
+;	main.c:193: P0 = INS_ACK;
+	mov	_P0,#0x01
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function '_mul1_montgomery'
+;------------------------------------------------------------
+;------------------------------------------------------------
+;	main.c:196: void _mul1_montgomery() {
+;	-----------------------------------------
+;	 function _mul1_montgomery
+;	-----------------------------------------
+__mul1_montgomery:
+;	main.c:197: P0 = INS_MUL1_MONTGOMERY;
+	mov	_P0,#0x15
+;	main.c:198: P0 = INS_IDLE;
 	mov	_P0,#0x00
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function '_terminate'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:179: void _terminate() {
+;	main.c:201: void _terminate() {
 ;	-----------------------------------------
 ;	 function _terminate
 ;	-----------------------------------------
 __terminate:
-;	main.c:180: P3 = 0x55;
+;	main.c:202: P3 = 0x55;
 	mov	_P3,#0x55
 	ret
 	.area CSEG    (CODE)
