@@ -266,7 +266,7 @@ Symbol Table
     _TR1                                                        =  008E G
     _TXD                                                        =  00B1 G
     _WR                                                         =  00B6 G
- 1C __findFirstOne                                                 02B9 GR
+ 1C __findFirstOne                                                 02A7 GR
   4 __findFirstOne_e_1_1                                           0000 GR
   4 __findFirstOne_i_1_1                                           0003 GR
     __gptrget                                                      **** GX
@@ -274,16 +274,16 @@ Symbol Table
     __mcs51_genRAMCLEAR                                            **** GX
     __mcs51_genXINIT                                               **** GX
     __mcs51_genXRAMCLEAR                                           **** GX
- 1C __mul1_montgomery                                              03B3 GR
- 1C __mul1_readResult                                              0391 GR
- 1C __mul1_writeAll                                                0368 GR
- 1C __mul1_writeOne                                                0379 GR
- 1C __mul1_writeReg                                                038A GR
- 1C __mul1_writeResult                                             03A2 GR
+ 1C __mul1_montgomery                                              03A1 GR
+ 1C __mul1_readResult                                              037F GR
+ 1C __mul1_writeAll                                                0356 GR
+ 1C __mul1_writeOne                                                0367 GR
+ 1C __mul1_writeReg                                                0378 GR
+ 1C __mul1_writeResult                                             0390 GR
     __sdcc_gsinit_startup                                          **** GX
  13 __sdcc_program_startup                                         0003 GR
   5 __start__stack                                                 0000 GR
- 1C __terminate                                                    03BA GR
+ 1C __terminate                                                    03A8 GR
     _decryptedMessage                                           =  5100 G
     _encryptedMessage                                           =  5000 G
  1C _main                                                          0000 GR
@@ -297,7 +297,6 @@ Symbol Table
   3 _montModExp_PARM_3                                             000C GR
     _montModExp_one_1_1                                         =  1100 
   3 _montModExp_r_1_1                                              000F R
-  8 _montModExp_sloc0_1_0                                          0003 R
   3 _montModExp_t_1_1                                              0012 R
     _montModExp_xTilde_1_1                                      =  1200 
  1C _montMultiply                                                  0055 GR
@@ -506,7 +505,7 @@ Area Table
    5 SSEG                                                                               size    1   flags 0
    6 ISEG                                                                               size    0   flags 0
    7 IABS                                                                               size    0   flags 8
-   8 BSEG                                                                               size    4   flags 80
+   8 BSEG                                                                               size    3   flags 80
    9 PSEG                                                                               size    0   flags 50
    A XSEG                                                                               size    0   flags 40
    B XABS                                                                               size    0   flags 48
@@ -526,7 +525,7 @@ Area Table
   19 GSINIT5                                                                            size    0   flags 20
   1A GSINIT                                                                             size  F0A   flags 20
   1B GSFINAL                                                                            size    3   flags 20
-  1C CSEG                                                                               size  3BE   flags 20
+  1C CSEG                                                                               size  3AC   flags 20
   1D CONST                                                                              size    0   flags 20
   1E XINIT                                                                              size    0   flags 20
   1F CABS                                                                               size    0   flags 28

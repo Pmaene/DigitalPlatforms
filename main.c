@@ -123,7 +123,8 @@ void montModExp(unsigned char *r, unsigned char *x, unsigned char *e) {
     _mul1_writeResult();
 
     for (i = 0; i <= t; i++) {
-        montMultiply_Result(r, i == t || ((e[(t-i)/8] >> (t-i)%8)) & 1);
+        if (i != 0)
+            montMultiply_Result(r, ((e[(t-i)/8] >> (t-i)%8)) & 1);
         if (((e[(t-i)/8] >> (t-i)%8)) & 1)
             montMultiply_One(r, xTilde, false);
     }

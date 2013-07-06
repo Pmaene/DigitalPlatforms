@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 2.9.0 #5416 (Feb  3 2010) (UNIX)
-; This file was generated Sat Jul  6 09:31:43 2013
+; This file was generated Sat Jul  6 11:33:11 2013
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mmcs51 --model-small
@@ -298,8 +298,6 @@ _montMultiply_PARM_4:
 _montMultiply_One_PARM_3:
 	.ds 1
 _montMultiply_Result_PARM_2:
-	.ds 1
-_montModExp_sloc0_1_0:
 	.ds 1
 ;--------------------------------------------------------
 ; paged external ram data
@@ -2598,22 +2596,20 @@ _montModExp:
 ;	main.c:125: for (i = 0; i <= t; i++) {
 	mov	r7,#0x00
 	mov	r0,#0x00
-00103$:
+00105$:
 	clr	c
 	mov	a,_montModExp_t_1_1
 	subb	a,r7
 	mov	a,(_montModExp_t_1_1 + 1)
 	subb	a,r0
-	jnc	00118$
-	ljmp	00106$
-00118$:
-;	main.c:126: montMultiply_Result(r, i == t || ((e[(t-i)/8] >> (t-i)%8)) & 1);
+	jnc	00116$
+	ljmp	00108$
+00116$:
+;	main.c:126: if (i != 0)
 	mov	a,r7
-	cjne	a,_montModExp_t_1_1,00119$
-	mov	a,r0
-	cjne	a,(_montModExp_t_1_1 + 1),00119$
-	sjmp	00110$
-00119$:
+	orl	a,r0
+	jz	00102$
+;	main.c:127: montMultiply_Result(r, ((e[(t-i)/8] >> (t-i)%8)) & 1);
 	mov	a,_montModExp_t_1_1
 	clr	c
 	subb	a,r7
@@ -2651,21 +2647,13 @@ _montModExp:
 	mov	b,r1
 	inc	b
 	mov	a,r3
-	sjmp	00121$
-00120$:
+	sjmp	00119$
+00118$:
 	clr	c
 	rrc	a
-00121$:
-	djnz	b,00120$
-	anl	a,#0x01
-	mov	r3,a
-	jnz	00110$
-	clr	_montModExp_sloc0_1_0
-	sjmp	00111$
-00110$:
-	setb	_montModExp_sloc0_1_0
-00111$:
-	mov	c,_montModExp_sloc0_1_0
+00119$:
+	djnz	b,00118$
+	rrc	a
 	mov	_montMultiply_Result_PARM_2,c
 	mov	dpl,_montModExp_r_1_1
 	mov	dph,(_montModExp_r_1_1 + 1)
@@ -2675,7 +2663,8 @@ _montModExp:
 	lcall	_montMultiply_Result
 	pop	ar0
 	pop	ar7
-;	main.c:127: if (((e[(t-i)/8] >> (t-i)%8)) & 1)
+00102$:
+;	main.c:128: if (((e[(t-i)/8] >> (t-i)%8)) & 1)
 	mov	a,_montModExp_t_1_1
 	clr	c
 	subb	a,r7
@@ -2713,14 +2702,14 @@ _montModExp:
 	mov	b,r2
 	inc	b
 	mov	a,r4
-	sjmp	00124$
-00123$:
+	sjmp	00121$
+00120$:
 	clr	c
 	rrc	a
-00124$:
-	djnz	b,00123$
-	jnb	acc.0,00105$
-;	main.c:128: montMultiply_One(r, xTilde, false);
+00121$:
+	djnz	b,00120$
+	jnb	acc.0,00107$
+;	main.c:129: montMultiply_One(r, xTilde, false);
 	mov	_montMultiply_One_PARM_2,#_montModExp_xTilde_1_1
 	mov	(_montMultiply_One_PARM_2 + 1),#(_montModExp_xTilde_1_1 >> 8)
 	mov	(_montMultiply_One_PARM_2 + 2),#0x00
@@ -2733,15 +2722,15 @@ _montModExp:
 	lcall	_montMultiply_One
 	pop	ar0
 	pop	ar7
-00105$:
+00107$:
 ;	main.c:125: for (i = 0; i <= t; i++) {
 	inc	r7
-	cjne	r7,#0x00,00126$
+	cjne	r7,#0x00,00123$
 	inc	r0
-00126$:
-	ljmp	00103$
-00106$:
-;	main.c:131: montMultiply_One(r, one, true);
+00123$:
+	ljmp	00105$
+00108$:
+;	main.c:132: montMultiply_One(r, one, true);
 	mov	_montMultiply_One_PARM_2,#_montModExp_one_1_1
 	mov	(_montMultiply_One_PARM_2 + 1),#(_montModExp_one_1_1 >> 8)
 	mov	(_montMultiply_One_PARM_2 + 2),#0x00
@@ -2757,7 +2746,7 @@ _montModExp:
 ;i                         Allocated with name '__findFirstOne_i_1_1'
 ;j                         Allocated to registers r6 
 ;------------------------------------------------------------
-;	main.c:135: unsigned short _findFirstOne(unsigned char *e) {
+;	main.c:136: unsigned short _findFirstOne(unsigned char *e) {
 ;	-----------------------------------------
 ;	 function _findFirstOne
 ;	-----------------------------------------
@@ -2765,7 +2754,7 @@ __findFirstOne:
 	mov	__findFirstOne_e_1_1,dpl
 	mov	(__findFirstOne_e_1_1 + 1),dph
 	mov	(__findFirstOne_e_1_1 + 2),b
-;	main.c:139: for (i = 0; i < SIZE; i++) {
+;	main.c:140: for (i = 0; i < SIZE; i++) {
 	mov	__findFirstOne_i_1_1,#0x00
 00109$:
 	mov	a,#0x100 - 0x80
@@ -2773,7 +2762,7 @@ __findFirstOne:
 	jnc	00121$
 	ljmp	00112$
 00121$:
-;	main.c:140: if (e[(SIZE-1)-i] != 0) {
+;	main.c:141: if (e[(SIZE-1)-i] != 0) {
 	mov	r6,__findFirstOne_i_1_1
 	mov	r7,#0x00
 	mov	a,#0x7F
@@ -2797,13 +2786,13 @@ __findFirstOne:
 	jnz	00122$
 	ljmp	00111$
 00122$:
-;	main.c:141: for (j = 0; j < 8; j++) {
+;	main.c:142: for (j = 0; j < 8; j++) {
 	mov	r6,#0x00
 00105$:
 	cjne	r6,#0x08,00123$
 00123$:
 	jnc	00111$
-;	main.c:142: if (e[(SIZE-1)-i] >> (7-j) & 1)
+;	main.c:143: if (e[(SIZE-1)-i] >> (7-j) & 1)
 	mov	r7,__findFirstOne_i_1_1
 	mov	r0,#0x00
 	mov	a,#0x7F
@@ -2844,7 +2833,7 @@ __findFirstOne:
 00126$:
 	djnz	b,00125$
 	jnb	acc.0,00107$
-;	main.c:143: return 8*((SIZE-1)-i) + (7-j);
+;	main.c:144: return 8*((SIZE-1)-i) + (7-j);
 	mov	a,#0x7F
 	clr	c
 	subb	a,r7
@@ -2879,143 +2868,143 @@ __findFirstOne:
 	mov	dph,a
 	ret
 00107$:
-;	main.c:141: for (j = 0; j < 8; j++) {
+;	main.c:142: for (j = 0; j < 8; j++) {
 	inc	r6
 	ljmp	00105$
 00111$:
-;	main.c:139: for (i = 0; i < SIZE; i++) {
+;	main.c:140: for (i = 0; i < SIZE; i++) {
 	inc	__findFirstOne_i_1_1
 	ljmp	00109$
 00112$:
-;	main.c:148: return 0;
+;	main.c:149: return 0;
 	mov	dptr,#0x0000
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function '_mul1_writeAll'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:151: void _mul1_writeAll() {
+;	main.c:152: void _mul1_writeAll() {
 ;	-----------------------------------------
 ;	 function _mul1_writeAll
 ;	-----------------------------------------
 __mul1_writeAll:
-;	main.c:152: P1 = 0;
+;	main.c:153: P1 = 0;
 	mov	_P1,#0x00
-;	main.c:154: P0 = INS_MUL1_WRITE_ALL;
+;	main.c:155: P0 = INS_MUL1_WRITE_ALL;
 	mov	_P0,#0x10
-;	main.c:155: P0 = INS_IDLE;
+;	main.c:156: P0 = INS_IDLE;
 	mov	_P0,#0x00
-;	main.c:157: while (P1 == 0) {}
+;	main.c:158: while (P1 == 0) {}
 00101$:
 	mov	a,_P1
 	jz	00101$
-;	main.c:158: P0 = INS_ACK;
+;	main.c:159: P0 = INS_ACK;
 	mov	_P0,#0x01
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function '_mul1_writeOne'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:161: void _mul1_writeOne() {
+;	main.c:162: void _mul1_writeOne() {
 ;	-----------------------------------------
 ;	 function _mul1_writeOne
 ;	-----------------------------------------
 __mul1_writeOne:
-;	main.c:162: P1 = 0;
+;	main.c:163: P1 = 0;
 	mov	_P1,#0x00
-;	main.c:164: P0 = INS_MUL1_WRITE_ONE;
+;	main.c:165: P0 = INS_MUL1_WRITE_ONE;
 	mov	_P0,#0x11
-;	main.c:165: P0 = INS_IDLE;
+;	main.c:166: P0 = INS_IDLE;
 	mov	_P0,#0x00
-;	main.c:167: while (P1 == 0) {}
+;	main.c:168: while (P1 == 0) {}
 00101$:
 	mov	a,_P1
 	jz	00101$
-;	main.c:168: P0 = INS_ACK;
+;	main.c:169: P0 = INS_ACK;
 	mov	_P0,#0x01
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function '_mul1_writeReg'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:171: void _mul1_writeReg() {
+;	main.c:172: void _mul1_writeReg() {
 ;	-----------------------------------------
 ;	 function _mul1_writeReg
 ;	-----------------------------------------
 __mul1_writeReg:
-;	main.c:172: P0 = INS_MUL1_WRITE_REG;
+;	main.c:173: P0 = INS_MUL1_WRITE_REG;
 	mov	_P0,#0x12
-;	main.c:173: P0 = INS_IDLE;
+;	main.c:174: P0 = INS_IDLE;
 	mov	_P0,#0x00
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function '_mul1_readResult'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:176: void _mul1_readResult() {
+;	main.c:177: void _mul1_readResult() {
 ;	-----------------------------------------
 ;	 function _mul1_readResult
 ;	-----------------------------------------
 __mul1_readResult:
-;	main.c:177: P1 = 0;
+;	main.c:178: P1 = 0;
 	mov	_P1,#0x00
-;	main.c:179: P0 = INS_MUL1_READ_RESULT;
+;	main.c:180: P0 = INS_MUL1_READ_RESULT;
 	mov	_P0,#0x13
-;	main.c:180: while (P1 == 0) {}
+;	main.c:181: while (P1 == 0) {}
 00101$:
 	mov	a,_P1
 	jz	00101$
-;	main.c:181: P0 = INS_ACK;
+;	main.c:182: P0 = INS_ACK;
 	mov	_P0,#0x01
-;	main.c:183: P0 = INS_IDLE;
+;	main.c:184: P0 = INS_IDLE;
 	mov	_P0,#0x00
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function '_mul1_writeResult'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:186: void _mul1_writeResult() {
+;	main.c:187: void _mul1_writeResult() {
 ;	-----------------------------------------
 ;	 function _mul1_writeResult
 ;	-----------------------------------------
 __mul1_writeResult:
-;	main.c:187: P1 = 0;
+;	main.c:188: P1 = 0;
 	mov	_P1,#0x00
-;	main.c:189: P0 = INS_MUL1_WRITE_RESULT;
+;	main.c:190: P0 = INS_MUL1_WRITE_RESULT;
 	mov	_P0,#0x14
-;	main.c:190: P0 = INS_IDLE;
+;	main.c:191: P0 = INS_IDLE;
 	mov	_P0,#0x00
-;	main.c:192: while (P1 == 0) {}
+;	main.c:193: while (P1 == 0) {}
 00101$:
 	mov	a,_P1
 	jz	00101$
-;	main.c:193: P0 = INS_ACK;
+;	main.c:194: P0 = INS_ACK;
 	mov	_P0,#0x01
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function '_mul1_montgomery'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:196: void _mul1_montgomery() {
+;	main.c:197: void _mul1_montgomery() {
 ;	-----------------------------------------
 ;	 function _mul1_montgomery
 ;	-----------------------------------------
 __mul1_montgomery:
-;	main.c:197: P0 = INS_MUL1_MONTGOMERY;
+;	main.c:198: P0 = INS_MUL1_MONTGOMERY;
 	mov	_P0,#0x15
-;	main.c:198: P0 = INS_IDLE;
+;	main.c:199: P0 = INS_IDLE;
 	mov	_P0,#0x00
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function '_terminate'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:201: void _terminate() {
+;	main.c:202: void _terminate() {
 ;	-----------------------------------------
 ;	 function _terminate
 ;	-----------------------------------------
 __terminate:
-;	main.c:202: P3 = 0x55;
+;	main.c:203: P3 = 0x55;
 	mov	_P3,#0x55
 	ret
 	.area CSEG    (CODE)
