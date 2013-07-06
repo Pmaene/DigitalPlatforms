@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 2.9.0 #5416 (Feb  3 2010) (UNIX)
-; This file was generated Sat Jul  6 14:04:09 2013
+; This file was generated Sat Jul  6 14:12:54 2013
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mmcs51 --model-small
@@ -2338,8 +2338,8 @@ _main:
 ;	main.c:69: for (i = 0; i < SIZE; i++)
 	mov	r2,#0x00
 00101$:
-	cjne	r2,#0x80,00124$
-00124$:
+	cjne	r2,#0x80,00117$
+00117$:
 	jnc	00104$
 ;	main.c:70: sM[i] = modulus[i];
 	mov	a,r2
@@ -2371,8 +2371,8 @@ _main:
 ;	main.c:74: for (i = 0; i < SIZE; i++)
 	mov	r2,#0x00
 00105$:
-	cjne	r2,#0x80,00126$
-00126$:
+	cjne	r2,#0x80,00119$
+00119$:
 	jnc	00108$
 ;	main.c:75: encryptedMessage[i] = sR[i];
 	mov	ar3,r2
@@ -2388,33 +2388,6 @@ _main:
 	inc	r2
 	sjmp	00105$
 00108$:
-;	main.c:76: montModExp(encryptedMessage, privateKey);
-	mov	_montModExp_PARM_2,#_privateKey
-	mov	(_montModExp_PARM_2 + 1),#(_privateKey >> 8)
-	mov	(_montModExp_PARM_2 + 2),#0x00
-	mov	dptr,#_encryptedMessage
-	mov	b,#0x00
-	lcall	_montModExp
-;	main.c:77: for (i = 0; i < SIZE; i++)
-	mov	r2,#0x00
-00109$:
-	cjne	r2,#0x80,00128$
-00128$:
-	jnc	00112$
-;	main.c:78: decryptedMessage[i] = sR[i];
-	mov	ar3,r2
-	mov	r4,#(_decryptedMessage >> 8)
-	mov	dpl,r2
-	mov	dph,#(_sR >> 8)
-	movx	a,@dptr
-	mov	r5,a
-	mov	dpl,r3
-	mov	dph,r4
-	movx	@dptr,a
-;	main.c:77: for (i = 0; i < SIZE; i++)
-	inc	r2
-	sjmp	00109$
-00112$:
 ;	main.c:80: _terminate();
 	lcall	__terminate
 ;	main.c:81: return 0;

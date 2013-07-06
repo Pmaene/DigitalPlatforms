@@ -76,12 +76,12 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:0080    l_XABS5
   0C:00DF    l_SSEG
   0C:0100    l_IRAM
-  0C:0478    l_CSEG
+  0C:044C    l_CSEG
   0C:0F0A    l_GSINIT
   0C:0F6B    s_GSFINAL
   0C:0F6E    s_CSEG
-  0C:13E6    s_CONST
-  0C:13E6    s_XINIT
+  0C:13BA    s_CONST
+  0C:13BA    s_XINIT
 
 Hexadecimal
 
@@ -369,27 +369,27 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CSEG                               0F6E   0478 =   1144. bytes (REL,CON,CODE)
+CSEG                               0F6E   044C =   1100. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
   0C:0F6E    _main
-  0C:0FEE    _montMultiply
-  0C:1089    _montMultiply_One
-  0C:10F9    _montMultiply_Result
-  0C:1153    _montModExp
-  0C:12A1    __findFirstOne
-  0C:1350    __displayCycles
-  0C:1357    __mul1_writeAll
-  0C:1368    __mul1_writeOne
-  0C:1379    __mul1_writeReg
-  0C:1380    __mul1_readResult
-  0C:1391    __mul1_writeResult
-  0C:13A2    __mul1_montgomery
-  0C:13A9    __terminate
-  0C:13AD    __gptrput
-  0C:13C6    __gptrget
-  0C:13E2    __sdcc_external_startup
+  0C:0FC2    _montMultiply
+  0C:105D    _montMultiply_One
+  0C:10CD    _montMultiply_Result
+  0C:1127    _montModExp
+  0C:1275    __findFirstOne
+  0C:1324    __displayCycles
+  0C:132B    __mul1_writeAll
+  0C:133C    __mul1_writeOne
+  0C:134D    __mul1_writeReg
+  0C:1354    __mul1_readResult
+  0C:1365    __mul1_writeResult
+  0C:1376    __mul1_montgomery
+  0C:137D    __terminate
+  0C:1381    __gptrput
+  0C:139A    __gptrget
+  0C:13B6    __sdcc_external_startup
 
 
 ASxxxx Linker V01.75 + NoICE + SDCC Feb 1999,  page 1.

@@ -1,99 +1,98 @@
-dp adder_dp (in sel : ns(1); in a, b : ns(1026); out s: ns(1027)) {
+dp adder_dp (in difference : ns(1); in a, b : ns(1026); out s: ns(1027)) {
     sig b_eff : ns(1026);
 
     always {
-        b_eff = sel == 1 ? (~b + 1) : b;
+        b_eff = difference == 1 ? (~b + 1) : b;
         s = a + b_eff;
     }
 }
 
 dp montgomery_dp (in a, b, m : ns(1024); in start : ns(1); out r : ns(1027))
 {
-    reg counter : ns(11);
-    reg a_reg   : ns(1024);
-    reg r_reg   : ns(1027);
+    reg counter_reg : ns(11);
+    reg a_reg : ns(1024);
+    reg r_reg : ns(1027);
 
-    sig r_tmp   : ns(1027);
-    sig sel     : ns(1);
-    sig x       : ns(1026);
-    sig y       : ns(1026);
+    sig r_tmp : ns(1027);
+    sig x, y : ns(1026);
+    sig difference : ns(1);
 
-    use adder_dp(sel, x, y, r_tmp);
+    use adder_dp(difference, x, y, r_tmp);
 
     sfg init {
-        counter = 0;
+        counter_reg = 0;
         r = 0;
         r_reg = 0;
 
         x = 0;
         y = 0;
-        sel = 0;
+        difference = 0;
 
         a_reg = a;
     }
 
-    sfg count_inc {
-        counter = counter + 1;
+    sfg counter_increment {
+        counter_reg = counter_reg + 1;
         a_reg = a_reg >> 1;
     }
 
-    sfg count_rst {
-        counter = 0;
+    sfg counter_reset {
+        counter_reg = 0;
     }
 
     sfg sum {
         x = r_reg;
         y = a_reg[0] == 0 ? 0 : b;
-        sel = 0;
+        difference = 0;
         r_reg = r_tmp;
     }
 
     sfg just_divide {
-        sel = 0;
         x = 0;
         y = 0;
+        difference = 0;
         r_reg = r_reg >> 1;
     }
 
     sfg sum_and_divide {
         x = r_reg;
         y = b;
-        sel = 0;
+        difference = 0;
         r_reg = r_tmp >> 1;
     }
 
     sfg sum_m_and_divide {
         x = r_reg;
         y = m;
-        sel = 0;
+        difference = 0;
         r_reg = r_tmp >> 1;
     }
 
     sfg equal_to_zero {
-        sel = 0;
         x = 0;
         y = 0;
+        difference = 0;
         r_reg = r_reg >> 1;
     }
 
     sfg not_equal_to_zero {
-        sel = 0;
         x = r_reg;
         y = m;
+        difference = 0;
         r_reg = r_tmp >> 1;
     }
 
     sfg overflow_check {
-        sel = 1;
         x = r_reg;
         y = r_reg >= m ? m : 0;
+        difference = 1;
         r_reg = r_tmp;
     }
 
     sfg stop {
-        sel = 0;
         x = 0;
         y = 0;
+        difference = 0;
         r = r_reg;
     }
 
@@ -112,22 +111,22 @@ fsm montgomery (montgomery_dp)
                     (init) -> wait;
                 else
                     (init) -> do;
-    @do         if (counter >= 1024) then
-                    (count_rst, overflow_check, reset_r) -> stop;
+    @do         if (counter_reg >= 1024) then
+                    (counter_reset, overflow_check, reset_r) -> stop;
                 else if (r_reg[0] == 0 & a_reg[0] == 0) then
-                    (just_divide, count_inc, reset_r) -> do;
+                    (just_divide, counter_increment, reset_r) -> do;
                 else if (r_reg[0] == 0 & a_reg[0] == 1 & b[0] == 0) then
-                    (sum_and_divide, count_inc, reset_r) -> do;
+                    (sum_and_divide, counter_increment, reset_r) -> do;
                 else if (r_reg[0] == 1 & a_reg[0] == 1 & b[0] == 1) then
-                    (sum_and_divide, count_inc, reset_r) -> do;
+                    (sum_and_divide, counter_increment, reset_r) -> do;
                 else if (r_reg[0] == 1 & a_reg[0] == 0) then
-                    (sum_m_and_divide, count_inc, reset_r) -> do;
+                    (sum_m_and_divide, counter_increment, reset_r) -> do;
                 else
                     (sum, reset_r) -> if_else;
     @if_else    if (r_reg[0] == 0) then
-                    (equal_to_zero, count_inc, reset_r) -> do;
+                    (equal_to_zero, counter_increment, reset_r) -> do;
                 else
-                    (not_equal_to_zero, count_inc, reset_r) -> do;
+                    (not_equal_to_zero, counter_increment, reset_r) -> do;
     @stop       (stop) -> wait;
 }
 

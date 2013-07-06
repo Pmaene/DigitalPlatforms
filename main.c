@@ -73,9 +73,9 @@ int main() {
     montModExp(message, publicKey);
     for (i = 0; i < SIZE; i++)
         encryptedMessage[i] = sR[i];
-    montModExp(encryptedMessage, privateKey);
-    for (i = 0; i < SIZE; i++)
-        decryptedMessage[i] = sR[i];
+    //montModExp(encryptedMessage, privateKey);
+    //for (i = 0; i < SIZE; i++)
+    //    decryptedMessage[i] = sR[i];
 
     _terminate();
     return 0;
