@@ -144,9 +144,10 @@ fsm montgomery (montgomery_dp)
  * Decoder
  */
 
-dp decoder_dp(in instruction, data_in, result_in : ns(8); out sync, result_out, address: ns(9); out data_wr, result_wr : ns(1)) {
-    reg counter_reg : ns(9);
-    reg instruction_reg, data_in_reg, result_in_reg : ns(8);
+dp decoder_dp(in instruction, address, data_in : ns(8); out full_address : ns(16); out data_out, idling: ns(8); out data_wr : ns(1)) {
+    reg displayed_reg : ns(1);
+    reg counter_reg : ns(8);
+    reg instruction_reg, address_reg, data_in_reg : ns(8);
 
     reg a_reg, b_reg, m_reg : ns(1024);
     reg r_reg : ns(1027);
@@ -164,8 +165,8 @@ dp decoder_dp(in instruction, data_in, result_in : ns(8); out sync, result_out, 
 
     sfg decode {
         instruction_reg = instruction;
+        address_reg = address;
         data_in_reg = data_in;
-        result_in_reg = result_in;
     }
 
     sfg no_adder {
@@ -181,34 +182,29 @@ dp decoder_dp(in instruction, data_in, result_in : ns(8); out sync, result_out, 
         start_sig = 0;
     }
 
-    sfg no_sync {
-        sync = 0;
-    }
-
     sfg no_write {
+        data_out = 0;
         data_wr = 0;
-        result_wr = 0;
-        result_out = 0;
     }
 
     sfg no_address {
-        address = 0;
+        full_address = 0;
     }
 
-    sfg read_a {
-        address = 0x80 - counter_reg;
-        counter_reg = counter_reg+1;
+    sfg read_a_mem {
+        full_address = (address_reg << 8)+(0x7F-counter_reg);
         a_reg = a_reg << 8 | data_in;
+        counter_reg = counter_reg+1;
     }
 
     sfg read_a_reg {
         a_reg = r_reg;
     }
 
-    sfg read_b {
-        address = 0x180 - counter_reg;
-        counter_reg = counter_reg+1;
+    sfg read_b_mem {
+        full_address = (address_reg << 8)+(0x7F-counter_reg);
         b_reg = b_reg << 8 | data_in;
+        counter_reg = counter_reg+1;
     }
 
     sfg read_b_reg {
@@ -216,19 +212,26 @@ dp decoder_dp(in instruction, data_in, result_in : ns(8); out sync, result_out, 
     }
 
     sfg read_m {
-        address = 0x180 - counter_reg;
-        counter_reg = counter_reg+1;
+        full_address = (address_reg << 8)+(0x7F-counter_reg);
         m_reg = m_reg << 8 | data_in;
+        counter_reg = counter_reg+1;
+    }
+
+    sfg reset_m {
+        m_reg = 0;
     }
 
     sfg read_result {
-        address = 0x80 - counter_reg;
+        full_address = (address_reg << 8)+(0x7F-counter_reg);
+        r_reg = r_reg << 8 | data_in;
         counter_reg = counter_reg+1;
-        r_reg = r_reg << 8 | result_in;
     }
 
-    sfg read_done {
-        sync = 1;
+    sfg write_result {
+        full_address = (address_reg << 8)+counter_reg;
+        data_out = r_reg >> (8*counter_reg);
+        data_wr = 1;
+        counter_reg = counter_reg+1;
     }
 
     sfg add {
@@ -252,20 +255,12 @@ dp decoder_dp(in instruction, data_in, result_in : ns(8); out sync, result_out, 
         r_reg = r_sig;
     }
 
-    sfg write_result {
-        address = counter_reg;
-        counter_reg = counter_reg+1;
-        result_out = r_reg >> (8*address);
-        data_wr = 0;
-        result_wr = 1;
-    }
-
-    sfg write_done {
-        sync = 1;
-    }
-
     sfg reset_counter {
         counter_reg = 0;
+    }
+
+    sfg reset_displayed {
+        displayed_reg = 0;
     }
 
     sfg start_montgomery {
@@ -276,86 +271,94 @@ dp decoder_dp(in instruction, data_in, result_in : ns(8); out sync, result_out, 
         start_sig = 0;
     }
 
+    sfg idling {
+        idling = 1;
+    }
+
+    sfg no_idling {
+        idling = 0;
+    }
+
     sfg display_cycles {
+        displayed_reg = 1;
         $display("Cycles: ", $cycle);
     }
 
     sfg display_result {
+        displayed_reg = 1;
         $display("Result: ", r_reg);
     }
 }
 
 fsm decoder(decoder_dp) {
     initial init;
-    state do, read_modulus, read_both, read_single, read_result, read_done, montgomery, write_result, write_done;
+    state do, read_modulus, read_a_mem, read_b_mem, read_result, read_done, montgomery, write_result, write_done;
 
-    @init           (no_adder, no_montgomery, no_sync, no_write, no_address, decode) -> do;
+    @init           (no_adder, no_montgomery, no_idling, no_write, no_address, decode) -> do;
     @do             if (instruction_reg == 0x00) then
-                        (no_adder, no_montgomery, no_sync, no_write, no_address, decode) -> do;
-                    else if (instruction_reg == 0x01) then
-                        (display_cycles, no_adder, no_montgomery, no_sync, no_write, no_address, decode) -> do;
-                    else if (instruction_reg == 0x02) then
-                        (display_result, no_adder, no_montgomery, no_sync, no_write, no_address, decode) -> do;
+                        (reset_displayed, idling, no_adder, no_montgomery, no_write, no_address, decode) -> do;
+                    else if (instruction_reg == 0x01 & displayed_reg == 0) then
+                        (display_cycles, no_adder, no_montgomery, no_idling, no_write, no_address, decode) -> do;
+                    else if (instruction_reg == 0x02 & displayed_reg == 0) then
+                        (display_result, no_adder, no_montgomery, no_idling, no_write, no_address, decode) -> do;
+
                     else if (instruction_reg == 0x10) then
-                        (reset_counter, no_adder, no_montgomery, no_sync, no_write, no_address, decode) -> read_modulus;
+                        (reset_m, reset_counter, no_adder, no_montgomery, no_idling, no_write, no_address, decode) -> read_modulus;
                     else if (instruction_reg == 0x11) then
-                        (reset_counter, no_adder, no_montgomery, no_sync, no_write, no_address, decode) -> read_both;
+                        (reset_counter, no_adder, no_montgomery, no_idling, no_write, no_address, decode) -> read_a_mem;
                     else if (instruction_reg == 0x12) then
-                        (reset_counter, read_b_reg, no_adder, no_montgomery, no_sync, no_write, no_address, decode) -> read_single;
+                        (read_a_reg, no_adder, no_montgomery, no_idling, no_write, no_address, decode) -> do;
                     else if (instruction_reg == 0x13) then
-                        (read_a_reg, read_b_reg, no_adder, no_montgomery, no_sync, no_write, no_address, decode) -> do;
+                        (reset_counter, no_adder, no_montgomery, no_idling, no_write, no_address, decode) -> read_b_mem;
                     else if (instruction_reg == 0x14) then
-                        (reset_counter, no_adder, no_montgomery, no_sync, no_write, no_address, decode) -> write_result;
+                        (read_b_reg, no_adder, no_montgomery, no_idling, no_write, no_address, decode) -> do;
                     else if (instruction_reg == 0x15) then
-                        (reset_counter, no_adder, no_montgomery, no_sync, no_write, no_address, decode) -> read_result;
+                        (reset_counter, no_adder, no_montgomery, no_idling, no_write, no_address, decode) -> read_result;
                     else if (instruction_reg == 0x16) then
-                        (stop_montgomery, montgomery, no_adder, no_sync, no_write, no_address, decode) -> montgomery;
+                        (reset_counter, no_adder, no_montgomery, no_idling, no_write, no_address, decode) -> write_result;
+
+                    else if (instruction_reg == 0x20) then
+                        (stop_montgomery, montgomery, no_adder, no_idling, no_write, no_address, decode) -> montgomery;
+
                     else if (instruction_reg == 0x30) then
-                        (reset_counter, no_adder, no_montgomery, no_sync, no_write, no_address, decode) -> read_both;
+                        (add, no_montgomery, no_idling, no_write, no_address, decode) -> do;
                     else if (instruction_reg == 0x31) then
-                        (reset_counter, read_b_reg, no_adder, no_montgomery, no_sync, no_write, no_address, decode) -> read_single;
-                    else if (instruction_reg == 0x32) then
-                        (reset_counter, no_adder, no_montgomery, no_sync, no_write, no_address, decode) -> write_result;
-                    else if (instruction_reg == 0x33) then
-                        (add, no_montgomery, no_sync, no_write, no_address, decode) -> do;
-                    else if (instruction_reg == 0x34) then
-                        (subtract, no_montgomery, no_sync, no_write, no_address, decode) -> do;
+                        (subtract, no_montgomery, no_idling, no_write, no_address, decode) -> do;
+
                     else
-                        (no_adder, no_montgomery, no_sync, no_write, no_address, decode) -> do;
-    @read_modulus   if (counter_reg < 0x81) then
-                        (read_m, no_adder, no_montgomery, no_sync, no_write, decode) -> read_modulus;
+                        (no_adder, no_montgomery, no_idling, no_write, no_address, decode) -> do;
+    @read_modulus   if (counter_reg < 0x80) then
+                        (read_m, no_adder, no_montgomery, no_idling, no_write, decode) -> read_modulus;
                     else
-                        (read_done, no_adder, no_montgomery, no_write, no_address, decode) -> read_done;
-    @read_both      if (counter_reg < 0x81) then
-                        (read_a, no_adder, no_montgomery, no_sync, no_write, decode) -> read_both;
-                    else if (counter_reg >= 0x81 & counter_reg < 0x101) then
-                        (read_b, no_adder, no_montgomery, no_sync, no_write, decode) -> read_both;
+                        (idling, no_adder, no_montgomery, no_write, no_address, decode) -> read_done;
+    @read_a_mem     if (counter_reg < 0x80) then
+                        (read_a_mem, no_adder, no_montgomery, no_idling, no_write, decode) -> read_a_mem;
                     else
-                        (read_done, no_adder, no_montgomery, no_write, no_address, decode) -> read_done;
-    @read_single    if (counter_reg < 0x81) then
-                        (read_a, no_adder, no_montgomery, no_sync, no_write, decode) -> read_single;
+                        (idling, no_adder, no_montgomery, no_write, no_address, decode) -> read_done;
+    @read_b_mem     if (counter_reg < 0x80) then
+                        (read_b_mem, no_adder, no_montgomery, no_idling, no_write, decode) -> read_b_mem;
                     else
-                        (read_done, no_adder, no_montgomery, no_write, no_address, decode) -> read_done;
-    @read_result    if (counter_reg < 0x81) then
-                        (read_result, no_adder, no_montgomery, no_sync, no_write, decode) -> read_result;
+                        (idling, no_adder, no_montgomery, no_write, no_address, decode) -> read_done;
+    @read_result    if (counter_reg < 0x80) then
+                        (read_result, no_adder, no_montgomery, no_idling, no_write, decode) -> read_result;
                     else
-                        (read_done, no_adder, no_montgomery, no_write, no_address, decode) -> read_done;
+                        (idling, no_adder, no_montgomery, no_write, no_address, decode) -> read_done;
     @read_done      if (instruction_reg == 0x0F) then
-                        (no_adder, no_montgomery, no_sync, no_write, no_address, decode) -> do;
+                        (no_adder, no_montgomery, no_idling, no_write, no_address, decode) -> do;
                     else
-                        (read_done, no_adder, no_montgomery, no_write, no_address, decode) -> read_done;
+                        (idling, no_adder, no_montgomery, no_write, no_address, decode) -> read_done;
     @montgomery     if (r_reg > 0) then
-                        (no_adder, no_montgomery, no_sync, no_write, no_address, decode) -> do;
+                        (no_adder, no_montgomery, no_idling, no_write, no_address, decode) -> do;
                     else
-                        (start_montgomery, montgomery, no_adder, no_sync, no_write, no_address, decode) -> montgomery;
-    @write_result   if (counter_reg < 0x81) then
-                        (no_adder, no_montgomery, no_sync, write_result, decode) -> write_result;
+                        (start_montgomery, montgomery, no_adder, no_idling, no_write, no_address, decode) -> montgomery;
+    @write_result   if (counter_reg < 0x80) then
+                        (write_result, no_adder, no_montgomery, no_idling, decode) -> write_result;
                     else
-                        (no_adder, no_montgomery, no_write, no_address, write_done, decode) -> write_done;
+                        (no_adder, no_montgomery, no_write, no_address, no_idling, decode) -> write_done;
     @write_done     if (instruction_reg == 0x0F) then
-                        (no_adder, no_montgomery, no_write, no_address, no_sync, decode) -> do;
+                        (no_adder, no_montgomery, no_write, no_address, no_idling, decode) -> do;
                     else
-                        (no_adder, no_montgomery, no_write, no_address, write_done, decode) -> write_done;
+                        (idling, no_adder, no_montgomery, no_write, no_address, decode) -> write_done;
 }
 
 ipblock my8051 {
@@ -364,30 +367,29 @@ ipblock my8051 {
     ipparm "verbose=1";
 }
 
-ipblock my8051_sync(in data : ns(8)) {
-    iptype "i8051systemsink";
-    ipparm "core=my8051";
-    ipparm "port=P1";
-}
-
 ipblock my8051_instruction(out data : ns(8)) {
     iptype "i8051systemsource";
     ipparm "core=my8051";
     ipparm "port=P0";
 }
 
-ipblock my8051_data(in idata : ns(8); out odata : ns(8); in address : ns(9); in wr : ns(1)) {
-    iptype "i8051buffer";
+ipblock my8051_address(out data : ns(8)) {
+    iptype "i8051systemsource";
     ipparm "core=my8051";
-    ipparm "xbus=0x2000";
-    ipparm "xrange=0x180";
+    ipparm "port=P1";
 }
 
-ipblock my8051_result(in idata : ns(8); out odata : ns(8); in address : ns(9); in wr : ns(1)) {
+ipblock my8051_idling(in data : ns(8)) {
+    iptype "i8051systemsink";
+    ipparm "core=my8051";
+    ipparm "port=P2";
+}
+
+ipblock my8051_memory(in idata : ns(8); out odata : ns(8); in address : ns(16); in wr : ns(1)) {
     iptype "i8051buffer";
     ipparm "core=my8051";
-    ipparm "xbus=0x3000";
-    ipparm "xrange=0x80";
+    ipparm "xbus=0x0000";
+    ipparm "xrange=0xFFFF";
 }
 
 dp defaults (out data_in : ns(8))
@@ -402,20 +404,20 @@ hardwired defaults_hw (defaults) { do_always; }
 
 dp montgomery_sys
 {
-    sig sync, data_in, data_out, result_in, result_out : ns(8);
-    sig instruction : ns(8);
-    sig address : ns(9);
-    sig data_wr, result_wr : ns(1);
+    sig idling, data_in, data_out, result_in, result_out : ns(8);
+    sig instruction, address : ns(8);
+    sig full_address : ns(16);
+    sig data_wr : ns(1);
 
     use defaults(data_in);
 
     use my8051;
-    use my8051_sync(sync);
     use my8051_instruction(instruction);
-    use my8051_data(data_in, data_out, address, data_wr);
-    use my8051_result(result_in, result_out, address, result_wr);
+    use my8051_address(address);
+    use my8051_idling(idling);
+    use my8051_memory(data_in, data_out, full_address, data_wr);
 
-    use decoder_dp(instruction, data_out, result_out, sync, result_in, address, data_wr, result_wr);
+    use decoder_dp(instruction, address, data_out, full_address, data_in, idling, data_wr);
 }
 
 system S

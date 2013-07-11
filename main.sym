@@ -266,84 +266,84 @@ Symbol Table
     _TR1                                                        =  008E G
     _TXD                                                        =  00B1 G
     _WR                                                         =  00B6 G
- 21 __adder_add                                                    06DC GR
- 21 __adder_readResult                                             06CB GR
- 21 __adder_subtract                                               06E3 GR
- 21 __adder_writeBoth                                              06A9 GR
- 21 __adder_writeSingle                                            06BA GR
- 21 __displayCycles                                                0638 GR
- 21 __displayResult                                                063F GR
- 21 __findFirstOne                                                 0589 GR
+ 25 __adder_add                                                    0398 GR
+ 25 __adder_subtract                                               03A6 GR
+ 25 __displayCycles                                                0305 GR
+ 25 __displayResult                                                030C GR
+ 25 __findFirstOne                                                 0256 GR
   4 __findFirstOne_e_1_1                                           0000 GR
   4 __findFirstOne_i_1_1                                           0003 GR
     __gptrget                                                      **** GX
-    __gptrput                                                      **** GX
- 18 __interrupt_vect                                               0000 R
+ 1C __interrupt_vect                                               0000 R
     __mcs51_genRAMCLEAR                                            **** GX
     __mcs51_genXINIT                                               **** GX
     __mcs51_genXRAMCLEAR                                           **** GX
- 21 __mul1_montgomery                                              06A2 GR
- 21 __mul1_readResult                                              0680 GR
- 21 __mul1_writeBoth                                               0657 GR
- 21 __mul1_writeModulus                                            0646 GR
- 21 __mul1_writeReg                                                0679 GR
- 21 __mul1_writeResult                                             0691 GR
- 21 __mul1_writeSingle                                             0668 GR
+ 25 __mul_montgomery                                               038A GR
+ 25 __readResult                                                   0375 GR
     __sdcc_gsinit_startup                                          **** GX
- 18 __sdcc_program_startup                                         0003 GR
+ 1C __sdcc_program_startup                                         0003 GR
   5 __start__stack                                                 0000 GR
- 21 __terminate                                                    06EA GR
- 21 _crtModExp                                                     0454 GR
-  3 _crtModExp_PARM_2                                              0026 GR
-  3 _crtModExp_PARM_3                                              0029 GR
-    _crtModExp_resultDifference_1_1                             =  1200 
-    _crtModExp_resultOne_1_1                                    =  1000 
-    _crtModExp_resultTwo_1_1                                    =  1100 
-    _crtModExp_u_1_1                                            =  1300 
-    _decryptedMessage                                           =  5100 G
-    _encryptedMessage                                           =  5000 G
- 16 _garnerConstant                                                4A00 GR
- 21 _main                                                          0000 GR
- 11 _message                                                       4500 GR
-  E _modulus                                                       4200 GR
- 21 _montModExp                                                    0284 GR
-  3 _montModExp_PARM_2                                             001B GR
-  3 _montModExp_PARM_3                                             001E GR
-    _montModExp_one_1_1                                         =  1000 
-  3 _montModExp_t_1_1                                              0024 R
-    _montModExp_xTilde_1_1                                      =  1100 
-  3 _montModExp_x_1_1                                              0021 R
- 21 _montMultiply_Both                                             011F GR
-  3 _montMultiply_Both_PARM_2                                      000C GR
-  3 _montMultiply_Both_PARM_3                                      000F GR
-  8 _montMultiply_Both_PARM_4                                      0002 GR
-  3 _montMultiply_Both_r_1_1                                       0012 R
- 21 _montMultiply_Result                                           022A GR
+ 25 __terminate                                                    03B4 GR
+ 25 __writeA_Mem                                                   0328 GR
+ 25 __writeA_Reg                                                   033D GR
+ 25 __writeB_Mem                                                   0344 GR
+ 25 __writeB_Reg                                                   0359 GR
+ 25 __writeModulus                                                 0313 GR
+ 25 __writeResult                                                  0360 GR
+ 25 _crtModExp                                                     01CA GR
+  3 _crtModExp_PARM_10                                             001B GR
+  3 _crtModExp_PARM_11                                             001C GR
+  3 _crtModExp_PARM_12                                             001D GR
+  3 _crtModExp_PARM_2                                              000F GR
+  3 _crtModExp_PARM_3                                              0010 GR
+  3 _crtModExp_PARM_4                                              0013 GR
+  3 _crtModExp_PARM_5                                              0016 GR
+  3 _crtModExp_PARM_6                                              0017 GR
+  3 _crtModExp_PARM_7                                              0018 GR
+  3 _crtModExp_PARM_8                                              0019 GR
+  3 _crtModExp_PARM_9                                              001A GR
+    _decryptedMessage                                           =  2100 G
+    _encryptedMessage                                           =  2000 G
+ 14 _garnerConstant                                                1800 GR
+ 25 _main                                                          0000 GR
+  F _message                                                       1300 GR
+  C _modulus                                                       1000 GR
+ 25 _montModExp                                                    00CA GR
+  3 _montModExp_PARM_2                                             0005 GR
+  3 _montModExp_PARM_3                                             0006 GR
+  3 _montModExp_PARM_4                                             0009 GR
+  3 _montModExp_PARM_5                                             000A GR
+  3 _montModExp_PARM_6                                             000B GR
+    _montModExp_one_1_1                                         =  0000 
+  3 _montModExp_r_1_1                                              000C R
+  3 _montModExp_t_1_1                                              000D R
+ 25 _montMultiply_Both                                             0094 GR
+  3 _montMultiply_Both_PARM_2                                      0003 GR
+  3 _montMultiply_Both_PARM_3                                      0004 GR
+  8 _montMultiply_Both_PARM_4                                      0003 GR
+ 25 _montMultiply_Result                                           00B2 GR
   8 _montMultiply_Result_PARM_2                                    0004 GR
- 21 _montMultiply_Single                                           01BA GR
-  3 _montMultiply_Single_PARM_2                                    0015 GR
-  8 _montMultiply_Single_PARM_3                                    0003 GR
-  3 _montMultiply_Single_r_1_1                                     0018 R
- 21 _mpAdd_Single                                                  003F GR
+ 25 _montMultiply_Single                                           0079 GR
+  3 _montMultiply_Single_PARM_2                                    0002 GR
+  8 _montMultiply_Single_PARM_3                                    0002 GR
+ 25 _mpAdd_Single                                                  0043 GR
   3 _mpAdd_Single_PARM_2                                           0000 GR
   8 _mpAdd_Single_PARM_3                                           0000 GR
-  3 _mpAdd_Single_r_1_1                                            0003 R
- 21 _mpSubtract_Single                                             00AF GR
-  3 _mpSubtract_Single_PARM_2                                      0006 GR
+ 25 _mpSubtract_Single                                             005E GR
+  3 _mpSubtract_Single_PARM_2                                      0001 GR
   8 _mpSubtract_Single_PARM_3                                      0001 GR
-  3 _mpSubtract_Single_r_1_1                                       0009 R
-  F _p                                                             4300 GR
- 13 _privateKey                                                    4700 GR
- 14 _privateKey_P                                                  4800 GR
- 15 _privateKey_Q                                                  4900 GR
- 12 _publicKey                                                     4600 GR
- 10 _q                                                             4400 GR
-  D _r2modm                                                        4100 GR
-  C _rmodm                                                         4000 GR
-    _sA                                                         =  2000 G
-    _sB                                                         =  2080 G
-    _sM                                                         =  2100 G
-    _sR                                                         =  3000 G
+  D _p                                                             1100 GR
+ 11 _privateKey                                                    1500 GR
+ 12 _privateKey_P                                                  1600 GR
+ 13 _privateKey_Q                                                  1700 GR
+ 10 _publicKey                                                     1400 GR
+  E _q                                                             1200 GR
+ 16 _r2modm                                                        1A00 GR
+ 18 _r2modp                                                        1C00 GR
+ 1A _r2modq                                                        1E00 GR
+ 15 _rmodm                                                         1900 GR
+ 17 _rmodp                                                         1B00 GR
+ 19 _rmodq                                                         1D00 GR
     a                                                              00D6 
     ac                                                             00D6 
     acc                                                            00E0 
@@ -528,7 +528,7 @@ Area Table
    0 _CODE                                                                              size    0   flags 0
    1 RSEG                                                                               size    0   flags 0
    2 REG_BANK_0                                                                         size    8   flags 4
-   3 DSEG                                                                               size   2C   flags 0
+   3 DSEG                                                                               size   1E   flags 0
    4 OSEG                                                                               size    4   flags 4
    5 SSEG                                                                               size    1   flags 0
    6 ISEG                                                                               size    0   flags 0
@@ -548,17 +548,21 @@ Area Table
   14 XABS8                                                                              size   80   flags 48
   15 XABS9                                                                              size   80   flags 48
   16 XABSa                                                                              size   80   flags 48
-  17 XISEG                                                                              size    0   flags 40
-  18 HOME                                                                               size    8   flags 20
-  19 GSINIT0                                                                            size    0   flags 20
-  1A GSINIT1                                                                            size    0   flags 20
-  1B GSINIT2                                                                            size    0   flags 20
-  1C GSINIT3                                                                            size    0   flags 20
-  1D GSINIT4                                                                            size    0   flags 20
-  1E GSINIT5                                                                            size    0   flags 20
-  1F GSINIT                                                                             size 1BD9   flags 20
-  20 GSFINAL                                                                            size    3   flags 20
-  21 CSEG                                                                               size  6EE   flags 20
-  22 CONST                                                                              size    0   flags 20
-  23 XINIT                                                                              size    0   flags 20
-  24 CABS                                                                               size    0   flags 28
+  17 XABSb                                                                              size   80   flags 48
+  18 XABSc                                                                              size   80   flags 48
+  19 XABSd                                                                              size   80   flags 48
+  1A XABSe                                                                              size   80   flags 48
+  1B XISEG                                                                              size    0   flags 40
+  1C HOME                                                                               size    8   flags 20
+  1D GSINIT0                                                                            size    0   flags 20
+  1E GSINIT1                                                                            size    0   flags 20
+  1F GSINIT2                                                                            size    0   flags 20
+  20 GSINIT3                                                                            size    0   flags 20
+  21 GSINIT4                                                                            size    0   flags 20
+  22 GSINIT5                                                                            size    0   flags 20
+  23 GSINIT                                                                             size 2619   flags 20
+  24 GSFINAL                                                                            size    3   flags 20
+  25 CSEG                                                                               size  3B8   flags 20
+  26 CONST                                                                              size    0   flags 20
+  27 XINIT                                                                              size    0   flags 20
+  28 CABS                                                                               size    0   flags 28
