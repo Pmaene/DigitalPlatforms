@@ -11,142 +11,13 @@ dp adder_dp (in subtract : ns(1); in a, b : ns(1026); out s: ns(1027)) {
     }
 }
 
-dp montgomery_adder_dp : adder_dp
-
 /**
- * Montgomery
+ * Main
  */
 
-dp montgomery_dp (in a, b, m : ns(1024); in start : ns(1); out r : ns(1027))
-{
-    reg counter_reg : ns(11);
-    reg a_reg : ns(1024);
-    reg r_reg : ns(1027);
-
-    sig s_sig : ns(1027);
-    sig x_sig, y_sig : ns(1026);
-    sig subtract_sig : ns(1);
-
-    use montgomery_adder_dp(subtract_sig, x_sig, y_sig, s_sig);
-
-    sfg init {
-        counter_reg = 0;
-        r = 0;
-        r_reg = 0;
-
-        x_sig = 0;
-        y_sig = 0;
-        subtract_sig = 0;
-
-        a_reg = a;
-    }
-
-    sfg counter_increment {
-        counter_reg = counter_reg + 1;
-        a_reg = a_reg >> 1;
-    }
-
-    sfg counter_reset {
-        counter_reg = 0;
-    }
-
-    sfg sum {
-        x_sig = r_reg;
-        y_sig = a_reg[0] == 0 ? 0 : b;
-        subtract_sig = 0;
-        r_reg = s_sig;
-    }
-
-    sfg just_divide {
-        x_sig = 0;
-        y_sig = 0;
-        subtract_sig = 0;
-        r_reg = r_reg >> 1;
-    }
-
-    sfg sum_and_divide {
-        x_sig = r_reg;
-        y_sig = b;
-        subtract_sig = 0;
-        r_reg = s_sig >> 1;
-    }
-
-    sfg sum_m_and_divide {
-        x_sig = r_reg;
-        y_sig = m;
-        subtract_sig = 0;
-        r_reg = s_sig >> 1;
-    }
-
-    sfg equal_to_zero {
-        x_sig = 0;
-        y_sig = 0;
-        subtract_sig = 0;
-        r_reg = r_reg >> 1;
-    }
-
-    sfg not_equal_to_zero {
-        x_sig = r_reg;
-        y_sig = m;
-        subtract_sig = 0;
-        r_reg = s_sig >> 1;
-    }
-
-    sfg overflow_check {
-        x_sig = r_reg;
-        y_sig = r_reg >= m ? m : 0;
-        subtract_sig = 1;
-        r_reg = s_sig;
-    }
-
-    sfg stop {
-        x_sig = 0;
-        y_sig = 0;
-        subtract_sig = 0;
-        r = r_reg;
-    }
-
-    sfg reset_r {
-        r = 0;
-    }
-}
-
-fsm montgomery (montgomery_dp)
-{
-    initial init;
-    state wait, do, if_else, stop;
-
-    @init       (init) -> wait;
-    @wait       if (start == 0) then
-                    (init) -> wait;
-                else
-                    (init) -> do;
-    @do         if (counter_reg >= 1024) then
-                    (counter_reset, overflow_check, reset_r) -> stop;
-                else if (r_reg[0] == 0 & a_reg[0] == 0) then
-                    (just_divide, counter_increment, reset_r) -> do;
-                else if (r_reg[0] == 0 & a_reg[0] == 1 & b[0] == 0) then
-                    (sum_and_divide, counter_increment, reset_r) -> do;
-                else if (r_reg[0] == 1 & a_reg[0] == 1 & b[0] == 1) then
-                    (sum_and_divide, counter_increment, reset_r) -> do;
-                else if (r_reg[0] == 1 & a_reg[0] == 0) then
-                    (sum_m_and_divide, counter_increment, reset_r) -> do;
-                else
-                    (sum, reset_r) -> if_else;
-    @if_else    if (r_reg[0] == 0) then
-                    (equal_to_zero, counter_increment, reset_r) -> do;
-                else
-                    (not_equal_to_zero, counter_increment, reset_r) -> do;
-    @stop       (stop) -> wait;
-}
-
-/**
- * Decoder
- */
-
-dp decoder_dp(in instruction, address, data_in : ns(8); out full_address : ns(16); out data_out, idling: ns(8); out data_wr : ns(1)) {
+dp main_dp(in instruction, address, data_in : ns(8); out full_address : ns(16); out data_out, idling: ns(8); out data_wr : ns(1)) {
     reg displayed_reg : ns(1);
-    reg counter_reg : ns(8);
+    reg counter_reg : ns(11);
     reg instruction_reg, address_reg, data_in_reg : ns(8);
 
     reg a_reg, b_reg, m_reg : ns(1024);
@@ -156,12 +27,11 @@ dp decoder_dp(in instruction, address, data_in : ns(8); out full_address : ns(16
     sig s_sig : ns(1027);
     sig subtract_sig : ns(1);
 
-    sig a_sig, b_sig, m_sig : ns(1024);
-    sig r_sig : ns(1027);
-    sig start_sig : ns(1);
-
     use adder_dp(subtract_sig, x_sig, y_sig, s_sig);
-    use montgomery_dp(a_sig, b_sig, m_sig, start_sig, r_sig);
+
+    /**
+     * Decoder
+     */
 
     sfg decode {
         instruction_reg = instruction;
@@ -173,13 +43,6 @@ dp decoder_dp(in instruction, address, data_in : ns(8); out full_address : ns(16
         x_sig = 0;
         y_sig = 0;
         subtract_sig = 0;
-    }
-
-    sfg no_montgomery {
-        a_sig = 0;
-        b_sig = 0;
-        m_sig = 0;
-        start_sig = 0;
     }
 
     sfg no_write {
@@ -248,13 +111,6 @@ dp decoder_dp(in instruction, address, data_in : ns(8); out full_address : ns(16
         r_reg = s_sig;
     }
 
-    sfg montgomery {
-        a_sig = a_reg;
-        b_sig = b_reg;
-        m_sig = m_reg;
-        r_reg = r_sig;
-    }
-
     sfg reset_counter {
         counter_reg = 0;
     }
@@ -263,12 +119,8 @@ dp decoder_dp(in instruction, address, data_in : ns(8); out full_address : ns(16
         displayed_reg = 0;
     }
 
-    sfg start_montgomery {
-        start_sig = 1;
-    }
-
-    sfg stop_montgomery {
-        start_sig = 0;
+    sfg reset_result {
+        r_reg = 0;
     }
 
     sfg idling {
@@ -288,77 +140,141 @@ dp decoder_dp(in instruction, address, data_in : ns(8); out full_address : ns(16
         displayed_reg = 1;
         $display("Result: ", r_reg);
     }
+
+    /**
+     * Montgomery
+     */
+
+    sfg mont_counter_increment {
+        counter_reg = counter_reg + 1;
+        a_reg = a_reg >> 1;
+    }
+
+    sfg mont_sum {
+        x_sig = r_reg;
+        y_sig = a_reg[0] == 0 ? 0 : b_reg;
+        subtract_sig = 0;
+        r_reg = s_sig;
+    }
+
+    sfg mont_just_divide {
+        r_reg = r_reg >> 1;
+    }
+
+    sfg mont_sum_and_divide {
+        x_sig = r_reg;
+        y_sig = b_reg;
+        subtract_sig = 0;
+        r_reg = s_sig >> 1;
+    }
+
+    sfg mont_sum_m_and_divide {
+        x_sig = r_reg;
+        y_sig = m_reg;
+        subtract_sig = 0;
+        r_reg = s_sig >> 1;
+    }
+
+    sfg mont_equal_to_zero {
+        r_reg = r_reg >> 1;
+    }
+
+    sfg mont_not_equal_to_zero {
+        x_sig = r_reg;
+        y_sig = m_reg;
+        subtract_sig = 0;
+        r_reg = s_sig >> 1;
+    }
+
+    sfg mont_overflow_check {
+        x_sig = r_reg;
+        y_sig = r_reg >= m_reg ? m_reg : 0;
+        subtract_sig = 1;
+        r_reg = s_sig;
+    }
 }
 
-fsm decoder(decoder_dp) {
+fsm main(main_dp) {
     initial init;
-    state do, read_modulus, read_a_mem, read_b_mem, read_result, read_done, montgomery, write_result, write_done;
+    state do, read_modulus, read_a_mem, read_b_mem, read_result, read_done, mont_do, mont_if_else, write_result, write_done;
 
-    @init           (no_adder, no_montgomery, no_idling, no_write, no_address, decode) -> do;
+    @init           (no_adder, no_idling, no_write, no_address, decode) -> do;
     @do             if (instruction_reg == 0x00) then
-                        (reset_displayed, idling, no_adder, no_montgomery, no_write, no_address, decode) -> do;
+                        (reset_displayed, idling, no_adder, no_write, no_address, decode) -> do;
                     else if (instruction_reg == 0x01 & displayed_reg == 0) then
-                        (display_cycles, no_adder, no_montgomery, no_idling, no_write, no_address, decode) -> do;
+                        (display_cycles, no_adder, no_idling, no_write, no_address, decode) -> do;
                     else if (instruction_reg == 0x02 & displayed_reg == 0) then
-                        (display_result, no_adder, no_montgomery, no_idling, no_write, no_address, decode) -> do;
+                        (display_result, no_adder, no_idling, no_write, no_address, decode) -> do;
 
                     else if (instruction_reg == 0x10) then
-                        (reset_m, reset_counter, no_adder, no_montgomery, no_idling, no_write, no_address, decode) -> read_modulus;
+                        (reset_m, reset_counter, no_adder, no_idling, no_write, no_address, decode) -> read_modulus;
                     else if (instruction_reg == 0x11) then
-                        (reset_counter, no_adder, no_montgomery, no_idling, no_write, no_address, decode) -> read_a_mem;
+                        (reset_counter, no_adder, no_idling, no_write, no_address, decode) -> read_a_mem;
                     else if (instruction_reg == 0x12) then
-                        (read_a_reg, no_adder, no_montgomery, no_idling, no_write, no_address, decode) -> do;
+                        (read_a_reg, no_adder, no_idling, no_write, no_address, decode) -> do;
                     else if (instruction_reg == 0x13) then
-                        (reset_counter, no_adder, no_montgomery, no_idling, no_write, no_address, decode) -> read_b_mem;
+                        (reset_counter, no_adder, no_idling, no_write, no_address, decode) -> read_b_mem;
                     else if (instruction_reg == 0x14) then
-                        (read_b_reg, no_adder, no_montgomery, no_idling, no_write, no_address, decode) -> do;
+                        (read_b_reg, no_adder, no_idling, no_write, no_address, decode) -> do;
                     else if (instruction_reg == 0x15) then
-                        (reset_counter, no_adder, no_montgomery, no_idling, no_write, no_address, decode) -> read_result;
+                        (reset_counter, no_adder, no_idling, no_write, no_address, decode) -> read_result;
                     else if (instruction_reg == 0x16) then
-                        (reset_counter, no_adder, no_montgomery, no_idling, no_write, no_address, decode) -> write_result;
+                        (reset_counter, no_adder, no_idling, no_write, no_address, decode) -> write_result;
 
                     else if (instruction_reg == 0x20) then
-                        (stop_montgomery, montgomery, no_adder, no_idling, no_write, no_address, decode) -> montgomery;
+                        (reset_counter, reset_result, no_adder, no_idling, no_write, no_address, decode) -> mont_do;
 
                     else if (instruction_reg == 0x30) then
-                        (add, no_montgomery, no_idling, no_write, no_address, decode) -> do;
+                        (add, no_idling, no_write, no_address, decode) -> do;
                     else if (instruction_reg == 0x31) then
-                        (subtract, no_montgomery, no_idling, no_write, no_address, decode) -> do;
+                        (subtract, no_idling, no_write, no_address, decode) -> do;
 
                     else
-                        (no_adder, no_montgomery, no_idling, no_write, no_address, decode) -> do;
+                        (no_adder, no_idling, no_write, no_address, decode) -> do;
     @read_modulus   if (counter_reg < 0x80) then
-                        (read_m, no_adder, no_montgomery, no_idling, no_write, decode) -> read_modulus;
+                        (read_m, no_adder, no_idling, no_write, decode) -> read_modulus;
                     else
-                        (idling, no_adder, no_montgomery, no_write, no_address, decode) -> read_done;
+                        (idling, no_adder, no_write, no_address, decode) -> read_done;
     @read_a_mem     if (counter_reg < 0x80) then
-                        (read_a_mem, no_adder, no_montgomery, no_idling, no_write, decode) -> read_a_mem;
+                        (read_a_mem, no_adder, no_idling, no_write, decode) -> read_a_mem;
                     else
-                        (idling, no_adder, no_montgomery, no_write, no_address, decode) -> read_done;
+                        (idling, no_adder, no_write, no_address, decode) -> read_done;
     @read_b_mem     if (counter_reg < 0x80) then
-                        (read_b_mem, no_adder, no_montgomery, no_idling, no_write, decode) -> read_b_mem;
+                        (read_b_mem, no_adder, no_idling, no_write, decode) -> read_b_mem;
                     else
-                        (idling, no_adder, no_montgomery, no_write, no_address, decode) -> read_done;
+                        (idling, no_adder, no_write, no_address, decode) -> read_done;
     @read_result    if (counter_reg < 0x80) then
-                        (read_result, no_adder, no_montgomery, no_idling, no_write, decode) -> read_result;
+                        (read_result, no_adder, no_idling, no_write, decode) -> read_result;
                     else
-                        (idling, no_adder, no_montgomery, no_write, no_address, decode) -> read_done;
+                        (idling, no_adder, no_write, no_address, decode) -> read_done;
     @read_done      if (instruction_reg == 0x0F) then
-                        (no_adder, no_montgomery, no_idling, no_write, no_address, decode) -> do;
+                        (no_adder, no_idling, no_write, no_address, decode) -> do;
                     else
-                        (idling, no_adder, no_montgomery, no_write, no_address, decode) -> read_done;
-    @montgomery     if (r_reg > 0) then
-                        (no_adder, no_montgomery, no_idling, no_write, no_address, decode) -> do;
+                        (idling, no_adder, no_write, no_address, decode) -> read_done;
+    @mont_do        if (counter_reg >= 1024) then
+                        (mont_overflow_check, idling, no_write, no_address, decode) -> do;
+                    else if (r_reg[0] == 0 & a_reg[0] == 0) then
+                        (mont_just_divide, mont_counter_increment, no_adder, no_idling, no_write, no_address, decode) -> mont_do;
+                    else if (r_reg[0] == 0 & a_reg[0] == 1 & b_reg[0] == 0) then
+                        (mont_sum_and_divide, mont_counter_increment, no_idling, no_write, no_address, decode) -> mont_do;
+                    else if (r_reg[0] == 1 & a_reg[0] == 1 & b_reg[0] == 1) then
+                        (mont_sum_and_divide, mont_counter_increment, no_idling, no_write, no_address, decode) -> mont_do;
+                    else if (r_reg[0] == 1 & a_reg[0] == 0) then
+                        (mont_sum_m_and_divide, mont_counter_increment, no_idling, no_write, no_address, decode) -> mont_do;
                     else
-                        (start_montgomery, montgomery, no_adder, no_idling, no_write, no_address, decode) -> montgomery;
+                        (mont_sum, no_idling, no_write, no_address, decode) -> mont_if_else;
+    @mont_if_else   if (r_reg[0] == 0) then
+                        (mont_equal_to_zero, mont_counter_increment, no_adder, no_idling, no_write, no_address, decode) -> mont_do;
+                    else
+                        (mont_not_equal_to_zero, mont_counter_increment, no_idling, no_write, no_address, decode) -> mont_do;
     @write_result   if (counter_reg < 0x80) then
-                        (write_result, no_adder, no_montgomery, no_idling, decode) -> write_result;
+                        (write_result, no_adder, no_idling, decode) -> write_result;
                     else
-                        (no_adder, no_montgomery, no_write, no_address, no_idling, decode) -> write_done;
+                        (no_adder, no_write, no_address, no_idling, decode) -> write_done;
     @write_done     if (instruction_reg == 0x0F) then
-                        (no_adder, no_montgomery, no_write, no_address, no_idling, decode) -> do;
+                        (no_adder, no_write, no_address, no_idling, decode) -> do;
                     else
-                        (idling, no_adder, no_montgomery, no_write, no_address, decode) -> write_done;
+                        (idling, no_adder, no_write, no_address, decode) -> write_done;
 }
 
 ipblock my8051 {
@@ -392,24 +308,12 @@ ipblock my8051_memory(in idata : ns(8); out odata : ns(8); in address : ns(16); 
     ipparm "xrange=0xFFFF";
 }
 
-dp defaults (out data_in : ns(8))
-{
-    sfg do_always
-    {
-        data_in = 0;
-    }
-}
-
-hardwired defaults_hw (defaults) { do_always; }
-
-dp montgomery_sys
+dp main_sys
 {
     sig idling, data_in, data_out, result_in, result_out : ns(8);
     sig instruction, address : ns(8);
     sig full_address : ns(16);
     sig data_wr : ns(1);
-
-    use defaults(data_in);
 
     use my8051;
     use my8051_instruction(instruction);
@@ -417,10 +321,10 @@ dp montgomery_sys
     use my8051_idling(idling);
     use my8051_memory(data_in, data_out, full_address, data_wr);
 
-    use decoder_dp(instruction, address, data_out, full_address, data_in, idling, data_wr);
+    use main_dp(instruction, address, data_out, full_address, data_in, idling, data_wr);
 }
 
 system S
 {
-    montgomery_sys;
+    main_sys;
 }

@@ -529,13 +529,13 @@ main.rel
 
 Libraries Linked            [   object  file   ]
 
-/usr/share/sdcc/lib/small/mcs51.lib    [     crtclear.rel ]
-/usr/share/sdcc/lib/small/mcs51.lib    [     crtxinit.rel ]
-/usr/share/sdcc/lib/small/mcs51.lib    [    crtxclear.rel ]
-/usr/share/sdcc/lib/small/mcs51.lib    [   crtpagesfr.rel ]
-/usr/share/sdcc/lib/small/mcs51.lib    [     crtstart.rel ]
-/usr/share/sdcc/lib/small/libsdcc.lib    [     _gptrget.rel ]
-/usr/share/sdcc/lib/small/libsdcc.lib    [     _startup.rel ]
+/usr/bin/../share/sdcc/lib/small/mcs51.lib    [     crtclear.rel ]
+/usr/bin/../share/sdcc/lib/small/mcs51.lib    [     crtxinit.rel ]
+/usr/bin/../share/sdcc/lib/small/mcs51.lib    [    crtxclear.rel ]
+/usr/bin/../share/sdcc/lib/small/mcs51.lib    [   crtpagesfr.rel ]
+/usr/bin/../share/sdcc/lib/small/mcs51.lib    [     crtstart.rel ]
+/usr/bin/../share/sdcc/lib/small/libsdcc.lib    [     _gptrget.rel ]
+/usr/bin/../share/sdcc/lib/small/libsdcc.lib    [     _startup.rel ]
 
 ASxxxx Linker V01.75 + NoICE + SDCC Feb 1999,  page 2.
 
