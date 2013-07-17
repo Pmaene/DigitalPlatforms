@@ -58,8 +58,6 @@ void crtModExp(
 );
 
 // Private Function API
-unsigned short _findFirstOne(unsigned char *e);
-
 void _displayCycles();
 void _displayResult();
 
@@ -151,7 +149,9 @@ void montModExp(unsigned char r, unsigned char x, unsigned char *e, unsigned cha
     __xdata __at (0x0000) unsigned char one[SIZE];
     // __xdata __at (0x0100) unsigned char xTilde[SIZE];
 
-    unsigned short i;
+    unsigned char i;
+    unsigned char j;
+    unsigned short k;
     unsigned short t;
 
     *one = 0x01;
@@ -162,17 +162,30 @@ void montModExp(unsigned char r, unsigned char x, unsigned char *e, unsigned cha
     // montMultiply_Both(xTilde, x, r2modm, true)
     montMultiply_Both(0x01, x, r2modm, true);
 
-    t = _findFirstOne(e);
+    // t = _findFirstOne(e)
+    t = 0;
+    for (i = 0; i < SIZE; i++) {
+        if (e[(SIZE-1)-i] != 0) {
+            for (j = 0; j < 8; j++) {
+                if (e[(SIZE-1)-i] >> (7-j) & 1) {
+                    t = 8*((SIZE-1)-i) + (7-j);
+                    goto exitLoop;
+                }
+            }
+        }
+    }
 
-    // Extracted first loop iteration (i = 0)
+    exitLoop:
+
+    // Extracted first loop iteration (k = 0)
     _writeResult(rmodm);
     if (((e[t/8] >> t%8)) & 1)
         // montMultiply_Single(r, xTilde, false)
         montMultiply_Single(r, 0x01, false);
 
-    for (i = 1; i <= t; i++) {
+    for (k = 1; k <= t; k++) {
         montMultiply_Result(r, false);
-        if (((e[(t-i)/8] >> (t-i)%8)) & 1)
+        if (((e[(t-k)/8] >> (t-k)%8)) & 1)
             // montMultiply_Single(r, xTilde, false)
             montMultiply_Single(r, 0x01, false);
     }
@@ -225,22 +238,6 @@ void crtModExp(
 }
 
 // Private Functions
-unsigned short _findFirstOne(unsigned char *e) {
-    unsigned char i;
-    unsigned char j;
-
-    for (i = 0; i < SIZE; i++) {
-        if (e[(SIZE-1)-i] != 0) {
-            for (j = 0; j < 8; j++) {
-                if (e[(SIZE-1)-i] >> (7-j) & 1)
-                    return 8*((SIZE-1)-i) + (7-j);
-            }
-        }
-    }
-
-    return 0;
-}
-
 void _displayCycles() {
     P0 = INS_DISPLAY_CYCLES;
     P0 = INS_IDLE;
@@ -252,6 +249,8 @@ void _displayResult() {
 }
 
 void _writeModulus(unsigned char address) {
+    while (P2 == 2) {}
+
     P2 = 0;
     P1 = address;
 
@@ -263,6 +262,8 @@ void _writeModulus(unsigned char address) {
 }
 
 void _writeA_Mem(unsigned char address) {
+    while (P2 == 2) {}
+
     P2 = 0;
     P1 = address;
 
@@ -274,11 +275,15 @@ void _writeA_Mem(unsigned char address) {
 }
 
 void _writeA_Reg() {
+    while (P2 == 2) {}
+
     P0 = INS_WRITE_A_REG;
     P0 = INS_IDLE;
 }
 
 void _writeB_Mem(unsigned char address) {
+    while (P2 == 2) {}
+
     P2 = 0;
     P1 = address;
 
@@ -290,11 +295,15 @@ void _writeB_Mem(unsigned char address) {
 }
 
 void _writeB_Reg() {
+    while (P2 == 2) {}
+
     P0 = INS_WRITE_B_REG;
     P0 = INS_IDLE;
 }
 
 void _writeResult(unsigned char address) {
+    while (P2 == 2) {}
+
     P2 = 0;
     P1 = address;
 
@@ -306,6 +315,8 @@ void _writeResult(unsigned char address) {
 }
 
 void _readResult(unsigned char address) {
+    while (P2 == 2) {}
+
     P2 = 0;
     P1 = address;
 
@@ -321,8 +332,6 @@ void _mul_montgomery() {
 
     P0 = INS_MUL_MONTGOMERY;
     P0 = INS_IDLE;
-
-    while (P2 == 0) {}
 }
 
 void _adder_add() {
@@ -330,8 +339,6 @@ void _adder_add() {
 
     P0 = INS_ADDER_ADD;
     P0 = INS_IDLE;
-
-    while (P2 == 0) {}
 }
 
 void _adder_subtract() {
@@ -339,8 +346,6 @@ void _adder_subtract() {
 
     P0 = INS_ADDER_SUBTRACT;
     P0 = INS_IDLE;
-
-    while (P2 == 0) {}
 }
 
 void _terminate() {

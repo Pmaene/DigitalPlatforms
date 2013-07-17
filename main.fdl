@@ -15,7 +15,7 @@ dp adder_dp (in subtract : ns(1); in a, b : ns(1026); out s: ns(1027)) {
  * Main
  */
 
-dp main_dp(in instruction, address, data_in : ns(8); out full_address : ns(16); out data_out, idling: ns(8); out data_wr : ns(1)) {
+dp main_dp(in instruction, address, data_in : ns(8); out full_address : ns(16); out data_out, status: ns(8); out data_wr : ns(1)) {
     reg displayed_reg : ns(1);
     reg counter_reg : ns(11);
     reg instruction_reg, address_reg, data_in_reg : ns(8);
@@ -64,6 +64,10 @@ dp main_dp(in instruction, address, data_in : ns(8); out full_address : ns(16); 
         a_reg = r_reg;
     }
 
+    sfg reset_a {
+        a_reg = 0;
+    }
+
     sfg read_b_mem {
         full_address = (address_reg << 8)+(0x7F-counter_reg);
         b_reg = b_reg << 8 | data_in;
@@ -72,6 +76,10 @@ dp main_dp(in instruction, address, data_in : ns(8); out full_address : ns(16); 
 
     sfg read_b_reg {
         b_reg = r_reg;
+    }
+
+    sfg reset_b {
+        b_reg = 0;
     }
 
     sfg read_m {
@@ -97,6 +105,10 @@ dp main_dp(in instruction, address, data_in : ns(8); out full_address : ns(16); 
         counter_reg = counter_reg+1;
     }
 
+    sfg reset_r {
+        r_reg = 0;
+    }
+
     sfg add {
         x_sig = a_reg;
         y_sig = b_reg;
@@ -119,16 +131,16 @@ dp main_dp(in instruction, address, data_in : ns(8); out full_address : ns(16); 
         displayed_reg = 0;
     }
 
-    sfg reset_result {
-        r_reg = 0;
+    sfg mont_not_done {
+        status = 2;
     }
 
     sfg idling {
-        idling = 1;
+        status = 1;
     }
 
-    sfg no_idling {
-        idling = 0;
+    sfg not_idling {
+        status = 0;
     }
 
     sfg display_cycles {
@@ -198,81 +210,81 @@ fsm main(main_dp) {
     initial init;
     state do, read_modulus, read_a_mem, read_b_mem, read_result, read_done, mont_do, mont_if_else, write_result, write_done;
 
-    @init           (no_adder, no_idling, no_write, no_address, decode) -> do;
+    @init           (no_adder, not_idling, no_write, no_address, decode) -> do;
     @do             if (instruction_reg == 0x00) then
                         (reset_displayed, idling, no_adder, no_write, no_address, decode) -> do;
                     else if (instruction_reg == 0x01 & displayed_reg == 0) then
-                        (display_cycles, no_adder, no_idling, no_write, no_address, decode) -> do;
+                        (display_cycles, no_adder, not_idling, no_write, no_address, decode) -> do;
                     else if (instruction_reg == 0x02 & displayed_reg == 0) then
-                        (display_result, no_adder, no_idling, no_write, no_address, decode) -> do;
+                        (display_result, no_adder, not_idling, no_write, no_address, decode) -> do;
 
                     else if (instruction_reg == 0x10) then
-                        (reset_m, reset_counter, no_adder, no_idling, no_write, no_address, decode) -> read_modulus;
+                        (reset_m, reset_counter, no_adder, not_idling, no_write, no_address, decode) -> read_modulus;
                     else if (instruction_reg == 0x11) then
-                        (reset_counter, no_adder, no_idling, no_write, no_address, decode) -> read_a_mem;
+                        (reset_a, reset_counter, no_adder, not_idling, no_write, no_address, decode) -> read_a_mem;
                     else if (instruction_reg == 0x12) then
-                        (read_a_reg, no_adder, no_idling, no_write, no_address, decode) -> do;
+                        (read_a_reg, no_adder, not_idling, no_write, no_address, decode) -> do;
                     else if (instruction_reg == 0x13) then
-                        (reset_counter, no_adder, no_idling, no_write, no_address, decode) -> read_b_mem;
+                        (reset_b, reset_counter, no_adder, not_idling, no_write, no_address, decode) -> read_b_mem;
                     else if (instruction_reg == 0x14) then
-                        (read_b_reg, no_adder, no_idling, no_write, no_address, decode) -> do;
+                        (read_b_reg, no_adder, not_idling, no_write, no_address, decode) -> do;
                     else if (instruction_reg == 0x15) then
-                        (reset_counter, no_adder, no_idling, no_write, no_address, decode) -> read_result;
+                        (reset_r, reset_counter, no_adder, not_idling, no_write, no_address, decode) -> read_result;
                     else if (instruction_reg == 0x16) then
-                        (reset_counter, no_adder, no_idling, no_write, no_address, decode) -> write_result;
+                        (reset_counter, no_adder, not_idling, no_write, no_address, decode) -> write_result;
 
                     else if (instruction_reg == 0x20) then
-                        (reset_counter, reset_result, no_adder, no_idling, no_write, no_address, decode) -> mont_do;
+                        (reset_counter, reset_r, no_adder, mont_not_done, no_write, no_address, decode) -> mont_do;
 
                     else if (instruction_reg == 0x30) then
-                        (add, no_idling, no_write, no_address, decode) -> do;
+                        (add, not_idling, no_write, no_address, decode) -> do;
                     else if (instruction_reg == 0x31) then
-                        (subtract, no_idling, no_write, no_address, decode) -> do;
+                        (subtract, not_idling, no_write, no_address, decode) -> do;
 
                     else
-                        (no_adder, no_idling, no_write, no_address, decode) -> do;
+                        (no_adder, not_idling, no_write, no_address, decode) -> do;
     @read_modulus   if (counter_reg < 0x80) then
-                        (read_m, no_adder, no_idling, no_write, decode) -> read_modulus;
+                        (read_m, no_adder, not_idling, no_write, decode) -> read_modulus;
                     else
                         (idling, no_adder, no_write, no_address, decode) -> read_done;
     @read_a_mem     if (counter_reg < 0x80) then
-                        (read_a_mem, no_adder, no_idling, no_write, decode) -> read_a_mem;
+                        (read_a_mem, no_adder, not_idling, no_write, decode) -> read_a_mem;
                     else
                         (idling, no_adder, no_write, no_address, decode) -> read_done;
     @read_b_mem     if (counter_reg < 0x80) then
-                        (read_b_mem, no_adder, no_idling, no_write, decode) -> read_b_mem;
+                        (read_b_mem, no_adder, not_idling, no_write, decode) -> read_b_mem;
                     else
                         (idling, no_adder, no_write, no_address, decode) -> read_done;
     @read_result    if (counter_reg < 0x80) then
-                        (read_result, no_adder, no_idling, no_write, decode) -> read_result;
+                        (read_result, no_adder, not_idling, no_write, decode) -> read_result;
                     else
                         (idling, no_adder, no_write, no_address, decode) -> read_done;
     @read_done      if (instruction_reg == 0x0F) then
-                        (no_adder, no_idling, no_write, no_address, decode) -> do;
+                        (no_adder, not_idling, no_write, no_address, decode) -> do;
                     else
                         (idling, no_adder, no_write, no_address, decode) -> read_done;
     @mont_do        if (counter_reg >= 1024) then
                         (mont_overflow_check, idling, no_write, no_address, decode) -> do;
                     else if (r_reg[0] == 0 & a_reg[0] == 0) then
-                        (mont_just_divide, mont_counter_increment, no_adder, no_idling, no_write, no_address, decode) -> mont_do;
+                        (mont_just_divide, mont_counter_increment, no_adder, mont_not_done, no_write, no_address, decode) -> mont_do;
                     else if (r_reg[0] == 0 & a_reg[0] == 1 & b_reg[0] == 0) then
-                        (mont_sum_and_divide, mont_counter_increment, no_idling, no_write, no_address, decode) -> mont_do;
+                        (mont_sum_and_divide, mont_counter_increment, mont_not_done, no_write, no_address, decode) -> mont_do;
                     else if (r_reg[0] == 1 & a_reg[0] == 1 & b_reg[0] == 1) then
-                        (mont_sum_and_divide, mont_counter_increment, no_idling, no_write, no_address, decode) -> mont_do;
+                        (mont_sum_and_divide, mont_counter_increment, mont_not_done, no_write, no_address, decode) -> mont_do;
                     else if (r_reg[0] == 1 & a_reg[0] == 0) then
-                        (mont_sum_m_and_divide, mont_counter_increment, no_idling, no_write, no_address, decode) -> mont_do;
+                        (mont_sum_m_and_divide, mont_counter_increment, mont_not_done, no_write, no_address, decode) -> mont_do;
                     else
-                        (mont_sum, no_idling, no_write, no_address, decode) -> mont_if_else;
+                        (mont_sum, mont_not_done, no_write, no_address, decode) -> mont_if_else;
     @mont_if_else   if (r_reg[0] == 0) then
-                        (mont_equal_to_zero, mont_counter_increment, no_adder, no_idling, no_write, no_address, decode) -> mont_do;
+                        (mont_equal_to_zero, mont_counter_increment, no_adder, mont_not_done, no_write, no_address, decode) -> mont_do;
                     else
-                        (mont_not_equal_to_zero, mont_counter_increment, no_idling, no_write, no_address, decode) -> mont_do;
+                        (mont_not_equal_to_zero, mont_counter_increment, mont_not_done, no_write, no_address, decode) -> mont_do;
     @write_result   if (counter_reg < 0x80) then
-                        (write_result, no_adder, no_idling, decode) -> write_result;
+                        (write_result, no_adder, not_idling, decode) -> write_result;
                     else
-                        (no_adder, no_write, no_address, no_idling, decode) -> write_done;
+                        (no_adder, no_write, no_address, not_idling, decode) -> write_done;
     @write_done     if (instruction_reg == 0x0F) then
-                        (no_adder, no_write, no_address, no_idling, decode) -> do;
+                        (no_adder, no_write, no_address, not_idling, decode) -> do;
                     else
                         (idling, no_adder, no_write, no_address, decode) -> write_done;
 }
@@ -295,7 +307,7 @@ ipblock my8051_address(out data : ns(8)) {
     ipparm "port=P1";
 }
 
-ipblock my8051_idling(in data : ns(8)) {
+ipblock my8051_status(in data : ns(8)) {
     iptype "i8051systemsink";
     ipparm "core=my8051";
     ipparm "port=P2";
@@ -310,7 +322,7 @@ ipblock my8051_memory(in idata : ns(8); out odata : ns(8); in address : ns(16); 
 
 dp main_sys
 {
-    sig idling, data_in, data_out, result_in, result_out : ns(8);
+    sig status, data_in, data_out, result_in, result_out : ns(8);
     sig instruction, address : ns(8);
     sig full_address : ns(16);
     sig data_wr : ns(1);
@@ -318,10 +330,10 @@ dp main_sys
     use my8051;
     use my8051_instruction(instruction);
     use my8051_address(address);
-    use my8051_idling(idling);
+    use my8051_status(status);
     use my8051_memory(data_in, data_out, full_address, data_wr);
 
-    use main_dp(instruction, address, data_out, full_address, data_in, idling, data_wr);
+    use main_dp(instruction, address, data_out, full_address, data_in, status, data_wr);
 }
 
 system S

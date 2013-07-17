@@ -266,42 +266,39 @@ Symbol Table
     _TR1                                                        =  008E G
     _TXD                                                        =  00B1 G
     _WR                                                         =  00B6 G
- 25 __adder_add                                                    0398 GR
- 25 __adder_subtract                                               03A6 GR
- 25 __displayCycles                                                0305 GR
- 25 __displayResult                                                030C GR
- 25 __findFirstOne                                                 0256 GR
-  4 __findFirstOne_e_1_1                                           0000 GR
-  4 __findFirstOne_i_1_1                                           0003 GR
+ 25 __adder_add                                                    03A7 GR
+ 25 __adder_subtract                                               03B1 GR
+ 25 __displayCycles                                                02E7 GR
+ 25 __displayResult                                                02EE GR
     __gptrget                                                      **** GX
  1C __interrupt_vect                                               0000 R
     __mcs51_genRAMCLEAR                                            **** GX
     __mcs51_genXINIT                                               **** GX
     __mcs51_genXRAMCLEAR                                           **** GX
- 25 __mul_montgomery                                               038A GR
- 25 __readResult                                                   0375 GR
+ 25 __mul_montgomery                                               039D GR
+ 25 __readResult                                                   0381 GR
     __sdcc_gsinit_startup                                          **** GX
  1C __sdcc_program_startup                                         0003 GR
   5 __start__stack                                                 0000 GR
- 25 __terminate                                                    03B4 GR
- 25 __writeA_Mem                                                   0328 GR
- 25 __writeA_Reg                                                   033D GR
- 25 __writeB_Mem                                                   0344 GR
- 25 __writeB_Reg                                                   0359 GR
- 25 __writeModulus                                                 0313 GR
- 25 __writeResult                                                  0360 GR
- 25 _crtModExp                                                     01CA GR
-  3 _crtModExp_PARM_10                                             001B GR
-  3 _crtModExp_PARM_11                                             001C GR
-  3 _crtModExp_PARM_12                                             001D GR
-  3 _crtModExp_PARM_2                                              000F GR
-  3 _crtModExp_PARM_3                                              0010 GR
-  3 _crtModExp_PARM_4                                              0013 GR
-  3 _crtModExp_PARM_5                                              0016 GR
-  3 _crtModExp_PARM_6                                              0017 GR
-  3 _crtModExp_PARM_7                                              0018 GR
-  3 _crtModExp_PARM_8                                              0019 GR
-  3 _crtModExp_PARM_9                                              001A GR
+ 25 __terminate                                                    03BB GR
+ 25 __writeA_Mem                                                   0311 GR
+ 25 __writeA_Reg                                                   032D GR
+ 25 __writeB_Mem                                                   033B GR
+ 25 __writeB_Reg                                                   0357 GR
+ 25 __writeModulus                                                 02F5 GR
+ 25 __writeResult                                                  0365 GR
+ 25 _crtModExp                                                     025B GR
+  3 _crtModExp_PARM_10                                             001C GR
+  3 _crtModExp_PARM_11                                             001D GR
+  3 _crtModExp_PARM_12                                             001E GR
+  3 _crtModExp_PARM_2                                              0010 GR
+  3 _crtModExp_PARM_3                                              0011 GR
+  3 _crtModExp_PARM_4                                              0014 GR
+  3 _crtModExp_PARM_5                                              0017 GR
+  3 _crtModExp_PARM_6                                              0018 GR
+  3 _crtModExp_PARM_7                                              0019 GR
+  3 _crtModExp_PARM_8                                              001A GR
+  3 _crtModExp_PARM_9                                              001B GR
     _decryptedMessage                                           =  2100 G
     _encryptedMessage                                           =  2000 G
  14 _garnerConstant                                                1800 GR
@@ -314,9 +311,10 @@ Symbol Table
   3 _montModExp_PARM_4                                             0009 GR
   3 _montModExp_PARM_5                                             000A GR
   3 _montModExp_PARM_6                                             000B GR
+  3 _montModExp_i_1_1                                              000D R
     _montModExp_one_1_1                                         =  0000 
   3 _montModExp_r_1_1                                              000C R
-  3 _montModExp_t_1_1                                              000D R
+  3 _montModExp_t_1_1                                              000E R
  25 _montMultiply_Both                                             0094 GR
   3 _montMultiply_Both_PARM_2                                      0003 GR
   3 _montMultiply_Both_PARM_3                                      0004 GR
@@ -528,8 +526,8 @@ Area Table
    0 _CODE                                                                              size    0   flags 0
    1 RSEG                                                                               size    0   flags 0
    2 REG_BANK_0                                                                         size    8   flags 4
-   3 DSEG                                                                               size   1E   flags 0
-   4 OSEG                                                                               size    4   flags 4
+   3 DSEG                                                                               size   1F   flags 0
+   4 OSEG                                                                               size    0   flags 4
    5 SSEG                                                                               size    1   flags 0
    6 ISEG                                                                               size    0   flags 0
    7 IABS                                                                               size    0   flags 8
@@ -562,7 +560,7 @@ Area Table
   22 GSINIT5                                                                            size    0   flags 20
   23 GSINIT                                                                             size 2619   flags 20
   24 GSFINAL                                                                            size    3   flags 20
-  25 CSEG                                                                               size  3B8   flags 20
+  25 CSEG                                                                               size  3BF   flags 20
   26 CONST                                                                              size    0   flags 20
   27 XINIT                                                                              size    0   flags 20
   28 CABS                                                                               size    0   flags 28

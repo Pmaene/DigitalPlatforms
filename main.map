@@ -14,6 +14,7 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:0000    l_GSINIT5
   0C:0000    l_IABS
   0C:0000    l_ISEG
+  0C:0000    l_OSEG
   0C:0000    l_PSEG
   0C:0000    l_REG_BANK_1
   0C:0000    l_REG_BANK_2
@@ -53,12 +54,10 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:0001    l_BSEG_BYTES
   0C:0003    l_GSFINAL
   0C:0003    l_GSINIT0
-  0C:0004    l_OSEG
   0C:0005    l_BSEG
   0C:0008    l_HOME
   0C:0008    l_REG_BANK_0
   0C:0008    s_GSINIT0
-  0C:0008    s_OSEG
   0C:0008    s_REG_BANK_1
   0C:000A    l_GSINIT2
   0C:000B    s_GSINIT1
@@ -66,17 +65,18 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:0010    s_REG_BANK_2
   0C:0015    s_GSINIT3
   0C:0018    s_BIT_BANK
+  0C:0018    s_OSEG
   0C:0018    s_REG_BANK_3
   0C:0020    s_BSEG_BYTES
   0C:0020    s__CODE
   0C:0022    l_GSINIT3
   0C:002A    l_GSINIT4
   0C:0037    s_GSINIT4
-  0C:003F    s_RSEG
-  0C:003F    s_SSEG
+  0C:0040    s_RSEG
+  0C:0040    s_SSEG
   0C:0061    s_GSINIT
   0C:0061    s_GSINIT5
-  0C:006C    l_DSEG
+  0C:0068    l_DSEG
   0C:0080    l_XABS0
   0C:0080    l_XABS1
   0C:0080    l_XABS2
@@ -92,14 +92,14 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:0080    l_XABSc
   0C:0080    l_XABSd
   0C:0080    l_XABSe
-  0C:00C1    l_SSEG
+  0C:00C0    l_SSEG
   0C:0100    l_IRAM
-  0C:03D8    l_CSEG
+  0C:03DF    l_CSEG
   0C:2619    l_GSINIT
   0C:267A    s_GSFINAL
   0C:267D    s_CSEG
-  0C:2A55    s_CONST
-  0C:2A55    s_XINIT
+  0C:2A5C    s_CONST
+  0C:2A5C    s_XINIT
 
 Hexadecimal
 
@@ -389,7 +389,7 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-DSEG                               0000   006C =    108. bytes (REL,CON)
+DSEG                               0000   0068 =    104. bytes (REL,CON)
 
       Value  Global
    --------  --------------------------------
@@ -403,39 +403,29 @@ DSEG                               0000   006C =    108. bytes (REL,CON)
      002A    _montModExp_PARM_4
      002B    _montModExp_PARM_5
      002C    _montModExp_PARM_6
-     0030    _crtModExp_PARM_2
-     0031    _crtModExp_PARM_3
-     0034    _crtModExp_PARM_4
-     0037    _crtModExp_PARM_5
-     0038    _crtModExp_PARM_6
-     0039    _crtModExp_PARM_7
-     003A    _crtModExp_PARM_8
-     003B    _crtModExp_PARM_9
-     003C    _crtModExp_PARM_10
-     003D    _crtModExp_PARM_11
-     003E    _crtModExp_PARM_12
+     0031    _crtModExp_PARM_2
+     0032    _crtModExp_PARM_3
+     0035    _crtModExp_PARM_4
+     0038    _crtModExp_PARM_5
+     0039    _crtModExp_PARM_6
+     003A    _crtModExp_PARM_7
+     003B    _crtModExp_PARM_8
+     003C    _crtModExp_PARM_9
+     003D    _crtModExp_PARM_10
+     003E    _crtModExp_PARM_11
+     003F    _crtModExp_PARM_12
 
-Hexadecimal
-
-Area                               Addr   Size   Decimal Bytes (Attributes)
---------------------------------   ----   ----   ------- ----- ------------
-OSEG                               0008   0004 =      4. bytes (REL,OVR)
-
-      Value  Global
-   --------  --------------------------------
-     0008    __findFirstOne_e_1_1
-     000B    __findFirstOne_i_1_1
 
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-SSEG                               003F   00C1 =    193. bytes (REL,OVR)
+SSEG                               0040   00C0 =    192. bytes (REL,OVR)
 
       Value  Global
    --------  --------------------------------
-     003F    __start__stack
+     0040    __start__stack
 
 
 
@@ -491,7 +481,7 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CSEG                               267D   03D8 =    984. bytes (REL,CON,CODE)
+CSEG                               267D   03DF =    991. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
@@ -502,23 +492,22 @@ CSEG                               267D   03D8 =    984. bytes (REL,CON,CODE)
   0C:2711    _montMultiply_Both
   0C:272F    _montMultiply_Result
   0C:2747    _montModExp
-  0C:2847    _crtModExp
-  0C:28D3    __findFirstOne
-  0C:2982    __displayCycles
-  0C:2989    __displayResult
-  0C:2990    __writeModulus
-  0C:29A5    __writeA_Mem
-  0C:29BA    __writeA_Reg
-  0C:29C1    __writeB_Mem
-  0C:29D6    __writeB_Reg
-  0C:29DD    __writeResult
-  0C:29F2    __readResult
-  0C:2A07    __mul_montgomery
-  0C:2A15    __adder_add
-  0C:2A23    __adder_subtract
-  0C:2A31    __terminate
-  0C:2A35    __gptrget
-  0C:2A51    __sdcc_external_startup
+  0C:28D8    _crtModExp
+  0C:2964    __displayCycles
+  0C:296B    __displayResult
+  0C:2972    __writeModulus
+  0C:298E    __writeA_Mem
+  0C:29AA    __writeA_Reg
+  0C:29B8    __writeB_Mem
+  0C:29D4    __writeB_Reg
+  0C:29E2    __writeResult
+  0C:29FE    __readResult
+  0C:2A1A    __mul_montgomery
+  0C:2A24    __adder_add
+  0C:2A2E    __adder_subtract
+  0C:2A38    __terminate
+  0C:2A3C    __gptrget
+  0C:2A58    __sdcc_external_startup
 
 
 ASxxxx Linker V01.75 + NoICE + SDCC Feb 1999,  page 1.
