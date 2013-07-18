@@ -95,11 +95,11 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:00C0    l_SSEG
   0C:0100    l_IRAM
   0C:03DF    l_CSEG
-  0C:2619    l_GSINIT
-  0C:267A    s_GSFINAL
-  0C:267D    s_CSEG
-  0C:2A5C    s_CONST
-  0C:2A5C    s_XINIT
+  0C:1C89    l_GSINIT
+  0C:1CEA    s_GSFINAL
+  0C:1CED    s_CSEG
+  0C:20CC    s_CONST
+  0C:20CC    s_XINIT
 
 Hexadecimal
 
@@ -481,33 +481,33 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CSEG                               267D   03DF =    991. bytes (REL,CON,CODE)
+CSEG                               1CED   03DF =    991. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:267D    _main
-  0C:26C0    _mpAdd_Single
-  0C:26DB    _mpSubtract_Single
-  0C:26F6    _montMultiply_Single
-  0C:2711    _montMultiply_Both
-  0C:272F    _montMultiply_Result
-  0C:2747    _montModExp
-  0C:28D8    _crtModExp
-  0C:2964    __displayCycles
-  0C:296B    __displayResult
-  0C:2972    __writeModulus
-  0C:298E    __writeA_Mem
-  0C:29AA    __writeA_Reg
-  0C:29B8    __writeB_Mem
-  0C:29D4    __writeB_Reg
-  0C:29E2    __writeResult
-  0C:29FE    __readResult
-  0C:2A1A    __mul_montgomery
-  0C:2A24    __adder_add
-  0C:2A2E    __adder_subtract
-  0C:2A38    __terminate
-  0C:2A3C    __gptrget
-  0C:2A58    __sdcc_external_startup
+  0C:1CED    _main
+  0C:1D30    _mpAdd_Single
+  0C:1D4B    _mpSubtract_Single
+  0C:1D66    _montMultiply_Single
+  0C:1D81    _montMultiply_Both
+  0C:1D9F    _montMultiply_Result
+  0C:1DB7    _montModExp
+  0C:1F48    _crtModExp
+  0C:1FD4    __displayCycles
+  0C:1FDB    __displayResult
+  0C:1FE2    __writeModulus
+  0C:1FFE    __writeA_Mem
+  0C:201A    __writeA_Reg
+  0C:2028    __writeB_Mem
+  0C:2044    __writeB_Reg
+  0C:2052    __writeResult
+  0C:206E    __readResult
+  0C:208A    __mul_montgomery
+  0C:2094    __adder_add
+  0C:209E    __adder_subtract
+  0C:20A8    __terminate
+  0C:20AC    __gptrget
+  0C:20C8    __sdcc_external_startup
 
 
 ASxxxx Linker V01.75 + NoICE + SDCC Feb 1999,  page 1.
@@ -518,13 +518,13 @@ main.rel
 
 Libraries Linked            [   object  file   ]
 
-/usr/bin/../share/sdcc/lib/small/mcs51.lib    [     crtclear.rel ]
-/usr/bin/../share/sdcc/lib/small/mcs51.lib    [     crtxinit.rel ]
-/usr/bin/../share/sdcc/lib/small/mcs51.lib    [    crtxclear.rel ]
-/usr/bin/../share/sdcc/lib/small/mcs51.lib    [   crtpagesfr.rel ]
-/usr/bin/../share/sdcc/lib/small/mcs51.lib    [     crtstart.rel ]
-/usr/bin/../share/sdcc/lib/small/libsdcc.lib    [     _gptrget.rel ]
-/usr/bin/../share/sdcc/lib/small/libsdcc.lib    [     _startup.rel ]
+/usr/share/sdcc/lib/small/mcs51.lib    [     crtclear.rel ]
+/usr/share/sdcc/lib/small/mcs51.lib    [     crtxinit.rel ]
+/usr/share/sdcc/lib/small/mcs51.lib    [    crtxclear.rel ]
+/usr/share/sdcc/lib/small/mcs51.lib    [   crtpagesfr.rel ]
+/usr/share/sdcc/lib/small/mcs51.lib    [     crtstart.rel ]
+/usr/share/sdcc/lib/small/libsdcc.lib    [     _gptrget.rel ]
+/usr/share/sdcc/lib/small/libsdcc.lib    [     _startup.rel ]
 
 ASxxxx Linker V01.75 + NoICE + SDCC Feb 1999,  page 2.
 

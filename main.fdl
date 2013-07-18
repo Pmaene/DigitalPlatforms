@@ -16,7 +16,7 @@ dp adder_dp (in subtract : ns(1); in a, b : ns(1026); out s: ns(1027)) {
  */
 
 dp main_dp(in instruction, address, data_in : ns(8); out full_address : ns(16); out data_out, status: ns(8); out data_wr : ns(1)) {
-    reg displayed_reg : ns(1);
+    reg displayed_reg, mont_test_gte_reg : ns(1);
     reg counter_reg : ns(11);
     reg instruction_reg, address_reg, data_in_reg : ns(8);
 
@@ -198,9 +198,20 @@ dp main_dp(in instruction, address, data_in : ns(8); out full_address : ns(16); 
         r_reg = s_sig >> 1;
     }
 
-    sfg mont_overflow_check {
+    sfg mont_test_result {
+        mont_test_gte_reg = r_reg >= m_reg ? 1 : 0;
+    }
+
+    sfg mont_test_gte {
         x_sig = r_reg;
-        y_sig = r_reg >= m_reg ? m_reg : 0;
+        y_sig = m_reg;
+        subtract_sig = 1;
+        r_reg = s_sig;
+    }
+
+    sfg mont_test_lt {
+        x_sig = r_reg;
+        y_sig = 0;
         subtract_sig = 1;
         r_reg = s_sig;
     }
@@ -208,37 +219,37 @@ dp main_dp(in instruction, address, data_in : ns(8); out full_address : ns(16); 
 
 fsm main(main_dp) {
     initial init;
-    state do, read_modulus, read_a_mem, read_b_mem, read_result, read_done, mont_do, mont_if_else, write_result, write_done;
+    state do, read_modulus, read_a_mem, read_b_mem, read_result, read_done, mont_do, mont_if_else, mont_test, write_result, write_done;
 
     @init           (no_adder, not_idling, no_write, no_address, decode) -> do;
-    @do             if (instruction_reg == 0x00) then
+    @do             if (instruction_reg == 0) then
                         (reset_displayed, idling, no_adder, no_write, no_address, decode) -> do;
-                    else if (instruction_reg == 0x01 & displayed_reg == 0) then
+                    else if (instruction_reg == 1 & displayed_reg == 0) then
                         (display_cycles, no_adder, not_idling, no_write, no_address, decode) -> do;
-                    else if (instruction_reg == 0x02 & displayed_reg == 0) then
+                    else if (instruction_reg == 2 & displayed_reg == 0) then
                         (display_result, no_adder, not_idling, no_write, no_address, decode) -> do;
 
-                    else if (instruction_reg == 0x10) then
+                    else if (instruction_reg == 16) then
                         (reset_m, reset_counter, no_adder, not_idling, no_write, no_address, decode) -> read_modulus;
-                    else if (instruction_reg == 0x11) then
+                    else if (instruction_reg == 17) then
                         (reset_a, reset_counter, no_adder, not_idling, no_write, no_address, decode) -> read_a_mem;
-                    else if (instruction_reg == 0x12) then
+                    else if (instruction_reg == 18) then
                         (read_a_reg, no_adder, not_idling, no_write, no_address, decode) -> do;
-                    else if (instruction_reg == 0x13) then
+                    else if (instruction_reg == 19) then
                         (reset_b, reset_counter, no_adder, not_idling, no_write, no_address, decode) -> read_b_mem;
-                    else if (instruction_reg == 0x14) then
+                    else if (instruction_reg == 20) then
                         (read_b_reg, no_adder, not_idling, no_write, no_address, decode) -> do;
-                    else if (instruction_reg == 0x15) then
+                    else if (instruction_reg == 21) then
                         (reset_r, reset_counter, no_adder, not_idling, no_write, no_address, decode) -> read_result;
-                    else if (instruction_reg == 0x16) then
+                    else if (instruction_reg == 22) then
                         (reset_counter, no_adder, not_idling, no_write, no_address, decode) -> write_result;
 
-                    else if (instruction_reg == 0x20) then
+                    else if (instruction_reg == 32) then
                         (reset_counter, reset_r, no_adder, mont_not_done, no_write, no_address, decode) -> mont_do;
 
-                    else if (instruction_reg == 0x30) then
+                    else if (instruction_reg == 48) then
                         (add, not_idling, no_write, no_address, decode) -> do;
-                    else if (instruction_reg == 0x31) then
+                    else if (instruction_reg == 49) then
                         (subtract, not_idling, no_write, no_address, decode) -> do;
 
                     else
@@ -264,7 +275,7 @@ fsm main(main_dp) {
                     else
                         (idling, no_adder, no_write, no_address, decode) -> read_done;
     @mont_do        if (counter_reg >= 1024) then
-                        (mont_overflow_check, idling, no_write, no_address, decode) -> do;
+                        (mont_test_result, no_adder, mont_not_done, no_write, no_address, decode) -> mont_test;
                     else if (r_reg[0] == 0 & a_reg[0] == 0) then
                         (mont_just_divide, mont_counter_increment, no_adder, mont_not_done, no_write, no_address, decode) -> mont_do;
                     else if (r_reg[0] == 0 & a_reg[0] == 1 & b_reg[0] == 0) then
@@ -279,6 +290,10 @@ fsm main(main_dp) {
                         (mont_equal_to_zero, mont_counter_increment, no_adder, mont_not_done, no_write, no_address, decode) -> mont_do;
                     else
                         (mont_not_equal_to_zero, mont_counter_increment, mont_not_done, no_write, no_address, decode) -> mont_do;
+    @mont_test      if (mont_test_gte_reg == 1) then
+                        (mont_test_gte, idling, no_write, no_address, decode) -> do;
+                    else
+                        (mont_test_lt, idling, no_write, no_address, decode) -> do;
     @write_result   if (counter_reg < 0x80) then
                         (write_result, no_adder, not_idling, decode) -> write_result;
                     else

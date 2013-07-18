@@ -3,7 +3,7 @@
 -b HOME = 0x0000
 -b ISEG = 0x0000
 -b BSEG = 0x0000
--k /usr/bin/../share/sdcc/lib/small
+-k /usr/libexec/sdcc/../share/sdcc/lib/small
 -k /usr/share/sdcc/lib/small
 -l mcs51
 -l libsdcc
