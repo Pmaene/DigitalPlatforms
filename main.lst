@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 2.9.0 #5416 (Aug  6 2010) (UNIX)
-                              4 ; This file was generated Thu Jul 18 16:01:45 2013
+                              4 ; This file was generated Thu Jul 18 16:25:32 2013
                               5 ;--------------------------------------------------------
                               6 	.module main
                               7 	.optsdcc -mmcs51 --model-small
@@ -4173,7 +4173,7 @@
    0015 75 82 20           4173 	mov	dpl,#0x20
    0018 12s00rCA           4174 	lcall	_montModExp
                            4175 ;	main.c:82: _displayResult();
-   001B 12s02rEE           4176 	lcall	__displayResult
+   001B 12s02rFF           4176 	lcall	__displayResult
                            4177 ;	main.c:85: montModExp(0x21, 0x20, privateKey, 0x10, 0x19, 0x1A);
    001E 75*06r00           4178 	mov	_montModExp_PARM_3,#_privateKey
    0021 75*07s15           4179 	mov	(_montModExp_PARM_3 + 1),#(_privateKey >> 8)
@@ -4185,9 +4185,9 @@
    0033 75 82 21           4185 	mov	dpl,#0x21
    0036 12s00rCA           4186 	lcall	_montModExp
                            4187 ;	main.c:86: _displayResult();
-   0039 12s02rEE           4188 	lcall	__displayResult
+   0039 12s02rFF           4188 	lcall	__displayResult
                            4189 ;	main.c:94: _terminate();
-   003C 12s03rBB           4190 	lcall	__terminate
+   003C 12s03rCC           4190 	lcall	__terminate
                            4191 ;	main.c:95: return 0;
    003F 90 00 00           4192 	mov	dptr,#0x0000
    0042 22                 4193 	ret
@@ -4206,17 +4206,17 @@
                            4206 ;	main.c:99: _writeA_Mem(a);
    0045 85*00 82           4207 	mov	dpl,_mpAdd_Single_PARM_2
    0048 C0 02              4208 	push	ar2
-   004A 12s03r11           4209 	lcall	__writeA_Mem
+   004A 12s03r22           4209 	lcall	__writeA_Mem
                            4210 ;	main.c:100: _writeB_Reg();
-   004D 12s03r57           4211 	lcall	__writeB_Reg
+   004D 12s03r68           4211 	lcall	__writeB_Reg
                            4212 ;	main.c:102: _adder_add();
-   0050 12s03rA7           4213 	lcall	__adder_add
+   0050 12s03rB8           4213 	lcall	__adder_add
    0053 D0 02              4214 	pop	ar2
                            4215 ;	main.c:104: if (readResult)
    0055 30*00 05           4216 	jnb	_mpAdd_Single_PARM_3,00103$
                            4217 ;	main.c:105: _readResult(r);
    0058 8A 82              4218 	mov	dpl,r2
-   005A 02s03r81           4219 	ljmp	__readResult
+   005A 02s03r92           4219 	ljmp	__readResult
    005D                    4220 00103$:
    005D 22                 4221 	ret
                            4222 ;------------------------------------------------------------
@@ -4234,17 +4234,17 @@
                            4234 ;	main.c:109: _writeA_Mem(a);
    0060 85*01 82           4235 	mov	dpl,_mpSubtract_Single_PARM_2
    0063 C0 02              4236 	push	ar2
-   0065 12s03r11           4237 	lcall	__writeA_Mem
+   0065 12s03r22           4237 	lcall	__writeA_Mem
                            4238 ;	main.c:110: _writeB_Reg();
-   0068 12s03r57           4239 	lcall	__writeB_Reg
+   0068 12s03r68           4239 	lcall	__writeB_Reg
                            4240 ;	main.c:112: _adder_subtract();
-   006B 12s03rB1           4241 	lcall	__adder_subtract
+   006B 12s03rC2           4241 	lcall	__adder_subtract
    006E D0 02              4242 	pop	ar2
                            4243 ;	main.c:114: if (readResult)
    0070 30*01 05           4244 	jnb	_mpSubtract_Single_PARM_3,00103$
                            4245 ;	main.c:115: _readResult(r);
    0073 8A 82              4246 	mov	dpl,r2
-   0075 02s03r81           4247 	ljmp	__readResult
+   0075 02s03r92           4247 	ljmp	__readResult
    0078                    4248 00103$:
    0078 22                 4249 	ret
                            4250 ;------------------------------------------------------------
@@ -4262,17 +4262,17 @@
                            4262 ;	main.c:119: _writeA_Mem(a);
    007B 85*02 82           4263 	mov	dpl,_montMultiply_Single_PARM_2
    007E C0 02              4264 	push	ar2
-   0080 12s03r11           4265 	lcall	__writeA_Mem
+   0080 12s03r22           4265 	lcall	__writeA_Mem
                            4266 ;	main.c:120: _writeB_Reg();
-   0083 12s03r57           4267 	lcall	__writeB_Reg
+   0083 12s03r68           4267 	lcall	__writeB_Reg
                            4268 ;	main.c:122: _mul_montgomery();
-   0086 12s03r9D           4269 	lcall	__mul_montgomery
+   0086 12s03rAE           4269 	lcall	__mul_montgomery
    0089 D0 02              4270 	pop	ar2
                            4271 ;	main.c:124: if (readResult)
    008B 30*02 05           4272 	jnb	_montMultiply_Single_PARM_3,00103$
                            4273 ;	main.c:125: _readResult(r);
    008E 8A 82              4274 	mov	dpl,r2
-   0090 02s03r81           4275 	ljmp	__readResult
+   0090 02s03r92           4275 	ljmp	__readResult
    0093                    4276 00103$:
    0093 22                 4277 	ret
                            4278 ;------------------------------------------------------------
@@ -4291,18 +4291,18 @@
                            4291 ;	main.c:129: _writeA_Mem(a);
    0096 85*03 82           4292 	mov	dpl,_montMultiply_Both_PARM_2
    0099 C0 02              4293 	push	ar2
-   009B 12s03r11           4294 	lcall	__writeA_Mem
+   009B 12s03r22           4294 	lcall	__writeA_Mem
                            4295 ;	main.c:130: _writeB_Mem(b);
    009E 85*04 82           4296 	mov	dpl,_montMultiply_Both_PARM_3
-   00A1 12s03r3B           4297 	lcall	__writeB_Mem
+   00A1 12s03r4C           4297 	lcall	__writeB_Mem
                            4298 ;	main.c:132: _mul_montgomery();
-   00A4 12s03r9D           4299 	lcall	__mul_montgomery
+   00A4 12s03rAE           4299 	lcall	__mul_montgomery
    00A7 D0 02              4300 	pop	ar2
                            4301 ;	main.c:134: if (readResult)
    00A9 30*03 05           4302 	jnb	_montMultiply_Both_PARM_4,00103$
                            4303 ;	main.c:135: _readResult(r);
    00AC 8A 82              4304 	mov	dpl,r2
-   00AE 02s03r81           4305 	ljmp	__readResult
+   00AE 02s03r92           4305 	ljmp	__readResult
    00B1                    4306 00103$:
    00B1 22                 4307 	ret
                            4308 ;------------------------------------------------------------
@@ -4318,17 +4318,17 @@
    00B2 AA 82              4318 	mov	r2,dpl
                            4319 ;	main.c:139: _writeA_Reg();
    00B4 C0 02              4320 	push	ar2
-   00B6 12s03r2D           4321 	lcall	__writeA_Reg
+   00B6 12s03r3E           4321 	lcall	__writeA_Reg
                            4322 ;	main.c:140: _writeB_Reg();
-   00B9 12s03r57           4323 	lcall	__writeB_Reg
+   00B9 12s03r68           4323 	lcall	__writeB_Reg
                            4324 ;	main.c:142: _mul_montgomery();
-   00BC 12s03r9D           4325 	lcall	__mul_montgomery
+   00BC 12s03rAE           4325 	lcall	__mul_montgomery
    00BF D0 02              4326 	pop	ar2
                            4327 ;	main.c:144: if (readResult)
    00C1 30*04 05           4328 	jnb	_montMultiply_Result_PARM_2,00103$
                            4329 ;	main.c:145: _readResult(r);
    00C4 8A 82              4330 	mov	dpl,r2
-   00C6 02s03r81           4331 	ljmp	__readResult
+   00C6 02s03r92           4331 	ljmp	__readResult
    00C9                    4332 00103$:
    00C9 22                 4333 	ret
                            4334 ;------------------------------------------------------------
@@ -4358,645 +4358,661 @@
    00D2 F0                 4358 	movx	@dptr,a
                            4359 ;	main.c:160: _writeModulus(m);
    00D3 85*09 82           4360 	mov	dpl,_montModExp_PARM_4
-   00D6 12s02rF5           4361 	lcall	__writeModulus
-                           4362 ;	main.c:163: montMultiply_Both(0x01, x, r2modm, true);
-   00D9 85*05*03           4363 	mov	_montMultiply_Both_PARM_2,_montModExp_PARM_2
-   00DC 85*0B*04           4364 	mov	_montMultiply_Both_PARM_3,_montModExp_PARM_6
-   00DF D2*03              4365 	setb	_montMultiply_Both_PARM_4
-   00E1 75 82 01           4366 	mov	dpl,#0x01
-   00E4 12s00r94           4367 	lcall	_montMultiply_Both
-                           4368 ;	main.c:166: t = 0;
-                           4369 ;	main.c:167: for (i = 0; i < SIZE; i++) {
-   00E7 E4                 4370 	clr	a
-   00E8 F5*0E              4371 	mov	_montModExp_t_1_1,a
-   00EA F5*0F              4372 	mov	(_montModExp_t_1_1 + 1),a
-   00EC F5*0D              4373 	mov	_montModExp_i_1_1,a
-   00EE                    4374 00114$:
-   00EE 74 80              4375 	mov	a,#0x100 - 0x80
-   00F0 25*0D              4376 	add	a,_montModExp_i_1_1
-   00F2 50 03              4377 	jnc	00135$
-   00F4 02s01r8A           4378 	ljmp	00105$
-   00F7                    4379 00135$:
-                           4380 ;	main.c:168: if (e[(SIZE-1)-i] != 0) {
-   00F7 AE*0D              4381 	mov	r6,_montModExp_i_1_1
-   00F9 7F 00              4382 	mov	r7,#0x00
-   00FB 74 7F              4383 	mov	a,#0x7F
-   00FD C3                 4384 	clr	c
-   00FE 9E                 4385 	subb	a,r6
-   00FF FE                 4386 	mov	r6,a
-   0100 E4                 4387 	clr	a
-   0101 9F                 4388 	subb	a,r7
-   0102 FF                 4389 	mov	r7,a
-   0103 EE                 4390 	mov	a,r6
-   0104 25*06              4391 	add	a,_montModExp_PARM_3
-   0106 FE                 4392 	mov	r6,a
-   0107 EF                 4393 	mov	a,r7
-   0108 35*07              4394 	addc	a,(_montModExp_PARM_3 + 1)
-   010A FF                 4395 	mov	r7,a
-   010B A8*08              4396 	mov	r0,(_montModExp_PARM_3 + 2)
-   010D 8E 82              4397 	mov	dpl,r6
-   010F 8F 83              4398 	mov	dph,r7
-   0111 88 F0              4399 	mov	b,r0
-   0113 12s00r00           4400 	lcall	__gptrget
-   0116 60 6D              4401 	jz	00116$
-                           4402 ;	main.c:169: for (j = 0; j < 8; j++) {
-   0118 7E 00              4403 	mov	r6,#0x00
-   011A                    4404 00110$:
-   011A BE 08 00           4405 	cjne	r6,#0x08,00137$
-   011D                    4406 00137$:
-   011D 50 66              4407 	jnc	00116$
-                           4408 ;	main.c:170: if (e[(SIZE-1)-i] >> (7-j) & 1) {
-   011F AF*0D              4409 	mov	r7,_montModExp_i_1_1
-   0121 78 00              4410 	mov	r0,#0x00
-   0123 74 7F              4411 	mov	a,#0x7F
-   0125 C3                 4412 	clr	c
-   0126 9F                 4413 	subb	a,r7
-   0127 F9                 4414 	mov	r1,a
-   0128 E4                 4415 	clr	a
-   0129 98                 4416 	subb	a,r0
-   012A FA                 4417 	mov	r2,a
-   012B E9                 4418 	mov	a,r1
-   012C 25*06              4419 	add	a,_montModExp_PARM_3
-   012E F9                 4420 	mov	r1,a
-   012F EA                 4421 	mov	a,r2
-   0130 35*07              4422 	addc	a,(_montModExp_PARM_3 + 1)
-   0132 FA                 4423 	mov	r2,a
-   0133 AB*08              4424 	mov	r3,(_montModExp_PARM_3 + 2)
-   0135 89 82              4425 	mov	dpl,r1
-   0137 8A 83              4426 	mov	dph,r2
-   0139 8B F0              4427 	mov	b,r3
-   013B 12s00r00           4428 	lcall	__gptrget
-   013E F9                 4429 	mov	r1,a
-   013F 8E 02              4430 	mov	ar2,r6
-   0141 7B 00              4431 	mov	r3,#0x00
-   0143 74 07              4432 	mov	a,#0x07
-   0145 C3                 4433 	clr	c
-   0146 9A                 4434 	subb	a,r2
-   0147 FC                 4435 	mov	r4,a
-   0148 E4                 4436 	clr	a
-   0149 9B                 4437 	subb	a,r3
-   014A FD                 4438 	mov	r5,a
-   014B 8C F0              4439 	mov	b,r4
-   014D 05 F0              4440 	inc	b
-   014F E9                 4441 	mov	a,r1
-   0150 80 02              4442 	sjmp	00140$
-   0152                    4443 00139$:
-   0152 C3                 4444 	clr	c
-   0153 13                 4445 	rrc	a
-   0154                    4446 00140$:
-   0154 D5 F0 FB           4447 	djnz	b,00139$
-   0157 30 E0 28           4448 	jnb	acc.0,00112$
-                           4449 ;	main.c:171: t = 8*((SIZE-1)-i) + (7-j);
-   015A 74 7F              4450 	mov	a,#0x7F
-   015C C3                 4451 	clr	c
-   015D 9F                 4452 	subb	a,r7
-   015E FF                 4453 	mov	r7,a
-   015F E4                 4454 	clr	a
-   0160 98                 4455 	subb	a,r0
-   0161 C4                 4456 	swap	a
-   0162 03                 4457 	rr	a
-   0163 54 F8              4458 	anl	a,#0xf8
-   0165 CF                 4459 	xch	a,r7
-   0166 C4                 4460 	swap	a
-   0167 03                 4461 	rr	a
-   0168 CF                 4462 	xch	a,r7
-   0169 6F                 4463 	xrl	a,r7
-   016A CF                 4464 	xch	a,r7
-   016B 54 F8              4465 	anl	a,#0xf8
-   016D CF                 4466 	xch	a,r7
-   016E 6F                 4467 	xrl	a,r7
-   016F F8                 4468 	mov	r0,a
-   0170 74 07              4469 	mov	a,#0x07
-   0172 C3                 4470 	clr	c
-   0173 9A                 4471 	subb	a,r2
-   0174 FA                 4472 	mov	r2,a
-   0175 E4                 4473 	clr	a
-   0176 9B                 4474 	subb	a,r3
-   0177 FB                 4475 	mov	r3,a
-   0178 EA                 4476 	mov	a,r2
-   0179 2F                 4477 	add	a,r7
-   017A F5*0E              4478 	mov	_montModExp_t_1_1,a
-   017C EB                 4479 	mov	a,r3
-   017D 38                 4480 	addc	a,r0
-   017E F5*0F              4481 	mov	(_montModExp_t_1_1 + 1),a
-                           4482 ;	main.c:172: goto exitLoop;
-   0180 80 08              4483 	sjmp	00105$
-   0182                    4484 00112$:
-                           4485 ;	main.c:169: for (j = 0; j < 8; j++) {
-   0182 0E                 4486 	inc	r6
-   0183 80 95              4487 	sjmp	00110$
-   0185                    4488 00116$:
-                           4489 ;	main.c:167: for (i = 0; i < SIZE; i++) {
-   0185 05*0D              4490 	inc	_montModExp_i_1_1
-   0187 02s00rEE           4491 	ljmp	00114$
-                           4492 ;	main.c:178: exitLoop:
-   018A                    4493 00105$:
-                           4494 ;	main.c:181: _writeResult(rmodm);
-   018A 85*0A 82           4495 	mov	dpl,_montModExp_PARM_5
-   018D 12s03r65           4496 	lcall	__writeResult
-                           4497 ;	main.c:182: if (((e[t/8] >> t%8)) & 1)
-   0190 AA*0E              4498 	mov	r2,_montModExp_t_1_1
-   0192 E5*0F              4499 	mov	a,(_montModExp_t_1_1 + 1)
-   0194 C4                 4500 	swap	a
-   0195 23                 4501 	rl	a
-   0196 CA                 4502 	xch	a,r2
-   0197 C4                 4503 	swap	a
-   0198 23                 4504 	rl	a
-   0199 54 1F              4505 	anl	a,#0x1f
-   019B 6A                 4506 	xrl	a,r2
-   019C CA                 4507 	xch	a,r2
-   019D 54 1F              4508 	anl	a,#0x1f
-   019F CA                 4509 	xch	a,r2
-   01A0 6A                 4510 	xrl	a,r2
-   01A1 CA                 4511 	xch	a,r2
-   01A2 FB                 4512 	mov	r3,a
-   01A3 EA                 4513 	mov	a,r2
-   01A4 25*06              4514 	add	a,_montModExp_PARM_3
-   01A6 FA                 4515 	mov	r2,a
-   01A7 EB                 4516 	mov	a,r3
-   01A8 35*07              4517 	addc	a,(_montModExp_PARM_3 + 1)
-   01AA FB                 4518 	mov	r3,a
-   01AB AC*08              4519 	mov	r4,(_montModExp_PARM_3 + 2)
-   01AD 8A 82              4520 	mov	dpl,r2
-   01AF 8B 83              4521 	mov	dph,r3
-   01B1 8C F0              4522 	mov	b,r4
-   01B3 12s00r00           4523 	lcall	__gptrget
-   01B6 FA                 4524 	mov	r2,a
-   01B7 74 07              4525 	mov	a,#0x07
-   01B9 55*0E              4526 	anl	a,_montModExp_t_1_1
-   01BB FB                 4527 	mov	r3,a
-   01BC 7C 00              4528 	mov	r4,#0x00
-   01BE 8B F0              4529 	mov	b,r3
-   01C0 05 F0              4530 	inc	b
-   01C2 EA                 4531 	mov	a,r2
-   01C3 80 02              4532 	sjmp	00143$
-   01C5                    4533 00142$:
-   01C5 C3                 4534 	clr	c
-   01C6 13                 4535 	rrc	a
-   01C7                    4536 00143$:
-   01C7 D5 F0 FB           4537 	djnz	b,00142$
-   01CA 30 E0 0B           4538 	jnb	acc.0,00133$
-                           4539 ;	main.c:184: montMultiply_Single(r, 0x01, false);
-   01CD 75*02 01           4540 	mov	_montMultiply_Single_PARM_2,#0x01
-   01D0 C2*02              4541 	clr	_montMultiply_Single_PARM_3
-   01D2 85*0C 82           4542 	mov	dpl,_montModExp_r_1_1
-   01D5 12s00r79           4543 	lcall	_montMultiply_Single
-                           4544 ;	main.c:186: for (k = 1; k <= t; k++) {
-   01D8                    4545 00133$:
-   01D8 7A 01              4546 	mov	r2,#0x01
-   01DA 7B 00              4547 	mov	r3,#0x00
-   01DC                    4548 00118$:
-   01DC C3                 4549 	clr	c
-   01DD E5*0E              4550 	mov	a,_montModExp_t_1_1
-   01DF 9A                 4551 	subb	a,r2
-   01E0 E5*0F              4552 	mov	a,(_montModExp_t_1_1 + 1)
-   01E2 9B                 4553 	subb	a,r3
-   01E3 40 6B              4554 	jc	00121$
-                           4555 ;	main.c:187: montMultiply_Result(r, false);
-   01E5 C2*04              4556 	clr	_montMultiply_Result_PARM_2
-   01E7 85*0C 82           4557 	mov	dpl,_montModExp_r_1_1
-   01EA C0 02              4558 	push	ar2
-   01EC C0 03              4559 	push	ar3
-   01EE 12s00rB2           4560 	lcall	_montMultiply_Result
-   01F1 D0 03              4561 	pop	ar3
-   01F3 D0 02              4562 	pop	ar2
-                           4563 ;	main.c:188: if (((e[(t-k)/8] >> (t-k)%8)) & 1)
-   01F5 E5*0E              4564 	mov	a,_montModExp_t_1_1
-   01F7 C3                 4565 	clr	c
-   01F8 9A                 4566 	subb	a,r2
-   01F9 FC                 4567 	mov	r4,a
-   01FA E5*0F              4568 	mov	a,(_montModExp_t_1_1 + 1)
-   01FC 9B                 4569 	subb	a,r3
-   01FD 8C 06              4570 	mov	ar6,r4
-   01FF C4                 4571 	swap	a
-   0200 23                 4572 	rl	a
-   0201 CE                 4573 	xch	a,r6
-   0202 C4                 4574 	swap	a
-   0203 23                 4575 	rl	a
-   0204 54 1F              4576 	anl	a,#0x1f
-   0206 6E                 4577 	xrl	a,r6
-   0207 CE                 4578 	xch	a,r6
-   0208 54 1F              4579 	anl	a,#0x1f
-   020A CE                 4580 	xch	a,r6
-   020B 6E                 4581 	xrl	a,r6
-   020C CE                 4582 	xch	a,r6
-   020D FF                 4583 	mov	r7,a
-   020E EE                 4584 	mov	a,r6
-   020F 25*06              4585 	add	a,_montModExp_PARM_3
-   0211 FE                 4586 	mov	r6,a
-   0212 EF                 4587 	mov	a,r7
-   0213 35*07              4588 	addc	a,(_montModExp_PARM_3 + 1)
-   0215 FF                 4589 	mov	r7,a
-   0216 A8*08              4590 	mov	r0,(_montModExp_PARM_3 + 2)
-   0218 8E 82              4591 	mov	dpl,r6
-   021A 8F 83              4592 	mov	dph,r7
-   021C 88 F0              4593 	mov	b,r0
-   021E 12s00r00           4594 	lcall	__gptrget
-   0221 FE                 4595 	mov	r6,a
-   0222 53 04 07           4596 	anl	ar4,#0x07
-   0225 7D 00              4597 	mov	r5,#0x00
-   0227 8C F0              4598 	mov	b,r4
-   0229 05 F0              4599 	inc	b
-   022B EE                 4600 	mov	a,r6
-   022C 80 02              4601 	sjmp	00147$
-   022E                    4602 00146$:
-   022E C3                 4603 	clr	c
-   022F 13                 4604 	rrc	a
-   0230                    4605 00147$:
-   0230 D5 F0 FB           4606 	djnz	b,00146$
-   0233 30 E0 13           4607 	jnb	acc.0,00120$
-                           4608 ;	main.c:190: montMultiply_Single(r, 0x01, false);
-   0236 75*02 01           4609 	mov	_montMultiply_Single_PARM_2,#0x01
-   0239 C2*02              4610 	clr	_montMultiply_Single_PARM_3
-   023B 85*0C 82           4611 	mov	dpl,_montModExp_r_1_1
-   023E C0 02              4612 	push	ar2
-   0240 C0 03              4613 	push	ar3
-   0242 12s00r79           4614 	lcall	_montMultiply_Single
-   0245 D0 03              4615 	pop	ar3
-   0247 D0 02              4616 	pop	ar2
-   0249                    4617 00120$:
-                           4618 ;	main.c:186: for (k = 1; k <= t; k++) {
-   0249 0A                 4619 	inc	r2
-   024A BA 00 8F           4620 	cjne	r2,#0x00,00118$
-   024D 0B                 4621 	inc	r3
-   024E 80 8C              4622 	sjmp	00118$
-   0250                    4623 00121$:
-                           4624 ;	main.c:194: montMultiply_Single(r, 0x00, true);
-   0250 75*02 00           4625 	mov	_montMultiply_Single_PARM_2,#0x00
-   0253 D2*02              4626 	setb	_montMultiply_Single_PARM_3
-   0255 85*0C 82           4627 	mov	dpl,_montModExp_r_1_1
-   0258 02s00r79           4628 	ljmp	_montMultiply_Single
-                           4629 ;------------------------------------------------------------
-                           4630 ;Allocation info for local variables in function 'crtModExp'
-                           4631 ;------------------------------------------------------------
-                           4632 ;x                         Allocated with name '_crtModExp_PARM_2'
-                           4633 ;eP                        Allocated with name '_crtModExp_PARM_3'
-                           4634 ;eQ                        Allocated with name '_crtModExp_PARM_4'
-                           4635 ;p                         Allocated with name '_crtModExp_PARM_5'
-                           4636 ;rmodp                     Allocated with name '_crtModExp_PARM_6'
-                           4637 ;r2modp                    Allocated with name '_crtModExp_PARM_7'
-                           4638 ;q                         Allocated with name '_crtModExp_PARM_8'
-                           4639 ;rmodq                     Allocated with name '_crtModExp_PARM_9'
-                           4640 ;r2modq                    Allocated with name '_crtModExp_PARM_10'
-                           4641 ;m                         Allocated with name '_crtModExp_PARM_11'
-                           4642 ;r2modm                    Allocated with name '_crtModExp_PARM_12'
-                           4643 ;r                         Allocated to registers r2 
-                           4644 ;------------------------------------------------------------
-                           4645 ;	main.c:197: void crtModExp(
-                           4646 ;	-----------------------------------------
-                           4647 ;	 function crtModExp
-                           4648 ;	-----------------------------------------
-   025B                    4649 _crtModExp:
-   025B AA 82              4650 	mov	r2,dpl
-                           4651 ;	main.c:208: montModExp(0x00, x, eP, p, rmodp, r2modp);
-   025D 85*10*05           4652 	mov	_montModExp_PARM_2,_crtModExp_PARM_2
-   0260 85*11*06           4653 	mov	_montModExp_PARM_3,_crtModExp_PARM_3
-   0263 85*12*07           4654 	mov	(_montModExp_PARM_3 + 1),(_crtModExp_PARM_3 + 1)
-   0266 85*13*08           4655 	mov	(_montModExp_PARM_3 + 2),(_crtModExp_PARM_3 + 2)
-   0269 85*17*09           4656 	mov	_montModExp_PARM_4,_crtModExp_PARM_5
-   026C 85*18*0A           4657 	mov	_montModExp_PARM_5,_crtModExp_PARM_6
-   026F 85*19*0B           4658 	mov	_montModExp_PARM_6,_crtModExp_PARM_7
-   0272 75 82 00           4659 	mov	dpl,#0x00
-   0275 C0 02              4660 	push	ar2
-   0277 12s00rCA           4661 	lcall	_montModExp
-                           4662 ;	main.c:209: _displayResult();
-   027A 12s02rEE           4663 	lcall	__displayResult
-                           4664 ;	main.c:212: montModExp(0x01, x, eQ, q, rmodq, r2modq);
-   027D 85*10*05           4665 	mov	_montModExp_PARM_2,_crtModExp_PARM_2
-   0280 85*14*06           4666 	mov	_montModExp_PARM_3,_crtModExp_PARM_4
-   0283 85*15*07           4667 	mov	(_montModExp_PARM_3 + 1),(_crtModExp_PARM_4 + 1)
-   0286 85*16*08           4668 	mov	(_montModExp_PARM_3 + 2),(_crtModExp_PARM_4 + 2)
-   0289 85*1A*09           4669 	mov	_montModExp_PARM_4,_crtModExp_PARM_8
-   028C 85*1B*0A           4670 	mov	_montModExp_PARM_5,_crtModExp_PARM_9
-   028F 85*1C*0B           4671 	mov	_montModExp_PARM_6,_crtModExp_PARM_10
-   0292 75 82 01           4672 	mov	dpl,#0x01
-   0295 12s00rCA           4673 	lcall	_montModExp
-                           4674 ;	main.c:213: _displayResult();
-   0298 12s02rEE           4675 	lcall	__displayResult
-                           4676 ;	main.c:217: mpSubtract_Single(0x02, 0x00, true);
-   029B 75*01 00           4677 	mov	_mpSubtract_Single_PARM_2,#0x00
-   029E D2*01              4678 	setb	_mpSubtract_Single_PARM_3
-   02A0 75 82 02           4679 	mov	dpl,#0x02
-   02A3 12s00r5E           4680 	lcall	_mpSubtract_Single
-                           4681 ;	main.c:224: montMultiply_Both(0x03, 0x01, 0x1A, false);
-   02A6 75*03 01           4682 	mov	_montMultiply_Both_PARM_2,#0x01
-   02A9 75*04 1A           4683 	mov	_montMultiply_Both_PARM_3,#0x1A
-   02AC C2*03              4684 	clr	_montMultiply_Both_PARM_4
-   02AE 75 82 03           4685 	mov	dpl,#0x03
-   02B1 12s00r94           4686 	lcall	_montMultiply_Both
-                           4687 ;	main.c:226: montMultiply_Single(0x03, r2modm, false);
-   02B4 85*1E*02           4688 	mov	_montMultiply_Single_PARM_2,_crtModExp_PARM_12
-   02B7 C2*02              4689 	clr	_montMultiply_Single_PARM_3
-   02B9 75 82 03           4690 	mov	dpl,#0x03
-   02BC 12s00r79           4691 	lcall	_montMultiply_Single
-                           4692 ;	main.c:230: _writeModulus(m);
-   02BF 85*1D 82           4693 	mov	dpl,_crtModExp_PARM_11
-   02C2 12s02rF5           4694 	lcall	__writeModulus
-                           4695 ;	main.c:233: montMultiply_Single(0x03, p, false);
-   02C5 85*17*02           4696 	mov	_montMultiply_Single_PARM_2,_crtModExp_PARM_5
-   02C8 C2*02              4697 	clr	_montMultiply_Single_PARM_3
-   02CA 75 82 03           4698 	mov	dpl,#0x03
-   02CD 12s00r79           4699 	lcall	_montMultiply_Single
-                           4700 ;	main.c:235: montMultiply_Single(0x03, r2modm, false);
-   02D0 85*1E*02           4701 	mov	_montMultiply_Single_PARM_2,_crtModExp_PARM_12
-   02D3 C2*02              4702 	clr	_montMultiply_Single_PARM_3
-   02D5 75 82 03           4703 	mov	dpl,#0x03
-   02D8 12s00r79           4704 	lcall	_montMultiply_Single
-   02DB D0 02              4705 	pop	ar2
-                           4706 ;	main.c:237: mpAdd_Single(r, 0x00, true);
-   02DD 75*00 00           4707 	mov	_mpAdd_Single_PARM_2,#0x00
-   02E0 D2*00              4708 	setb	_mpAdd_Single_PARM_3
-   02E2 8A 82              4709 	mov	dpl,r2
-   02E4 02s00r43           4710 	ljmp	_mpAdd_Single
-                           4711 ;------------------------------------------------------------
-                           4712 ;Allocation info for local variables in function '_displayCycles'
-                           4713 ;------------------------------------------------------------
-                           4714 ;------------------------------------------------------------
-                           4715 ;	main.c:241: void _displayCycles() {
-                           4716 ;	-----------------------------------------
-                           4717 ;	 function _displayCycles
-                           4718 ;	-----------------------------------------
-   02E7                    4719 __displayCycles:
-                           4720 ;	main.c:242: P0 = INS_DISPLAY_CYCLES;
-   02E7 75 80 01           4721 	mov	_P0,#0x01
-                           4722 ;	main.c:243: P0 = INS_IDLE;
-   02EA 75 80 00           4723 	mov	_P0,#0x00
-   02ED 22                 4724 	ret
-                           4725 ;------------------------------------------------------------
-                           4726 ;Allocation info for local variables in function '_displayResult'
+   00D6 12s03r06           4361 	lcall	__writeModulus
+                           4362 ;	main.c:164: _writeA_Mem(x);
+   00D9 85*05 82           4363 	mov	dpl,_montModExp_PARM_2
+   00DC 12s03r22           4364 	lcall	__writeA_Mem
+                           4365 ;	main.c:165: _writeB_Mem(r2modm);
+   00DF 85*0B 82           4366 	mov	dpl,_montModExp_PARM_6
+   00E2 12s03r4C           4367 	lcall	__writeB_Mem
+                           4368 ;	main.c:166: _mul_montgomery();
+   00E5 12s03rAE           4369 	lcall	__mul_montgomery
+                           4370 ;	main.c:167: _readResult(0x01);
+   00E8 75 82 01           4371 	mov	dpl,#0x01
+   00EB 12s03r92           4372 	lcall	__readResult
+                           4373 ;	main.c:170: t = 0;
+                           4374 ;	main.c:171: for (i = 0; i < SIZE; i++) {
+   00EE E4                 4375 	clr	a
+   00EF F5*0E              4376 	mov	_montModExp_t_1_1,a
+   00F1 F5*0F              4377 	mov	(_montModExp_t_1_1 + 1),a
+   00F3 F5*0D              4378 	mov	_montModExp_i_1_1,a
+   00F5                    4379 00114$:
+   00F5 74 80              4380 	mov	a,#0x100 - 0x80
+   00F7 25*0D              4381 	add	a,_montModExp_i_1_1
+   00F9 50 03              4382 	jnc	00135$
+   00FB 02s01r91           4383 	ljmp	00105$
+   00FE                    4384 00135$:
+                           4385 ;	main.c:172: if (e[(SIZE-1)-i] != 0) {
+   00FE AE*0D              4386 	mov	r6,_montModExp_i_1_1
+   0100 7F 00              4387 	mov	r7,#0x00
+   0102 74 7F              4388 	mov	a,#0x7F
+   0104 C3                 4389 	clr	c
+   0105 9E                 4390 	subb	a,r6
+   0106 FE                 4391 	mov	r6,a
+   0107 E4                 4392 	clr	a
+   0108 9F                 4393 	subb	a,r7
+   0109 FF                 4394 	mov	r7,a
+   010A EE                 4395 	mov	a,r6
+   010B 25*06              4396 	add	a,_montModExp_PARM_3
+   010D FE                 4397 	mov	r6,a
+   010E EF                 4398 	mov	a,r7
+   010F 35*07              4399 	addc	a,(_montModExp_PARM_3 + 1)
+   0111 FF                 4400 	mov	r7,a
+   0112 A8*08              4401 	mov	r0,(_montModExp_PARM_3 + 2)
+   0114 8E 82              4402 	mov	dpl,r6
+   0116 8F 83              4403 	mov	dph,r7
+   0118 88 F0              4404 	mov	b,r0
+   011A 12s00r00           4405 	lcall	__gptrget
+   011D 60 6D              4406 	jz	00116$
+                           4407 ;	main.c:173: for (j = 0; j < 8; j++) {
+   011F 7E 00              4408 	mov	r6,#0x00
+   0121                    4409 00110$:
+   0121 BE 08 00           4410 	cjne	r6,#0x08,00137$
+   0124                    4411 00137$:
+   0124 50 66              4412 	jnc	00116$
+                           4413 ;	main.c:174: if (e[(SIZE-1)-i] >> (7-j) & 1) {
+   0126 AF*0D              4414 	mov	r7,_montModExp_i_1_1
+   0128 78 00              4415 	mov	r0,#0x00
+   012A 74 7F              4416 	mov	a,#0x7F
+   012C C3                 4417 	clr	c
+   012D 9F                 4418 	subb	a,r7
+   012E F9                 4419 	mov	r1,a
+   012F E4                 4420 	clr	a
+   0130 98                 4421 	subb	a,r0
+   0131 FA                 4422 	mov	r2,a
+   0132 E9                 4423 	mov	a,r1
+   0133 25*06              4424 	add	a,_montModExp_PARM_3
+   0135 F9                 4425 	mov	r1,a
+   0136 EA                 4426 	mov	a,r2
+   0137 35*07              4427 	addc	a,(_montModExp_PARM_3 + 1)
+   0139 FA                 4428 	mov	r2,a
+   013A AB*08              4429 	mov	r3,(_montModExp_PARM_3 + 2)
+   013C 89 82              4430 	mov	dpl,r1
+   013E 8A 83              4431 	mov	dph,r2
+   0140 8B F0              4432 	mov	b,r3
+   0142 12s00r00           4433 	lcall	__gptrget
+   0145 F9                 4434 	mov	r1,a
+   0146 8E 02              4435 	mov	ar2,r6
+   0148 7B 00              4436 	mov	r3,#0x00
+   014A 74 07              4437 	mov	a,#0x07
+   014C C3                 4438 	clr	c
+   014D 9A                 4439 	subb	a,r2
+   014E FC                 4440 	mov	r4,a
+   014F E4                 4441 	clr	a
+   0150 9B                 4442 	subb	a,r3
+   0151 FD                 4443 	mov	r5,a
+   0152 8C F0              4444 	mov	b,r4
+   0154 05 F0              4445 	inc	b
+   0156 E9                 4446 	mov	a,r1
+   0157 80 02              4447 	sjmp	00140$
+   0159                    4448 00139$:
+   0159 C3                 4449 	clr	c
+   015A 13                 4450 	rrc	a
+   015B                    4451 00140$:
+   015B D5 F0 FB           4452 	djnz	b,00139$
+   015E 30 E0 28           4453 	jnb	acc.0,00112$
+                           4454 ;	main.c:175: t = 8*((SIZE-1)-i) + (7-j);
+   0161 74 7F              4455 	mov	a,#0x7F
+   0163 C3                 4456 	clr	c
+   0164 9F                 4457 	subb	a,r7
+   0165 FF                 4458 	mov	r7,a
+   0166 E4                 4459 	clr	a
+   0167 98                 4460 	subb	a,r0
+   0168 C4                 4461 	swap	a
+   0169 03                 4462 	rr	a
+   016A 54 F8              4463 	anl	a,#0xf8
+   016C CF                 4464 	xch	a,r7
+   016D C4                 4465 	swap	a
+   016E 03                 4466 	rr	a
+   016F CF                 4467 	xch	a,r7
+   0170 6F                 4468 	xrl	a,r7
+   0171 CF                 4469 	xch	a,r7
+   0172 54 F8              4470 	anl	a,#0xf8
+   0174 CF                 4471 	xch	a,r7
+   0175 6F                 4472 	xrl	a,r7
+   0176 F8                 4473 	mov	r0,a
+   0177 74 07              4474 	mov	a,#0x07
+   0179 C3                 4475 	clr	c
+   017A 9A                 4476 	subb	a,r2
+   017B FA                 4477 	mov	r2,a
+   017C E4                 4478 	clr	a
+   017D 9B                 4479 	subb	a,r3
+   017E FB                 4480 	mov	r3,a
+   017F EA                 4481 	mov	a,r2
+   0180 2F                 4482 	add	a,r7
+   0181 F5*0E              4483 	mov	_montModExp_t_1_1,a
+   0183 EB                 4484 	mov	a,r3
+   0184 38                 4485 	addc	a,r0
+   0185 F5*0F              4486 	mov	(_montModExp_t_1_1 + 1),a
+                           4487 ;	main.c:176: goto breakLoop;
+   0187 80 08              4488 	sjmp	00105$
+   0189                    4489 00112$:
+                           4490 ;	main.c:173: for (j = 0; j < 8; j++) {
+   0189 0E                 4491 	inc	r6
+   018A 80 95              4492 	sjmp	00110$
+   018C                    4493 00116$:
+                           4494 ;	main.c:171: for (i = 0; i < SIZE; i++) {
+   018C 05*0D              4495 	inc	_montModExp_i_1_1
+   018E 02s00rF5           4496 	ljmp	00114$
+                           4497 ;	main.c:182: breakLoop:
+   0191                    4498 00105$:
+                           4499 ;	main.c:185: _writeResult(rmodm);
+   0191 85*0A 82           4500 	mov	dpl,_montModExp_PARM_5
+   0194 12s03r76           4501 	lcall	__writeResult
+                           4502 ;	main.c:186: if (((e[t/8] >> t%8)) & 1) {
+   0197 AA*0E              4503 	mov	r2,_montModExp_t_1_1
+   0199 E5*0F              4504 	mov	a,(_montModExp_t_1_1 + 1)
+   019B C4                 4505 	swap	a
+   019C 23                 4506 	rl	a
+   019D CA                 4507 	xch	a,r2
+   019E C4                 4508 	swap	a
+   019F 23                 4509 	rl	a
+   01A0 54 1F              4510 	anl	a,#0x1f
+   01A2 6A                 4511 	xrl	a,r2
+   01A3 CA                 4512 	xch	a,r2
+   01A4 54 1F              4513 	anl	a,#0x1f
+   01A6 CA                 4514 	xch	a,r2
+   01A7 6A                 4515 	xrl	a,r2
+   01A8 CA                 4516 	xch	a,r2
+   01A9 FB                 4517 	mov	r3,a
+   01AA EA                 4518 	mov	a,r2
+   01AB 25*06              4519 	add	a,_montModExp_PARM_3
+   01AD FA                 4520 	mov	r2,a
+   01AE EB                 4521 	mov	a,r3
+   01AF 35*07              4522 	addc	a,(_montModExp_PARM_3 + 1)
+   01B1 FB                 4523 	mov	r3,a
+   01B2 AC*08              4524 	mov	r4,(_montModExp_PARM_3 + 2)
+   01B4 8A 82              4525 	mov	dpl,r2
+   01B6 8B 83              4526 	mov	dph,r3
+   01B8 8C F0              4527 	mov	b,r4
+   01BA 12s00r00           4528 	lcall	__gptrget
+   01BD FA                 4529 	mov	r2,a
+   01BE 74 07              4530 	mov	a,#0x07
+   01C0 55*0E              4531 	anl	a,_montModExp_t_1_1
+   01C2 FB                 4532 	mov	r3,a
+   01C3 7C 00              4533 	mov	r4,#0x00
+   01C5 8B F0              4534 	mov	b,r3
+   01C7 05 F0              4535 	inc	b
+   01C9 EA                 4536 	mov	a,r2
+   01CA 80 02              4537 	sjmp	00143$
+   01CC                    4538 00142$:
+   01CC C3                 4539 	clr	c
+   01CD 13                 4540 	rrc	a
+   01CE                    4541 00143$:
+   01CE D5 F0 FB           4542 	djnz	b,00142$
+   01D1 30 E0 0C           4543 	jnb	acc.0,00133$
+                           4544 ;	main.c:189: _writeA_Mem(0x01);
+   01D4 75 82 01           4545 	mov	dpl,#0x01
+   01D7 12s03r22           4546 	lcall	__writeA_Mem
+                           4547 ;	main.c:190: _writeB_Reg();
+   01DA 12s03r68           4548 	lcall	__writeB_Reg
+                           4549 ;	main.c:191: _mul_montgomery();
+   01DD 12s03rAE           4550 	lcall	__mul_montgomery
+                           4551 ;	main.c:194: for (k = 1; k <= t; k++) {
+   01E0                    4552 00133$:
+   01E0 7A 01              4553 	mov	r2,#0x01
+   01E2 7B 00              4554 	mov	r3,#0x00
+   01E4                    4555 00118$:
+   01E4 C3                 4556 	clr	c
+   01E5 E5*0E              4557 	mov	a,_montModExp_t_1_1
+   01E7 9A                 4558 	subb	a,r2
+   01E8 E5*0F              4559 	mov	a,(_montModExp_t_1_1 + 1)
+   01EA 9B                 4560 	subb	a,r3
+   01EB 40 6D              4561 	jc	00121$
+                           4562 ;	main.c:196: _writeA_Reg();
+   01ED C0 02              4563 	push	ar2
+   01EF C0 03              4564 	push	ar3
+   01F1 12s03r3E           4565 	lcall	__writeA_Reg
+                           4566 ;	main.c:197: _writeB_Reg();
+   01F4 12s03r68           4567 	lcall	__writeB_Reg
+                           4568 ;	main.c:198: _mul_montgomery();
+   01F7 12s03rAE           4569 	lcall	__mul_montgomery
+   01FA D0 03              4570 	pop	ar3
+   01FC D0 02              4571 	pop	ar2
+                           4572 ;	main.c:200: if (((e[(t-k)/8] >> (t-k)%8)) & 1) {
+   01FE E5*0E              4573 	mov	a,_montModExp_t_1_1
+   0200 C3                 4574 	clr	c
+   0201 9A                 4575 	subb	a,r2
+   0202 FC                 4576 	mov	r4,a
+   0203 E5*0F              4577 	mov	a,(_montModExp_t_1_1 + 1)
+   0205 9B                 4578 	subb	a,r3
+   0206 8C 06              4579 	mov	ar6,r4
+   0208 C4                 4580 	swap	a
+   0209 23                 4581 	rl	a
+   020A CE                 4582 	xch	a,r6
+   020B C4                 4583 	swap	a
+   020C 23                 4584 	rl	a
+   020D 54 1F              4585 	anl	a,#0x1f
+   020F 6E                 4586 	xrl	a,r6
+   0210 CE                 4587 	xch	a,r6
+   0211 54 1F              4588 	anl	a,#0x1f
+   0213 CE                 4589 	xch	a,r6
+   0214 6E                 4590 	xrl	a,r6
+   0215 CE                 4591 	xch	a,r6
+   0216 FF                 4592 	mov	r7,a
+   0217 EE                 4593 	mov	a,r6
+   0218 25*06              4594 	add	a,_montModExp_PARM_3
+   021A FE                 4595 	mov	r6,a
+   021B EF                 4596 	mov	a,r7
+   021C 35*07              4597 	addc	a,(_montModExp_PARM_3 + 1)
+   021E FF                 4598 	mov	r7,a
+   021F A8*08              4599 	mov	r0,(_montModExp_PARM_3 + 2)
+   0221 8E 82              4600 	mov	dpl,r6
+   0223 8F 83              4601 	mov	dph,r7
+   0225 88 F0              4602 	mov	b,r0
+   0227 12s00r00           4603 	lcall	__gptrget
+   022A FE                 4604 	mov	r6,a
+   022B 53 04 07           4605 	anl	ar4,#0x07
+   022E 7D 00              4606 	mov	r5,#0x00
+   0230 8C F0              4607 	mov	b,r4
+   0232 05 F0              4608 	inc	b
+   0234 EE                 4609 	mov	a,r6
+   0235 80 02              4610 	sjmp	00147$
+   0237                    4611 00146$:
+   0237 C3                 4612 	clr	c
+   0238 13                 4613 	rrc	a
+   0239                    4614 00147$:
+   0239 D5 F0 FB           4615 	djnz	b,00146$
+   023C 30 E0 14           4616 	jnb	acc.0,00120$
+                           4617 ;	main.c:203: _writeA_Mem(0x01);
+   023F 75 82 01           4618 	mov	dpl,#0x01
+   0242 C0 02              4619 	push	ar2
+   0244 C0 03              4620 	push	ar3
+   0246 12s03r22           4621 	lcall	__writeA_Mem
+                           4622 ;	main.c:204: _writeB_Reg();
+   0249 12s03r68           4623 	lcall	__writeB_Reg
+                           4624 ;	main.c:205: _mul_montgomery();
+   024C 12s03rAE           4625 	lcall	__mul_montgomery
+   024F D0 03              4626 	pop	ar3
+   0251 D0 02              4627 	pop	ar2
+   0253                    4628 00120$:
+                           4629 ;	main.c:194: for (k = 1; k <= t; k++) {
+   0253 0A                 4630 	inc	r2
+   0254 BA 00 8D           4631 	cjne	r2,#0x00,00118$
+   0257 0B                 4632 	inc	r3
+   0258 80 8A              4633 	sjmp	00118$
+   025A                    4634 00121$:
+                           4635 ;	main.c:211: _writeA_Mem(0x00);
+   025A 75 82 00           4636 	mov	dpl,#0x00
+   025D 12s03r22           4637 	lcall	__writeA_Mem
+                           4638 ;	main.c:212: _writeB_Reg();
+   0260 12s03r68           4639 	lcall	__writeB_Reg
+                           4640 ;	main.c:213: _mul_montgomery();
+   0263 12s03rAE           4641 	lcall	__mul_montgomery
+                           4642 ;	main.c:214: _readResult(r);
+   0266 85*0C 82           4643 	mov	dpl,_montModExp_r_1_1
+   0269 02s03r92           4644 	ljmp	__readResult
+                           4645 ;------------------------------------------------------------
+                           4646 ;Allocation info for local variables in function 'crtModExp'
+                           4647 ;------------------------------------------------------------
+                           4648 ;x                         Allocated with name '_crtModExp_PARM_2'
+                           4649 ;eP                        Allocated with name '_crtModExp_PARM_3'
+                           4650 ;eQ                        Allocated with name '_crtModExp_PARM_4'
+                           4651 ;p                         Allocated with name '_crtModExp_PARM_5'
+                           4652 ;rmodp                     Allocated with name '_crtModExp_PARM_6'
+                           4653 ;r2modp                    Allocated with name '_crtModExp_PARM_7'
+                           4654 ;q                         Allocated with name '_crtModExp_PARM_8'
+                           4655 ;rmodq                     Allocated with name '_crtModExp_PARM_9'
+                           4656 ;r2modq                    Allocated with name '_crtModExp_PARM_10'
+                           4657 ;m                         Allocated with name '_crtModExp_PARM_11'
+                           4658 ;r2modm                    Allocated with name '_crtModExp_PARM_12'
+                           4659 ;r                         Allocated to registers r2 
+                           4660 ;------------------------------------------------------------
+                           4661 ;	main.c:217: void crtModExp(
+                           4662 ;	-----------------------------------------
+                           4663 ;	 function crtModExp
+                           4664 ;	-----------------------------------------
+   026C                    4665 _crtModExp:
+   026C AA 82              4666 	mov	r2,dpl
+                           4667 ;	main.c:228: montModExp(0x00, x, eP, p, rmodp, r2modp);
+   026E 85*10*05           4668 	mov	_montModExp_PARM_2,_crtModExp_PARM_2
+   0271 85*11*06           4669 	mov	_montModExp_PARM_3,_crtModExp_PARM_3
+   0274 85*12*07           4670 	mov	(_montModExp_PARM_3 + 1),(_crtModExp_PARM_3 + 1)
+   0277 85*13*08           4671 	mov	(_montModExp_PARM_3 + 2),(_crtModExp_PARM_3 + 2)
+   027A 85*17*09           4672 	mov	_montModExp_PARM_4,_crtModExp_PARM_5
+   027D 85*18*0A           4673 	mov	_montModExp_PARM_5,_crtModExp_PARM_6
+   0280 85*19*0B           4674 	mov	_montModExp_PARM_6,_crtModExp_PARM_7
+   0283 75 82 00           4675 	mov	dpl,#0x00
+   0286 C0 02              4676 	push	ar2
+   0288 12s00rCA           4677 	lcall	_montModExp
+                           4678 ;	main.c:229: _displayResult();
+   028B 12s02rFF           4679 	lcall	__displayResult
+                           4680 ;	main.c:232: montModExp(0x01, x, eQ, q, rmodq, r2modq);
+   028E 85*10*05           4681 	mov	_montModExp_PARM_2,_crtModExp_PARM_2
+   0291 85*14*06           4682 	mov	_montModExp_PARM_3,_crtModExp_PARM_4
+   0294 85*15*07           4683 	mov	(_montModExp_PARM_3 + 1),(_crtModExp_PARM_4 + 1)
+   0297 85*16*08           4684 	mov	(_montModExp_PARM_3 + 2),(_crtModExp_PARM_4 + 2)
+   029A 85*1A*09           4685 	mov	_montModExp_PARM_4,_crtModExp_PARM_8
+   029D 85*1B*0A           4686 	mov	_montModExp_PARM_5,_crtModExp_PARM_9
+   02A0 85*1C*0B           4687 	mov	_montModExp_PARM_6,_crtModExp_PARM_10
+   02A3 75 82 01           4688 	mov	dpl,#0x01
+   02A6 12s00rCA           4689 	lcall	_montModExp
+                           4690 ;	main.c:233: _displayResult();
+   02A9 12s02rFF           4691 	lcall	__displayResult
+                           4692 ;	main.c:237: mpSubtract_Single(0x02, 0x00, true);
+   02AC 75*01 00           4693 	mov	_mpSubtract_Single_PARM_2,#0x00
+   02AF D2*01              4694 	setb	_mpSubtract_Single_PARM_3
+   02B1 75 82 02           4695 	mov	dpl,#0x02
+   02B4 12s00r5E           4696 	lcall	_mpSubtract_Single
+                           4697 ;	main.c:244: montMultiply_Both(0x03, 0x01, 0x1A, false);
+   02B7 75*03 01           4698 	mov	_montMultiply_Both_PARM_2,#0x01
+   02BA 75*04 1A           4699 	mov	_montMultiply_Both_PARM_3,#0x1A
+   02BD C2*03              4700 	clr	_montMultiply_Both_PARM_4
+   02BF 75 82 03           4701 	mov	dpl,#0x03
+   02C2 12s00r94           4702 	lcall	_montMultiply_Both
+                           4703 ;	main.c:246: montMultiply_Single(0x03, r2modm, false);
+   02C5 85*1E*02           4704 	mov	_montMultiply_Single_PARM_2,_crtModExp_PARM_12
+   02C8 C2*02              4705 	clr	_montMultiply_Single_PARM_3
+   02CA 75 82 03           4706 	mov	dpl,#0x03
+   02CD 12s00r79           4707 	lcall	_montMultiply_Single
+                           4708 ;	main.c:250: _writeModulus(m);
+   02D0 85*1D 82           4709 	mov	dpl,_crtModExp_PARM_11
+   02D3 12s03r06           4710 	lcall	__writeModulus
+                           4711 ;	main.c:253: montMultiply_Single(0x03, p, false);
+   02D6 85*17*02           4712 	mov	_montMultiply_Single_PARM_2,_crtModExp_PARM_5
+   02D9 C2*02              4713 	clr	_montMultiply_Single_PARM_3
+   02DB 75 82 03           4714 	mov	dpl,#0x03
+   02DE 12s00r79           4715 	lcall	_montMultiply_Single
+                           4716 ;	main.c:255: montMultiply_Single(0x03, r2modm, false);
+   02E1 85*1E*02           4717 	mov	_montMultiply_Single_PARM_2,_crtModExp_PARM_12
+   02E4 C2*02              4718 	clr	_montMultiply_Single_PARM_3
+   02E6 75 82 03           4719 	mov	dpl,#0x03
+   02E9 12s00r79           4720 	lcall	_montMultiply_Single
+   02EC D0 02              4721 	pop	ar2
+                           4722 ;	main.c:257: mpAdd_Single(r, 0x00, true);
+   02EE 75*00 00           4723 	mov	_mpAdd_Single_PARM_2,#0x00
+   02F1 D2*00              4724 	setb	_mpAdd_Single_PARM_3
+   02F3 8A 82              4725 	mov	dpl,r2
+   02F5 02s00r43           4726 	ljmp	_mpAdd_Single
                            4727 ;------------------------------------------------------------
-                           4728 ;------------------------------------------------------------
-                           4729 ;	main.c:246: void _displayResult() {
-                           4730 ;	-----------------------------------------
-                           4731 ;	 function _displayResult
+                           4728 ;Allocation info for local variables in function '_displayCycles'
+                           4729 ;------------------------------------------------------------
+                           4730 ;------------------------------------------------------------
+                           4731 ;	main.c:261: void _displayCycles() {
                            4732 ;	-----------------------------------------
-   02EE                    4733 __displayResult:
-                           4734 ;	main.c:247: P0 = INS_DISPLAY_RESULT;
-   02EE 75 80 02           4735 	mov	_P0,#0x02
-                           4736 ;	main.c:248: P0 = INS_IDLE;
-   02F1 75 80 00           4737 	mov	_P0,#0x00
-   02F4 22                 4738 	ret
-                           4739 ;------------------------------------------------------------
-                           4740 ;Allocation info for local variables in function '_writeModulus'
+                           4733 ;	 function _displayCycles
+                           4734 ;	-----------------------------------------
+   02F8                    4735 __displayCycles:
+                           4736 ;	main.c:262: P0 = INS_DISPLAY_CYCLES;
+   02F8 75 80 01           4737 	mov	_P0,#0x01
+                           4738 ;	main.c:263: P0 = INS_IDLE;
+   02FB 75 80 00           4739 	mov	_P0,#0x00
+   02FE 22                 4740 	ret
                            4741 ;------------------------------------------------------------
-                           4742 ;address                   Allocated to registers r2 
+                           4742 ;Allocation info for local variables in function '_displayResult'
                            4743 ;------------------------------------------------------------
-                           4744 ;	main.c:251: void _writeModulus(unsigned char address) {
-                           4745 ;	-----------------------------------------
-                           4746 ;	 function _writeModulus
-                           4747 ;	-----------------------------------------
-   02F5                    4748 __writeModulus:
-   02F5 AA 82              4749 	mov	r2,dpl
-                           4750 ;	main.c:252: while (P2 == 2) {}
-   02F7                    4751 00101$:
-   02F7 74 02              4752 	mov	a,#0x02
-   02F9 B5 A0 02           4753 	cjne	a,_P2,00113$
-   02FC 80 F9              4754 	sjmp	00101$
-   02FE                    4755 00113$:
-                           4756 ;	main.c:254: P2 = 0;
-   02FE 75 A0 00           4757 	mov	_P2,#0x00
-                           4758 ;	main.c:255: P1 = address;
-   0301 8A 90              4759 	mov	_P1,r2
-                           4760 ;	main.c:257: P0 = INS_WRITE_MODULUS;
-   0303 75 80 10           4761 	mov	_P0,#0x10
-                           4762 ;	main.c:258: P0 = INS_IDLE;
-   0306 75 80 00           4763 	mov	_P0,#0x00
-                           4764 ;	main.c:260: while (P2 == 0) {}
-   0309                    4765 00104$:
-   0309 E5 A0              4766 	mov	a,_P2
-   030B 60 FC              4767 	jz	00104$
-                           4768 ;	main.c:261: P0 = INS_ACK;
-   030D 75 80 0F           4769 	mov	_P0,#0x0F
-   0310 22                 4770 	ret
-                           4771 ;------------------------------------------------------------
-                           4772 ;Allocation info for local variables in function '_writeA_Mem'
-                           4773 ;------------------------------------------------------------
-                           4774 ;address                   Allocated to registers r2 
-                           4775 ;------------------------------------------------------------
-                           4776 ;	main.c:264: void _writeA_Mem(unsigned char address) {
-                           4777 ;	-----------------------------------------
-                           4778 ;	 function _writeA_Mem
-                           4779 ;	-----------------------------------------
-   0311                    4780 __writeA_Mem:
-   0311 AA 82              4781 	mov	r2,dpl
-                           4782 ;	main.c:265: while (P2 == 2) {}
-   0313                    4783 00101$:
-   0313 74 02              4784 	mov	a,#0x02
-   0315 B5 A0 02           4785 	cjne	a,_P2,00113$
-   0318 80 F9              4786 	sjmp	00101$
-   031A                    4787 00113$:
-                           4788 ;	main.c:267: P2 = 0;
-   031A 75 A0 00           4789 	mov	_P2,#0x00
-                           4790 ;	main.c:268: P1 = address;
-   031D 8A 90              4791 	mov	_P1,r2
-                           4792 ;	main.c:270: P0 = INS_WRITE_A_MEM;
-   031F 75 80 11           4793 	mov	_P0,#0x11
-                           4794 ;	main.c:271: P0 = INS_IDLE;
-   0322 75 80 00           4795 	mov	_P0,#0x00
-                           4796 ;	main.c:273: while (P2 == 0) {}
-   0325                    4797 00104$:
-   0325 E5 A0              4798 	mov	a,_P2
-   0327 60 FC              4799 	jz	00104$
-                           4800 ;	main.c:274: P0 = INS_ACK;
-   0329 75 80 0F           4801 	mov	_P0,#0x0F
-   032C 22                 4802 	ret
-                           4803 ;------------------------------------------------------------
-                           4804 ;Allocation info for local variables in function '_writeA_Reg'
-                           4805 ;------------------------------------------------------------
-                           4806 ;------------------------------------------------------------
-                           4807 ;	main.c:277: void _writeA_Reg() {
-                           4808 ;	-----------------------------------------
-                           4809 ;	 function _writeA_Reg
-                           4810 ;	-----------------------------------------
-   032D                    4811 __writeA_Reg:
-                           4812 ;	main.c:278: while (P2 == 2) {}
-   032D                    4813 00101$:
-   032D 74 02              4814 	mov	a,#0x02
-   032F B5 A0 02           4815 	cjne	a,_P2,00108$
-   0332 80 F9              4816 	sjmp	00101$
-   0334                    4817 00108$:
-                           4818 ;	main.c:280: P0 = INS_WRITE_A_REG;
-   0334 75 80 12           4819 	mov	_P0,#0x12
-                           4820 ;	main.c:281: P0 = INS_IDLE;
-   0337 75 80 00           4821 	mov	_P0,#0x00
-   033A 22                 4822 	ret
-                           4823 ;------------------------------------------------------------
-                           4824 ;Allocation info for local variables in function '_writeB_Mem'
-                           4825 ;------------------------------------------------------------
-                           4826 ;address                   Allocated to registers r2 
-                           4827 ;------------------------------------------------------------
-                           4828 ;	main.c:284: void _writeB_Mem(unsigned char address) {
-                           4829 ;	-----------------------------------------
-                           4830 ;	 function _writeB_Mem
-                           4831 ;	-----------------------------------------
-   033B                    4832 __writeB_Mem:
-   033B AA 82              4833 	mov	r2,dpl
-                           4834 ;	main.c:285: while (P2 == 2) {}
-   033D                    4835 00101$:
-   033D 74 02              4836 	mov	a,#0x02
-   033F B5 A0 02           4837 	cjne	a,_P2,00113$
-   0342 80 F9              4838 	sjmp	00101$
-   0344                    4839 00113$:
-                           4840 ;	main.c:287: P2 = 0;
-   0344 75 A0 00           4841 	mov	_P2,#0x00
-                           4842 ;	main.c:288: P1 = address;
-   0347 8A 90              4843 	mov	_P1,r2
-                           4844 ;	main.c:290: P0 = INS_WRITE_B_MEM;
-   0349 75 80 13           4845 	mov	_P0,#0x13
-                           4846 ;	main.c:291: P0 = INS_IDLE;
-   034C 75 80 00           4847 	mov	_P0,#0x00
-                           4848 ;	main.c:293: while (P2 == 0) {}
-   034F                    4849 00104$:
-   034F E5 A0              4850 	mov	a,_P2
-   0351 60 FC              4851 	jz	00104$
-                           4852 ;	main.c:294: P0 = INS_ACK;
-   0353 75 80 0F           4853 	mov	_P0,#0x0F
-   0356 22                 4854 	ret
-                           4855 ;------------------------------------------------------------
-                           4856 ;Allocation info for local variables in function '_writeB_Reg'
-                           4857 ;------------------------------------------------------------
-                           4858 ;------------------------------------------------------------
-                           4859 ;	main.c:297: void _writeB_Reg() {
-                           4860 ;	-----------------------------------------
-                           4861 ;	 function _writeB_Reg
-                           4862 ;	-----------------------------------------
-   0357                    4863 __writeB_Reg:
-                           4864 ;	main.c:298: while (P2 == 2) {}
-   0357                    4865 00101$:
-   0357 74 02              4866 	mov	a,#0x02
-   0359 B5 A0 02           4867 	cjne	a,_P2,00108$
-   035C 80 F9              4868 	sjmp	00101$
-   035E                    4869 00108$:
-                           4870 ;	main.c:300: P0 = INS_WRITE_B_REG;
-   035E 75 80 14           4871 	mov	_P0,#0x14
-                           4872 ;	main.c:301: P0 = INS_IDLE;
-   0361 75 80 00           4873 	mov	_P0,#0x00
-   0364 22                 4874 	ret
-                           4875 ;------------------------------------------------------------
-                           4876 ;Allocation info for local variables in function '_writeResult'
-                           4877 ;------------------------------------------------------------
-                           4878 ;address                   Allocated to registers r2 
-                           4879 ;------------------------------------------------------------
-                           4880 ;	main.c:304: void _writeResult(unsigned char address) {
-                           4881 ;	-----------------------------------------
-                           4882 ;	 function _writeResult
-                           4883 ;	-----------------------------------------
-   0365                    4884 __writeResult:
-   0365 AA 82              4885 	mov	r2,dpl
-                           4886 ;	main.c:305: while (P2 == 2) {}
-   0367                    4887 00101$:
-   0367 74 02              4888 	mov	a,#0x02
-   0369 B5 A0 02           4889 	cjne	a,_P2,00113$
-   036C 80 F9              4890 	sjmp	00101$
-   036E                    4891 00113$:
-                           4892 ;	main.c:307: P2 = 0;
-   036E 75 A0 00           4893 	mov	_P2,#0x00
-                           4894 ;	main.c:308: P1 = address;
-   0371 8A 90              4895 	mov	_P1,r2
-                           4896 ;	main.c:310: P0 = INS_WRITE_RESULT;
-   0373 75 80 15           4897 	mov	_P0,#0x15
-                           4898 ;	main.c:311: P0 = INS_IDLE;
-   0376 75 80 00           4899 	mov	_P0,#0x00
-                           4900 ;	main.c:313: while (P2 == 0) {}
-   0379                    4901 00104$:
-   0379 E5 A0              4902 	mov	a,_P2
-   037B 60 FC              4903 	jz	00104$
-                           4904 ;	main.c:314: P0 = INS_ACK;
-   037D 75 80 0F           4905 	mov	_P0,#0x0F
-   0380 22                 4906 	ret
-                           4907 ;------------------------------------------------------------
-                           4908 ;Allocation info for local variables in function '_readResult'
-                           4909 ;------------------------------------------------------------
-                           4910 ;address                   Allocated to registers r2 
-                           4911 ;------------------------------------------------------------
-                           4912 ;	main.c:317: void _readResult(unsigned char address) {
-                           4913 ;	-----------------------------------------
-                           4914 ;	 function _readResult
-                           4915 ;	-----------------------------------------
-   0381                    4916 __readResult:
-   0381 AA 82              4917 	mov	r2,dpl
-                           4918 ;	main.c:318: while (P2 == 2) {}
-   0383                    4919 00101$:
-   0383 74 02              4920 	mov	a,#0x02
-   0385 B5 A0 02           4921 	cjne	a,_P2,00113$
-   0388 80 F9              4922 	sjmp	00101$
-   038A                    4923 00113$:
-                           4924 ;	main.c:320: P2 = 0;
-   038A 75 A0 00           4925 	mov	_P2,#0x00
-                           4926 ;	main.c:321: P1 = address;
-   038D 8A 90              4927 	mov	_P1,r2
-                           4928 ;	main.c:323: P0 = INS_READ_RESULT;
-   038F 75 80 16           4929 	mov	_P0,#0x16
-                           4930 ;	main.c:324: P0 = INS_IDLE;
-   0392 75 80 00           4931 	mov	_P0,#0x00
-                           4932 ;	main.c:326: while (P2 == 0) {}
-   0395                    4933 00104$:
-   0395 E5 A0              4934 	mov	a,_P2
-   0397 60 FC              4935 	jz	00104$
-                           4936 ;	main.c:327: P0 = INS_ACK;
-   0399 75 80 0F           4937 	mov	_P0,#0x0F
-   039C 22                 4938 	ret
-                           4939 ;------------------------------------------------------------
-                           4940 ;Allocation info for local variables in function '_mul_montgomery'
-                           4941 ;------------------------------------------------------------
-                           4942 ;------------------------------------------------------------
-                           4943 ;	main.c:330: void _mul_montgomery() {
-                           4944 ;	-----------------------------------------
-                           4945 ;	 function _mul_montgomery
-                           4946 ;	-----------------------------------------
-   039D                    4947 __mul_montgomery:
-                           4948 ;	main.c:331: P2 = 0;
-   039D 75 A0 00           4949 	mov	_P2,#0x00
-                           4950 ;	main.c:333: P0 = INS_MUL_MONTGOMERY;
-   03A0 75 80 20           4951 	mov	_P0,#0x20
-                           4952 ;	main.c:334: P0 = INS_IDLE;
-   03A3 75 80 00           4953 	mov	_P0,#0x00
-   03A6 22                 4954 	ret
+                           4744 ;------------------------------------------------------------
+                           4745 ;	main.c:266: void _displayResult() {
+                           4746 ;	-----------------------------------------
+                           4747 ;	 function _displayResult
+                           4748 ;	-----------------------------------------
+   02FF                    4749 __displayResult:
+                           4750 ;	main.c:267: P0 = INS_DISPLAY_RESULT;
+   02FF 75 80 02           4751 	mov	_P0,#0x02
+                           4752 ;	main.c:268: P0 = INS_IDLE;
+   0302 75 80 00           4753 	mov	_P0,#0x00
+   0305 22                 4754 	ret
+                           4755 ;------------------------------------------------------------
+                           4756 ;Allocation info for local variables in function '_writeModulus'
+                           4757 ;------------------------------------------------------------
+                           4758 ;address                   Allocated to registers r2 
+                           4759 ;------------------------------------------------------------
+                           4760 ;	main.c:271: void _writeModulus(unsigned char address) {
+                           4761 ;	-----------------------------------------
+                           4762 ;	 function _writeModulus
+                           4763 ;	-----------------------------------------
+   0306                    4764 __writeModulus:
+   0306 AA 82              4765 	mov	r2,dpl
+                           4766 ;	main.c:272: while (P2 == 2) {}
+   0308                    4767 00101$:
+   0308 74 02              4768 	mov	a,#0x02
+   030A B5 A0 02           4769 	cjne	a,_P2,00113$
+   030D 80 F9              4770 	sjmp	00101$
+   030F                    4771 00113$:
+                           4772 ;	main.c:274: P2 = 0;
+   030F 75 A0 00           4773 	mov	_P2,#0x00
+                           4774 ;	main.c:275: P1 = address;
+   0312 8A 90              4775 	mov	_P1,r2
+                           4776 ;	main.c:277: P0 = INS_WRITE_MODULUS;
+   0314 75 80 10           4777 	mov	_P0,#0x10
+                           4778 ;	main.c:278: P0 = INS_IDLE;
+   0317 75 80 00           4779 	mov	_P0,#0x00
+                           4780 ;	main.c:280: while (P2 == 0) {}
+   031A                    4781 00104$:
+   031A E5 A0              4782 	mov	a,_P2
+   031C 60 FC              4783 	jz	00104$
+                           4784 ;	main.c:281: P0 = INS_ACK;
+   031E 75 80 0F           4785 	mov	_P0,#0x0F
+   0321 22                 4786 	ret
+                           4787 ;------------------------------------------------------------
+                           4788 ;Allocation info for local variables in function '_writeA_Mem'
+                           4789 ;------------------------------------------------------------
+                           4790 ;address                   Allocated to registers r2 
+                           4791 ;------------------------------------------------------------
+                           4792 ;	main.c:284: void _writeA_Mem(unsigned char address) {
+                           4793 ;	-----------------------------------------
+                           4794 ;	 function _writeA_Mem
+                           4795 ;	-----------------------------------------
+   0322                    4796 __writeA_Mem:
+   0322 AA 82              4797 	mov	r2,dpl
+                           4798 ;	main.c:285: while (P2 == 2) {}
+   0324                    4799 00101$:
+   0324 74 02              4800 	mov	a,#0x02
+   0326 B5 A0 02           4801 	cjne	a,_P2,00113$
+   0329 80 F9              4802 	sjmp	00101$
+   032B                    4803 00113$:
+                           4804 ;	main.c:287: P2 = 0;
+   032B 75 A0 00           4805 	mov	_P2,#0x00
+                           4806 ;	main.c:288: P1 = address;
+   032E 8A 90              4807 	mov	_P1,r2
+                           4808 ;	main.c:290: P0 = INS_WRITE_A_MEM;
+   0330 75 80 11           4809 	mov	_P0,#0x11
+                           4810 ;	main.c:291: P0 = INS_IDLE;
+   0333 75 80 00           4811 	mov	_P0,#0x00
+                           4812 ;	main.c:293: while (P2 == 0) {}
+   0336                    4813 00104$:
+   0336 E5 A0              4814 	mov	a,_P2
+   0338 60 FC              4815 	jz	00104$
+                           4816 ;	main.c:294: P0 = INS_ACK;
+   033A 75 80 0F           4817 	mov	_P0,#0x0F
+   033D 22                 4818 	ret
+                           4819 ;------------------------------------------------------------
+                           4820 ;Allocation info for local variables in function '_writeA_Reg'
+                           4821 ;------------------------------------------------------------
+                           4822 ;------------------------------------------------------------
+                           4823 ;	main.c:297: void _writeA_Reg() {
+                           4824 ;	-----------------------------------------
+                           4825 ;	 function _writeA_Reg
+                           4826 ;	-----------------------------------------
+   033E                    4827 __writeA_Reg:
+                           4828 ;	main.c:298: while (P2 == 2) {}
+   033E                    4829 00101$:
+   033E 74 02              4830 	mov	a,#0x02
+   0340 B5 A0 02           4831 	cjne	a,_P2,00108$
+   0343 80 F9              4832 	sjmp	00101$
+   0345                    4833 00108$:
+                           4834 ;	main.c:300: P0 = INS_WRITE_A_REG;
+   0345 75 80 12           4835 	mov	_P0,#0x12
+                           4836 ;	main.c:301: P0 = INS_IDLE;
+   0348 75 80 00           4837 	mov	_P0,#0x00
+   034B 22                 4838 	ret
+                           4839 ;------------------------------------------------------------
+                           4840 ;Allocation info for local variables in function '_writeB_Mem'
+                           4841 ;------------------------------------------------------------
+                           4842 ;address                   Allocated to registers r2 
+                           4843 ;------------------------------------------------------------
+                           4844 ;	main.c:304: void _writeB_Mem(unsigned char address) {
+                           4845 ;	-----------------------------------------
+                           4846 ;	 function _writeB_Mem
+                           4847 ;	-----------------------------------------
+   034C                    4848 __writeB_Mem:
+   034C AA 82              4849 	mov	r2,dpl
+                           4850 ;	main.c:305: while (P2 == 2) {}
+   034E                    4851 00101$:
+   034E 74 02              4852 	mov	a,#0x02
+   0350 B5 A0 02           4853 	cjne	a,_P2,00113$
+   0353 80 F9              4854 	sjmp	00101$
+   0355                    4855 00113$:
+                           4856 ;	main.c:307: P2 = 0;
+   0355 75 A0 00           4857 	mov	_P2,#0x00
+                           4858 ;	main.c:308: P1 = address;
+   0358 8A 90              4859 	mov	_P1,r2
+                           4860 ;	main.c:310: P0 = INS_WRITE_B_MEM;
+   035A 75 80 13           4861 	mov	_P0,#0x13
+                           4862 ;	main.c:311: P0 = INS_IDLE;
+   035D 75 80 00           4863 	mov	_P0,#0x00
+                           4864 ;	main.c:313: while (P2 == 0) {}
+   0360                    4865 00104$:
+   0360 E5 A0              4866 	mov	a,_P2
+   0362 60 FC              4867 	jz	00104$
+                           4868 ;	main.c:314: P0 = INS_ACK;
+   0364 75 80 0F           4869 	mov	_P0,#0x0F
+   0367 22                 4870 	ret
+                           4871 ;------------------------------------------------------------
+                           4872 ;Allocation info for local variables in function '_writeB_Reg'
+                           4873 ;------------------------------------------------------------
+                           4874 ;------------------------------------------------------------
+                           4875 ;	main.c:317: void _writeB_Reg() {
+                           4876 ;	-----------------------------------------
+                           4877 ;	 function _writeB_Reg
+                           4878 ;	-----------------------------------------
+   0368                    4879 __writeB_Reg:
+                           4880 ;	main.c:318: while (P2 == 2) {}
+   0368                    4881 00101$:
+   0368 74 02              4882 	mov	a,#0x02
+   036A B5 A0 02           4883 	cjne	a,_P2,00108$
+   036D 80 F9              4884 	sjmp	00101$
+   036F                    4885 00108$:
+                           4886 ;	main.c:320: P0 = INS_WRITE_B_REG;
+   036F 75 80 14           4887 	mov	_P0,#0x14
+                           4888 ;	main.c:321: P0 = INS_IDLE;
+   0372 75 80 00           4889 	mov	_P0,#0x00
+   0375 22                 4890 	ret
+                           4891 ;------------------------------------------------------------
+                           4892 ;Allocation info for local variables in function '_writeResult'
+                           4893 ;------------------------------------------------------------
+                           4894 ;address                   Allocated to registers r2 
+                           4895 ;------------------------------------------------------------
+                           4896 ;	main.c:324: void _writeResult(unsigned char address) {
+                           4897 ;	-----------------------------------------
+                           4898 ;	 function _writeResult
+                           4899 ;	-----------------------------------------
+   0376                    4900 __writeResult:
+   0376 AA 82              4901 	mov	r2,dpl
+                           4902 ;	main.c:325: while (P2 == 2) {}
+   0378                    4903 00101$:
+   0378 74 02              4904 	mov	a,#0x02
+   037A B5 A0 02           4905 	cjne	a,_P2,00113$
+   037D 80 F9              4906 	sjmp	00101$
+   037F                    4907 00113$:
+                           4908 ;	main.c:327: P2 = 0;
+   037F 75 A0 00           4909 	mov	_P2,#0x00
+                           4910 ;	main.c:328: P1 = address;
+   0382 8A 90              4911 	mov	_P1,r2
+                           4912 ;	main.c:330: P0 = INS_WRITE_RESULT;
+   0384 75 80 15           4913 	mov	_P0,#0x15
+                           4914 ;	main.c:331: P0 = INS_IDLE;
+   0387 75 80 00           4915 	mov	_P0,#0x00
+                           4916 ;	main.c:333: while (P2 == 0) {}
+   038A                    4917 00104$:
+   038A E5 A0              4918 	mov	a,_P2
+   038C 60 FC              4919 	jz	00104$
+                           4920 ;	main.c:334: P0 = INS_ACK;
+   038E 75 80 0F           4921 	mov	_P0,#0x0F
+   0391 22                 4922 	ret
+                           4923 ;------------------------------------------------------------
+                           4924 ;Allocation info for local variables in function '_readResult'
+                           4925 ;------------------------------------------------------------
+                           4926 ;address                   Allocated to registers r2 
+                           4927 ;------------------------------------------------------------
+                           4928 ;	main.c:337: void _readResult(unsigned char address) {
+                           4929 ;	-----------------------------------------
+                           4930 ;	 function _readResult
+                           4931 ;	-----------------------------------------
+   0392                    4932 __readResult:
+   0392 AA 82              4933 	mov	r2,dpl
+                           4934 ;	main.c:338: while (P2 == 2) {}
+   0394                    4935 00101$:
+   0394 74 02              4936 	mov	a,#0x02
+   0396 B5 A0 02           4937 	cjne	a,_P2,00113$
+   0399 80 F9              4938 	sjmp	00101$
+   039B                    4939 00113$:
+                           4940 ;	main.c:340: P2 = 0;
+   039B 75 A0 00           4941 	mov	_P2,#0x00
+                           4942 ;	main.c:341: P1 = address;
+   039E 8A 90              4943 	mov	_P1,r2
+                           4944 ;	main.c:343: P0 = INS_READ_RESULT;
+   03A0 75 80 16           4945 	mov	_P0,#0x16
+                           4946 ;	main.c:344: P0 = INS_IDLE;
+   03A3 75 80 00           4947 	mov	_P0,#0x00
+                           4948 ;	main.c:346: while (P2 == 0) {}
+   03A6                    4949 00104$:
+   03A6 E5 A0              4950 	mov	a,_P2
+   03A8 60 FC              4951 	jz	00104$
+                           4952 ;	main.c:347: P0 = INS_ACK;
+   03AA 75 80 0F           4953 	mov	_P0,#0x0F
+   03AD 22                 4954 	ret
                            4955 ;------------------------------------------------------------
-                           4956 ;Allocation info for local variables in function '_adder_add'
+                           4956 ;Allocation info for local variables in function '_mul_montgomery'
                            4957 ;------------------------------------------------------------
                            4958 ;------------------------------------------------------------
-                           4959 ;	main.c:337: void _adder_add() {
+                           4959 ;	main.c:350: void _mul_montgomery() {
                            4960 ;	-----------------------------------------
-                           4961 ;	 function _adder_add
+                           4961 ;	 function _mul_montgomery
                            4962 ;	-----------------------------------------
-   03A7                    4963 __adder_add:
-                           4964 ;	main.c:338: P2 = 0;
-   03A7 75 A0 00           4965 	mov	_P2,#0x00
-                           4966 ;	main.c:340: P0 = INS_ADDER_ADD;
-   03AA 75 80 30           4967 	mov	_P0,#0x30
-                           4968 ;	main.c:341: P0 = INS_IDLE;
-   03AD 75 80 00           4969 	mov	_P0,#0x00
-   03B0 22                 4970 	ret
+   03AE                    4963 __mul_montgomery:
+                           4964 ;	main.c:351: P2 = 0;
+   03AE 75 A0 00           4965 	mov	_P2,#0x00
+                           4966 ;	main.c:353: P0 = INS_MUL_MONTGOMERY;
+   03B1 75 80 20           4967 	mov	_P0,#0x20
+                           4968 ;	main.c:354: P0 = INS_IDLE;
+   03B4 75 80 00           4969 	mov	_P0,#0x00
+   03B7 22                 4970 	ret
                            4971 ;------------------------------------------------------------
-                           4972 ;Allocation info for local variables in function '_adder_subtract'
+                           4972 ;Allocation info for local variables in function '_adder_add'
                            4973 ;------------------------------------------------------------
                            4974 ;------------------------------------------------------------
-                           4975 ;	main.c:344: void _adder_subtract() {
+                           4975 ;	main.c:357: void _adder_add() {
                            4976 ;	-----------------------------------------
-                           4977 ;	 function _adder_subtract
+                           4977 ;	 function _adder_add
                            4978 ;	-----------------------------------------
-   03B1                    4979 __adder_subtract:
-                           4980 ;	main.c:345: P2 = 0;
-   03B1 75 A0 00           4981 	mov	_P2,#0x00
-                           4982 ;	main.c:347: P0 = INS_ADDER_SUBTRACT;
-   03B4 75 80 31           4983 	mov	_P0,#0x31
-                           4984 ;	main.c:348: P0 = INS_IDLE;
-   03B7 75 80 00           4985 	mov	_P0,#0x00
-   03BA 22                 4986 	ret
+   03B8                    4979 __adder_add:
+                           4980 ;	main.c:358: P2 = 0;
+   03B8 75 A0 00           4981 	mov	_P2,#0x00
+                           4982 ;	main.c:360: P0 = INS_ADDER_ADD;
+   03BB 75 80 30           4983 	mov	_P0,#0x30
+                           4984 ;	main.c:361: P0 = INS_IDLE;
+   03BE 75 80 00           4985 	mov	_P0,#0x00
+   03C1 22                 4986 	ret
                            4987 ;------------------------------------------------------------
-                           4988 ;Allocation info for local variables in function '_terminate'
+                           4988 ;Allocation info for local variables in function '_adder_subtract'
                            4989 ;------------------------------------------------------------
                            4990 ;------------------------------------------------------------
-                           4991 ;	main.c:351: void _terminate() {
+                           4991 ;	main.c:364: void _adder_subtract() {
                            4992 ;	-----------------------------------------
-                           4993 ;	 function _terminate
+                           4993 ;	 function _adder_subtract
                            4994 ;	-----------------------------------------
-   03BB                    4995 __terminate:
-                           4996 ;	main.c:352: P3 = 0x55;
-   03BB 75 B0 55           4997 	mov	_P3,#0x55
-   03BE 22                 4998 	ret
-                           4999 	.area CSEG    (CODE)
-                           5000 	.area CONST   (CODE)
-                           5001 	.area XINIT   (CODE)
-                           5002 	.area CABS    (ABS,CODE)
+   03C2                    4995 __adder_subtract:
+                           4996 ;	main.c:365: P2 = 0;
+   03C2 75 A0 00           4997 	mov	_P2,#0x00
+                           4998 ;	main.c:367: P0 = INS_ADDER_SUBTRACT;
+   03C5 75 80 31           4999 	mov	_P0,#0x31
+                           5000 ;	main.c:368: P0 = INS_IDLE;
+   03C8 75 80 00           5001 	mov	_P0,#0x00
+   03CB 22                 5002 	ret
+                           5003 ;------------------------------------------------------------
+                           5004 ;Allocation info for local variables in function '_terminate'
+                           5005 ;------------------------------------------------------------
+                           5006 ;------------------------------------------------------------
+                           5007 ;	main.c:371: void _terminate() {
+                           5008 ;	-----------------------------------------
+                           5009 ;	 function _terminate
+                           5010 ;	-----------------------------------------
+   03CC                    5011 __terminate:
+                           5012 ;	main.c:372: P3 = 0x55;
+   03CC 75 B0 55           5013 	mov	_P3,#0x55
+   03CF 22                 5014 	ret
+                           5015 	.area CSEG    (CODE)
+                           5016 	.area CONST   (CODE)
+                           5017 	.area XINIT   (CODE)
+                           5018 	.area CABS    (ABS,CODE)

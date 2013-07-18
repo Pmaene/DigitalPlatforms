@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 2.9.0 #5416 (Aug  6 2010) (UNIX)
-; This file was generated Thu Jul 18 16:01:45 2013
+; This file was generated Thu Jul 18 16:25:32 2013
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mmcs51 --model-small
@@ -4359,14 +4359,19 @@ _montModExp:
 ;	main.c:160: _writeModulus(m);
 	mov	dpl,_montModExp_PARM_4
 	lcall	__writeModulus
-;	main.c:163: montMultiply_Both(0x01, x, r2modm, true);
-	mov	_montMultiply_Both_PARM_2,_montModExp_PARM_2
-	mov	_montMultiply_Both_PARM_3,_montModExp_PARM_6
-	setb	_montMultiply_Both_PARM_4
+;	main.c:164: _writeA_Mem(x);
+	mov	dpl,_montModExp_PARM_2
+	lcall	__writeA_Mem
+;	main.c:165: _writeB_Mem(r2modm);
+	mov	dpl,_montModExp_PARM_6
+	lcall	__writeB_Mem
+;	main.c:166: _mul_montgomery();
+	lcall	__mul_montgomery
+;	main.c:167: _readResult(0x01);
 	mov	dpl,#0x01
-	lcall	_montMultiply_Both
-;	main.c:166: t = 0;
-;	main.c:167: for (i = 0; i < SIZE; i++) {
+	lcall	__readResult
+;	main.c:170: t = 0;
+;	main.c:171: for (i = 0; i < SIZE; i++) {
 	clr	a
 	mov	_montModExp_t_1_1,a
 	mov	(_montModExp_t_1_1 + 1),a
@@ -4377,7 +4382,7 @@ _montModExp:
 	jnc	00135$
 	ljmp	00105$
 00135$:
-;	main.c:168: if (e[(SIZE-1)-i] != 0) {
+;	main.c:172: if (e[(SIZE-1)-i] != 0) {
 	mov	r6,_montModExp_i_1_1
 	mov	r7,#0x00
 	mov	a,#0x7F
@@ -4399,13 +4404,13 @@ _montModExp:
 	mov	b,r0
 	lcall	__gptrget
 	jz	00116$
-;	main.c:169: for (j = 0; j < 8; j++) {
+;	main.c:173: for (j = 0; j < 8; j++) {
 	mov	r6,#0x00
 00110$:
 	cjne	r6,#0x08,00137$
 00137$:
 	jnc	00116$
-;	main.c:170: if (e[(SIZE-1)-i] >> (7-j) & 1) {
+;	main.c:174: if (e[(SIZE-1)-i] >> (7-j) & 1) {
 	mov	r7,_montModExp_i_1_1
 	mov	r0,#0x00
 	mov	a,#0x7F
@@ -4446,7 +4451,7 @@ _montModExp:
 00140$:
 	djnz	b,00139$
 	jnb	acc.0,00112$
-;	main.c:171: t = 8*((SIZE-1)-i) + (7-j);
+;	main.c:175: t = 8*((SIZE-1)-i) + (7-j);
 	mov	a,#0x7F
 	clr	c
 	subb	a,r7
@@ -4479,22 +4484,22 @@ _montModExp:
 	mov	a,r3
 	addc	a,r0
 	mov	(_montModExp_t_1_1 + 1),a
-;	main.c:172: goto exitLoop;
+;	main.c:176: goto breakLoop;
 	sjmp	00105$
 00112$:
-;	main.c:169: for (j = 0; j < 8; j++) {
+;	main.c:173: for (j = 0; j < 8; j++) {
 	inc	r6
 	sjmp	00110$
 00116$:
-;	main.c:167: for (i = 0; i < SIZE; i++) {
+;	main.c:171: for (i = 0; i < SIZE; i++) {
 	inc	_montModExp_i_1_1
 	ljmp	00114$
-;	main.c:178: exitLoop:
+;	main.c:182: breakLoop:
 00105$:
-;	main.c:181: _writeResult(rmodm);
+;	main.c:185: _writeResult(rmodm);
 	mov	dpl,_montModExp_PARM_5
 	lcall	__writeResult
-;	main.c:182: if (((e[t/8] >> t%8)) & 1)
+;	main.c:186: if (((e[t/8] >> t%8)) & 1) {
 	mov	r2,_montModExp_t_1_1
 	mov	a,(_montModExp_t_1_1 + 1)
 	swap	a
@@ -4536,12 +4541,14 @@ _montModExp:
 00143$:
 	djnz	b,00142$
 	jnb	acc.0,00133$
-;	main.c:184: montMultiply_Single(r, 0x01, false);
-	mov	_montMultiply_Single_PARM_2,#0x01
-	clr	_montMultiply_Single_PARM_3
-	mov	dpl,_montModExp_r_1_1
-	lcall	_montMultiply_Single
-;	main.c:186: for (k = 1; k <= t; k++) {
+;	main.c:189: _writeA_Mem(0x01);
+	mov	dpl,#0x01
+	lcall	__writeA_Mem
+;	main.c:190: _writeB_Reg();
+	lcall	__writeB_Reg
+;	main.c:191: _mul_montgomery();
+	lcall	__mul_montgomery
+;	main.c:194: for (k = 1; k <= t; k++) {
 00133$:
 	mov	r2,#0x01
 	mov	r3,#0x00
@@ -4552,15 +4559,17 @@ _montModExp:
 	mov	a,(_montModExp_t_1_1 + 1)
 	subb	a,r3
 	jc	00121$
-;	main.c:187: montMultiply_Result(r, false);
-	clr	_montMultiply_Result_PARM_2
-	mov	dpl,_montModExp_r_1_1
+;	main.c:196: _writeA_Reg();
 	push	ar2
 	push	ar3
-	lcall	_montMultiply_Result
+	lcall	__writeA_Reg
+;	main.c:197: _writeB_Reg();
+	lcall	__writeB_Reg
+;	main.c:198: _mul_montgomery();
+	lcall	__mul_montgomery
 	pop	ar3
 	pop	ar2
-;	main.c:188: if (((e[(t-k)/8] >> (t-k)%8)) & 1)
+;	main.c:200: if (((e[(t-k)/8] >> (t-k)%8)) & 1) {
 	mov	a,_montModExp_t_1_1
 	clr	c
 	subb	a,r2
@@ -4605,27 +4614,34 @@ _montModExp:
 00147$:
 	djnz	b,00146$
 	jnb	acc.0,00120$
-;	main.c:190: montMultiply_Single(r, 0x01, false);
-	mov	_montMultiply_Single_PARM_2,#0x01
-	clr	_montMultiply_Single_PARM_3
-	mov	dpl,_montModExp_r_1_1
+;	main.c:203: _writeA_Mem(0x01);
+	mov	dpl,#0x01
 	push	ar2
 	push	ar3
-	lcall	_montMultiply_Single
+	lcall	__writeA_Mem
+;	main.c:204: _writeB_Reg();
+	lcall	__writeB_Reg
+;	main.c:205: _mul_montgomery();
+	lcall	__mul_montgomery
 	pop	ar3
 	pop	ar2
 00120$:
-;	main.c:186: for (k = 1; k <= t; k++) {
+;	main.c:194: for (k = 1; k <= t; k++) {
 	inc	r2
 	cjne	r2,#0x00,00118$
 	inc	r3
 	sjmp	00118$
 00121$:
-;	main.c:194: montMultiply_Single(r, 0x00, true);
-	mov	_montMultiply_Single_PARM_2,#0x00
-	setb	_montMultiply_Single_PARM_3
+;	main.c:211: _writeA_Mem(0x00);
+	mov	dpl,#0x00
+	lcall	__writeA_Mem
+;	main.c:212: _writeB_Reg();
+	lcall	__writeB_Reg
+;	main.c:213: _mul_montgomery();
+	lcall	__mul_montgomery
+;	main.c:214: _readResult(r);
 	mov	dpl,_montModExp_r_1_1
-	ljmp	_montMultiply_Single
+	ljmp	__readResult
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'crtModExp'
 ;------------------------------------------------------------
@@ -4642,13 +4658,13 @@ _montModExp:
 ;r2modm                    Allocated with name '_crtModExp_PARM_12'
 ;r                         Allocated to registers r2 
 ;------------------------------------------------------------
-;	main.c:197: void crtModExp(
+;	main.c:217: void crtModExp(
 ;	-----------------------------------------
 ;	 function crtModExp
 ;	-----------------------------------------
 _crtModExp:
 	mov	r2,dpl
-;	main.c:208: montModExp(0x00, x, eP, p, rmodp, r2modp);
+;	main.c:228: montModExp(0x00, x, eP, p, rmodp, r2modp);
 	mov	_montModExp_PARM_2,_crtModExp_PARM_2
 	mov	_montModExp_PARM_3,_crtModExp_PARM_3
 	mov	(_montModExp_PARM_3 + 1),(_crtModExp_PARM_3 + 1)
@@ -4659,9 +4675,9 @@ _crtModExp:
 	mov	dpl,#0x00
 	push	ar2
 	lcall	_montModExp
-;	main.c:209: _displayResult();
+;	main.c:229: _displayResult();
 	lcall	__displayResult
-;	main.c:212: montModExp(0x01, x, eQ, q, rmodq, r2modq);
+;	main.c:232: montModExp(0x01, x, eQ, q, rmodq, r2modq);
 	mov	_montModExp_PARM_2,_crtModExp_PARM_2
 	mov	_montModExp_PARM_3,_crtModExp_PARM_4
 	mov	(_montModExp_PARM_3 + 1),(_crtModExp_PARM_4 + 1)
@@ -4671,39 +4687,39 @@ _crtModExp:
 	mov	_montModExp_PARM_6,_crtModExp_PARM_10
 	mov	dpl,#0x01
 	lcall	_montModExp
-;	main.c:213: _displayResult();
+;	main.c:233: _displayResult();
 	lcall	__displayResult
-;	main.c:217: mpSubtract_Single(0x02, 0x00, true);
+;	main.c:237: mpSubtract_Single(0x02, 0x00, true);
 	mov	_mpSubtract_Single_PARM_2,#0x00
 	setb	_mpSubtract_Single_PARM_3
 	mov	dpl,#0x02
 	lcall	_mpSubtract_Single
-;	main.c:224: montMultiply_Both(0x03, 0x01, 0x1A, false);
+;	main.c:244: montMultiply_Both(0x03, 0x01, 0x1A, false);
 	mov	_montMultiply_Both_PARM_2,#0x01
 	mov	_montMultiply_Both_PARM_3,#0x1A
 	clr	_montMultiply_Both_PARM_4
 	mov	dpl,#0x03
 	lcall	_montMultiply_Both
-;	main.c:226: montMultiply_Single(0x03, r2modm, false);
+;	main.c:246: montMultiply_Single(0x03, r2modm, false);
 	mov	_montMultiply_Single_PARM_2,_crtModExp_PARM_12
 	clr	_montMultiply_Single_PARM_3
 	mov	dpl,#0x03
 	lcall	_montMultiply_Single
-;	main.c:230: _writeModulus(m);
+;	main.c:250: _writeModulus(m);
 	mov	dpl,_crtModExp_PARM_11
 	lcall	__writeModulus
-;	main.c:233: montMultiply_Single(0x03, p, false);
+;	main.c:253: montMultiply_Single(0x03, p, false);
 	mov	_montMultiply_Single_PARM_2,_crtModExp_PARM_5
 	clr	_montMultiply_Single_PARM_3
 	mov	dpl,#0x03
 	lcall	_montMultiply_Single
-;	main.c:235: montMultiply_Single(0x03, r2modm, false);
+;	main.c:255: montMultiply_Single(0x03, r2modm, false);
 	mov	_montMultiply_Single_PARM_2,_crtModExp_PARM_12
 	clr	_montMultiply_Single_PARM_3
 	mov	dpl,#0x03
 	lcall	_montMultiply_Single
 	pop	ar2
-;	main.c:237: mpAdd_Single(r, 0x00, true);
+;	main.c:257: mpAdd_Single(r, 0x00, true);
 	mov	_mpAdd_Single_PARM_2,#0x00
 	setb	_mpAdd_Single_PARM_3
 	mov	dpl,r2
@@ -4712,28 +4728,28 @@ _crtModExp:
 ;Allocation info for local variables in function '_displayCycles'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:241: void _displayCycles() {
+;	main.c:261: void _displayCycles() {
 ;	-----------------------------------------
 ;	 function _displayCycles
 ;	-----------------------------------------
 __displayCycles:
-;	main.c:242: P0 = INS_DISPLAY_CYCLES;
+;	main.c:262: P0 = INS_DISPLAY_CYCLES;
 	mov	_P0,#0x01
-;	main.c:243: P0 = INS_IDLE;
+;	main.c:263: P0 = INS_IDLE;
 	mov	_P0,#0x00
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function '_displayResult'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:246: void _displayResult() {
+;	main.c:266: void _displayResult() {
 ;	-----------------------------------------
 ;	 function _displayResult
 ;	-----------------------------------------
 __displayResult:
-;	main.c:247: P0 = INS_DISPLAY_RESULT;
+;	main.c:267: P0 = INS_DISPLAY_RESULT;
 	mov	_P0,#0x02
-;	main.c:248: P0 = INS_IDLE;
+;	main.c:268: P0 = INS_IDLE;
 	mov	_P0,#0x00
 	ret
 ;------------------------------------------------------------
@@ -4741,31 +4757,31 @@ __displayResult:
 ;------------------------------------------------------------
 ;address                   Allocated to registers r2 
 ;------------------------------------------------------------
-;	main.c:251: void _writeModulus(unsigned char address) {
+;	main.c:271: void _writeModulus(unsigned char address) {
 ;	-----------------------------------------
 ;	 function _writeModulus
 ;	-----------------------------------------
 __writeModulus:
 	mov	r2,dpl
-;	main.c:252: while (P2 == 2) {}
+;	main.c:272: while (P2 == 2) {}
 00101$:
 	mov	a,#0x02
 	cjne	a,_P2,00113$
 	sjmp	00101$
 00113$:
-;	main.c:254: P2 = 0;
+;	main.c:274: P2 = 0;
 	mov	_P2,#0x00
-;	main.c:255: P1 = address;
+;	main.c:275: P1 = address;
 	mov	_P1,r2
-;	main.c:257: P0 = INS_WRITE_MODULUS;
+;	main.c:277: P0 = INS_WRITE_MODULUS;
 	mov	_P0,#0x10
-;	main.c:258: P0 = INS_IDLE;
+;	main.c:278: P0 = INS_IDLE;
 	mov	_P0,#0x00
-;	main.c:260: while (P2 == 0) {}
+;	main.c:280: while (P2 == 0) {}
 00104$:
 	mov	a,_P2
 	jz	00104$
-;	main.c:261: P0 = INS_ACK;
+;	main.c:281: P0 = INS_ACK;
 	mov	_P0,#0x0F
 	ret
 ;------------------------------------------------------------
@@ -4773,63 +4789,11 @@ __writeModulus:
 ;------------------------------------------------------------
 ;address                   Allocated to registers r2 
 ;------------------------------------------------------------
-;	main.c:264: void _writeA_Mem(unsigned char address) {
+;	main.c:284: void _writeA_Mem(unsigned char address) {
 ;	-----------------------------------------
 ;	 function _writeA_Mem
 ;	-----------------------------------------
 __writeA_Mem:
-	mov	r2,dpl
-;	main.c:265: while (P2 == 2) {}
-00101$:
-	mov	a,#0x02
-	cjne	a,_P2,00113$
-	sjmp	00101$
-00113$:
-;	main.c:267: P2 = 0;
-	mov	_P2,#0x00
-;	main.c:268: P1 = address;
-	mov	_P1,r2
-;	main.c:270: P0 = INS_WRITE_A_MEM;
-	mov	_P0,#0x11
-;	main.c:271: P0 = INS_IDLE;
-	mov	_P0,#0x00
-;	main.c:273: while (P2 == 0) {}
-00104$:
-	mov	a,_P2
-	jz	00104$
-;	main.c:274: P0 = INS_ACK;
-	mov	_P0,#0x0F
-	ret
-;------------------------------------------------------------
-;Allocation info for local variables in function '_writeA_Reg'
-;------------------------------------------------------------
-;------------------------------------------------------------
-;	main.c:277: void _writeA_Reg() {
-;	-----------------------------------------
-;	 function _writeA_Reg
-;	-----------------------------------------
-__writeA_Reg:
-;	main.c:278: while (P2 == 2) {}
-00101$:
-	mov	a,#0x02
-	cjne	a,_P2,00108$
-	sjmp	00101$
-00108$:
-;	main.c:280: P0 = INS_WRITE_A_REG;
-	mov	_P0,#0x12
-;	main.c:281: P0 = INS_IDLE;
-	mov	_P0,#0x00
-	ret
-;------------------------------------------------------------
-;Allocation info for local variables in function '_writeB_Mem'
-;------------------------------------------------------------
-;address                   Allocated to registers r2 
-;------------------------------------------------------------
-;	main.c:284: void _writeB_Mem(unsigned char address) {
-;	-----------------------------------------
-;	 function _writeB_Mem
-;	-----------------------------------------
-__writeB_Mem:
 	mov	r2,dpl
 ;	main.c:285: while (P2 == 2) {}
 00101$:
@@ -4841,8 +4805,8 @@ __writeB_Mem:
 	mov	_P2,#0x00
 ;	main.c:288: P1 = address;
 	mov	_P1,r2
-;	main.c:290: P0 = INS_WRITE_B_MEM;
-	mov	_P0,#0x13
+;	main.c:290: P0 = INS_WRITE_A_MEM;
+	mov	_P0,#0x11
 ;	main.c:291: P0 = INS_IDLE;
 	mov	_P0,#0x00
 ;	main.c:293: while (P2 == 0) {}
@@ -4853,35 +4817,35 @@ __writeB_Mem:
 	mov	_P0,#0x0F
 	ret
 ;------------------------------------------------------------
-;Allocation info for local variables in function '_writeB_Reg'
+;Allocation info for local variables in function '_writeA_Reg'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:297: void _writeB_Reg() {
+;	main.c:297: void _writeA_Reg() {
 ;	-----------------------------------------
-;	 function _writeB_Reg
+;	 function _writeA_Reg
 ;	-----------------------------------------
-__writeB_Reg:
+__writeA_Reg:
 ;	main.c:298: while (P2 == 2) {}
 00101$:
 	mov	a,#0x02
 	cjne	a,_P2,00108$
 	sjmp	00101$
 00108$:
-;	main.c:300: P0 = INS_WRITE_B_REG;
-	mov	_P0,#0x14
+;	main.c:300: P0 = INS_WRITE_A_REG;
+	mov	_P0,#0x12
 ;	main.c:301: P0 = INS_IDLE;
 	mov	_P0,#0x00
 	ret
 ;------------------------------------------------------------
-;Allocation info for local variables in function '_writeResult'
+;Allocation info for local variables in function '_writeB_Mem'
 ;------------------------------------------------------------
 ;address                   Allocated to registers r2 
 ;------------------------------------------------------------
-;	main.c:304: void _writeResult(unsigned char address) {
+;	main.c:304: void _writeB_Mem(unsigned char address) {
 ;	-----------------------------------------
-;	 function _writeResult
+;	 function _writeB_Mem
 ;	-----------------------------------------
-__writeResult:
+__writeB_Mem:
 	mov	r2,dpl
 ;	main.c:305: while (P2 == 2) {}
 00101$:
@@ -4893,8 +4857,8 @@ __writeResult:
 	mov	_P2,#0x00
 ;	main.c:308: P1 = address;
 	mov	_P1,r2
-;	main.c:310: P0 = INS_WRITE_RESULT;
-	mov	_P0,#0x15
+;	main.c:310: P0 = INS_WRITE_B_MEM;
+	mov	_P0,#0x13
 ;	main.c:311: P0 = INS_IDLE;
 	mov	_P0,#0x00
 ;	main.c:313: while (P2 == 0) {}
@@ -4905,95 +4869,147 @@ __writeResult:
 	mov	_P0,#0x0F
 	ret
 ;------------------------------------------------------------
-;Allocation info for local variables in function '_readResult'
+;Allocation info for local variables in function '_writeB_Reg'
+;------------------------------------------------------------
+;------------------------------------------------------------
+;	main.c:317: void _writeB_Reg() {
+;	-----------------------------------------
+;	 function _writeB_Reg
+;	-----------------------------------------
+__writeB_Reg:
+;	main.c:318: while (P2 == 2) {}
+00101$:
+	mov	a,#0x02
+	cjne	a,_P2,00108$
+	sjmp	00101$
+00108$:
+;	main.c:320: P0 = INS_WRITE_B_REG;
+	mov	_P0,#0x14
+;	main.c:321: P0 = INS_IDLE;
+	mov	_P0,#0x00
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function '_writeResult'
 ;------------------------------------------------------------
 ;address                   Allocated to registers r2 
 ;------------------------------------------------------------
-;	main.c:317: void _readResult(unsigned char address) {
+;	main.c:324: void _writeResult(unsigned char address) {
 ;	-----------------------------------------
-;	 function _readResult
+;	 function _writeResult
 ;	-----------------------------------------
-__readResult:
+__writeResult:
 	mov	r2,dpl
-;	main.c:318: while (P2 == 2) {}
+;	main.c:325: while (P2 == 2) {}
 00101$:
 	mov	a,#0x02
 	cjne	a,_P2,00113$
 	sjmp	00101$
 00113$:
-;	main.c:320: P2 = 0;
+;	main.c:327: P2 = 0;
 	mov	_P2,#0x00
-;	main.c:321: P1 = address;
+;	main.c:328: P1 = address;
 	mov	_P1,r2
-;	main.c:323: P0 = INS_READ_RESULT;
-	mov	_P0,#0x16
-;	main.c:324: P0 = INS_IDLE;
+;	main.c:330: P0 = INS_WRITE_RESULT;
+	mov	_P0,#0x15
+;	main.c:331: P0 = INS_IDLE;
 	mov	_P0,#0x00
-;	main.c:326: while (P2 == 0) {}
+;	main.c:333: while (P2 == 0) {}
 00104$:
 	mov	a,_P2
 	jz	00104$
-;	main.c:327: P0 = INS_ACK;
+;	main.c:334: P0 = INS_ACK;
+	mov	_P0,#0x0F
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function '_readResult'
+;------------------------------------------------------------
+;address                   Allocated to registers r2 
+;------------------------------------------------------------
+;	main.c:337: void _readResult(unsigned char address) {
+;	-----------------------------------------
+;	 function _readResult
+;	-----------------------------------------
+__readResult:
+	mov	r2,dpl
+;	main.c:338: while (P2 == 2) {}
+00101$:
+	mov	a,#0x02
+	cjne	a,_P2,00113$
+	sjmp	00101$
+00113$:
+;	main.c:340: P2 = 0;
+	mov	_P2,#0x00
+;	main.c:341: P1 = address;
+	mov	_P1,r2
+;	main.c:343: P0 = INS_READ_RESULT;
+	mov	_P0,#0x16
+;	main.c:344: P0 = INS_IDLE;
+	mov	_P0,#0x00
+;	main.c:346: while (P2 == 0) {}
+00104$:
+	mov	a,_P2
+	jz	00104$
+;	main.c:347: P0 = INS_ACK;
 	mov	_P0,#0x0F
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function '_mul_montgomery'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:330: void _mul_montgomery() {
+;	main.c:350: void _mul_montgomery() {
 ;	-----------------------------------------
 ;	 function _mul_montgomery
 ;	-----------------------------------------
 __mul_montgomery:
-;	main.c:331: P2 = 0;
+;	main.c:351: P2 = 0;
 	mov	_P2,#0x00
-;	main.c:333: P0 = INS_MUL_MONTGOMERY;
+;	main.c:353: P0 = INS_MUL_MONTGOMERY;
 	mov	_P0,#0x20
-;	main.c:334: P0 = INS_IDLE;
+;	main.c:354: P0 = INS_IDLE;
 	mov	_P0,#0x00
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function '_adder_add'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:337: void _adder_add() {
+;	main.c:357: void _adder_add() {
 ;	-----------------------------------------
 ;	 function _adder_add
 ;	-----------------------------------------
 __adder_add:
-;	main.c:338: P2 = 0;
+;	main.c:358: P2 = 0;
 	mov	_P2,#0x00
-;	main.c:340: P0 = INS_ADDER_ADD;
+;	main.c:360: P0 = INS_ADDER_ADD;
 	mov	_P0,#0x30
-;	main.c:341: P0 = INS_IDLE;
+;	main.c:361: P0 = INS_IDLE;
 	mov	_P0,#0x00
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function '_adder_subtract'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:344: void _adder_subtract() {
+;	main.c:364: void _adder_subtract() {
 ;	-----------------------------------------
 ;	 function _adder_subtract
 ;	-----------------------------------------
 __adder_subtract:
-;	main.c:345: P2 = 0;
+;	main.c:365: P2 = 0;
 	mov	_P2,#0x00
-;	main.c:347: P0 = INS_ADDER_SUBTRACT;
+;	main.c:367: P0 = INS_ADDER_SUBTRACT;
 	mov	_P0,#0x31
-;	main.c:348: P0 = INS_IDLE;
+;	main.c:368: P0 = INS_IDLE;
 	mov	_P0,#0x00
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function '_terminate'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:351: void _terminate() {
+;	main.c:371: void _terminate() {
 ;	-----------------------------------------
 ;	 function _terminate
 ;	-----------------------------------------
 __terminate:
-;	main.c:352: P3 = 0x55;
+;	main.c:372: P3 = 0x55;
 	mov	_P3,#0x55
 	ret
 	.area CSEG    (CODE)

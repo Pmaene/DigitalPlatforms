@@ -266,28 +266,28 @@ Symbol Table
     _TR1                                                        =  008E G
     _TXD                                                        =  00B1 G
     _WR                                                         =  00B6 G
- 25 __adder_add                                                    03A7 GR
- 25 __adder_subtract                                               03B1 GR
- 25 __displayCycles                                                02E7 GR
- 25 __displayResult                                                02EE GR
+ 25 __adder_add                                                    03B8 GR
+ 25 __adder_subtract                                               03C2 GR
+ 25 __displayCycles                                                02F8 GR
+ 25 __displayResult                                                02FF GR
     __gptrget                                                      **** GX
  1C __interrupt_vect                                               0000 R
     __mcs51_genRAMCLEAR                                            **** GX
     __mcs51_genXINIT                                               **** GX
     __mcs51_genXRAMCLEAR                                           **** GX
- 25 __mul_montgomery                                               039D GR
- 25 __readResult                                                   0381 GR
+ 25 __mul_montgomery                                               03AE GR
+ 25 __readResult                                                   0392 GR
     __sdcc_gsinit_startup                                          **** GX
  1C __sdcc_program_startup                                         0003 GR
   5 __start__stack                                                 0000 GR
- 25 __terminate                                                    03BB GR
- 25 __writeA_Mem                                                   0311 GR
- 25 __writeA_Reg                                                   032D GR
- 25 __writeB_Mem                                                   033B GR
- 25 __writeB_Reg                                                   0357 GR
- 25 __writeModulus                                                 02F5 GR
- 25 __writeResult                                                  0365 GR
- 25 _crtModExp                                                     025B GR
+ 25 __terminate                                                    03CC GR
+ 25 __writeA_Mem                                                   0322 GR
+ 25 __writeA_Reg                                                   033E GR
+ 25 __writeB_Mem                                                   034C GR
+ 25 __writeB_Reg                                                   0368 GR
+ 25 __writeModulus                                                 0306 GR
+ 25 __writeResult                                                  0376 GR
+ 25 _crtModExp                                                     026C GR
   3 _crtModExp_PARM_10                                             001C GR
   3 _crtModExp_PARM_11                                             001D GR
   3 _crtModExp_PARM_12                                             001E GR
@@ -560,7 +560,7 @@ Area Table
   22 GSINIT5                                                                            size    0   flags 20
   23 GSINIT                                                                             size 1C89   flags 20
   24 GSFINAL                                                                            size    3   flags 20
-  25 CSEG                                                                               size  3BF   flags 20
+  25 CSEG                                                                               size  3D0   flags 20
   26 CONST                                                                              size    0   flags 20
   27 XINIT                                                                              size    0   flags 20
   28 CABS                                                                               size    0   flags 28

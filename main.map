@@ -94,12 +94,12 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:0080    l_XABSe
   0C:00C0    l_SSEG
   0C:0100    l_IRAM
-  0C:03DF    l_CSEG
+  0C:03F0    l_CSEG
   0C:1C89    l_GSINIT
   0C:1CEA    s_GSFINAL
   0C:1CED    s_CSEG
-  0C:20CC    s_CONST
-  0C:20CC    s_XINIT
+  0C:20DD    s_CONST
+  0C:20DD    s_XINIT
 
 Hexadecimal
 
@@ -481,7 +481,7 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CSEG                               1CED   03DF =    991. bytes (REL,CON,CODE)
+CSEG                               1CED   03F0 =   1008. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
@@ -492,22 +492,22 @@ CSEG                               1CED   03DF =    991. bytes (REL,CON,CODE)
   0C:1D81    _montMultiply_Both
   0C:1D9F    _montMultiply_Result
   0C:1DB7    _montModExp
-  0C:1F48    _crtModExp
-  0C:1FD4    __displayCycles
-  0C:1FDB    __displayResult
-  0C:1FE2    __writeModulus
-  0C:1FFE    __writeA_Mem
-  0C:201A    __writeA_Reg
-  0C:2028    __writeB_Mem
-  0C:2044    __writeB_Reg
-  0C:2052    __writeResult
-  0C:206E    __readResult
-  0C:208A    __mul_montgomery
-  0C:2094    __adder_add
-  0C:209E    __adder_subtract
-  0C:20A8    __terminate
-  0C:20AC    __gptrget
-  0C:20C8    __sdcc_external_startup
+  0C:1F59    _crtModExp
+  0C:1FE5    __displayCycles
+  0C:1FEC    __displayResult
+  0C:1FF3    __writeModulus
+  0C:200F    __writeA_Mem
+  0C:202B    __writeA_Reg
+  0C:2039    __writeB_Mem
+  0C:2055    __writeB_Reg
+  0C:2063    __writeResult
+  0C:207F    __readResult
+  0C:209B    __mul_montgomery
+  0C:20A5    __adder_add
+  0C:20AF    __adder_subtract
+  0C:20B9    __terminate
+  0C:20BD    __gptrget
+  0C:20D9    __sdcc_external_startup
 
 
 ASxxxx Linker V01.75 + NoICE + SDCC Feb 1999,  page 1.
