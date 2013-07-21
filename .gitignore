@@ -1,0 +1,12 @@
+# Exclude the custom folder attributes file
+.DS_Store
+
+# Do not version temporary LaTeX files
+.texpadtmp/
+
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.pdf
