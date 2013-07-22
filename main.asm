@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 2.9.0 #5416 (Aug  6 2010) (UNIX)
-; This file was generated Thu Jul 18 16:25:32 2013
+; This file was generated Mon Jul 22 12:27:29 2013
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mmcs51 --model-small
@@ -156,19 +156,6 @@
 	.globl _montMultiply_Result
 	.globl _montModExp
 	.globl _crtModExp
-	.globl __displayCycles
-	.globl __displayResult
-	.globl __writeModulus
-	.globl __writeA_Mem
-	.globl __writeA_Reg
-	.globl __writeB_Mem
-	.globl __writeB_Reg
-	.globl __writeResult
-	.globl __readResult
-	.globl __mul_montgomery
-	.globl __adder_add
-	.globl __adder_subtract
-	.globl __terminate
 ;--------------------------------------------------------
 ; special function registers
 ;--------------------------------------------------------
@@ -4728,7 +4715,7 @@ _crtModExp:
 ;Allocation info for local variables in function '_displayCycles'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:261: void _displayCycles() {
+;	main.c:261: static inline void _displayCycles() {
 ;	-----------------------------------------
 ;	 function _displayCycles
 ;	-----------------------------------------
@@ -4742,7 +4729,7 @@ __displayCycles:
 ;Allocation info for local variables in function '_displayResult'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:266: void _displayResult() {
+;	main.c:266: static inline void _displayResult() {
 ;	-----------------------------------------
 ;	 function _displayResult
 ;	-----------------------------------------
@@ -4757,7 +4744,7 @@ __displayResult:
 ;------------------------------------------------------------
 ;address                   Allocated to registers r2 
 ;------------------------------------------------------------
-;	main.c:271: void _writeModulus(unsigned char address) {
+;	main.c:271: static inline void _writeModulus(unsigned char address) {
 ;	-----------------------------------------
 ;	 function _writeModulus
 ;	-----------------------------------------
@@ -4789,7 +4776,7 @@ __writeModulus:
 ;------------------------------------------------------------
 ;address                   Allocated to registers r2 
 ;------------------------------------------------------------
-;	main.c:284: void _writeA_Mem(unsigned char address) {
+;	main.c:284: static inline void _writeA_Mem(unsigned char address) {
 ;	-----------------------------------------
 ;	 function _writeA_Mem
 ;	-----------------------------------------
@@ -4820,7 +4807,7 @@ __writeA_Mem:
 ;Allocation info for local variables in function '_writeA_Reg'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:297: void _writeA_Reg() {
+;	main.c:297: static inline void _writeA_Reg() {
 ;	-----------------------------------------
 ;	 function _writeA_Reg
 ;	-----------------------------------------
@@ -4841,7 +4828,7 @@ __writeA_Reg:
 ;------------------------------------------------------------
 ;address                   Allocated to registers r2 
 ;------------------------------------------------------------
-;	main.c:304: void _writeB_Mem(unsigned char address) {
+;	main.c:304: static inline void _writeB_Mem(unsigned char address) {
 ;	-----------------------------------------
 ;	 function _writeB_Mem
 ;	-----------------------------------------
@@ -4872,7 +4859,7 @@ __writeB_Mem:
 ;Allocation info for local variables in function '_writeB_Reg'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:317: void _writeB_Reg() {
+;	main.c:317: static inline void _writeB_Reg() {
 ;	-----------------------------------------
 ;	 function _writeB_Reg
 ;	-----------------------------------------
@@ -4893,7 +4880,7 @@ __writeB_Reg:
 ;------------------------------------------------------------
 ;address                   Allocated to registers r2 
 ;------------------------------------------------------------
-;	main.c:324: void _writeResult(unsigned char address) {
+;	main.c:324: static inline void _writeResult(unsigned char address) {
 ;	-----------------------------------------
 ;	 function _writeResult
 ;	-----------------------------------------
@@ -4925,7 +4912,7 @@ __writeResult:
 ;------------------------------------------------------------
 ;address                   Allocated to registers r2 
 ;------------------------------------------------------------
-;	main.c:337: void _readResult(unsigned char address) {
+;	main.c:337: static inline void _readResult(unsigned char address) {
 ;	-----------------------------------------
 ;	 function _readResult
 ;	-----------------------------------------
@@ -4956,7 +4943,7 @@ __readResult:
 ;Allocation info for local variables in function '_mul_montgomery'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:350: void _mul_montgomery() {
+;	main.c:350: static inline void _mul_montgomery() {
 ;	-----------------------------------------
 ;	 function _mul_montgomery
 ;	-----------------------------------------
@@ -4972,7 +4959,7 @@ __mul_montgomery:
 ;Allocation info for local variables in function '_adder_add'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:357: void _adder_add() {
+;	main.c:357: static inline void _adder_add() {
 ;	-----------------------------------------
 ;	 function _adder_add
 ;	-----------------------------------------
@@ -4988,7 +4975,7 @@ __adder_add:
 ;Allocation info for local variables in function '_adder_subtract'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:364: void _adder_subtract() {
+;	main.c:364: static inline void _adder_subtract() {
 ;	-----------------------------------------
 ;	 function _adder_subtract
 ;	-----------------------------------------
@@ -5004,7 +4991,7 @@ __adder_subtract:
 ;Allocation info for local variables in function '_terminate'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:371: void _terminate() {
+;	main.c:371: static inline void _terminate() {
 ;	-----------------------------------------
 ;	 function _terminate
 ;	-----------------------------------------

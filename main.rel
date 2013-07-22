@@ -1,5 +1,5 @@
 XH
-H 29 areas A7 global symbols
+H 29 areas 9A global symbols
 M main
 O -mmcs51 --model-small
 S _P1 Def0090
@@ -187,25 +187,12 @@ A GSINIT size 1C89 flags 20 addr 0
 A GSFINAL size 3 flags 20 addr 0
 A CSEG size 3D0 flags 20 addr 0
 S _main Def0000
-S __adder_subtract Def03C2
 S _mpSubtract_Single Def005E
-S __adder_add Def03B8
 S _mpAdd_Single Def0043
-S __terminate Def03CC
-S __writeResult Def0376
-S __displayResult Def02FF
 S _montMultiply_Result Def00B2
-S __writeA_Reg Def033E
-S __writeB_Reg Def0368
-S __writeA_Mem Def0322
-S __writeB_Mem Def034C
 S _montMultiply_Both Def0094
 S _montModExp Def00CA
-S __writeModulus Def0306
 S _crtModExp Def026C
-S __displayCycles Def02F8
-S __readResult Def0392
-S __mul_montgomery Def03AE
 S _montMultiply_Single Def0079
 A CONST size 0 flags 20 addr 0
 A XINIT size 0 flags 20 addr 0

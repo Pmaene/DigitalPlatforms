@@ -58,22 +58,22 @@ void crtModExp(
 );
 
 // Private Function API
-void _displayCycles();
-void _displayResult();
+static inline void _displayCycles();
+static inline void _displayResult();
 
-void _writeModulus(unsigned char address);
-void _writeA_Mem(unsigned char address);
-void _writeA_Reg();
-void _writeB_Mem(unsigned char address);
-void _writeB_Reg();
-void _writeResult(unsigned char address);
-void _readResult(unsigned char address);
+static inline void _writeModulus(unsigned char address);
+static inline void _writeA_Mem(unsigned char address);
+static inline void _writeA_Reg();
+static inline void _writeB_Mem(unsigned char address);
+static inline void _writeB_Reg();
+static inline void _writeResult(unsigned char address);
+static inline void _readResult(unsigned char address);
 
-void _mul_montgomery();
-void _adder_add();
-void _adder_subtract();
+static inline void _mul_montgomery();
+static inline void _adder_add();
+static inline void _adder_subtract();
 
-void _terminate();
+static inline void _terminate();
 
 // Public Functions
 int main() {
@@ -258,17 +258,17 @@ void crtModExp(
 }
 
 // Private Functions
-void _displayCycles() {
+static inline void _displayCycles() {
     P0 = INS_DISPLAY_CYCLES;
     P0 = INS_IDLE;
 }
 
-void _displayResult() {
+static inline void _displayResult() {
     P0 = INS_DISPLAY_RESULT;
     P0 = INS_IDLE;
 }
 
-void _writeModulus(unsigned char address) {
+static inline void _writeModulus(unsigned char address) {
     while (P2 == 2) {}
 
     P2 = 0;
@@ -281,7 +281,7 @@ void _writeModulus(unsigned char address) {
     P0 = INS_ACK;
 }
 
-void _writeA_Mem(unsigned char address) {
+static inline void _writeA_Mem(unsigned char address) {
     while (P2 == 2) {}
 
     P2 = 0;
@@ -294,14 +294,14 @@ void _writeA_Mem(unsigned char address) {
     P0 = INS_ACK;
 }
 
-void _writeA_Reg() {
+static inline void _writeA_Reg() {
     while (P2 == 2) {}
 
     P0 = INS_WRITE_A_REG;
     P0 = INS_IDLE;
 }
 
-void _writeB_Mem(unsigned char address) {
+static inline void _writeB_Mem(unsigned char address) {
     while (P2 == 2) {}
 
     P2 = 0;
@@ -314,14 +314,14 @@ void _writeB_Mem(unsigned char address) {
     P0 = INS_ACK;
 }
 
-void _writeB_Reg() {
+static inline void _writeB_Reg() {
     while (P2 == 2) {}
 
     P0 = INS_WRITE_B_REG;
     P0 = INS_IDLE;
 }
 
-void _writeResult(unsigned char address) {
+static inline void _writeResult(unsigned char address) {
     while (P2 == 2) {}
 
     P2 = 0;
@@ -334,7 +334,7 @@ void _writeResult(unsigned char address) {
     P0 = INS_ACK;
 }
 
-void _readResult(unsigned char address) {
+static inline void _readResult(unsigned char address) {
     while (P2 == 2) {}
 
     P2 = 0;
@@ -347,27 +347,27 @@ void _readResult(unsigned char address) {
     P0 = INS_ACK;
 }
 
-void _mul_montgomery() {
+static inline void _mul_montgomery() {
     P2 = 0;
 
     P0 = INS_MUL_MONTGOMERY;
     P0 = INS_IDLE;
 }
 
-void _adder_add() {
+static inline void _adder_add() {
     P2 = 0;
 
     P0 = INS_ADDER_ADD;
     P0 = INS_IDLE;
 }
 
-void _adder_subtract() {
+static inline void _adder_subtract() {
     P2 = 0;
 
     P0 = INS_ADDER_SUBTRACT;
     P0 = INS_IDLE;
 }
 
-void _terminate() {
+static inline void _terminate() {
     P3 = 0x55;
 }

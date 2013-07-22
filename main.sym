@@ -266,27 +266,27 @@ Symbol Table
     _TR1                                                        =  008E G
     _TXD                                                        =  00B1 G
     _WR                                                         =  00B6 G
- 25 __adder_add                                                    03B8 GR
- 25 __adder_subtract                                               03C2 GR
- 25 __displayCycles                                                02F8 GR
- 25 __displayResult                                                02FF GR
+ 25 __adder_add                                                    03B8 R
+ 25 __adder_subtract                                               03C2 R
+ 25 __displayCycles                                                02F8 R
+ 25 __displayResult                                                02FF R
     __gptrget                                                      **** GX
  1C __interrupt_vect                                               0000 R
     __mcs51_genRAMCLEAR                                            **** GX
     __mcs51_genXINIT                                               **** GX
     __mcs51_genXRAMCLEAR                                           **** GX
- 25 __mul_montgomery                                               03AE GR
- 25 __readResult                                                   0392 GR
+ 25 __mul_montgomery                                               03AE R
+ 25 __readResult                                                   0392 R
     __sdcc_gsinit_startup                                          **** GX
  1C __sdcc_program_startup                                         0003 GR
   5 __start__stack                                                 0000 GR
- 25 __terminate                                                    03CC GR
- 25 __writeA_Mem                                                   0322 GR
- 25 __writeA_Reg                                                   033E GR
- 25 __writeB_Mem                                                   034C GR
- 25 __writeB_Reg                                                   0368 GR
- 25 __writeModulus                                                 0306 GR
- 25 __writeResult                                                  0376 GR
+ 25 __terminate                                                    03CC R
+ 25 __writeA_Mem                                                   0322 R
+ 25 __writeA_Reg                                                   033E R
+ 25 __writeB_Mem                                                   034C R
+ 25 __writeB_Reg                                                   0368 R
+ 25 __writeModulus                                                 0306 R
+ 25 __writeResult                                                  0376 R
  25 _crtModExp                                                     026C GR
   3 _crtModExp_PARM_10                                             001C GR
   3 _crtModExp_PARM_11                                             001D GR
