@@ -202,8 +202,10 @@ To debug the C code syntactically, we can rely on the compiler. However, the GEZ
 
 To make this process a bit easier, two instructions were added: one to report the nummer of cycles and the other to display the contents of the result register. By sending these instructions to the coprocessor, we can view both at any given moment. Aside from our dedicated instructions, the \textit{\$display} statement in GEZEL also came in handy to display the contents of registers other than the result register. By issuing the display cycles instruction around blocks of code, the design could be profiled. It also allowed me to verify the effect of a given optimisation.
 
-\section{Further Optimizations}
+\section{Further Optimisations}
 
+The current implementation is relatively fast, but we still could do better. Especially the decryption process takes a long time and speeding it up would be good. In a smartcard RSA is usually used to create a digital signature. A message is signed with the private key (our decryption process) and that signature is verified with the public key. So it makes sense to spend a bit more time optimising the decryption, as it will be used often.\\
 
+From the course \textit{Cryptography and Network Security} and from having implemented RSA for the \textit{P\&D Multimedia} I know that by applying the Chinese Remainder Theorem to its modular exponentiation, the decryption can be sped up considerably. The modulus $m$ is actually the product of two primes $p$ and $q$. The CRT takes advantage of this and calculates two exponentiations with shorter exponents (see Handbook of Applied Cryptography, Chapter 14, Algorithm 14.71). Their results are then recombined to form $x^e\mod{m}$.
 
 \end{document}
