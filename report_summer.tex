@@ -8,7 +8,6 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{listings}
-\usepackage{SIunits}
 
 \marginsize{2.5cm}{2.5cm}{1.5cm}{1.5cm}
 \setlength{\parindent}{0pt}
@@ -51,14 +50,14 @@ The design we built for the winter evaluation had the performance metrics listed
 			\textbf{Slices} & 16153 (63\%)\\
 			\textbf{Slice FFs} & 12370 (24\%)\\
 			\textbf{4 Input LUTs} & 30723 (60\%)\\
-			\textbf{Maximum Frequency} & 11.679 \mega\hertz
+			\textbf{Maximum Frequency} & 11.679 MHz
 		\end{tabular}
 	\end{center}
 	\caption{Synthesis Results --- Winter}
 	\label{tab:synthesis_results_winter}
 \end{table}
 
-Analysing this data, we can see the design had some serious drawbacks. First, the design was simply too large. It used 63\% of the available slices on the selected FPGA and needed 12 large registers. This resulted from the fact that we used several data paths (one for the decoder, a second for the exponentiation and a third for the Montgomery multiplication), each with its own registers, instead of integrating them. Secondly, because we didn't optimise the critical path, the clock frequency was limited to 11.679 \mega\hertz. This meant that despite the relatively low number of clock cycles, the execution time was not optimal. Finally, implementing the exponentiation algorithm completely in hardwire made optimisations (and particularly algorithmic optimisations) a lot harder.
+Analysing this data, we can see the design had some serious drawbacks. First, the design was simply too large. It used 63\% of the available slices on the selected FPGA and needed 12 large registers. This resulted from the fact that we used several data paths (one for the decoder, a second for the exponentiation and a third for the Montgomery multiplication), each with its own registers, instead of integrating them. Secondly, because we didn't optimise the critical path, the clock frequency was limited to 11.679 MHz. This meant that despite the relatively low number of clock cycles, the execution time was not optimal. Finally, implementing the exponentiation algorithm completely in hardwire made optimisations (and particularly algorithmic optimisations) a lot harder.
 
 \begin{figure}[H]
 	\center{\includegraphics[width=0.5\linewidth]{situation_winter.png}}
@@ -94,7 +93,7 @@ The upper byte of a 2-byte address is sent to the coprocessor on port $P1$. From
 
 \subsection{Clock Cycles}
 
-The base release was built using the decoder and montgomery multiplier that was built in the winter, but with the exponentiation algorithm itself programmed in software. Because our hardware design had been very modular, it was fairly easy to take the parts I needed and build the initial version of the new coprocessor. As we can see from Table~\ref{tab:clock_cycles}, this resulted in a very slow implementation, taking more than half a billion cycles. The main reason for this was that I was still using the four shared memory locations for the multiplication factors, the modulus and the result. Because of this, data had to be copied to and from these locations by the microprocessor, which is very slow.\\
+The base release was built using the decoder and montgomery multiplier that was built in the winter, but with the exponentiation algorithm itself programmed in software. Because our hardware design had been very modular, it was fairly easy to take the parts I needed and build the initial version of the new coprocessor. As we can see from Table~\ref{tab:clock_cycles_total}, this resulted in a very slow implementation, taking more than half a billion cycles. The main reason for this was that I was still using the four shared memory locations for the multiplication factors, the modulus and the result. Because of this, data had to be copied to and from these locations by the microprocessor, which is very slow.\\
 
 \begin{table}[H]
     \begin{center}	
@@ -136,13 +135,13 @@ Next, I noticed that a lot of cycles were lost between the coprocessor finishing
 	\label{tab:clock_cycles_encryption_and_decryption}
 \end{table}
 
-Finally, some small code optimisations were made. The function calls to \textit{montMultiply\_Single}, \textit{montMultiply\_Both} and \textit{MontMultiply\_Result} in \textit{montModExp} were manually inlined. The functions encapsulating the hardware calls were specified to be \textit{static inline} so that the compiler would inline them. The first iteration of the exponentiation could be extracted because $\text{Mont}(R\mod{m}, R\mod{m}) = R\mod{m}$.\\
+Finally, some small code optimisations were made. The function calls to \textit{montMultiply\_Single}, \textit{montMultiply\_Both} and \textit{MontMultiply\_Result} in \textit{montModExp} were manually inlined. The functions encapsulating the hardware calls were specified to be \textit{static inline} so that the compiler would inline them. The first iteration of the exponentiation could be extracted because $\text{Mont}(R\mod{m}, R\mod{m}) = R\mod{m}$. To use this, I created an instruction to write directly to the result register.\\
 
-Comparing the results from Table~\ref{tab:performance_metrics_winter} and Table~\ref{tab:clock_cycles_encryption_and_decryption} we can see that although the encryption is about 25000 in the new design, the decryption is almost 450000 cycles faster. To have at least the same cycle count was one of the goals for the new design (see Paragraph~\ref{sec:overall_architecture}).
+Comparing the results from Table~\ref{tab:performance_metrics_winter} and Table~\ref{tab:clock_cycles_encryption_and_decryption} we can see that although the encryption is about 25000 in the new design, the decryption is almost 450000 cycles faster. To have at least the same cycle count was one of the goals for the new design (see Paragraph~\ref{sec:overall_architecture}). Note that the initialisation overhead remained constant at 48132 cycles and was subtracted from the cycle counts in Table~\ref{tab:clock_cycles_encryption_and_decryption}).
 
 \subsection{Time}
 
-As we will see in Paragraph~\ref{sec:synthesis_results} the clock frequency was initially 11.524 \mega\hertz. This resulted in an execution time of 50.02 seconds to initialise the processor, encrypt the message and decrypt it. After optimisations, the final clock frequency is 25.076 \mega\hertz\ and the final execution time is reduced to 0.109 seconds. This is a lot less than the 0.273 seconds for the winter design.
+As we will see in Paragraph~\ref{sec:synthesis_results} the clock frequency was initially 11.524 MHz. This resulted in an execution time of 50.02 seconds to initialise the processor, encrypt the message and decrypt it. After optimisations, the final clock frequency is 25.076 MHz and the final execution time is reduced to 0.109 seconds. This is a lot less than the 0.273 seconds for the winter design.
 
 \subsection{Area}
 
@@ -166,7 +165,7 @@ The initial design needed six large registers because the separate multiplicatio
 
 Synthesising the generated VHDL code was relatively straightforward in Xilinx. The only error encountered was that the process failed when the instruction register was compared to a hexadecimal numbers in the FSM. This was fixed by changing them to their decimal form.\\
 
-From Table~\ref{tab:synthesis_results} we can see that the clock frequency of the base design was even slower than that of the winter design. After the integration of the multiplication data path, the clock frequency increased a bit to 13.141 \mega\hertz. However, analyses of the critical path revealed that we could do better. At the end of the Montgomery multiplication there is an overflow check which will add the modulus when needed.\\
+From Table~\ref{tab:synthesis_results} we can see that the clock frequency of the base design was even slower than that of the winter design. After the integration of the multiplication data path, the clock frequency increased a bit to 13.141 MHz. However, analyses of the critical path revealed that we could do better. At the end of the Montgomery multiplication there is an overflow check which will add the modulus when needed.\\
 
 As we can see from the following code fragment, where y\_sig is the second term that is passed to the adder data path, there is both a comparator and an adder in the critical path. This is the main reason that the frequency of our coprocessor is so low.
 
@@ -183,7 +182,7 @@ We can solve this problem by moving the comparison and addition to separate cycl
 \begin{table}[H]
 	\begin{center}	
 		\begin{tabular}{l|r|r|r|r}
-			& \textbf{Slices} & \textbf{Slice FFs} & \textbf{4 Input LUTs} & \textbf{Frequency} (\mega\hertz)\\\hline
+			& \textbf{Slices} & \textbf{Slice FFs} & \textbf{4 Input LUTs} & \textbf{Frequency} (MHz)\\\hline
         		\textbf{Base} & 13891 (54\%) & 6219 (12\%) & 26485 (52\%) & 11.524\\
              \textbf{No Montgomery DP} & 8304 (32\%) & 4138 (8\%) & 15774 (31\%) & 13.141\\
              \textbf{Critical Path} & 8116 (32\%) & 4145 (8\%) & 15336 (30\%) & 25.076
@@ -204,8 +203,12 @@ To make this process a bit easier, two instructions were added: one to report th
 
 \section{Further Optimisations}
 
-The current implementation is relatively fast, but we still could do better. Especially the decryption process takes a long time and speeding it up would be good. In a smartcard RSA is usually used to create a digital signature. A message is signed with the private key (our decryption process) and that signature is verified with the public key. So it makes sense to spend a bit more time optimising the decryption, as it will be used often.\\
+The current implementation is relatively fast, but we still could do better. Especially the decryption process takes a long time and speeding it up would be good. In a smart card RSA is usually used to create a digital signature. A message is signed with the private key (our decryption process) and that signature is verified with the public key. So it makes sense to spend a bit more time optimising the decryption, as it will be used often.\\
 
-From the course \textit{Cryptography and Network Security} and from having implemented RSA for the \textit{P\&D Multimedia} I know that by applying the Chinese Remainder Theorem to its modular exponentiation, the decryption can be sped up considerably. The modulus $m$ is actually the product of two primes $p$ and $q$. The CRT takes advantage of this and calculates two exponentiations with shorter exponents (see Handbook of Applied Cryptography, Chapter 14, Algorithm 14.71). Their results are then recombined to form $x^e\mod{m}$.
+From the course \textit{Cryptography and Network Security} and from having implemented RSA for the \textit{P\&D Multimedia} I know that by applying the \textit{Chinese Remainder Theorem} the decryption can be sped up considerably. The modulus $m$ is actually the product of two primes $p$ and $q$. The CRT takes advantage of this and calculates two exponentiations with shorter exponents (see Handbook of Applied Cryptography, Chapter 14, Algorithm 14.71). Their results are then recombined to form $x^e\mod{m}$. Because the encryption exponent already is short, would not make a lot of difference there.\\
+
+Aside from reducing the exponent's size, the CRT has another advantage. The two exponentiations do not have any control or data dependencies which means that we can easily parallelise them. The multiplier (and all corresponding registers) would have to be duplicated, increasing the size. Furthermore, the decoder hardware and our software would become more complex as they would have to support the two multipliers being used simultaneously preferably with their instructions being issued asynchronously.\\
+
+I started implementing the CRT for the decryption. All required constants had been calculated and the software functions had been written. For the multiplications in the recombination, I decided to use the hardware multiplier with long modulus $m$, followed by a multiplication of the result with $R^2\mod{m}$. This is possible because we are calculating $x^e\mod{m}$ so the result will be smaller than $m$. Additionally, instructions for addition and subtraction were also introduced because the hardware was already available. However, I ran into some problems where the smaller exponentiations did not give the expected result.
 
 \end{document}
