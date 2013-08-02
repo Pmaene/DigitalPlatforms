@@ -1,11 +1,8 @@
-# Do not version MCU8051IDE project files
+# MCU8051IDE
 *.mcu8051ide
 
-# We do not want temporary editor files
+# Gedit
 *~
-
-# OS X is not nice
-.DS_Store
 
 # Do not version temporary LaTeX files
 .texpadtmp/
