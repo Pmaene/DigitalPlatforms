@@ -1,9 +1,2 @@
-# Do not version SublimeText's configuration and workspace
-*.sublime-project
-*.sublime-workspace
-
-# Exclude the custom folder attributes file
-.DS_Store
-
 # Do not version compiled files and make folders
 main
