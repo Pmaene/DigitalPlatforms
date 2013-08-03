@@ -109,20 +109,6 @@ dp main_dp(in instruction, address, data_in : ns(8); out full_address : ns(16); 
         r_reg = 0;
     }
 
-    sfg add {
-        x_sig = a_reg;
-        y_sig = b_reg;
-        subtract_sig = 0;
-        r_reg = s_sig;
-    }
-
-    sfg subtract {
-        x_sig = a_reg;
-        y_sig = b_reg;
-        subtract_sig = 1;
-        r_reg = s_sig;
-    }
-
     sfg reset_counter {
         counter_reg = 0;
     }
@@ -246,11 +232,6 @@ fsm main(main_dp) {
 
                     else if (instruction_reg == 32) then
                         (reset_counter, reset_r, no_adder, mont_not_done, no_write, no_address, decode) -> mont_do;
-
-                    else if (instruction_reg == 48) then
-                        (add, not_idling, no_write, no_address, decode) -> do;
-                    else if (instruction_reg == 49) then
-                        (subtract, not_idling, no_write, no_address, decode) -> do;
 
                     else
                         (no_adder, not_idling, no_write, no_address, decode) -> do;

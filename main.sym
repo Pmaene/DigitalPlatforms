@@ -266,82 +266,44 @@ Symbol Table
     _TR1                                                        =  008E G
     _TXD                                                        =  00B1 G
     _WR                                                         =  00B6 G
- 25 __adder_add                                                    03B8 R
- 25 __adder_subtract                                               03C2 R
- 25 __displayCycles                                                02F8 R
- 25 __displayResult                                                02FF R
+ 1C __displayCycles                                                01E5 R
+ 1C __displayResult                                                01EC R
     __gptrget                                                      **** GX
- 1C __interrupt_vect                                               0000 R
+ 13 __interrupt_vect                                               0000 R
     __mcs51_genRAMCLEAR                                            **** GX
     __mcs51_genXINIT                                               **** GX
     __mcs51_genXRAMCLEAR                                           **** GX
- 25 __mul_montgomery                                               03AE R
- 25 __readResult                                                   0392 R
+ 1C __mul_montgomery                                               029B R
+ 1C __readResult                                                   027F R
     __sdcc_gsinit_startup                                          **** GX
- 1C __sdcc_program_startup                                         0003 GR
+ 13 __sdcc_program_startup                                         0003 GR
   5 __start__stack                                                 0000 GR
- 25 __terminate                                                    03CC R
- 25 __writeA_Mem                                                   0322 R
- 25 __writeA_Reg                                                   033E R
- 25 __writeB_Mem                                                   034C R
- 25 __writeB_Reg                                                   0368 R
- 25 __writeModulus                                                 0306 R
- 25 __writeResult                                                  0376 R
- 25 _crtModExp                                                     026C GR
-  3 _crtModExp_PARM_10                                             001C GR
-  3 _crtModExp_PARM_11                                             001D GR
-  3 _crtModExp_PARM_12                                             001E GR
-  3 _crtModExp_PARM_2                                              0010 GR
-  3 _crtModExp_PARM_3                                              0011 GR
-  3 _crtModExp_PARM_4                                              0014 GR
-  3 _crtModExp_PARM_5                                              0017 GR
-  3 _crtModExp_PARM_6                                              0018 GR
-  3 _crtModExp_PARM_7                                              0019 GR
-  3 _crtModExp_PARM_8                                              001A GR
-  3 _crtModExp_PARM_9                                              001B GR
+ 1C __terminate                                                    02A5 R
+ 1C __writeA_Mem                                                   020F R
+ 1C __writeA_Reg                                                   022B R
+ 1C __writeB_Mem                                                   0239 R
+ 1C __writeB_Reg                                                   0255 R
+ 1C __writeModulus                                                 01F3 R
+ 1C __writeResult                                                  0263 R
     _decryptedMessage                                           =  2100 G
     _encryptedMessage                                           =  2000 G
- 14 _garnerConstant                                                1800 GR
- 25 _main                                                          0000 GR
-  F _message                                                       1300 GR
+ 1C _main                                                          0000 GR
+  D _message                                                       1100 GR
   C _modulus                                                       1000 GR
- 25 _montModExp                                                    00CA GR
-  3 _montModExp_PARM_2                                             0005 GR
-  3 _montModExp_PARM_3                                             0006 GR
-  3 _montModExp_PARM_4                                             0009 GR
-  3 _montModExp_PARM_5                                             000A GR
-  3 _montModExp_PARM_6                                             000B GR
-  3 _montModExp_i_1_1                                              000D R
+ 1C _montModExp                                                    0043 GR
+  3 _montModExp_PARM_2                                             0000 GR
+  3 _montModExp_PARM_3                                             0001 GR
+  3 _montModExp_PARM_4                                             0004 GR
+  3 _montModExp_PARM_5                                             0005 GR
+  3 _montModExp_PARM_6                                             0006 GR
+  3 _montModExp_i_1_1                                              0008 R
     _montModExp_one_1_1                                         =  0000 
-  3 _montModExp_r_1_1                                              000C R
-  3 _montModExp_t_1_1                                              000E R
- 25 _montMultiply_Both                                             0094 GR
-  3 _montMultiply_Both_PARM_2                                      0003 GR
-  3 _montMultiply_Both_PARM_3                                      0004 GR
-  8 _montMultiply_Both_PARM_4                                      0003 GR
- 25 _montMultiply_Result                                           00B2 GR
-  8 _montMultiply_Result_PARM_2                                    0004 GR
- 25 _montMultiply_Single                                           0079 GR
-  3 _montMultiply_Single_PARM_2                                    0002 GR
-  8 _montMultiply_Single_PARM_3                                    0002 GR
- 25 _mpAdd_Single                                                  0043 GR
-  3 _mpAdd_Single_PARM_2                                           0000 GR
-  8 _mpAdd_Single_PARM_3                                           0000 GR
- 25 _mpSubtract_Single                                             005E GR
-  3 _mpSubtract_Single_PARM_2                                      0001 GR
-  8 _mpSubtract_Single_PARM_3                                      0001 GR
-  D _p                                                             1100 GR
- 11 _privateKey                                                    1500 GR
- 12 _privateKey_P                                                  1600 GR
- 13 _privateKey_Q                                                  1700 GR
- 10 _publicKey                                                     1400 GR
-  E _q                                                             1200 GR
- 16 _r2modm                                                        1A00 GR
- 18 _r2modp                                                        1C00 GR
- 1A _r2modq                                                        1E00 GR
- 15 _rmodm                                                         1900 GR
- 17 _rmodp                                                         1B00 GR
- 19 _rmodq                                                         1D00 GR
+  3 _montModExp_r_1_1                                              0007 R
+  3 _montModExp_t_1_1                                              0009 R
+  F _privateKey                                                    1300 GR
+  E _publicKey                                                     1200 GR
+ 11 _r2modm                                                        1500 GR
+ 10 _rmodm                                                         1400 GR
     a                                                              00D6 
     ac                                                             00D6 
     acc                                                            00E0 
@@ -526,12 +488,12 @@ Area Table
    0 _CODE                                                                              size    0   flags 0
    1 RSEG                                                                               size    0   flags 0
    2 REG_BANK_0                                                                         size    8   flags 4
-   3 DSEG                                                                               size   1F   flags 0
+   3 DSEG                                                                               size    B   flags 0
    4 OSEG                                                                               size    0   flags 4
    5 SSEG                                                                               size    1   flags 0
    6 ISEG                                                                               size    0   flags 0
    7 IABS                                                                               size    0   flags 8
-   8 BSEG                                                                               size    5   flags 80
+   8 BSEG                                                                               size    0   flags 80
    9 PSEG                                                                               size    0   flags 50
    A XSEG                                                                               size    0   flags 40
    B XABS                                                                               size    0   flags 48
@@ -541,26 +503,17 @@ Area Table
    F XABS3                                                                              size   80   flags 48
   10 XABS4                                                                              size   80   flags 48
   11 XABS5                                                                              size   80   flags 48
-  12 XABS6                                                                              size   80   flags 48
-  13 XABS7                                                                              size   80   flags 48
-  14 XABS8                                                                              size   80   flags 48
-  15 XABS9                                                                              size   80   flags 48
-  16 XABSa                                                                              size   80   flags 48
-  17 XABSb                                                                              size   80   flags 48
-  18 XABSc                                                                              size   80   flags 48
-  19 XABSd                                                                              size   80   flags 48
-  1A XABSe                                                                              size   80   flags 48
-  1B XISEG                                                                              size    0   flags 40
-  1C HOME                                                                               size    8   flags 20
-  1D GSINIT0                                                                            size    0   flags 20
-  1E GSINIT1                                                                            size    0   flags 20
-  1F GSINIT2                                                                            size    0   flags 20
-  20 GSINIT3                                                                            size    0   flags 20
-  21 GSINIT4                                                                            size    0   flags 20
-  22 GSINIT5                                                                            size    0   flags 20
-  23 GSINIT                                                                             size 1C89   flags 20
-  24 GSFINAL                                                                            size    3   flags 20
-  25 CSEG                                                                               size  3D0   flags 20
-  26 CONST                                                                              size    0   flags 20
-  27 XINIT                                                                              size    0   flags 20
-  28 CABS                                                                               size    0   flags 28
+  12 XISEG                                                                              size    0   flags 40
+  13 HOME                                                                               size    8   flags 20
+  14 GSINIT0                                                                            size    0   flags 20
+  15 GSINIT1                                                                            size    0   flags 20
+  16 GSINIT2                                                                            size    0   flags 20
+  17 GSINIT3                                                                            size    0   flags 20
+  18 GSINIT4                                                                            size    0   flags 20
+  19 GSINIT5                                                                            size    0   flags 20
+  1A GSINIT                                                                             size  F0A   flags 20
+  1B GSFINAL                                                                            size    3   flags 20
+  1C CSEG                                                                               size  2A9   flags 20
+  1D CONST                                                                              size    0   flags 20
+  1E XINIT                                                                              size    0   flags 20
+  1F CABS                                                                               size    0   flags 28
